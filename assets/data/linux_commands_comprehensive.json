@@ -1,0 +1,500 @@
+{
+  "categories": [
+    {
+      "id": "file_system",
+      "name_ar": "نظام الملفات",
+      "name_en": "File System",
+      "icon": "folder",
+      "description": "أوامر لإدارة الملفات والمجلدات في لينكس",
+      "commands": [
+        {
+          "id": "ls",
+          "command": "ls",
+          "name_ar": "عرض المحتويات",
+          "name_en": "List Contents",
+          "syntax": "'ls -la' للعرض الكامل",
+          "description": "يعرض محتويات المجلد الحالي مع التفاصيل الكاملة مثل الصلاحيات والحجم والتاريخ",
+          "how_to_use": "استخدم 'ls' للعرض البسيط، أو 'ls -la' للعرض مع التفاصيل المخفية والصلاحيات",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "cd",
+          "command": "cd",
+          "name_ar": "تغيير المسار",
+          "name_en": "Change Directory",
+          "syntax": "'cd /path/to/directory'",
+          "description": "ينقلك بين المجلدات المختلفة في النظام",
+          "how_to_use": "اكتب 'cd' متبوعاً باسم المجلد الذي تريد الانتقال إليه",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "pwd",
+          "command": "pwd",
+          "name_ar": "المسار الحالي",
+          "name_en": "Print Working Directory",
+          "syntax": "'pwd'",
+          "description": "يعرض المسار الكامل للمجلد الذي تعمل فيه حالياً",
+          "how_to_use": "اكتب 'pwd' في أي وقت لمعرفة مكانك الحالي في النظام",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "mkdir",
+          "command": "mkdir",
+          "name_ar": "إنشاء مجلد",
+          "name_en": "Make Directory",
+          "syntax": "'mkdir new_folder_name'",
+          "description": "ينشئ مجلد جديد في المسار الحالي",
+          "how_to_use": "استخدم 'mkdir' متبوعاً باسم المجلد الجديد، مثال: 'mkdir documents'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "rm",
+          "command": "rm",
+          "name_ar": "حذف الملفات",
+          "name_en": "Remove Files",
+          "syntax": "'rm filename' أو 'rm -r directory_name'",
+          "description": "يحذف الملفات والمجلدات، استخدم '-r' للمجلدات",
+          "how_to_use": "لحذف ملف: 'rm file.txt'، لحذف مجلد: 'rm -r folder_name'",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "cp",
+          "command": "cp",
+          "name_ar": "نسخ الملفات",
+          "name_en": "Copy Files",
+          "syntax": "'cp source destination'",
+          "description": "ينسخ الملفات والمجلدات من مكان لآخر",
+          "how_to_use": "استخدم 'cp' متبوعاً بالمصدر والوجهة، مثال: 'cp file.txt backup/'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "mv",
+          "command": "mv",
+          "name_ar": "نقل الملفات",
+          "name_en": "Move Files",
+          "syntax": "'mv old_name new_name'",
+          "description": "ينقل الملفات والمجلدات ويعيد تسميتها",
+          "how_to_use": "استخدم 'mv' لنقل أو إعادة التسمية، مثال: 'mv old.txt new.txt'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "cat",
+          "command": "cat",
+          "name_ar": "عرض محتوى الملف",
+          "name_en": "Display File Content",
+          "syntax": "'cat filename'",
+          "description": "يعرض محتويات الملفات النصية بالكامل",
+          "how_to_use": "استخدم 'cat' مع اسم الملف، مثال: 'cat config.txt'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "touch",
+          "command": "touch",
+          "name_ar": "إنشاء ملف فارغ",
+          "name_en": "Create Empty File",
+          "syntax": "'touch filename'",
+          "description": "ينشئ ملفاً فارغاً جديداً",
+          "how_to_use": "استخدم 'touch' مع اسم الملف، مثال: 'touch newfile.txt'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "chmod",
+          "command": "chmod",
+          "name_ar": "تغيير الصلاحيات",
+          "name_en": "Change Permissions",
+          "syntax": "'chmod 755 filename'",
+          "description": "يغير صلاحيات الوصول للملفات والمجلدات",
+          "how_to_use": "استخدم 'chmod' مع رموز الصلاحيات، مثال: 'chmod 755 script.sh'",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "find",
+          "command": "find",
+          "name_ar": "البحث عن الملفات",
+          "name_en": "Find Files",
+          "syntax": "'find . -name \"pattern\"'",
+          "description": "يبحث عن الملفات والمجلدات بناءً على معايير محددة",
+          "how_to_use": "استخدم 'find' مع شروط البحث، مثال: 'find . -name \"*.txt\"'",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "grep",
+          "command": "grep",
+          "name_ar": "البحث في الملفات",
+          "name_en": "Search in Files",
+          "syntax": "'grep \"pattern\" filename'",
+          "description": "يبحث عن نص معين داخل الملفات",
+          "how_to_use": "استخدم 'grep' للبحث عن نص، مثال: 'grep \"error\" logfile.txt'",
+          "level": "متوسط",
+          "can_copy": false
+        }
+      ]
+    },
+    {
+      "id": "networking",
+      "name_ar": "الشبكات",
+      "name_en": "Networking",
+      "icon": "lan",
+      "description": "أوامر لإدارة الشبكات والاتصالات في لينكس",
+      "commands": [
+        {
+          "id": "ip",
+          "command": "ip",
+          "name_ar": "عرض IP",
+          "name_en": "Show IP Address",
+          "syntax": "'ip addr show' أو 'ifconfig'",
+          "description": "يعرض عناوين IP وتفاصيل الشبكة",
+          "how_to_use": "استخدم 'ip addr show' للعرض الحديث، أو 'ifconfig' للقديم",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "ping",
+          "command": "ping",
+          "name_ar": "اختبار الاتصال",
+          "name_en": "Test Connection",
+          "syntax": "'ping google.com'",
+          "description": "يختبر الاتصال بالإنترنت أو بالشبكة المحلية",
+          "how_to_use": "استخدم 'ping' مع عنوان الموقع، مثال: 'ping 8.8.8.8'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "netstat",
+          "command": "netstat",
+          "name_ar": "عرض الاتصالات",
+          "name_en": "Show Connections",
+          "syntax": "'netstat -tulpn' أو 'ss -tulpn'",
+          "description": "يعرض الاتصالات الشبكية والمنافذ المفتوحة",
+          "how_to_use": "استخدم 'netstat -tulpn' لعرض التفاصيل الكاملة للاتصالات",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "wget",
+          "command": "wget",
+          "name_ar": "تنزيل الملفات",
+          "name_en": "Download Files",
+          "syntax": "'wget https://example.com/file'",
+          "description": "ينزل الملفات من الإنترنت",
+          "how_to_use": "استخدم 'wget' مع رابط الملف، مثال: 'wget https://site.com/file.zip'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "curl",
+          "command": "curl",
+          "name_ar": "نقل البيانات",
+          "name_en": "Transfer Data",
+          "syntax": "'curl -O https://example.com/file'",
+          "description": "ينقل البيانات بين الخوادم ويعرض محتوى المواقع",
+          "how_to_use": "استخدم 'curl' لتنزيل أو نقل البيانات، مثال: 'curl -O url'",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "ssh",
+          "command": "ssh",
+          "name_ar": "اتصال آمن",
+          "name_en": "Secure Connection",
+          "syntax": "'ssh user@hostname'",
+          "description": "يتصل بالخوادم بشكل آمن عبر الشبكة",
+          "how_to_use": "استخدم 'ssh' مع اسم المستخدم والمضيف، مثال: 'ssh user@192.168.1.1'",
+          "level": "متقدم",
+          "can_copy": false
+        },
+        {
+          "id": "scp",
+          "command": "scp",
+          "name_ar": "نسخ آمن",
+          "name_en": "Secure Copy",
+          "syntax": "'scp file.txt user@host:/path/'",
+          "description": "ينسخ الملفات بشكل آمن عبر الشبكة",
+          "how_to_use": "استخدم 'scp' لنقل الملفات بأمان، مثال: 'scp file.txt user@server:/home/'",
+          "level": "متقدم",
+          "can_copy": false
+        }
+      ]
+    },
+    {
+      "id": "system_info",
+      "name_ar": "معلومات النظام",
+      "name_en": "System Information",
+      "icon": "analytics",
+      "description": "أوامر لعرض معلومات النظام والأجهزة",
+      "commands": [
+        {
+          "id": "uname",
+          "command": "uname",
+          "name_ar": "معلومات النواة",
+          "name_en": "Kernel Info",
+          "syntax": "'uname -a'",
+          "description": "يعرض معلومات نواة النظام بالتفصيل",
+          "how_to_use": "استخدم 'uname -a' لعرض كل معلومات النواة",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "df",
+          "command": "df",
+          "name_ar": "مساحة القرص",
+          "name_en": "Disk Space",
+          "syntax": "'df -h'",
+          "description": "يعرض مساحة القرص المستخدمة والمتاحة",
+          "how_to_use": "استخدم 'df -h' لعرض المساحة بصيغة مقروءة",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "free",
+          "command": "free",
+          "name_ar": "الذاكرة",
+          "name_en": "Memory Usage",
+          "syntax": "'free -h'",
+          "description": "يعرض استخدام الذاكرة RAM",
+          "how_to_use": "استخدم 'free -h' لعرض الذاكرة بصيغة مقروءة",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "top",
+          "command": "top",
+          "name_ar": "العمليات",
+          "name_en": "Running Processes",
+          "syntax": "'top' أو 'htop'",
+          "description": "يعرض العمليات الجارية واستخدام المعالج",
+          "how_to_use": "استخدم 'top' لعرض العمليات مرتبة حسب الاستخدام",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "ps",
+          "command": "ps",
+          "name_ar": "عرض العمليات",
+          "name_en": "Process List",
+          "syntax": "'ps aux'",
+          "description": "يعرض كل العمليات الجارية في النظام",
+          "how_to_use": "استخدم 'ps aux' لعرض كل العمليات بالتفاصيل",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "uptime",
+          "command": "uptime",
+          "name_ar": "وقت التشغيل",
+          "name_en": "System Uptime",
+          "syntax": "'uptime'",
+          "description": "يعرض مدة تشغيل النظام والحمل",
+          "how_to_use": "استخدم 'uptime' لمعرفة كم وقت النظام يعمل",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "lshw",
+          "command": "lshw",
+          "name_ar": "معلومات العتاد",
+          "name_en": "Hardware Info",
+          "syntax": "'lshw -short'",
+          "description": "يعرض معلومات العتاد المادي",
+          "how_to_use": "استخدم 'lshw -short' لعرض ملخص معلومات العتاد",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "sensors",
+          "command": "sensors",
+          "name_ar": "حرارة المعالج",
+          "name_en": "Temperature Sensors",
+          "syntax": "'sensors'",
+          "description": "يعرض درجات حرارة المعالج والمكونات",
+          "how_to_use": "استخدم 'sensors' لمراقبة حرارة النظام",
+          "level": "متوسط",
+          "can_copy": false
+        }
+      ]
+    },
+    {
+      "id": "security",
+      "name_ar": "الأمان",
+      "name_en": "Security",
+      "icon": "security",
+      "description": "أوامر لحماية النظام وإدارة الصلاحيات",
+      "commands": [
+        {
+          "id": "passwd",
+          "command": "passwd",
+          "name_ar": "كلمة المرور",
+          "name_en": "Password",
+          "syntax": "'passwd'",
+          "description": "يغير كلمة مرور المستخدم الحالي",
+          "how_to_use": "اكتب 'passwd' ثم اتبع التعليمات لتغيير كلمة المرور",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "sudo",
+          "command": "sudo",
+          "name_ar": "صلاحيات المدير",
+          "name_en": "Superuser",
+          "syntax": "'sudo command'",
+          "description": "ينفذ الأوامر بصلاحيات المدير",
+          "how_to_use": "استخدم 'sudo' قبل أي أمر يحتاج صلاحيات إدارية",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "chmod",
+          "command": "chmod",
+          "name_ar": "صلاحيات الملفات",
+          "name_en": "File Permissions",
+          "syntax": "'chmod 755 filename'",
+          "description": "يغير صلاحيات الوصول للملفات",
+          "how_to_use": "استخدم 'chmod' مع رموز الصلاحيات، مثال: 'chmod +x script.sh'",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "chown",
+          "command": "chown",
+          "name_ar": "مالك الملفات",
+          "name_en": "File Owner",
+          "syntax": "'chown user:group filename'",
+          "description": "يغير مالك الملفات والمجلدات",
+          "how_to_use": "استخدم 'chown' مع اسم المستخدم، مثال: 'chown username file.txt'",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "who",
+          "command": "who",
+          "name_ar": "المستخدمون",
+          "name_en": "Active Users",
+          "syntax": "'who' أو 'w'",
+          "description": "يعرض المستخدمين النشطين حالياً",
+          "how_to_use": "استخدم 'who' لمعرفة من مسجل دخوله الآن",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "adduser",
+          "command": "adduser",
+          "name_ar": "إضافة مستخدم",
+          "name_en": "Add User",
+          "syntax": "'sudo adduser username'",
+          "description": "ينشئ مستخدم جديد في النظام",
+          "how_to_use": "استخدم 'sudo adduser' مع اسم المستخدم الجديد",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "ufw",
+          "command": "ufw",
+          "name_ar": "جدار الحماية",
+          "name_en": "Firewall",
+          "syntax": "'sudo ufw enable'",
+          "description": "يدير جدار حماية النظام",
+          "how_to_use": "استخدم 'sudo ufw enable' لتفعيل الجدار الناري",
+          "level": "متقدم",
+          "can_copy": false
+        }
+      ]
+    },
+    {
+      "id": "package_management",
+      "name_ar": "إدارة الحزم",
+      "name_en": "Package Management",
+      "icon": "settings_system_daydream",
+      "description": "أوامر لتثبيت وإدارة البرامج في لينكس",
+      "commands": [
+        {
+          "id": "apt_update",
+          "command": "apt update",
+          "name_ar": "تحديث القائمة",
+          "name_en": "Update Package List",
+          "syntax": "'sudo apt update'",
+          "description": "يحدث قائمة الحزم المتاحة",
+          "how_to_use": "استخدم 'sudo apt update' لتحديث قائمة الحزم قبل التثبيت",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "apt_upgrade",
+          "command": "apt upgrade",
+          "name_ar": "ترقية الحزم",
+          "name_en": "Upgrade Packages",
+          "syntax": "'sudo apt upgrade'",
+          "description": "يرقي الحزم المثبتة لأحدث إصداراتها",
+          "how_to_use": "استخدم 'sudo apt upgrade' لترقية كل الحزم المثبتة",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "apt_install",
+          "command": "apt install",
+          "name_ar": "تثبيت الحزم",
+          "name_en": "Install Package",
+          "syntax": "'sudo apt install package_name'",
+          "description": "يثبت الحزم الجديدة في النظام",
+          "how_to_use": "استخدم 'sudo apt install' مع اسم الحزمة، مثال: 'sudo apt install vim'",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "apt_remove",
+          "command": "apt remove",
+          "name_ar": "إزالة الحزم",
+          "name_en": "Remove Package",
+          "syntax": "'sudo apt remove package_name'",
+          "description": "يزيل الحزم من النظام",
+          "how_to_use": "استخدم 'sudo apt remove' مع اسم الحزمة المراد إزالتها",
+          "level": "متوسط",
+          "can_copy": false
+        },
+        {
+          "id": "apt_search",
+          "command": "apt search",
+          "name_ar": "البحث عن حزم",
+          "name_en": "Search Packages",
+          "syntax": "'apt search keyword'",
+          "description": "يبحث عن الحزم المتاحة للتثبيت",
+          "how_to_use": "استخدم 'apt search' مع كلمة مفتاحية للبحث عن حزم",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "dpkg_list",
+          "command": "dpkg -l",
+          "name_ar": "الحزم المثبتة",
+          "name_en": "List Installed",
+          "syntax": "'dpkg -l'",
+          "description": "يعرض كل الحزم المثبتة في النظام",
+          "how_to_use": "استخدم 'dpkg -l' لمعرفة ما هو مثبت في نظامك",
+          "level": "مبتدئ",
+          "can_copy": false
+        },
+        {
+          "id": "apt_autoremove",
+          "command": "apt autoremove",
+          "name_ar": "تنظيف الحزم",
+          "name_en": "Auto Remove",
+          "syntax": "'sudo apt autoremove'",
+          "description": "يزيل الحزم غير الضرورية تلقائياً",
+          "how_to_use": "استخدم 'sudo apt autoremove' لتنظيف الحزم القديمة",
+          "level": "متوسط",
+          "can_copy": false
+        }
+      ]
+    }
+  ]
+}

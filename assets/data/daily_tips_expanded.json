@@ -1,0 +1,544 @@
+{
+  "daily_tips": [
+    {
+      "id": 1,
+      "tip_ar": "استخدم زر 'Tab' لإكمال الأوامر تلقائياً في الطرفية.",
+      "tip_en": "Use Tab key to auto-complete commands in terminal!",
+      "category_id": "universal"
+    },
+    {
+      "id": 2,
+      "tip_ar": "للنسخ النص من الطرفية، حدد النص ثم اضغط Ctrl+Shift+C.",
+      "tip_en": "To copy text from terminal, select text then press Ctrl+Shift+C.",
+      "category_id": "universal"
+    },
+    {
+      "id": 3,
+      "tip_ar": "استخدم الأمر 'history' لعرض الأوامر السابقة التي استخدمتها.",
+      "tip_en": "Use 'history' command to view previous commands you've used.",
+      "category_id": "universal"
+    },
+    {
+      "id": 4,
+      "tip_ar": "للبحث عن أمر معين، استخدم 'grep' مع النمط المناسب.",
+      "tip_en": "To search for specific text, use 'grep' with appropriate pattern.",
+      "category_id": "universal"
+    },
+    {
+      "id": 5,
+      "tip_ar": "استخدم السهمين للأعلى والأسفل للتنقل بين الأوامر السابقة.",
+      "tip_en": "Use up and down arrows to navigate through command history.",
+      "category_id": "universal"
+    },
+    {
+      "id": 6,
+      "tip_ar": "لإعادة تشغيل آخر أمر كـ root، استخدم 'sudo !!'.",
+      "tip_en": "To rerun last command as root, use 'sudo !!'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 7,
+      "tip_ar": "استخدم 'man' قبل أي أمر جديد لمعرفة كيفية استخدامه.",
+      "tip_en": "Use 'man' before any new command to learn how to use it.",
+      "category_id": "universal"
+    },
+    {
+      "id": 8,
+      "tip_ar": "لحفظ مخرجات الأمر في ملف، استخدم علامة '>'.",
+      "tip_en": "To save command output to a file, use '>' redirection.",
+      "category_id": "universal"
+    },
+    {
+      "id": 9,
+      "tip_ar": "استخدم 'pwd' لمعرفة المسار الحالي الذي تعمل فيه.",
+      "tip_en": "Use 'pwd' to know your current working directory.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 10,
+      "tip_ar": "لإنشاء مجلد جديد، استخدم 'mkdir' مع اسم المجلد.",
+      "tip_en": "To create a new directory, use 'mkdir' with directory name.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 11,
+      "tip_ar": "لحذف مجلد فارغ، استخدم 'rmdir'.",
+      "tip_en": "To remove an empty directory, use 'rmdir'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 12,
+      "tip_ar": "لحذف ملف أو مجلد مع محتوياته، استخدم 'rm -r'.",
+      "tip_en": "To delete file or directory with contents, use 'rm -r'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 13,
+      "tip_ar": "لنسخ الملفات، استخدم 'cp' مع المصدر والوجهة.",
+      "tip_en": "To copy files, use 'cp' with source and destination.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 14,
+      "tip_ar": "لنقل الملفات، استخدم 'mv' مع المصدر والوجهة.",
+      "tip_en": "To move files, use 'mv' with source and destination.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 15,
+      "tip_ar": "لعرض محتويات المجلد، استخدم 'ls' مع الخيارات '-la' للتفاصيل الكاملة.",
+      "tip_en": "To list directory contents, use 'ls' with '-la' for full details.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 16,
+      "tip_ar": "لتغيير صلاحيات الملفات، استخدم 'chmod'.",
+      "tip_en": "To change file permissions, use 'chmod'.",
+      "category_id": "security"
+    },
+    {
+      "id": 17,
+      "tip_ar": "لتغيير مالك الملف، استخدم 'chown'.",
+      "tip_en": "To change file owner, use 'chown'.",
+      "category_id": "security"
+    },
+    {
+      "id": 18,
+      "tip_ar": "لعرض معلومات النظام، استخدم 'uname -a'.",
+      "tip_en": "To view system information, use 'uname -a'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 19,
+      "tip_ar": "لعرض استخدام الذاكرة، استخدم 'free -h'.",
+      "tip_en": "To view memory usage, use 'free -h'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 20,
+      "tip_ar": "لعرض استخدام المعالج، استخدم 'top' أو 'htop'.",
+      "tip_en": "To view CPU usage, use 'top' or 'htop'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 21,
+      "tip_ar": "لعرض مساحات القرص، استخدم 'df -h'.",
+      "tip_en": "To view disk space, use 'df -h'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 22,
+      "tip_ar": "لبحث عن الملفات، استخدم 'find' مع الشروط المناسبة.",
+      "tip_en": "To search for files, use 'find' with appropriate conditions.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 23,
+      "tip_ar": "لعرض محتويات الملفات النصية، استخدم 'cat' أو 'less'.",
+      "tip_en": "To view text file contents, use 'cat' or 'less'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 24,
+      "tip_ar": "للبحث داخل الملفات، استخدم 'grep'.",
+      "tip_en": "To search within files, use 'grep'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 25,
+      "tip_ar": "لتحرير الملفات النصية، استخدم 'nano' أو 'vim'.",
+      "tip_en": "To edit text files, use 'nano' or 'vim'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 26,
+      "tip_ar": "لضغط الملفات، استخدم 'tar' أو 'zip'.",
+      "tip_en": "To compress files, use 'tar' or 'zip'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 27,
+      "tip_ar": "لفك ضغط الملفات، استخدم 'tar -xzf' أو 'unzip'.",
+      "tip_en": "To extract files, use 'tar -xzf' or 'unzip'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 28,
+      "tip_ar": "لعرض العمليات الجارية، استخدم 'ps aux'.",
+      "tip_en": "To view running processes, use 'ps aux'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 29,
+      "tip_ar": "لإيقاف عملية، استخدم 'kill' مع رقم العملية.",
+      "tip_en": "To stop a process, use 'kill' with process ID.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 30,
+      "tip_ar": "لعرض اتصالات الشبكة، استخدم 'ip addr show'.",
+      "tip_en": "To view network connections, use 'ip addr show'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 31,
+      "tip_ar": "لاختبار الاتصال بالإنترنت، استخدم 'ping google.com'.",
+      "tip_en": "To test internet connection, use 'ping google.com'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 32,
+      "tip_ar": "لعرض منافذ الشبكة المفتوحة، استخدم 'netstat -tulpn'.",
+      "tip_en": "To view open network ports, use 'netstat -tulpn'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 33,
+      "tip_ar": "لتنزيل الملفات، استخدم 'wget' أو 'curl'.",
+      "tip_en": "To download files, use 'wget' or 'curl'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 34,
+      "tip_ar": "لنقل الملفات بأمان، استخدم 'scp'.",
+      "tip_en": "To transfer files securely, use 'scp'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 35,
+      "tip_ar": "لتحديث الحزم، استخدم 'sudo apt update'.",
+      "tip_en": "To update packages, use 'sudo apt update'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 36,
+      "tip_ar": "لترقية الحزم، استخدم 'sudo apt upgrade'.",
+      "tip_en": "To upgrade packages, use 'sudo apt upgrade'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 37,
+      "tip_ar": "لبحث عن حزمة، استخدم 'apt search'.",
+      "tip_en": "To search for a package, use 'apt search'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 38,
+      "tip_ar": "لتثبيت حزمة، استخدم 'sudo apt install'.",
+      "tip_en": "To install a package, use 'sudo apt install'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 39,
+      "tip_ar": "لإزالة حزمة، استخدم 'sudo apt remove'.",
+      "tip_en": "To remove a package, use 'sudo apt remove'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 40,
+      "tip_ar": "لعرض الحزم المثبتة، استخدم 'dpkg -l'.",
+      "tip_en": "To view installed packages, use 'dpkg -l'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 41,
+      "tip_ar": "لعرض سجل النظام، استخدم 'journalctl' أو 'tail /var/log/syslog'.",
+      "tip_en": "To view system logs, use 'journalctl' or 'tail /var/log/syslog'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 42,
+      "tip_ar": "لعرض المستخدمين النشطين، استخدم 'who' أو 'w'.",
+      "tip_en": "To view active users, use 'who' or 'w'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 43,
+      "tip_ar": "لتغيير كلمة مرور المستخدم، استخدم 'passwd'.",
+      "tip_en": "To change user password, use 'passwd'.",
+      "category_id": "security"
+    },
+    {
+      "id": 44,
+      "tip_ar": "لإنشاء مستخدم جديد، استخدم 'sudo adduser'.",
+      "tip_en": "To create a new user, use 'sudo adduser'.",
+      "category_id": "security"
+    },
+    {
+      "id": 45,
+      "tip_ar": "لحذف مستخدم، استخدم 'sudo deluser'.",
+      "tip_en": "To delete a user, use 'sudo deluser'.",
+      "category_id": "security"
+    },
+    {
+      "id": 46,
+      "tip_ar": "لعرض مجموعات المستخدمين، استخدم 'groups'.",
+      "tip_en": "To view user groups, use 'groups'.",
+      "category_id": "security"
+    },
+    {
+      "id": 47,
+      "tip_ar": "لعرض تقويم الملفات، استخدم 'stat'.",
+      "tip_en": "To view file statistics, use 'stat'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 48,
+      "tip_ar": "لمقارنة الملفات، استخدم 'diff'.",
+      "tip_en": "To compare files, use 'diff'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 49,
+      "tip_ar": "لدمج الملفات، استخدم 'cat file1 file2 > merged'.",
+      "tip_en": "To merge files, use 'cat file1 file2 > merged'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 50,
+      "tip_ar": "لعرض حجم الملفات، استخدم 'du -h'.",
+      "tip_en": "To view file sizes, use 'du -h'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 51,
+      "tip_ar": "لبحث عن نص واستبداله، استخدم 'sed'.",
+      "tip_en": "To search and replace text, use 'sed'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 52,
+      "tip_ar": "لمعالجة النصوص، استخدم 'awk'.",
+      "tip_en": "To process text, use 'awk'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 53,
+      "tip_ar": "لفرز النصوص، استخدم 'sort'.",
+      "tip_en": "To sort text, use 'sort'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 54,
+      "tip_ar": "لعرض أسطر محددة من ملف، استخدم 'head' أو 'tail'.",
+      "tip_en": "To view specific lines from a file, use 'head' or 'tail'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 55,
+      "tip_ar": "لعد أسطر الملفات، استخدم 'wc -l'.",
+      "tip_en": "To count file lines, use 'wc -l'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 56,
+      "tip_ar": "لعرض تقويم جدار الحماية، استخدم 'ufw status'.",
+      "tip_en": "To view firewall status, use 'ufw status'.",
+      "category_id": "security"
+    },
+    {
+      "id": 57,
+      "tip_ar": "لتفعيل جدار الحماية، استخدم 'sudo ufw enable'.",
+      "tip_en": "To enable firewall, use 'sudo ufw enable'.",
+      "category_id": "security"
+    },
+    {
+      "id": 58,
+      "tip_ar": "لعرض الخدمات، استخدم 'systemctl list-units'.",
+      "tip_en": "To view services, use 'systemctl list-units'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 59,
+      "tip_ar": "لبدء خدمة، استخدم 'sudo systemctl start'.",
+      "tip_en": "To start a service, use 'sudo systemctl start'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 60,
+      "tip_ar": "لإيقاف خدمة، استخدم 'sudo systemctl stop'.",
+      "tip_en": "To stop a service, use 'sudo systemctl stop'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 61,
+      "tip_ar": "لإعادة تشغيل خدمة، استخدم 'sudo systemctl restart'.",
+      "tip_en": "To restart a service, use 'sudo systemctl restart'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 62,
+      "tip_ar": "لتفعيل خدمة عند الإقلاع، استخدم 'sudo systemctl enable'.",
+      "tip_en": "To enable service at boot, use 'sudo systemctl enable'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 63,
+      "tip_ar": "لعرض معلومات الأجهزة، استخدم 'lshw' أو 'lspci'.",
+      "tip_en": "To view hardware information, use 'lshw' or 'lspci'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 64,
+      "tip_ar": "لعرض درجة حرارة المعالج، استخدم 'sensors'.",
+      "tip_en": "To view CPU temperature, use 'sensors'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 65,
+      "tip_ar": "لعرض البطارية، استخدم 'upower -i'.",
+      "tip_en": "To view battery information, use 'upower -i'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 66,
+      "tip_ar": "لمسح ذاكرة التخزين المؤقتة، استخدم 'sudo apt autoremove'.",
+      "tip_en": "To clean temporary cache, use 'sudo apt autoremove'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 67,
+      "tip_ar": "لعرض تاريخ الأوامر بالتاريخ والوقت، استخدم 'history | grep'.",
+      "tip_en": "To view command history with date/time, use 'history | grep'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 68,
+      "tip_ar": "لتنفيذ أمر كـ مستخدم آخر، استخدم 'su - username'.",
+      "tip_en": "To execute command as another user, use 'su - username'.",
+      "category_id": "security"
+    },
+    {
+      "id": 69,
+      "tip_ar": "لعرض معلومات القرص الصلب، استخدم 'fdisk -l'.",
+      "tip_en": "To view disk partitions, use 'fdisk -l'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 70,
+      "tip_ar": "لتنسيق القرص، استخدم 'sudo mkfs.ext4 /dev/sdX'.",
+      "tip_en": "To format disk, use 'sudo mkfs.ext4 /dev/sdX'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 71,
+      "tip_ar": "لربط قرص، استخدم 'sudo mount /dev/sdX /mount/point'.",
+      "tip_en": "To mount disk, use 'sudo mount /dev/sdX /mount/point'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 72,
+      "tip_ar": "لفصل قرص، استخدم 'sudo umount /mount/point'.",
+      "tip_en": "To unmount disk, use 'sudo umount /mount/point'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 73,
+      "tip_ar": "لعرض مساحة التخزين المؤقت، استخدم 'df -i'.",
+      "tip_en": "To view inode usage, use 'df -i'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 74,
+      "tip_ar": "لعرض العمليات حسب الاستخدام، استخدم 'ps aux --sort=-%cpu'.",
+      "tip_en": "To view processes by CPU usage, use 'ps aux --sort=-%cpu'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 75,
+      "tip_ar": "لعرض العمليات حسب الذاكرة، استخدم 'ps aux --sort=-%mem'.",
+      "tip_en": "To view processes by memory usage, use 'ps aux --sort=-%mem'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 76,
+      "tip_ar": "لقتل جميع عمليات برنامج، استخدم 'pkill' أو 'killall'.",
+      "tip_en": "To kill all processes of a program, use 'pkill' or 'killall'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 77,
+      "tip_ar": "لعرض اتصالات الشبكة التفصيلية، استخدم 'ss -tulpn'.",
+      "tip_en": "To view detailed network connections, use 'ss -tulpn'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 78,
+      "tip_ar": "لعرض جدول التوجيه، استخدم 'route -n'.",
+      "tip_en": "To view routing table, use 'route -n'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 79,
+      "tip_ar": "لحل مشاكل DNS، استخدم 'nslookup' أو 'dig'.",
+      "tip_en": "To troubleshoot DNS, use 'nslookup' or 'dig'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 80,
+      "tip_ar": "لعرض تكوين الشبكة، استخدم 'ifconfig' أو 'ip a'.",
+      "tip_en": "To view network configuration, use 'ifconfig' or 'ip a'.",
+      "category_id": "networking"
+    },
+    {
+      "id": 81,
+      "tip_ar": "لمسح ذاكرة التخزين المؤقتة يدوياً، استخدم 'rm -rf /tmp/*'.",
+      "tip_en": "To manually clean temp cache, use 'rm -rf /tmp/*'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 82,
+      "tip_ar": "لعرض ملفات التكوين، استخدم 'ls -la /etc/'.",
+      "tip_en": "To view config files, use 'ls -la /etc/'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 83,
+      "tip_ar": "لعمل نسخة احتياطية، استخدم 'rsync' مع الخيارات المناسبة.",
+      "tip_en": "To create backup, use 'rsync' with appropriate options.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 84,
+      "tip_ar": "لعرض الملفات الكبيرة، استخدم 'find . -type f -size +100M'.",
+      "tip_en": "To find large files, use 'find . -type f -size +100M'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 85,
+      "tip_ar": "لمراقبة الأوامر مباشرة، استخدم 'watch'.",
+      "tip_en": "To monitor commands in real-time, use 'watch'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 86,
+      "tip_ar": "لعرض معلومات kernel، استخدم 'uname -r' أو 'cat /proc/version'.",
+      "tip_en": "To view kernel information, use 'uname -r' or 'cat /proc/version'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 87,
+      "tip_ar": "لعرض وقت التشغيل، استخدم 'uptime'.",
+      "tip_en": "To view system uptime, use 'uptime'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 88,
+      "tip_ar": "لعرض محمل النظام، استخدم 'cat /proc/loadavg'.",
+      "tip_en": "To view system load, use 'cat /proc/loadavg'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 89,
+      "tip_ar": "لتحديث قاعدة بيانات الحزم، استخدم 'sudo apt update'.",
+      "tip_en": "To update package database, use 'sudo apt update'.",
+      "category_id": "package_management"
+    },
+    {
+      "id": 90,
+      "tip_ar": "لعرض الحزم المتاحة، استخدم 'apt-cache search'.",
+      "tip_en": "To view available packages, use 'apt-cache search'.",
+      "category_id": "package_management"
+    }
+  ]
+}

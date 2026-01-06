@@ -1,0 +1,53 @@
+{
+  "categories": [
+    {
+      "id": "universal",
+      "name_ar": "أوامر مشتركة (Universal)",
+      "name_en": "Universal Commands",
+      "icon": "terminal",
+      "description": "الأوامر التي تعمل على جميع توزيعات لينكس بلا استثناء."
+    },
+    {
+      "id": "zorin_ubuntu",
+      "name_ar": "عائلة زورين وأوبنتو",
+      "name_en": "Zorin & Ubuntu",
+      "icon": "laptop_linux",
+      "description": "أوامر إدارة الحزم والنظام الخاصة بتوزيعات Debian و Ubuntu و Zorin OS."
+    },
+    {
+      "id": "fedora_redhat",
+      "name_ar": "عائلة فيدورا",
+      "name_en": "Fedora & RedHat",
+      "icon": "settings_system_daydream",
+      "description": "أوامر خاصة بتوزيعات Fedora و CentOS التي تستخدم مدير حزم DNF."
+    },
+    {
+      "id": "file_management",
+      "name_ar": "إدارة الملفات والمجلدات",
+      "name_en": "File Management",
+      "icon": "folder",
+      "description": "كل ما تحتاجه لإنشاء، نقل، وحذف الملفات."
+    },
+    {
+      "id": "network",
+      "name_ar": "الشبكات والاتصال",
+      "name_en": "Networking",
+      "icon": "lan",
+      "description": "أوامر فحص الاتصال، الـ IP، والتحكم عن بعد."
+    },
+    {
+      "id": "system_monitor",
+      "name_ar": "مراقبة النظام والأداء",
+      "name_en": "System Monitoring",
+      "icon": "analytics",
+      "description": "لمعرفة استهلاك المعالج والرام وإدارة العمليات الحالية."
+    },
+    {
+      "id": "security",
+      "name_ar": "الأمان والصلاحيات",
+      "name_en": "Security & Permissions",
+      "icon": "security",
+      "description": "أوامر Sudo، وتغيير صلاحيات الملفات (chmod/chown)."
+    }
+  ]
+}
