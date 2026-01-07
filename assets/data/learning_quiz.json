@@ -1,498 +1,342 @@
 {
+  "quiz_info": {
+    "title": "اختبار معرفة أوامر لينكس",
+    "description": "اختبر معرفتك بأوامر لينكس المختلفة",
+    "total_questions": 30,
+    "passing_score": 7
+  },
   "questions": [
     {
       "id": 1,
-      "question_ar": "ما هو الأمر المستخدم لعرض الملفات في المجلد الحالي؟",
-      "question_en": "What command is used to list files in current directory?",
-      "options": ["cd", "ls", "mkdir", "rm"],
-      "correct_answer_index": 1,
-      "explanation_ar": "الأمر 'ls' هو اختصار لـ List ويستخدم لسرد المحتويات.",
-      "explanation_en": "The 'ls' command is short for List and is used to display contents."
+      "question_ar": "ما هو الأمر المستخدم للبحث في صفحات الدليل اليدوي عن كلمة مفتاحية؟",
+      "question_en": "What command is used to search manual pages for a keyword?",
+      "options": ["apropos", "man", "help", "info"],
+      "correct_answer_index": 0,
+      "explanation_ar": "أمر apropos يبحث في أسماء وأوصاف صفحات الدليل عن الكلمات الرئيسية المحددة",
+      "explanation_en": "The apropos command searches manual page names and descriptions for the specified keyword"
     },
     {
       "id": 2,
-      "question_ar": "كيف يمكنك الحصول على صلاحيات المدير لتنفيذ أمر ما؟",
-      "question_en": "How can you get administrator privileges to execute a command?",
-      "options": ["run", "admin", "sudo", "exec"],
-      "correct_answer_index": 2,
-      "explanation_ar": "كلمة 'sudo' تعني SuperUser DO وهي تمنحك صلاحيات المسؤول.",
-      "explanation_en": "The word 'sudo' means SuperUser DO and gives you administrator privileges."
+      "question_ar": "أمر 'apt install package' يستخدم لـ؟",
+      "question_en": "The 'apt install package' command is used for?",
+      "options": ["إزالة حزمة", "تثبيت حزمة", "تحديث الحزم", "البحث عن حزمة"],
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر apt install يستخدم لتثبيت الحزم الجديدة على النظام",
+      "explanation_en": "The apt install command is used to install new packages on the system"
     },
     {
       "id": 3,
-      "question_ar": "ما هو الاختصار المستخدم لتنظيف شاشة الترمينال بسرعة؟",
-      "question_en": "What shortcut is used to quickly clean terminal screen?",
-      "options": ["Ctrl + C", "Ctrl + Z", "Ctrl + L", "Ctrl + V"],
-      "correct_answer_index": 2,
-      "explanation_ar": "الاختصار Ctrl + L يقوم بتنظيف الشاشة فوراً وهو بديل لكتابة أمر 'clear'.",
-      "explanation_en": "The Ctrl + L shortcut immediately clears screen and is an alternative to typing 'clear'."
+      "question_ar": "ما هو الأمر الذي يعرض بنية المعالج؟",
+      "question_en": "What command displays the processor architecture?",
+      "options": ["uname", "arch", "lscpu", "cpuinfo"],
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر arch يعرض اسم بنية آلة الأجهزة مثل x86_64 أو arm64",
+      "explanation_en": "The arch command displays the hardware architecture name like x86_64 or arm64"
     },
     {
       "id": 4,
-      "question_ar": "أي من هذه الأوامر يستخدم لتحديث قائمة البرامج في Zorin OS؟",
-      "question_en": "Which of these commands is used to update package list in Zorin OS?",
-      "options": ["apt upgrade", "apt search", "apt update", "apt install"],
-      "correct_answer_index": 2,
-      "explanation_ar": "أمر 'update' يحدث المستودعات، بينما 'upgrade' يثبت التحديثات الفعلية.",
-      "explanation_en": "The 'update' command refreshes repositories, while 'upgrade' installs actual updates."
+      "question_ar": "أمر 'chattr +i file' يجعل الملف؟",
+      "question_en": "The 'chattr +i file' command makes the file?",
+      "options": ["قابلاً للتعديل", "غير قابل للتعديل", "مخفياً", "قابلاً للتنفيذ"],
+      "correct_answer_index": 1,
+      "explanation_ar": "السمة +i تجعل الملف غير قابل للتعديل (immutable)",
+      "explanation_en": "The +i attribute makes the file immutable (unchangeable)"
     },
     {
       "id": 5,
-      "question_ar": "ماذا يفعل الأمر 'cd ..' ؟",
-      "question_en": "What does command 'cd ..' do?",
-      "options": ["إغلاق الترمينال", "حذف المجلد الحالي", "الرجوع للمجلد السابق", "إنشاء مجلد جديد"],
-      "correct_answer_index": 2,
-      "explanation_ar": "النقطتان '..' ترمز للمستوى الأعلى في هيكل المجلدات.",
-      "explanation_en": "The two dots '..' represent parent directory in the folder structure."
+      "question_ar": "ما هو الأمر المستخدم لمسح شاشة الطرفية؟",
+      "question_en": "What command is used to clear the terminal screen?",
+      "options": ["clean", "clear", "cls", "reset"],
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر clear يمسح شاشة الطرفية وينقل المؤشر إلى الأعلى",
+      "explanation_en": "The clear command clears the terminal screen and moves the cursor to the top"
     },
     {
       "id": 6,
-      "question_ar": "ما هو الأمر المستخدم لإنشاء مجلد جديد؟",
-      "question_en": "What command is used to create a new directory?",
-      "options": ["touch", "mkdir", "newdir", "makedir"],
+      "question_ar": "أمر 'base64 file.txt' يقوم بـ؟",
+      "question_en": "The 'base64 file.txt' command does?",
+      "options": ["فك ترميز الملف", "ترميز الملف", "ضغط الملف", "تشفير الملف"],
       "correct_answer_index": 1,
-      "explanation_ar": "mkdir هو اختصار لـ make directory ويستخدم لإنشاء مجلدات جديدة.",
-      "explanation_en": "mkdir is short for make directory and is used to create new directories."
+      "explanation_ar": "أمر base64 يقوم بترميز محتوى الملف إلى صيغة base64",
+      "explanation_en": "The base64 command encodes the file content to base64 format"
     },
     {
       "id": 7,
-      "question_ar": "كيف يمكنك عرض محتويات ملف نصي؟",
-      "question_en": "How can you view the contents of a text file?",
-      "options": ["show", "cat", "open", "view"],
+      "question_ar": "ما هو الأمر المستخدم لمقارنة ملفين بايت بايت؟",
+      "question_en": "What command is used to compare two files byte by byte?",
+      "options": ["diff", "cmp", "comm", "compare"],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر cat يعرض محتويات الملف مباشرة في الترمينال.",
-      "explanation_en": "The cat command displays file contents directly in the terminal."
+      "explanation_ar": "أمر cmp يقارن ملفين بايت بايت ويظهر الفروقات",
+      "explanation_en": "The cmp command compares two files byte by byte and shows differences"
     },
     {
       "id": 8,
-      "question_ar": "ما هو الأمر المستخدم لحذف ملف؟",
-      "question_en": "What command is used to delete a file?",
-      "options": ["del", "rm", "delete", "remove"],
-      "correct_answer_index": 1,
-      "explanation_ar": "rm هو اختصار لـ remove ويستخدم لحذف الملفات والمجلدات.",
-      "explanation_en": "rm is short for remove and is used to delete files and directories."
+      "question_ar": "أمر 'chage -M 90 username' يضبط انتهاء صلاحية كلمة المرور إلى؟",
+      "question_en": "The 'chage -M 90 username' command sets password expiry to?",
+      "options": ["90 يوم", "90 ساعة", "90 دقيقة", "90 شهر"],
+      "correct_answer_index": 0,
+      "explanation_ar": "الخيار -M يضبط الحد الأقصى للأيام قبل انتهاء صلاحية كلمة المرور",
+      "explanation_en": "The -M option sets the maximum number of days before password expiry"
     },
     {
       "id": 9,
-      "question_ar": "كيف يمكنك نسخ ملف؟",
-      "question_en": "How can you copy a file?",
-      "options": ["copy", "cp", "duplicate", "move"],
+      "question_ar": "ما هو الأمر الذي يحاكي شاشة فيلم المصفوفة؟",
+      "question_en": "What command simulates the Matrix movie screen?",
+      "options": ["matrix", "cmatrix", "screen", "animation"],
       "correct_answer_index": 1,
-      "explanation_ar": "cp هو اختصار لـ copy ويستخدم لنسخ الملفات والمجلدات.",
-      "explanation_en": "cp is short for copy and is used to copy files and directories."
+      "explanation_ar": "أمر cmatrix يحاكي تأثير الشاشة الخضراء من فيلم المصفوفة",
+      "explanation_en": "The cmatrix command simulates the green screen effect from the Matrix movie"
     },
     {
       "id": 10,
-      "question_ar": "ما هو الأمر المستخدم لنقل ملف؟",
-      "question_en": "What command is used to move a file?",
-      "options": ["mv", "move", "transfer", "shift"],
-      "correct_answer_index": 0,
-      "explanation_ar": "mv هو اختصار لـ move ويستخدم لنقل الملفات والمجلدات أو إعادة تسميتها.",
-      "explanation_en": "mv is short for move and is used to move/rename files and directories."
+      "question_ar": "أمر 'awk '{print $1}' file.txt' يطبع؟",
+      "question_en": "The 'awk '{print $1}' file.txt' command prints?",
+      "options": ["السطر الأول", "العمود الأول", "الحرف الأول", "الكلمة الأولى"],
+      "correct_answer_index": 1,
+      "explanation_ar": "awk '{print $1}' يطبع العمود الأول من كل سطر في الملف",
+      "explanation_en": "awk '{print $1}' prints the first column from each line in the file"
     },
     {
       "id": 11,
-      "question_ar": "كيف يمكنك البحث عن ملف معين؟",
-      "question_en": "How can you search for a specific file?",
-      "options": ["search", "find", "locate", "look"],
+      "question_ar": "ما هو الأمر المستخدم لنقل البيانات من URL في أوبونتو؟",
+      "question_en": "What command is used to transfer data from a URL in Ubuntu?",
+      "options": ["wget", "curl", "download", "fetch"],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر find يبحث عن الملفات والمجلدات في النظام.",
-      "explanation_en": "The find command searches for files and directories in the system."
+      "explanation_ar": "أمر curl ينقل البيانات من أو إلى خادم باستخدام بروتوكولات مختلفة",
+      "explanation_en": "The curl command transfers data from or to a server using various protocols"
     },
     {
       "id": 12,
-      "question_ar": "ما هو الأمر المستخدم لعرض المسار الحالي؟",
-      "question_en": "What command is used to show current path?",
-      "options": ["path", "dir", "pwd", "where"],
-      "correct_answer_index": 2,
-      "explanation_ar": "pwd هو اختصار لـ print working directory ويظهر المسار الحالي.",
-      "explanation_en": "pwd is short for print working directory and shows the current path."
+      "question_ar": "أمر 'crontab -e' يستخدم لـ؟",
+      "question_en": "The 'crontab -e' command is used for?",
+      "options": ["عرض المهام", "تحرير المهام", "حذف المهام", "تشغيل المهام"],
+      "correct_answer_index": 1,
+      "explanation_ar": "crontab -e يفتح المحرر لتحرير المهام المجدولة للمستخدم",
+      "explanation_en": "crontab -e opens the editor to edit user's scheduled tasks"
     },
     {
       "id": 13,
-      "question_ar": "كيف يمكنك تغيير صلاحيات ملف؟",
-      "question_en": "How can you change file permissions?",
-      "options": ["perm", "chmod", "access", "rights"],
+      "question_ar": "ما هو الأمر المستخدم للبحث DNS في أوبونتو؟",
+      "question_en": "What command is used for DNS lookup in Ubuntu?",
+      "options": ["nslookup", "dig", "host", "ping"],
       "correct_answer_index": 1,
-      "explanation_ar": "chmod هو اختصار لـ change mode ويستخدم لتغيير صلاحيات الملفات.",
-      "explanation_en": "chmod is short for change mode and is used to change file permissions."
+      "explanation_ar": "أمر dig هو أداة بحث DNS قوية في أوبونتو",
+      "explanation_en": "The dig command is a powerful DNS lookup tool in Ubuntu"
     },
     {
       "id": 14,
-      "question_ar": "ماذا يفعل الأمر 'chmod +x'؟",
-      "question_en": "What does the command 'chmod +x' do?",
-      "options": ["يحذف الملف", "يجعل الملف قابلاً للتنفيذ", "يقرأ الملف فقط", "يخفي الملف"],
+      "question_ar": "أمر 'dconf read' يستخدم في زورين لـ؟",
+      "question_en": "The 'dconf read' command in Zorin is used for?",
+      "options": ["كتابة قيمة", "قراءة قيمة", "حذف قيمة", "تعديل قيمة"],
       "correct_answer_index": 1,
-      "explanation_ar": "+x يضيف صلاحية التنفيذ (execute) للملف.",
-      "explanation_en": "+x adds execute permission to the file."
+      "explanation_ar": "dconf read يقرأ قيمة من نظام تكوين زورين",
+      "explanation_en": "dconf read reads a value from Zorin's configuration system"
     },
     {
       "id": 15,
-      "question_ar": "كيف يمكنك عرض معلومات الملف مثل الحجم والتاريخ؟",
-      "question_en": "How can you view file information like size and date?",
-      "options": ["fileinfo", "stat", "ls -l", "info"],
-      "correct_answer_index": 2,
-      "explanation_ar": "ls -l يعرض تفاصيل الملفات في قائمة طويلة.",
-      "explanation_en": "ls -l displays file details in a long listing format."
+      "question_ar": "ما هو الأمر المستخدم للتحقق من ملفات سطح المكتب في زورين؟",
+      "question_en": "What command validates desktop files in Zorin?",
+      "options": ["desktop-check", "desktop-file-validate", "validate-desktop", "check-desktop"],
+      "correct_answer_index": 1,
+      "explanation_ar": "desktop-file-validate يتحقق من صحة ملفات إدخال سطح المكتب",
+      "explanation_en": "desktop-file-validate validates desktop entry files"
     },
     {
       "id": 16,
-      "question_ar": "ما هو الأمر المستخدم لإنشاء ملف فارغ؟",
-      "question_en": "What command is used to create an empty file?",
-      "options": ["new", "touch", "create", "empty"],
+      "question_ar": "أمر 'delv' في كالي يستخدم لـ؟",
+      "question_en": "The 'delv' command in Kali is used for?",
+      "options": ["بحث DNS", "التحقق من DNS", "مسح الشبكة", "فحص المنافذ"],
       "correct_answer_index": 1,
-      "explanation_ar": "touch ينشئ ملفاً فارغاً أو يحدث وقت تعديل الملف.",
-      "explanation_en": "touch creates an empty file or updates file modification time."
+      "explanation_ar": "delv هي أداة بحث والتحقق من DNS في كالي لينكس",
+      "explanation_en": "delv is a DNS lookup and validation utility in Kali Linux"
     },
     {
       "id": 17,
-      "question_ar": "كيف يمكنك حذف مجلد غير فارغ؟",
-      "question_en": "How can you delete a non-empty directory?",
-      "options": ["rm -d", "rmdir", "rm -r", "del -f"],
-      "correct_answer_index": 2,
-      "explanation_ar": "rm -r أو rm -rf يحذف المجلد ومحتوياته بشكل متكرر.",
-      "explanation_en": "rm -r or rm -rf deletes directory and its contents recursively."
+      "question_ar": "ما هو الأمر المستخدم لحساب CRC-32 في كالي؟",
+      "question_en": "What command calculates CRC-32 in Kali?",
+      "options": ["checksum", "crc32", "hash", "md5"],
+      "correct_answer_index": 1,
+      "explanation_ar": "crc32 يحسب مجموعات التحقق CRC-32 للملفات",
+      "explanation_en": "crc32 computes CRC-32 checksums for files"
     },
     {
       "id": 18,
-      "question_ar": "ما هو الأمر المستخدم لعرض العمليات الجارية؟",
-      "question_en": "What command is used to show running processes?",
-      "options": ["ps", "proc", "list", "show"],
-      "correct_answer_index": 0,
-      "explanation_ar": "ps يعرض العمليات الجارية في النظام.",
-      "explanation_en": "ps displays running processes in the system."
+      "question_ar": "أمر 'diff3' يقارن؟",
+      "question_en": "The 'diff3' command compares?",
+      "options": ["ملفين", "ثلاثة ملفات", "أربعة ملفات", "مجلدات"],
+      "correct_answer_index": 1,
+      "explanation_ar": "diff3 يقارن ثلاثة ملفات سطر بسطر",
+      "explanation_en": "diff3 compares three files line by line"
     },
     {
       "id": 19,
-      "question_ar": "كيف يمكنك إيقاف عملية جارية؟",
-      "question_en": "How can you stop a running process?",
-      "options": ["stop", "kill", "end", "terminate"],
+      "question_ar": "أمر 'dbus-send' في زورين يستخدم لـ؟",
+      "question_en": "The 'dbus-send' command in Zorin is used for?",
+      "options": ["إرسال بريد", "إرسال رسالة D-Bus", "إرسال إشعار", "إرسال ملف"],
       "correct_answer_index": 1,
-      "explanation_ar": "kill يرسل إشارة لإيقاف العملية المحددة.",
-      "explanation_en": "kill sends a signal to stop the specified process."
+      "explanation_ar": "dbus-send يرسل رسالة إلى ناقل رسائل D-Bus",
+      "explanation_en": "dbus-send sends a message to the D-Bus message bus"
     },
     {
       "id": 20,
-      "question_ar": "ماذا يفعل الأمر 'top'؟",
-      "question_en": "What does the 'top' command do?",
-      "options": ["يظهر أفضل الملفات", "يعرض العمليات بشكل مباشر", "يغلق الترمينال", "يبحث عن نص"],
+      "question_ar": "ما هو الأمر المستخدم لإعادة تجزئة الشهادات في كالي؟",
+      "question_en": "What command rehashes certificates in Kali?",
+      "options": ["cert-rehash", "c_rehash", "rehash-cert", "cert-rebuild"],
       "correct_answer_index": 1,
-      "explanation_ar": "top يعرض العمليات الجارية مع تحديث مستمر واستخدام الموارد.",
-      "explanation_en": "top displays running processes with continuous updates and resource usage."
+      "explanation_ar": "c_rehash ينشئ روابط رمزية للملفات المسماة بقيم التجزئة",
+      "explanation_en": "c_rehash creates symbolic links to files named by hash values"
     },
     {
       "id": 21,
-      "question_ar": "كيف يمكنك تثبيت برنامج باستخدام APT؟",
-      "question_en": "How can you install a program using APT?",
-      "options": ["apt get install", "apt install", "apt add", "apt setup"],
+      "question_ar": "أمر 'cut -d: -f1' يقوم بـ؟",
+      "question_en": "The 'cut -d: -f1' command does?",
+      "options": ["قطع الأحرف", "استخراج العمود الأول", "تقسيم الملف", "حذف الأسطر"],
       "correct_answer_index": 1,
-      "explanation_ar": "apt install هو الأمر الحديث لتثبيت الحزم في Debian/Ubuntu.",
-      "explanation_en": "apt install is the modern command to install packages in Debian/Ubuntu."
+      "explanation_ar": "cut -d: -f1 يستخرج العمود الأول باستخدام النقطتين كفاصل",
+      "explanation_en": "cut -d: -f1 extracts the first column using colon as delimiter"
     },
     {
       "id": 22,
-      "question_ar": "ما هو الأمر المستخدم لإزالة برنامج باستخدام APT؟",
-      "question_en": "What command is used to remove a program using APT?",
-      "options": ["apt delete", "apt remove", "apt uninstall", "apt erase"],
-      "correct_answer_index": 1,
-      "explanation_ar": "apt remove يزيل الحزمة مع الحفاظ على ملفات الإعدادات.",
-      "explanation_en": "apt remove removes the package while keeping configuration files."
+      "question_ar": "ما هو الأمر المستخدم لجدولة المهام في أوبونتو؟",
+      "question_en": "What command is used for task scheduling in Ubuntu?",
+      "options": ["schedule", "cron", "crontab", "task"],
+      "correct_answer_index": 2,
+      "explanation_ar": "crontab يحافظ على ملفات المهام المجدولة للمستخدمين",
+      "explanation_en": "crontab maintains crontab files for individual users"
     },
     {
       "id": 23,
-      "question_ar": "كيف يمكنك البحث عن حزمة باستخدام APT؟",
-      "question_en": "How can you search for a package using APT?",
-      "options": ["apt find", "apt search", "apt look", "apt locate"],
-      "correct_answer_index": 1,
-      "explanation_ar": "apt search يبحث في الحزم المتاحة في المستودعات.",
-      "explanation_en": "apt search searches through available packages in repositories."
+      "question_ar": "أمر 'dirmngr' في كالي هو؟",
+      "question_en": "The 'dirmngr' command in Kali is?",
+      "options": ["مدير الملفات", "مدير الشبكة", "خادم CRL و OCSP", "مدير العمليات"],
+      "correct_answer_index": 2,
+      "explanation_ar": "dirmngr هو خادم CRL و OCSP لإدارة الشهادات",
+      "explanation_en": "dirmngr is a CRL and OCSP daemon for certificate management"
     },
     {
       "id": 24,
-      "question_ar": "ما هو الأمر المستخدم لتحديث النظام بالكامل؟",
-      "question_en": "What command is used to upgrade the entire system?",
-      "options": ["apt upgrade", "apt update", "apt full-upgrade", "apt system-update"],
-      "correct_answer_index": 2,
-      "explanation_ar": "apt full-upgrade يحدث النظام بالكامل بما في ذلك إزالة الحزم القديمة.",
-      "explanation_en": "apt full-upgrade upgrades the entire system including removing old packages."
+      "question_ar": "أمر 'csplit' يستخدم لـ؟",
+      "question_en": "The 'csplit' command is used for?",
+      "options": ["تقسيم الملفات حسب الحجم", "تقسيم الملفات حسب السياق", "تقسيم الملفات حسب التاريخ", "تقسيم الملفات حسب النوع"],
+      "correct_answer_index": 1,
+      "explanation_ar": "csplit يقسم ملف إلى أقسام محددة بأسطر السياق",
+      "explanation_en": "csplit splits a file into sections determined by context lines"
     },
     {
       "id": 25,
-      "question_ar": "كيف يمكنك تثبيت برنامج باستخدام DNF (Fedora)؟",
-      "question_en": "How can you install a program using DNF (Fedora)?",
-      "options": ["dnf install", "dnf add", "dnf setup", "dnf get"],
-      "correct_answer_index": 0,
-      "explanation_ar": "dnf install هو الأمر لتثبيت الحزم في Fedora/CentOS.",
-      "explanation_en": "dnf install is the command to install packages in Fedora/CentOS."
+      "question_ar": "ما هو الأمر المستخدم لتحرير ملفات سطح المكتب في زورين؟",
+      "question_en": "What command edits desktop files in Zorin?",
+      "options": ["edit-desktop", "desktop-edit", "desktop-file-edit", "file-desktop-edit"],
+      "correct_answer_index": 2,
+      "explanation_ar": "desktop-file-edit يحرر ملفات سطح المكتب في زورين",
+      "explanation_en": "desktop-file-edit edits desktop files in Zorin"
     },
     {
       "id": 26,
-      "question_ar": "ما هو الأمر المستخدم لتحديث الحزم في Arch Linux؟",
-      "question_en": "What command is used to update packages in Arch Linux?",
-      "options": ["pacman -S", "pacman -Syu", "pacman -U", "pacman update"],
+      "question_ar": "أمر 'diffstat' يعرض؟",
+      "question_en": "The 'diffstat' command displays?",
+      "options": ["مخطط بياني", "مدرج تكراري", "جدول", "قائمة"],
       "correct_answer_index": 1,
-      "explanation_ar": "pacman -Syu يحدث قاعدة البيانات ويثبت التحديثات.",
-      "explanation_en": "pacman -Syu updates database and installs upgrades."
+      "explanation_ar": "diffstat ينشئ مدرج تكراري من مخرجات diff",
+      "explanation_en": "diffstat creates a histogram from diff-output"
     },
     {
       "id": 27,
-      "question_ar": "كيف يمكنك تثبيت حزمة في Arch Linux؟",
-      "question_en": "How can you install a package in Arch Linux?",
-      "options": ["pacman -S", "pacman -I", "pacman add", "pacman get"],
-      "correct_answer_index": 0,
-      "explanation_ar": "pacman -S package_name يثبت الحزمة المحددة.",
-      "explanation_en": "pacman -S package_name installs the specified package."
+      "question_ar": "أمر 'debconf' في زورين يستخدم لـ؟",
+      "question_en": "The 'debconf' command in Zorin is used for?",
+      "options": ["تثبيت الحزم", "تكوين الحزم", "تحديث الحزم", "حذف الحزم"],
+      "correct_answer_index": 1,
+      "explanation_ar": "debconf يشغل برنامج يستخدم نظام تكوين دبيان",
+      "explanation_en": "debconf runs a program using the debconf configuration system"
     },
     {
       "id": 28,
-      "question_ar": "ما هو الأمر المستخدم لإزالة حزمة في Arch Linux؟",
-      "question_en": "What command is used to remove a package in Arch Linux?",
-      "options": ["pacman -R", "pacman -D", "pacman remove", "pacman delete"],
-      "correct_answer_index": 0,
-      "explanation_ar": "pacman -R يزيل الحزمة المحددة.",
-      "explanation_en": "pacman -R removes the specified package."
+      "question_ar": "ما هو الأمر المستخدم لعرض إحصائيات الفروقات؟",
+      "question_en": "What command displays difference statistics?",
+      "options": ["diff-stats", "diffstat", "stat-diff", "stats-diff"],
+      "correct_answer_index": 1,
+      "explanation_ar": "diffstat ينشئ مدرج تكراري من مخرجات مقارنة الملفات",
+      "explanation_en": "diffstat makes a histogram from diff-output"
     },
     {
       "id": 29,
-      "question_ar": "كيف يمكنك عرض عنوان IP الخاص بك؟",
-      "question_en": "How can you view your IP address?",
-      "options": ["ip addr", "ifconfig", "ip a", "كل ما سبق"],
-      "correct_answer_index": 3,
-      "explanation_ar": "جميع هذه الأوامر يمكنها عرض معلومات الشبكة وعناوين IP.",
-      "explanation_en": "All these commands can display network information and IP addresses."
+      "question_ar": "أمر 'dirname /path/to/file' يعيد؟",
+      "question_en": "The 'dirname /path/to/file' command returns?",
+      "options": ["file", "to", "/path/to", "path"],
+      "correct_answer_index": 2,
+      "explanation_ar": "dirname يزيل الجزء الأخير من المسار ويعيد الدليل",
+      "explanation_en": "dirname removes the last part of the path and returns the directory"
     },
     {
       "id": 30,
-      "question_ar": "ما هو الأمر المستخدم لاختبار الاتصال بخادم؟",
-      "question_en": "What command is used to test connection to a server?",
-      "options": ["ping", "connect", "test", "check"],
-      "correct_answer_index": 0,
-      "explanation_ar": "ping يرسل حزم لاختبار الاتصال بالخادم المستهدف.",
-      "explanation_en": "ping sends packets to test connectivity to the target server."
-    },
-    {
-      "id": 31,
-      "question_ar": "كيف يمكنك عرض المنافذ المفتوحة؟",
-      "question_en": "How can you view open ports?",
-      "options": ["ports", "netstat", "openports", "portlist"],
-      "correct_answer_index": 1,
-      "explanation_ar": "netstat يعرض الاتصالات النشطة والمنافذ المفتوحة.",
-      "explanation_en": "netstat displays active connections and open ports."
-    },
-    {
-      "id": 32,
-      "question_ar": "ما هو الأمر المستخدم لتنزيل ملف من الإنترنت؟",
-      "question_en": "What command is used to download a file from the internet?",
-      "options": ["download", "get", "wget", "fetch"],
+      "question_ar": "أمر 'dircolors' يستخدم لـ؟",
+      "question_en": "The 'dircolors' command is used for?",
+      "options": ["تلوين الملفات", "تلوين الدلائل", "إعداد ألوان ls", "تغيير ألوان الطرفية"],
       "correct_answer_index": 2,
-      "explanation_ar": "wget يتنزل الملفات من الويب يدعم HTTP و FTP.",
-      "explanation_en": "wget downloads files from the web supporting HTTP and FTP."
-    },
-    {
-      "id": 33,
-      "question_ar": "كيف يمكنك نقل ملف عبر الشبكة باستخدام SSH؟",
-      "question_en": "How can you transfer a file over network using SSH?",
-      "options": ["ssh transfer", "scp", "sftp", "rsync"],
-      "correct_answer_index": 1,
-      "explanation_ar": "scp هو اختصار لـ secure copy وينقل الملفات بأمان عبر SSH.",
-      "explanation_en": "scp is short for secure copy and transfers files securely over SSH."
-    },
-    {
-      "id": 34,
-      "question_ar": "ما هو الأمر المستخدم للاتصال بخادم بعيد؟",
-      "question_en": "What command is used to connect to a remote server?",
-      "options": ["connect", "remote", "ssh", "login"],
-      "correct_answer_index": 2,
-      "explanation_ar": "ssh هو اختصار لـ secure shell ويوفر اتصالاً آمناً بالخوادم.",
-      "explanation_en": "ssh is short for secure shell and provides secure connection to servers."
-    },
-    {
-      "id": 35,
-      "question_ar": "كيف يمكنك عرض استخدام القرص؟",
-      "question_en": "How can you view disk usage?",
-      "options": ["disk", "du", "df", "storage"],
-      "correct_answer_index": 2,
-      "explanation_ar": "df هو اختصار لـ disk free ويظهر مساحة القرص المتاحة.",
-      "explanation_en": "df is short for disk free and shows available disk space."
-    },
-    {
-      "id": 36,
-      "question_ar": "ماذا يفعل الأمر 'du -sh'؟",
-      "question_en": "What does the command 'du -sh' do?",
-      "options": ["يظهر استخدام القرص الإجمالي", "يحذف الملفات الكبيرة", "يعرض حجم المجلدات بشكل مقروء", "يضغط الملفات"],
-      "correct_answer_index": 2,
-      "explanation_ar": "du -sh يعرض حجم كل مجلد بصيغة مقروءة للإنسان.",
-      "explanation_en": "du -sh displays size of each directory in human-readable format."
-    },
-    {
-      "id": 37,
-      "question_ar": "كيف يمكنك عرض استخدام الذاكرة؟",
-      "question_en": "How can you view memory usage?",
-      "options": ["mem", "memory", "free", "ram"],
-      "correct_answer_index": 2,
-      "explanation_ar": "free يعرض استخدام الذاكرة بما في ذلك RAM و swap.",
-      "explanation_en": "free displays memory usage including RAM and swap."
-    },
-    {
-      "id": 38,
-      "question_ar": "ما هو الأمر المستخدم لمراقبة استخدام الموارد بشكل مباشر؟",
-      "question_en": "What command is used to monitor resource usage in real-time?",
-      "options": ["monitor", "htop", "watch", "live"],
-      "correct_answer_index": 1,
-      "explanation_ar": "htop هو نسخة محسنة من top تعرض العمليات بشكل تفاعلي.",
-      "explanation_en": "htop is an improved version of top showing processes interactively."
-    },
-    {
-      "id": 39,
-      "question_ar": "كيف يمكنك عرض سجل النظام؟",
-      "question_en": "How can you view system logs?",
-      "options": ["log", "journalctl", "syslog", "history"],
-      "correct_answer_index": 1,
-      "explanation_ar": "journalctl يعرض سجل systemd والرسائل النظام.",
-      "explanation_en": "journalctl displays systemd log and system messages."
-    },
-    {
-      "id": 40,
-      "question_ar": "ما هو الأمر المستخدم لضغط ملف؟",
-      "question_en": "What command is used to compress a file?",
-      "options": ["zip", "compress", "pack", "archive"],
-      "correct_answer_index": 0,
-      "explanation_ar": "zip ينشئ ملف مضغوط بصيغة ZIP.",
-      "explanation_en": "zip creates a compressed file in ZIP format."
-    },
-    {
-      "id": 41,
-      "question_ar": "كيف يمكنك فك ضغط ملف TAR؟",
-      "question_en": "How can you extract a TAR file?",
-      "options": ["tar -x", "tar -e", "untar", "extract"],
-      "correct_answer_index": 0,
-      "explanation_ar": "tar -x يستخرج الملفات من أرشيف TAR.",
-      "explanation_en": "tar -x extracts files from a TAR archive."
-    },
-    {
-      "id": 42,
-      "question_ar": "ما هو الأمر المستخدم لإنشاء أرشيف TAR.GZ؟",
-      "question_en": "What command is used to create a TAR.GZ archive?",
-      "options": ["tar -czf", "tar -xzf", "tar -cf", "tar -z"],
-      "correct_answer_index": 0,
-      "explanation_ar": "tar -czf ينشئ أرشيف مضغوط باستخدام gzip.",
-      "explanation_en": "tar -czf creates compressed archive using gzip."
-    },
-    {
-      "id": 43,
-      "question_ar": "كيف يمكنك البحث عن نص داخل الملفات؟",
-      "question_en": "How can you search for text inside files?",
-      "options": ["search", "findtext", "grep", "locate"],
-      "correct_answer_index": 2,
-      "explanation_ar": "grep يبحث عن أنماط نصية داخل الملفات.",
-      "explanation_en": "grep searches for text patterns inside files."
-    },
-    {
-      "id": 44,
-      "question_ar": "ماذا يفعل الأمر 'grep -r'؟",
-      "question_en": "What does the command 'grep -r' do?",
-      "options": ["يبحث بشكل عكسي", "يبحث بشكل متكرر في المجلدات", "يبحث عن الروابط", "يعرض النتائج العكسية"],
-      "correct_answer_index": 1,
-      "explanation_ar": "-r أو -recursive يبحث بشكل متكرر في جميع المجلدات الفرعية.",
-      "explanation_en": "-r or -recursive searches recursively through all subdirectories."
-    },
-    {
-      "id": 45,
-      "question_ar": "كيف يمكنك عرض نهاية الملف؟",
-      "question_en": "How can you view the end of a file?",
-      "options": ["end", "tail", "bottom", "last"],
-      "correct_answer_index": 1,
-      "explanation_ar": "tail يعرض آخر سطور من الملف.",
-      "explanation_en": "tail displays the last lines of a file."
-    },
-    {
-      "id": 46,
-      "question_ar": "ما هو الأمر المستخدم لعرض بداية الملف؟",
-      "question_en": "What command is used to view the beginning of a file?",
-      "options": ["start", "head", "begin", "first"],
-      "correct_answer_index": 1,
-      "explanation_ar": "head يعرض أول سطور من الملف.",
-      "explanation_en": "head displays the first lines of a file."
-    },
-    {
-      "id": 47,
-      "question_ar": "كيف يمكنك عد الكلمات في ملف؟",
-      "question_en": "How can you count words in a file?",
-      "options": ["count", "wc", "wordcount", "num"],
-      "correct_answer_index": 1,
-      "explanation_ar": "wc هو اختصار لـ word count ويعد الكلمات والسطور والأحرف.",
-      "explanation_en": "wc is short for word count and counts words, lines, and characters."
-    },
-    {
-      "id": 48,
-      "question_ar": "ماذا يفعل الأمر 'sort'؟",
-      "question_en": "What does the 'sort' command do?",
-      "options": ["ينظم الملفات", "يرتب سطور النص أبجدياً", "يفرز المجلدات", "يزيل التكرارات"],
-      "correct_answer_index": 1,
-      "explanation_ar": "sort يرتب سطور النص أبجدياً أو رقمياً.",
-      "explanation_en": "sort arranges text lines alphabetically or numerically."
-    },
-    {
-      "id": 49,
-      "question_ar": "كيف يمكنك إزالة التكرارات من ملف؟",
-      "question_en": "How can you remove duplicates from a file?",
-      "options": ["unique", "dedup", "uniq", "distinct"],
-      "correct_answer_index": 2,
-      "explanation_ar": "uniq يزيل السطور المتكررة المتجاورة.",
-      "explanation_en": "uniq removes adjacent duplicate lines."
-    },
-    {
-      "id": 50,
-      "question_ar": "ما هو الأمر المستخدم لجدولة مهمة؟",
-      "question_en": "What command is used to schedule a task?",
-      "options": ["schedule", "cron", "task", "timer"],
-      "correct_answer_index": 1,
-      "explanation_ar": "cron يدير المهام المجدولة التي تعمل تلقائياً.",
-      "explanation_en": "cron manages scheduled tasks that run automatically."
+      "explanation_ar": "dircolors يعدد الألوان المستخدمة في أمر ls",
+      "explanation_en": "dircolors sets up colors used by the ls command"
     }
   ],
   "daily_tips": [
     {
       "id": 1,
-      "tip_ar": "استخدم زر Tab لإكمال الأوامر تلقائياً في الطرفية!",
-      "tip_en": "Use Tab key to auto-complete commands in terminal!",
-      "category_id": "universal"
+      "tip_ar": "استخدم 'history | grep command' للبحث عن الأوامر التي استخدمتها سابقاً",
+      "tip_en": "Use 'history | grep command' to search for commands you've used before",
+      "category_id": "productivity"
     },
     {
       "id": 2,
-      "tip_ar": "يمكنك استخدام الأمر 'history' لعرض كل الأوامر التي استخدمتها سابقاً.",
-      "tip_en": "You can use 'history' command to see all previously used commands.",
-      "category_id": "universal"
+      "tip_ar": "اختصار 'Ctrl + R' يسمح لك بالبحث التفاعلي في سجل الأوامر",
+      "tip_en": "The 'Ctrl + R' shortcut allows you to interactively search command history",
+      "category_id": "shortcuts"
     },
     {
       "id": 3,
-      "tip_ar": "استخدم 'Ctrl + C' لإيقاف أي أمر يعمل حالياً.",
-      "tip_en": "Use 'Ctrl + C' to stop any currently running command.",
-      "category_id": "universal"
+      "tip_ar": "استخدم '!!' لتكرار آخر أمر قمت بتشغيله",
+      "tip_en": "Use '!!' to repeat the last command you ran",
+      "category_id": "shortcuts"
     },
     {
       "id": 4,
-      "tip_ar": "أمر 'man' يعرض الدليل الكامل لأي أمر. استخدمه للتعلم!",
-      "tip_en": "The 'man' command shows complete manual for any command. Use it to learn!",
-      "category_id": "universal"
+      "tip_ar": "أمر 'sudo !!' ينفذ الأمر الأخير بصلاحيات المدير",
+      "tip_en": "The 'sudo !!' command executes the last command with administrator privileges",
+      "category_id": "administration"
     },
     {
       "id": 5,
-      "tip_ar": "استخدم 'sudo' فقط عند الحاجة. تجنبه للأوامر العادية.",
-      "tip_en": "Use 'sudo' only when necessary. Avoid it for regular commands.",
-      "category_id": "security"
+      "tip_ar": "استخدم 'man command' لعرض صفحة الدليل الكاملة لأي أمر",
+      "tip_en": "Use 'man command' to display the complete manual page for any command",
+      "category_id": "learning"
     },
     {
       "id": 6,
-      "tip_ar": "يمكنك دمج الأوامر باستخدام '&&' لتشغيلها بالتسلسل.",
-      "tip_en": "You can chain commands using '&&' to run them sequentially.",
-      "category_id": "universal"
+      "tip_ar": "اختصار 'Ctrl + L' يمسح شاشة الطرفية بسرعة",
+      "tip_en": "The 'Ctrl + L' shortcut quickly clears the terminal screen",
+      "category_id": "shortcuts"
     },
     {
       "id": 7,
-      "tip_ar": "استخدم 'clear' أو 'Ctrl + L' لتنظيف شاشة الطرفية بسرعة.",
-      "tip_en": "Use 'clear' or 'Ctrl + L' to quickly clean terminal screen.",
-      "category_id": "universal"
+      "tip_ar": "استخدم 'cd -' للعودة إلى الدليل السابق الذي كنت فيه",
+      "tip_en": "Use 'cd -' to return to the previous directory you were in",
+      "category_id": "navigation"
+    },
+    {
+      "id": 8,
+      "tip_ar": "أمر 'pwd' يعرض المسار الكامل للدليل الحالي",
+      "tip_en": "The 'pwd' command displays the full path of the current directory",
+      "category_id": "navigation"
+    },
+    {
+      "id": 9,
+      "tip_ar": "استخدم 'ls -la' لعرض جميع الملفات بما في ذلك الملفات المخفية",
+      "tip_en": "Use 'ls -la' to display all files including hidden files",
+      "category_id": "file_management"
+    },
+    {
+      "id": 10,
+      "tip_ar": "أمر 'top' يعرض العمليات النشطة واستخدام الموارد في الوقت الفعلي",
+      "tip_en": "The 'top' command displays active processes and resource usage in real-time",
+      "category_id": "monitoring"
     }
   ]
 }

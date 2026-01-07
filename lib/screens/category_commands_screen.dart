@@ -52,7 +52,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
 
     return Scaffold(
-      appBar: AppBar(title: Text(widget.categoryName)),
+      appBar: AppBar(title: Text(widget.categoryName), centerTitle: true),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _commands.isEmpty

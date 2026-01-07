@@ -21,6 +21,7 @@ class CommandDetailsScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(command.command),
+        centerTitle: true,
         actions: [
           IconButton(
             icon: const Icon(Icons.copy),
@@ -100,7 +101,7 @@ class CommandDetailsScreen extends StatelessWidget {
             
             const SizedBox(height: 16),
             
-            // قسم الصياغة (Syntax)
+            // قسم الصياغة (Syntax) - VS Code Style
             _buildSectionCard(
               context,
               title: 'الصياغة',
@@ -108,22 +109,74 @@ class CommandDetailsScreen extends StatelessWidget {
               isDarkMode: isDarkMode,
               child: Container(
                 width: double.infinity,
-                padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.grey[100],
+                  color: const Color(0xFF1E1E1E), // VS Code dark background
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(
-                    color: isDarkMode ? Colors.grey[700]! : Colors.grey[300]!,
+                    color: const Color(0xFF333333),
                   ),
                 ),
-                child: Text(
-                  command.syntax,
-                  style: TextStyle(
-                    fontFamily: 'monospace',
-                    fontSize: 14,
-                    color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                  ),
-                  textDirection: TextDirection.ltr, // الصياغة دائماً يسار لليمين
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    // Terminal Header - Three colored dots
+                    Container(
+                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFF252526),
+                        borderRadius: const BorderRadius.only(
+                          topLeft: Radius.circular(8),
+                          topRight: Radius.circular(8),
+                        ),
+                      ),
+                      child: Row(
+                        children: [
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFFF5F56),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFFFFBD2E),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          Container(
+                            width: 12,
+                            height: 12,
+                            decoration: const BoxDecoration(
+                              color: Color(0xFF27C93F),
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    // Syntax Content with Horizontal Scrolling
+                    Container(
+                      padding: const EdgeInsets.all(12),
+                      child: SingleChildScrollView(
+                        scrollDirection: Axis.horizontal,
+                        child: Text(
+                          command.syntax,
+                          style: const TextStyle(
+                            fontFamily: 'monospace',
+                            fontSize: 14,
+                            color: Color(0xFFD4D4D4), // VS Code text color
+                          ),
+                          textDirection: TextDirection.ltr,
+                        ),
+                      ),
+                    ),
+                  ],
                 ),
               ),
             ),

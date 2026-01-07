@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../models/quiz_model.dart';
 import '../providers/theme_provider.dart';
-import '../services/data_service.dart';
+import '../services/daily_tip_service.dart';
 import '../utils/bidi_helper.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -25,15 +25,13 @@ class _DailyTipCardState extends State<DailyTipCard> {
 
   Future<void> _loadDailyTip() async {
     try {
-      final quizData = await DataService.loadQuizData();
-      if (quizData.daily_tips != null && quizData.daily_tips!.isNotEmpty) {
-        final randomIndex = DateTime.now().day % quizData.daily_tips!.length;
-        setState(() {
-          _dailyTip = quizData.daily_tips![randomIndex];
-          _isLoading = false;
-        });
-      }
+      final dailyTip = await DailyTipService.getDailyTip();
+      setState(() {
+        _dailyTip = dailyTip;
+        _isLoading = false;
+      });
     } catch (e) {
+      print('Error loading daily tip: $e');
       setState(() => _isLoading = false);
     }
   }
@@ -73,7 +71,7 @@ class _DailyTipCardState extends State<DailyTipCard> {
                   const SizedBox(height: 6),
                   // هنا نستخدم buildRichTextWithCommands في حال وجود أوامر داخل النصيحة
                   BiDiHelper.buildRichTextWithCommands(
-                    text: _dailyTip?.tip_ar ?? "استخدم زر 'Tab' لإكمال الأوامر تلقائياً.",
+                    text: _dailyTip?.tip_ar ?? DailyTipService.fallbackTip,
                     style: GoogleFonts.cairo(
                       fontSize: 13,
                       color: isDarkMode ? Colors.white70 : Colors.black87,

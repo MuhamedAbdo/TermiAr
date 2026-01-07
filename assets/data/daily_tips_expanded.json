@@ -539,6 +539,546 @@
       "tip_ar": "لعرض الحزم المتاحة، استخدم 'apt-cache search'.",
       "tip_en": "To view available packages, use 'apt-cache search'.",
       "category_id": "package_management"
+    },
+    {
+      "id": 91,
+      "tip_ar": "استخدم 'Ctrl + L' لمسح شاشة الطرفية بسرعة بدلاً من كتابة أمر 'clear'.",
+      "tip_en": "Use 'Ctrl + L' to clear the terminal screen quickly instead of typing 'clear'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 92,
+      "tip_ar": "للبحث العكسي في سجل الأوامر، اضغط 'Ctrl + R' واكتب جزءاً من الأمر القديم.",
+      "tip_en": "For reverse search in command history, press 'Ctrl + R' and type part of the command.",
+      "category_id": "universal"
+    },
+    {
+      "id": 93,
+      "tip_ar": "يمكنك استخدام 'Ctrl + A' للانتقال إلى بداية السطر و 'Ctrl + E' للنهاية.",
+      "tip_en": "Use 'Ctrl + A' to move to the beginning of the line and 'Ctrl + E' to the end.",
+      "category_id": "universal"
+    },
+    {
+      "id": 94,
+      "tip_ar": "استخدم 'alias' لإنشاء اختصارات للأوامر الطويلة والمكررة.",
+      "tip_en": "Use 'alias' to create shortcuts for long and repetitive commands.",
+      "category_id": "universal"
+    },
+    {
+      "id": 95,
+      "tip_ar": "لإيقاف أي أمر عالق فوراً، استخدم اختصار 'Ctrl + C'.",
+      "tip_en": "To stop any hanging command immediately, use 'Ctrl + C'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 96,
+      "tip_ar": "استخدم 'Ctrl + Z' لتعليق أمر وإرساله للخلفية، ثم اكتب 'fg' لإعادته.",
+      "tip_en": "Use 'Ctrl + Z' to suspend a command, then type 'fg' to bring it back.",
+      "category_id": "universal"
+    },
+    {
+      "id": 97,
+      "tip_ar": "الأمر 'cd -' يعيدك إلى المجلد السابق الذي كنت فيه مباشرة.",
+      "tip_en": "The command 'cd -' takes you back to the previous directory you were in.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 98,
+      "tip_ar": "لعرض أحجام المجلدات بشكل مقروء، استخدم 'du -sh *'.",
+      "tip_en": "To view directory sizes in human-readable format, use 'du -sh *'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 99,
+      "tip_ar": "استخدم 'shred' لحذف ملف بشكل نهائي بحيث لا يمكن استرجاعه أبداً.",
+      "tip_en": "Use 'shred' to delete a file permanently so it can never be recovered.",
+      "category_id": "security"
+    },
+    {
+      "id": 100,
+      "tip_ar": "لإنشاء ملف نصي فارغ بسرعة، استخدم أمر 'touch filename'.",
+      "tip_en": "To quickly create an empty text file, use 'touch filename'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 101,
+      "tip_ar": "الأمر 'locate' أسرع من 'find' للبحث عن الملفات لأنه يعتمد على قاعدة بيانات.",
+      "tip_en": "'locate' is faster than 'find' for searching files as it uses a database.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 102,
+      "tip_ar": "استخدم 'sudo !!' لتنفيذ آخر أمر نسيته كتابة sudo قبله.",
+      "tip_en": "Use 'sudo !!' to run the last command you forgot to prefix with sudo.",
+      "category_id": "universal"
+    },
+    {
+      "id": 103,
+      "tip_ar": "لمعرفة نوع أي ملف (نصي، صورة، تنفيذي)، استخدم أمر 'file filename'.",
+      "tip_en": "To know any file type (text, image, executable), use 'file filename'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 104,
+      "tip_ar": "الأمر 'df -Th' يعرض لك نوع نظام الملفات (ext4, vfat) لكل قرص.",
+      "tip_en": "'df -Th' shows the filesystem type (ext4, vfat) for each disk.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 105,
+      "tip_ar": "استخدم 'head -n 5' لعرض أول 5 أسطر فقط من أي ملف كبير.",
+      "tip_en": "Use 'head -n 5' to view only the first 5 lines of any large file.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 106,
+      "tip_ar": "الأمر 'tail -f' مفيد جداً لمراقبة سجلات النظام (logs) أثناء تحديثها لحظياً.",
+      "tip_en": "'tail -f' is great for monitoring system logs as they update in real-time.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 107,
+      "tip_ar": "للبحث عن الأوامر التي استخدمتها مؤخراً فقط، اكتب 'history | tail'.",
+      "tip_en": "To search for your most recent commands, type 'history | tail'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 108,
+      "tip_ar": "استخدم 'whatis' للحصول على وصف موجز جداً لوظيفة أي أمر.",
+      "tip_en": "Use 'whatis' to get a very brief description of what a command does.",
+      "category_id": "universal"
+    },
+    {
+      "id": 109,
+      "tip_ar": "الأمر 'cal' يعرض لك تقويماً بسيطاً داخل الطرفية.",
+      "tip_en": "The 'cal' command displays a simple calendar inside the terminal.",
+      "category_id": "universal"
+    },
+    {
+      "id": 110,
+      "tip_ar": "استخدم 'ln -s' لإنشاء اختصار (Link) لملف أو مجلد في مكان آخر.",
+      "tip_en": "Use 'ln -s' to create a symbolic link for a file or directory.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 111,
+      "tip_ar": "لمعرفة المسار الكامل لأي أمر تنفيذي، استخدم 'which command_name'.",
+      "tip_en": "To find the full path of any executable command, use 'which command_name'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 112,
+      "tip_ar": "الأمر 'lsusb' يعرض لك كافة الأجهزة المتصلة بمنافذ الـ USB.",
+      "tip_en": "'lsusb' lists all devices connected to your USB ports.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 113,
+      "tip_ar": "استخدم 'lscpu' للحصول على تفاصيل معمارية المعالج وعدد الأنوية.",
+      "tip_en": "Use 'lscpu' to get CPU architecture details and core count.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 114,
+      "tip_ar": "لإغلاق الجهاز بعد وقت معين، استخدم 'sudo shutdown +30' (بعد 30 دقيقة).",
+      "tip_en": "To shutdown after a specific time, use 'sudo shutdown +30'.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 115,
+      "tip_ar": "استخدم 'tree' لعرض هيكل المجلدات والملفات بشكل شجري مرئي.",
+      "tip_en": "Use 'tree' to display directory structure in a visual tree format.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 116,
+      "tip_ar": "الأمر 'lsblk' يعرض الأقراص الصلبة وتقسيماتها بشكل منظم جداً.",
+      "tip_en": "'lsblk' lists block devices and their partitions in an organized way.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 117,
+      "tip_ar": "يمكنك استخدام 'nmcli' لإدارة شبكات الواي فاي من الطرفية مباشرة.",
+      "tip_en": "You can use 'nmcli' to manage Wi-Fi networks directly from the terminal.",
+      "category_id": "networking"
+    },
+    {
+      "id": 118,
+      "tip_ar": "استخدم 'zip -e' لإنشاء ملف مضغوط محمي بكلمة سر.",
+      "tip_en": "Use 'zip -e' to create a password-protected compressed file.",
+      "category_id": "security"
+    },
+    {
+      "id": 119,
+      "tip_ar": "الأمر 'groups username' يخبرك بكل المجموعات التي ينتمي إليها مستخدم معين.",
+      "tip_en": "'groups username' tells you all groups a specific user belongs to.",
+      "category_id": "security"
+    },
+    {
+      "id": 120,
+      "tip_ar": "استخدم 'history -c' لمسح سجل الأوامر بالكامل لأسباب تتعلق بالخصوصية.",
+      "tip_en": "Use 'history -c' to clear the entire command history for privacy.",
+      "category_id": "security"
+    },
+    {
+      "id": 121,
+      "tip_ar": "لفتح المجلد الحالي في مدير الملفات الرسومي، اكتب 'xdg-open .'.",
+      "tip_en": "To open the current directory in the GUI file manager, type 'xdg-open .'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 122,
+      "tip_ar": "الأمر 'w' يعرض لك من هم المستخدمون المسجلون وماذا يفعلون الآن.",
+      "tip_en": "The 'w' command shows logged-in users and what they are currently doing.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 123,
+      "tip_ar": "استخدم 'uptime -p' للحصول على وقت تشغيل النظام بصيغة سهلة القراءة.",
+      "tip_en": "Use 'uptime -p' to get system uptime in a human-readable format.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 124,
+      "tip_ar": "الأمر 'grep -r' يبحث عن نص معين داخل كل الملفات في المجلد والمجلدات الفرعية.",
+      "tip_en": "'grep -r' searches for text within all files in a directory recursively.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 125,
+      "tip_ar": "استخدم 'cat /proc/meminfo' للحصول على تفاصيل دقيقة جداً عن استهلاك الرام.",
+      "tip_en": "Use 'cat /proc/meminfo' for very detailed RAM consumption info.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 126,
+      "tip_ar": "للبحث عن أكبر 10 ملفات في النظام، استخدم 'du -a / | sort -n -r | head -n 10'.",
+      "tip_en": "To find the top 10 largest files, use 'du -a / | sort -n -r | head -n 10'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 127,
+      "tip_ar": "استخدم 'hostnamectl' لتغيير اسم الجهاز (Hostname) بشكل دائم.",
+      "tip_en": "Use 'hostnamectl' to permanently change the system hostname.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 128,
+      "tip_ar": "الأمر 'watch -n 1 command' ينفذ الأمر كل ثانية لمراقبة التغييرات.",
+      "tip_en": "'watch -n 1 command' runs a command every second to monitor changes.",
+      "category_id": "universal"
+    },
+    {
+      "id": 129,
+      "tip_ar": "لتجربة أمر دون حفظه في السجل، ضع مسافة قبل كتابة الأمر.",
+      "tip_en": "To run a command without saving it to history, start it with a space.",
+      "category_id": "security"
+    },
+    {
+      "id": 130,
+      "tip_ar": "استخدم 'screen' أو 'tmux' للحفاظ على تشغيل الأوامر حتى بعد إغلاق الطرفية.",
+      "tip_en": "Use 'screen' or 'tmux' to keep commands running after closing terminal.",
+      "category_id": "universal"
+    },
+    {
+      "id": 131,
+      "tip_ar": "الأمر 'ping -c 4' يرسل 4 حزم فقط بدلاً من الاستمرار للأبد.",
+      "tip_en": "'ping -c 4' sends only 4 packets instead of running indefinitely.",
+      "category_id": "networking"
+    },
+    {
+      "id": 132,
+      "tip_ar": "استخدم 'tar -tvf file.tar' لعرض محتويات ملف مضغوط دون فكه.",
+      "tip_en": "Use 'tar -tvf file.tar' to list contents of a tar file without extracting it.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 133,
+      "tip_ar": "لإخفاء ملف، ابدأ اسمه بنقطة مثل '.secret_file'.",
+      "tip_en": "To hide a file, start its name with a dot like '.secret_file'.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 134,
+      "tip_ar": "الأمر 'df -i' يخبرك بعدد الـ Inodes المتبقية (مهم في حال امتلاء القرص برمجياً).",
+      "tip_en": "'df -i' tells you remaining Inodes (important if disk is full via files).",
+      "category_id": "system_info"
+    },
+    {
+      "id": 135,
+      "tip_ar": "استخدم 'nproc' لمعرفة عدد المعالجات المتاحة للنظام فوراً.",
+      "tip_en": "Use 'nproc' to quickly see the number of available processing units.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 136,
+      "tip_ar": "الأمر 'fuser -k 80/tcp' يقتل أي عملية تستخدم المنفذ 80 حالياً.",
+      "tip_en": "'fuser -k 80/tcp' kills any process using port 80 currently.",
+      "category_id": "networking"
+    },
+    {
+      "id": 137,
+      "tip_ar": "استخدم 'echo $PATH' لمعرفة المجلدات التي يبحث فيها النظام عن الأوامر.",
+      "tip_en": "Use 'echo $PATH' to see directories where the system looks for commands.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 138,
+      "tip_ar": "للتحقق من سلامة القرص الصلب، استخدم أداة 'smartctl'.",
+      "tip_en": "To check hard drive health, use 'smartctl' tool.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 139,
+      "tip_ar": "الأمر 'last' يعرض لك تاريخ آخر عمليات تسجيل دخول للنظام.",
+      "tip_en": "The 'last' command shows a history of recent system logins.",
+      "category_id": "security"
+    },
+    {
+      "id": 140,
+      "tip_ar": "استخدم 'curl ifconfig.me' للحصول على عنوان الـ IP الخارجي الخاص بك.",
+      "tip_en": "Use 'curl ifconfig.me' to get your public IP address.",
+      "category_id": "networking"
+    },
+    {
+      "id": 141,
+      "tip_ar": "يمكنك استخدام 'Ctrl + U' لمسح السطر الحالي بالكامل والبدء من جديد.",
+      "tip_en": "Use 'Ctrl + U' to clear the entire current line and start over.",
+      "category_id": "universal"
+    },
+    {
+      "id": 142,
+      "tip_ar": "الأمر 'id' يظهر لك الـ UID و الـ GID الخاص بالمستخدم الحالي.",
+      "tip_en": "'id' command shows the UID and GID of the current user.",
+      "category_id": "security"
+    },
+    {
+      "id": 143,
+      "tip_ar": "استخدم 'grep -v' لعرض الأسطر التي لا تحتوي على الكلمة التي تبحث عنها.",
+      "tip_en": "Use 'grep -v' to display lines that do NOT contain the search term.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 144,
+      "tip_ar": "الأمر 'rev' يقوم بعكس ترتيب الحروف في كل سطر داخل الملف.",
+      "tip_en": "The 'rev' command reverses the characters in every line of a file.",
+      "category_id": "universal"
+    },
+    {
+      "id": 145,
+      "tip_ar": "استخدم 'echo' مع خيار '-e' لتمكين تفسير الرموز مثل '\\n' لسطر جديد.",
+      "tip_en": "Use 'echo -e' to enable interpretation of backslash escapes like '\\n'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 146,
+      "tip_ar": "الأمر 'sort -u' يقوم بفرز الملف وحذف السطور المكررة في خطوة واحدة.",
+      "tip_en": "'sort -u' sorts a file and removes duplicate lines in one step.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 147,
+      "tip_ar": "للبحث عن الأوامر التي تبدأ بكلمة معينة في السجل، اكتب '!word'.",
+      "tip_en": "To run the last command starting with a specific word, type '!word'.",
+      "category_id": "universal"
+    },
+    {
+      "id": 148,
+      "tip_ar": "استخدم 'column -t' لتنسيق مخرجات النص على شكل أعمدة مرتبة.",
+      "tip_en": "Use 'column -t' to format text output into neat columns.",
+      "category_id": "universal"
+    },
+    {
+      "id": 149,
+      "tip_ar": "الأمر 'pgrep' يبحث عن رقم العملية (PID) بناءً على اسمها فقط.",
+      "tip_en": "'pgrep' looks up the Process ID (PID) based on its name only.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 150,
+      "tip_ar": "استخدم 'nohup command &' لتشغيل أمر في الخلفية وضمان عدم توقفه.",
+      "tip_en": "Use 'nohup command &' to run a command in the background safely.",
+      "category_id": "universal"
+    },
+    {
+      "id": 151,
+      "tip_ar": "الأمر 'stat filename' يعرض لك تاريخ آخر وصول وتعديل وتغيير للملف.",
+      "tip_en": "'stat filename' shows the last access, modify, and change time of a file.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 152,
+      "tip_ar": "استخدم 'split' لتقسيم ملف كبير جداً إلى عدة ملفات صغيرة.",
+      "tip_en": "Use 'split' to break a very large file into multiple smaller files.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 153,
+      "tip_ar": "الأمر 'join' يدمج سطرين من ملفين مختلفين بناءً على حقل مشترك بينهما.",
+      "tip_en": "'join' merges lines from two files based on a common field.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 154,
+      "tip_ar": "استخدم 'shuf' للحصول على ترتيب عشوائي لأسطر الملف (مفيد للقرعات).",
+      "tip_en": "Use 'shuf' to generate a random permutation of file lines.",
+      "category_id": "universal"
+    },
+    {
+      "id": 155,
+      "tip_ar": "الأمر 'paste' يدمج الملفات جنباً إلى جنب بدلاً من دمجها تحت بعضها.",
+      "tip_en": "'paste' merges files side-by-side instead of vertically.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 156,
+      "tip_ar": "استخدم 'ls -R' لعرض كافة الملفات في المجلد الحالي وكل المجلدات الفرعية.",
+      "tip_en": "Use 'ls -R' to list all files in the current and subdirectories.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 157,
+      "tip_ar": "الأمر 'sudo -k' ينهي صلاحية sudo الحالية ويطلب كلمة السر في المرة القادمة.",
+      "tip_en": "'sudo -k' kills the current sudo session and asks for password next time.",
+      "category_id": "security"
+    },
+    {
+      "id": 158,
+      "tip_ar": "استخدم 'dmidecode' للحصول على معلومات السيريال نمبر الخاص بجهازك.",
+      "tip_en": "Use 'dmidecode' to get your hardware serial number information.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 159,
+      "tip_ar": "الأمر 'tload' يعرض لك رسم بياني بسيط لحمل النظام داخل الطرفية.",
+      "tip_en": "'tload' displays a simple graph of system load in the terminal.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 160,
+      "tip_ar": "استخدم 'free -m' لعرض حجم الذاكرة بالميجابايت بدلاً من البايت.",
+      "tip_en": "Use 'free -m' to view memory size in Megabytes instead of bytes.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 161,
+      "tip_ar": "الأمر 'kill -9' يقتل العملية فوراً وبقوة، استخدمه فقط عند الضرورة.",
+      "tip_en": "'kill -9' kills a process immediately and forcefully; use with caution.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 162,
+      "tip_ar": "استخدم 'ls -S' لفرز الملفات حسب الحجم، من الأكبر إلى الأصغر.",
+      "tip_en": "Use 'ls -S' to sort files by size, from largest to smallest.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 163,
+      "tip_ar": "الأمر 'comm' يقارن بين ملفين مفروزين ويظهر السطور المشتركة والمختلفة.",
+      "tip_en": "'comm' compares two sorted files and shows common/unique lines.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 164,
+      "tip_ar": "استخدم 'iconv' لتحويل ترميز النصوص من تنسيق إلى آخر (مثل من Windows-1256 لـ UTF-8).",
+      "tip_en": "Use 'iconv' to convert text encoding from one format to another.",
+      "category_id": "universal"
+    },
+    {
+      "id": 165,
+      "tip_ar": "الأمر 'zcat' يسمح لك بقراءة محتويات ملف مضغوط دون الحاجة لفك ضغطه.",
+      "tip_en": "'zcat' lets you read the contents of a compressed file without unzipping.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 166,
+      "tip_ar": "استخدم 'ls -t' لفرز الملفات حسب وقت التعديل، الأحدث يظهر أولاً.",
+      "tip_en": "Use 'ls -t' to sort files by modification time, newest first.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 167,
+      "tip_ar": "الأمر 'truncate -s 0 file' يفرغ محتوى الملف تماماً دون حذفه.",
+      "tip_en": "'truncate -s 0 file' empties a file's content without deleting it.",
+      "category_id": "file_system"
+    },
+    {
+      "id": 168,
+      "tip_ar": "استخدم 'at' لجدولة أمر ليتم تنفيذه في وقت محدد لمرة واحدة فقط.",
+      "tip_en": "Use 'at' to schedule a command to run once at a specific time.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 169,
+      "tip_ar": "الأمر 'crontab -e' يستخدم لجدولة الأوامر المتكررة (يومياً، أسبوعياً).",
+      "tip_en": "'crontab -e' is used to schedule recurring tasks (daily, weekly).",
+      "category_id": "system_info"
+    },
+    {
+      "id": 170,
+      "tip_ar": "استخدم 'logger' لإضافة رسالة مخصصة إلى سجلات النظام (syslog).",
+      "tip_en": "Use 'logger' to add a custom message to the system logs.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 171,
+      "tip_ar": "الأمر 'mkfifo' ينشئ أنبوباً مسمى (Named Pipe) للتواصل بين العمليات.",
+      "tip_en": "'mkfifo' creates a named pipe for inter-process communication.",
+      "category_id": "system_info"
+    },
+    {
+      "id": 172,
+      "tip_ar": "استخدم 'sudo -i' لفتح جلسة جذور (root) كاملة مع بيئة عمل المستخدم.",
+      "tip_en": "Use 'sudo -i' to open a full root session with environment variables.",
+      "category_id": "security"
+    },
+    {
+      "id": 173,
+      "tip_ar": "الأمر 'tcpdump' أداة قوية لمراقبة وتحليل حزم الشبكة المارة عبر جهازك.",
+      "tip_en": "'tcpdump' is a powerful tool for monitoring and analyzing network packets.",
+      "category_id": "networking"
+    },
+    {
+      "id": 174,
+      "tip_ar": "استخدم 'scp -P port' إذا كان سيرفر الـ SSH يعمل على منفذ غير افتراضي.",
+      "tip_en": "Use 'scp -P port' if the SSH server is running on a non-standard port.",
+      "category_id": "networking"
+    },
+    {
+      "id": 175,
+      "tip_ar": "الأمر 'rsync -z' يقوم بضغط البيانات أثناء نقلها لتسريع العملية.",
+      "tip_en": "'rsync -z' compresses data during transfer to speed up the process.",
+      "category_id": "networking"
+    },
+    {
+      "id": 176,
+      "tip_ar": "استخدم 'mtr' وهو مزيج بين ping و traceroute لتشخيص مشاكل الشبكة.",
+      "tip_en": "Use 'mtr', a mix of ping and traceroute, for network diagnostics.",
+      "category_id": "networking"
+    },
+    {
+      "id": 177,
+      "tip_ar": "الأمر 'ethtool' يظهر لك معلومات مفصلة عن كرت الشبكة الفيزيائي.",
+      "tip_en": "'ethtool' shows detailed information about your physical network card.",
+      "category_id": "networking"
+    },
+    {
+      "id": 178,
+      "tip_ar": "استخدم 'ss -s' للحصول على ملخص سريع لعدد الاتصالات النشطة بالشبكة.",
+      "tip_en": "Use 'ss -s' to get a quick summary of active network connections.",
+      "category_id": "networking"
+    },
+    {
+      "id": 179,
+      "tip_ar": "الأمر 'nmap' هو المعيار العالمي لفحص المنافذ واكتشاف الأجهزة في الشبكة.",
+      "tip_en": "'nmap' is the global standard for port scanning and network discovery.",
+      "category_id": "networking"
+    },
+    {
+      "id": 180,
+      "tip_ar": "استخدم 'iptables -L' لعرض كافة القواعد الحالية في جدار الحماية التقليدي.",
+      "tip_en": "Use 'iptables -L' to list all current rules in the traditional firewall.",
+      "category_id": "security"
     }
   ]
 }

@@ -58,7 +58,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('الأقسام (Categories)')),
+      appBar: AppBar(title: const Text('الأقسام (Categories)'), centerTitle: true),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
           : _categories.isEmpty

@@ -10,13 +10,13 @@ class AppDrawer extends StatelessWidget {
 
   void _showPrivacyPolicy(BuildContext context) {
     Navigator.pop(context);
-    // Use rootBundle to load the privacy policy file
     rootBundle.loadString('assets/data/privacy_policy.md').then((content) {
       Navigator.push(
         context,
         MaterialPageRoute(
           builder: (context) => Scaffold(
             appBar: AppBar(
+              centerTitle: true, // لتوحيد التصميم مع باقي الصفحات
               title: BiDiHelper.buildMixedText(
                 text: 'سياسة الخصوصية',
                 style: GoogleFonts.cairo(
@@ -45,115 +45,142 @@ class AppDrawer extends StatelessWidget {
     final isDarkMode = themeProvider.isDarkMode;
 
     return Drawer(
-      backgroundColor: Colors.transparent,
-      child: Container(
-        decoration: BoxDecoration(
-          color: isDarkMode 
-              ? const Color(0xFF1A1A1A).withOpacity(0.95)
-              : Colors.white.withOpacity(0.95),
-          borderRadius: const BorderRadius.only(
-            topRight: Radius.circular(24),
-            bottomRight: Radius.circular(24),
-          ),
-        ),
-        child: Column(
-          children: [
-            // Header Section
-            Container(
-              width: double.infinity,
-              padding: const EdgeInsets.all(24.0),
-              decoration: BoxDecoration(
-                gradient: LinearGradient(
-                  colors: isDarkMode
-                      ? [const Color(0xFF0055FF), const Color(0xFF003DCC)]
-                      : [const Color(0xFF0055FF), const Color(0xFF3380FF)],
-                  begin: Alignment.topLeft,
-                  end: Alignment.bottomRight,
-                ),
-                borderRadius: const BorderRadius.only(topRight: Radius.circular(24)),
+      // تم إزالة الشفافية من هنا لضمان عدم تداخل النصوص مع الصفحة الخلفية
+      backgroundColor: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
+      child: Column(
+        children: [
+          // Header Section
+          Container(
+            width: double.infinity,
+            padding: const EdgeInsets.all(24.0),
+            decoration: BoxDecoration(
+              gradient: LinearGradient(
+                colors: isDarkMode
+                    ? [const Color(0xFF0055FF), const Color(0xFF003DCC)]
+                    : [const Color(0xFF0055FF), const Color(0xFF3380FF)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
               ),
+            ),
+            child: Column(
+              children: [
+                const SizedBox(height: 20),
+                // Logo
+                // تأكد من وجود ملفات الصور في الـ assets أو استخدم Icon افتراضي إذا لم تكن موجودة
+                const Icon(Icons.terminal, size: 80, color: Colors.white),
+                const SizedBox(height: 16),
+                Text(
+                  'TermiAr',
+                  style: GoogleFonts.cairo(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                Text(
+                  'Your Linux Command Companion',
+                  style: GoogleFonts.cairo(
+                    color: Colors.white70,
+                    fontSize: 14,
+                  ),
+                ),
+              ],
+            ),
+          ),
+          
+          Expanded(
+            child: SingleChildScrollView(
               child: Column(
                 children: [
-                  const SizedBox(height: 20),
-                  // Logo
-                  Image.asset(
-                    isDarkMode ? 'assets/images/logo_dark.png' : 'assets/images/logo_light.png',
-                    width: 80, height: 80,
+                  // Settings
+                  _buildSectionHeader(isDarkMode, 'الإعدادات (Settings)'),
+                  _buildDrawerTile(
+                    isDarkMode: isDarkMode,
+                    icon: isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                    title: isDarkMode ? 'الوضع الفاتح (Light Mode)' : 'الوضع المظلم (Dark Mode)',
+                    trailing: Switch(
+                      value: isDarkMode,
+                      onChanged: (value) {
+                        themeProvider.toggleTheme();
+                        Navigator.pop(context);
+                      },
+                      activeColor: Colors.white,
+                      activeTrackColor: const Color(0xFF0055FF),
+                    ),
+                    onTap: () {
+                      themeProvider.toggleTheme();
+                      Navigator.pop(context);
+                    },
                   ),
-                  const SizedBox(height: 16),
-                  Text('TermiAr', style: GoogleFonts.cairo(color: Colors.white, fontSize: 24, fontWeight: FontWeight.bold)),
-                  Text('Your Linux Command Companion', style: GoogleFonts.cairo(color: Colors.white70, fontSize: 14)),
+
+                  // Legal
+                  _buildSectionHeader(isDarkMode, 'قانوني (Legal)'),
+                  _buildDrawerTile(
+                    isDarkMode: isDarkMode,
+                    icon: Icons.privacy_tip_outlined,
+                    title: 'سياسة الخصوصية (Privacy Policy)',
+                    onTap: () => _showPrivacyPolicy(context),
+                  ),
+
+                  // Developer Info
+                  _buildSectionHeader(isDarkMode, 'عن المطور (Developer)'),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    child: Container(
+                      padding: const EdgeInsets.all(16),
+                      decoration: BoxDecoration(
+                        color: isDarkMode 
+                            ? Colors.white.withOpacity(0.05) 
+                            : Colors.black.withOpacity(0.03),
+                        borderRadius: BorderRadius.circular(12),
+                        border: Border.all(
+                          color: isDarkMode ? Colors.white10 : Colors.black12,
+                        ),
+                      ),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          _buildInfoRow(isDarkMode, Icons.person_outline, 'محمد عبد العال'),
+                          const SizedBox(height: 12),
+                          _buildInfoRow(isDarkMode, Icons.phone_outlined, '+201148578813'),
+                          const SizedBox(height: 12),
+                          _buildInfoRow(isDarkMode, Icons.email_outlined, 'mohamedabdo9999933@gmail.com'),
+                        ],
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
-            
-            Expanded(
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    // Settings
-                    _buildSectionHeader(isDarkMode, 'الإعدادات (Settings)'),
-                    _buildDrawerTile(
-                      isDarkMode: isDarkMode,
-                      icon: isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                      title: isDarkMode ? 'الوضع الفاتح (Light Mode)' : 'الوضع المظلم (Dark Mode)',
-                      trailing: Switch(
-                        value: isDarkMode,
-                        onChanged: (value) { themeProvider.toggleTheme(); Navigator.pop(context); },
-                        activeColor: const Color(0xFF0055FF),
-                      ),
-                      onTap: () { themeProvider.toggleTheme(); Navigator.pop(context); },
-                    ),
-
-                    // Legal
-                    _buildSectionHeader(isDarkMode, 'قانوني (Legal)'),
-                    _buildDrawerTile(
-                      isDarkMode: isDarkMode,
-                      icon: Icons.privacy_tip_outlined,
-                      title: 'سياسة الخصوصية (Privacy Policy)',
-                      onTap: () => _showPrivacyPolicy(context),
-                    ),
-
-                    // Developer Info
-                    _buildSectionHeader(isDarkMode, 'عن المطور (Developer)'),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-                      child: Container(
-                        padding: const EdgeInsets.all(16),
-                        decoration: BoxDecoration(
-                          color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.02),
-                          borderRadius: BorderRadius.circular(12),
-                        ),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            _buildInfoRow(isDarkMode, Icons.person_outline, 'محمد عبد العال (Mohamed Abdelaal)'),
-                            const SizedBox(height: 12),
-                            _buildInfoRow(isDarkMode, Icons.phone_outlined, '+201148578813'),
-                            _buildInfoRow(isDarkMode, Icons.email_outlined, 'mohamedabdo9999933@gmail.com'),
-                          ],
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
+          ),
+          // نسخة التطبيق في الأسفل
+          Padding(
+            padding: const EdgeInsets.all(16.0),
+            child: Text(
+              'Version 1.0.0',
+              style: GoogleFonts.cairo(
+                fontSize: 12,
+                color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
               ),
             ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
 
-  // Helper Methods to fix the 'child' issues
   Widget _buildSectionHeader(bool isDarkMode, String title) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(24, 16, 24, 8),
+      padding: const EdgeInsets.fromLTRB(24, 20, 24, 8),
       child: Align(
         alignment: Alignment.centerRight,
-        child: BiDiHelper.buildMixedText(
-          text: title,
-          style: GoogleFonts.cairo(fontSize: 12, fontWeight: FontWeight.bold, color: isDarkMode ? Colors.grey[400] : Colors.grey[600]),
+        child: Text(
+          title,
+          style: GoogleFonts.cairo(
+            fontSize: 12,
+            fontWeight: FontWeight.bold,
+            color: const Color(0xFF0055FF), // لون مميز للعناوين الجانبية
+          ),
         ),
       ),
     );
@@ -167,17 +194,20 @@ class AppDrawer extends StatelessWidget {
     VoidCallback? onTap,
   }) {
     return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 4),
+      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: ListTile(
         leading: Icon(icon, color: isDarkMode ? Colors.white70 : Colors.black87),
-        title: BiDiHelper.buildMixedText(
-          text: title,
-          style: GoogleFonts.cairo(color: isDarkMode ? Colors.white : Colors.black87, fontSize: 14),
+        title: Text(
+          title,
+          style: GoogleFonts.cairo(
+            color: isDarkMode ? Colors.white : Colors.black87,
+            fontSize: 14,
+          ),
         ),
         trailing: trailing,
         onTap: onTap,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        tileColor: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.black.withOpacity(0.02),
+        tileColor: isDarkMode ? Colors.white.withOpacity(0.03) : Colors.black.withOpacity(0.01),
       ),
     );
   }
@@ -185,9 +215,17 @@ class AppDrawer extends StatelessWidget {
   Widget _buildInfoRow(bool isDarkMode, IconData icon, String text) {
     return Row(
       children: [
-        Icon(icon, size: 18, color: isDarkMode ? Colors.blue : Colors.blueAccent),
+        Icon(icon, size: 18, color: const Color(0xFF0055FF)),
         const SizedBox(width: 12),
-        Expanded(child: BiDiHelper.buildMixedText(text: text, style: GoogleFonts.cairo(fontSize: 13, color: isDarkMode ? Colors.white : Colors.black87))),
+        Expanded(
+          child: Text(
+            text,
+            style: GoogleFonts.cairo(
+              fontSize: 13,
+              color: isDarkMode ? Colors.white : Colors.black87,
+            ),
+          ),
+        ),
       ],
     );
   }

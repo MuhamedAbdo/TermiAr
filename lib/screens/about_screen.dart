@@ -1,9 +1,47 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart'; // المكتبة المطلوبة
 import '../providers/theme_provider.dart';
 
 class AboutScreen extends StatelessWidget {
   const AboutScreen({super.key});
+
+  // دالة إرسال البريد الإلكتروني
+  Future<void> _sendFeedback(BuildContext context) async {
+    final Uri emailLaunchUri = Uri(
+      scheme: 'mailto',
+      path: 'mohamedabdo9999933@gmail.com',
+      query: _encodeQueryParameters(<String, String>{
+        'subject': 'TermiAr App Feedback',
+        'body': 'Hello Mohamed,\n\nI am writing to you regarding the TermiAr app...'
+      }),
+    );
+
+    try {
+      if (await canLaunchUrl(emailLaunchUri)) {
+        await launchUrl(emailLaunchUri);
+      } else {
+        throw 'Could not launch email app';
+      }
+    } catch (e) {
+      if (context.mounted) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('No email app found on this device.'),
+            backgroundColor: Colors.red,
+          ),
+        );
+      }
+    }
+  }
+
+  // دالة مساعدة لتشفير الروابط
+  String? _encodeQueryParameters(Map<String, String> params) {
+    return params.entries
+        .map((MapEntry<String, String> e) =>
+            '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+        .join('&');
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -13,6 +51,7 @@ class AboutScreen extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: const Text('About'),
+        centerTitle: true,
       ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16.0),
@@ -28,11 +67,8 @@ class AboutScreen extends StatelessWidget {
                     height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(20),
-                      gradient: LinearGradient(
-                        colors: [
-                          const Color(0xFF0055FF),
-                          const Color(0xFF003DCC),
-                        ],
+                      gradient: const LinearGradient(
+                        colors: [Color(0xFF0055FF), Color(0xFF003DCC)],
                         begin: Alignment.topLeft,
                         end: Alignment.bottomRight,
                       ),
@@ -44,11 +80,7 @@ class AboutScreen extends StatelessWidget {
                         ),
                       ],
                     ),
-                    child: const Icon(
-                      Icons.terminal,
-                      size: 50,
-                      color: Colors.white,
-                    ),
+                    child: const Icon(Icons.terminal, size: 50, color: Colors.white),
                   ),
                   const SizedBox(height: 16),
                   Text(
@@ -70,18 +102,14 @@ class AboutScreen extends StatelessWidget {
                   const SizedBox(height: 8),
                   Text(
                     'Version 1.0.0',
-                    style: TextStyle(
-                      fontSize: 14,
-                      color: isDarkMode ? Colors.grey[500] : Colors.grey[500],
-                    ),
+                    style: TextStyle(fontSize: 14, color: Colors.grey[500]),
                   ),
                 ],
               ),
             ),
-            
             const SizedBox(height: 32),
             
-            // Description
+            // Description Card
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -90,10 +118,7 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(
-                          Icons.info,
-                          color: Color(0xFF0055FF),
-                        ),
+                        const Icon(Icons.info, color: Color(0xFF0055FF)),
                         const SizedBox(width: 8),
                         Text(
                           'About',
@@ -119,10 +144,9 @@ class AboutScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
             const SizedBox(height: 16),
-            
-            // Features
+
+            // Features Card
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -131,10 +155,7 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(
-                          Icons.star,
-                          color: Color(0xFF0055FF),
-                        ),
+                        const Icon(Icons.star, color: Color(0xFF0055FF)),
                         const SizedBox(width: 8),
                         Text(
                           'Features',
@@ -147,50 +168,19 @@ class AboutScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    _buildFeatureItem(
-                      context,
-                      Icons.search,
-                      'Real-time Search',
-                      'Find any command instantly',
-                    ),
-                    _buildFeatureItem(
-                      context,
-                      Icons.category,
-                      'Organized Categories',
-                      'Commands grouped by functionality',
-                    ),
-                    _buildFeatureItem(
-                      context,
-                      Icons.content_copy,
-                      'Copy to Clipboard',
-                      'Quick copy any command',
-                    ),
-                    _buildFeatureItem(
-                      context,
-                      Icons.quiz,
-                      'Interactive Quiz',
-                      'Test your knowledge',
-                    ),
-                    _buildFeatureItem(
-                      context,
-                      Icons.lightbulb,
-                      'Daily Tips',
-                      'Learn new tricks daily',
-                    ),
-                    _buildFeatureItem(
-                      context,
-                      Icons.dark_mode,
-                      'Dark Mode',
-                      'Comfortable viewing experience',
-                    ),
+                    _buildFeatureItem(context, Icons.search, 'Real-time Search', 'Find any command instantly'),
+                    _buildFeatureItem(context, Icons.category, 'Organized Categories', 'Commands grouped by functionality'),
+                    _buildFeatureItem(context, Icons.content_copy, 'Copy to Clipboard', 'Quick copy any command'),
+                    _buildFeatureItem(context, Icons.quiz, 'Interactive Quiz', 'Test your knowledge'),
+                    _buildFeatureItem(context, Icons.lightbulb, 'Daily Tips', 'Learn new tricks daily'),
+                    _buildFeatureItem(context, Icons.dark_mode, 'Dark Mode', 'Comfortable viewing experience'),
                   ],
                 ),
               ),
             ),
-            
             const SizedBox(height: 16),
-            
-            // Developer info
+
+            // Developer Card
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -199,10 +189,7 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(
-                          Icons.code,
-                          color: Color(0xFF0055FF),
-                        ),
+                        const Icon(Icons.code, color: Color(0xFF0055FF)),
                         const SizedBox(width: 8),
                         Text(
                           'Developer',
@@ -215,29 +202,16 @@ class AboutScreen extends StatelessWidget {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    Text(
-                      'Built with Flutter for cross-platform compatibility.',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                      ),
-                    ),
+                    Text('Built with Flutter for cross-platform compatibility.', style: TextStyle(fontSize: 16, color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A))),
                     const SizedBox(height: 8),
-                    Text(
-                      'Open source and community driven.',
-                      style: TextStyle(
-                        fontSize: 16,
-                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                      ),
-                    ),
+                    Text('Open source and community driven.', style: TextStyle(fontSize: 16, color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A))),
                   ],
                 ),
               ),
             ),
-            
             const SizedBox(height: 16),
-            
-            // Contact/Feedback
+
+            // Feedback Card - المحدث
             Card(
               child: Padding(
                 padding: const EdgeInsets.all(16.0),
@@ -246,10 +220,7 @@ class AboutScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Icon(
-                          Icons.feedback,
-                          color: Color(0xFF0055FF),
-                        ),
+                        const Icon(Icons.feedback, color: Color(0xFF0055FF)),
                         const SizedBox(width: 8),
                         Text(
                           'Feedback',
@@ -275,85 +246,47 @@ class AboutScreen extends StatelessWidget {
                     SizedBox(
                       width: double.infinity,
                       child: ElevatedButton.icon(
-                        onPressed: () {
-                          // You can add email functionality here
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text('Thank you for your support!'),
-                              backgroundColor: Color(0xFF0055FF),
-                            ),
-                          );
-                        },
+                        onPressed: () => _sendFeedback(context), // الآن يعمل فعلياً
                         icon: const Icon(Icons.email),
                         label: const Text('Send Feedback'),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: const Color(0xFF0055FF),
+                          foregroundColor: Colors.white,
+                          padding: const EdgeInsets.symmetric(vertical: 12),
+                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                        ),
                       ),
                     ),
                   ],
                 ),
               ),
             ),
-            
             const SizedBox(height: 32),
-            
-            // Copyright
-            Center(
-              child: Text(
-                '© 2024 TermiAr. All rights reserved.',
-                style: TextStyle(
-                  fontSize: 14,
-                  color: isDarkMode ? Colors.grey[500] : Colors.grey[500],
-                ),
-              ),
-            ),
+            Center(child: Text('© 2024 TermiAr. All rights reserved.', style: TextStyle(fontSize: 14, color: Colors.grey[500]))),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFeatureItem(
-    BuildContext context,
-    IconData icon,
-    String title,
-    String description,
-  ) {
+  Widget _buildFeatureItem(BuildContext context, IconData icon, String title, String description) {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
-
     return Padding(
       padding: const EdgeInsets.only(bottom: 12.0),
       child: Row(
         children: [
           Container(
             padding: const EdgeInsets.all(8),
-            decoration: BoxDecoration(
-              color: const Color(0xFF0055FF).withOpacity(0.1),
-              borderRadius: BorderRadius.circular(8),
-            ),
-            child: Icon(
-              icon,
-              color: const Color(0xFF0055FF),
-              size: 20,
-            ),
+            decoration: BoxDecoration(color: const Color(0xFF0055FF).withOpacity(0.1), borderRadius: BorderRadius.circular(8)),
+            child: Icon(icon, color: const Color(0xFF0055FF), size: 20),
           ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  title,
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                  ),
-                ),
-                Text(
-                  description,
-                  style: TextStyle(
-                    fontSize: 14,
-                    color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                  ),
-                ),
+                Text(title, style: TextStyle(fontWeight: FontWeight.bold, color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A))),
+                Text(description, style: TextStyle(fontSize: 14, color: isDarkMode ? Colors.grey[400] : Colors.grey[600])),
               ],
             ),
           ),

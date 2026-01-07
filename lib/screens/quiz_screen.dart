@@ -47,7 +47,10 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _generateRandomQuiz() {
+    // Shuffle all questions to ensure randomness
     final shuffledQuestions = List<QuizQuestion>.from(_allQuestions)..shuffle();
+    
+    // Take first 10 questions for current quiz
     _currentQuizQuestions = shuffledQuestions.take(10).toList();
     _currentQuestionIndex = 0;
     _score = 0;
@@ -122,7 +125,17 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void _startNewQuiz() {
-    _generateRandomQuiz();
+    // Shuffle all questions again for new quiz
+    final shuffledQuestions = List<QuizQuestion>.from(_allQuestions)..shuffle();
+    
+    setState(() {
+      _currentQuizQuestions = shuffledQuestions.take(10).toList();
+      _currentQuestionIndex = 0;
+      _score = 0;
+      _isAnswered = false;
+      _selectedAnswerIndex = null;
+      _showResult = false;
+    });
   }
 
   void _goToHome() {
@@ -145,6 +158,7 @@ class _QuizScreenState extends State<QuizScreen> {
       return Scaffold(
         appBar: AppBar(
           title: const Text('Quiz'),
+          centerTitle: true,
         ),
         body: const Center(
           child: Text('No quiz questions available'),
@@ -161,6 +175,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz'),
+        centerTitle: true,
         actions: [
           Padding(
             padding: const EdgeInsets.all(16.0),
@@ -351,6 +366,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('Quiz Result'),
+        centerTitle: true,
         automaticallyImplyLeading: false,
       ),
       body: Padding(

@@ -4,12 +4,25 @@ part 'quiz_model.g.dart';
 
 @JsonSerializable()
 class QuizQuestion {
+  @JsonKey(defaultValue: 0)
   final int id;
+  
+  @JsonKey(defaultValue: "")
   final String question_ar;
+  
+  @JsonKey(defaultValue: "")
   final String question_en;
+  
+  @JsonKey(defaultValue: [])
   final List<String> options;
+  
+  @JsonKey(defaultValue: 0)
   final int correct_answer_index;
+  
+  @JsonKey(defaultValue: "")
   final String explanation_ar;
+  
+  @JsonKey(defaultValue: "")
   final String explanation_en;
 
   QuizQuestion({
@@ -30,9 +43,16 @@ class QuizQuestion {
 
 @JsonSerializable()
 class DailyTip {
+  @JsonKey(defaultValue: 0)
   final int id;
+  
+  @JsonKey(defaultValue: "")
   final String tip_ar;
+  
+  @JsonKey(defaultValue: "")
   final String tip_en;
+  
+  @JsonKey(defaultValue: "")
   final String category_id;
 
   DailyTip({
@@ -50,7 +70,10 @@ class DailyTip {
 
 @JsonSerializable()
 class LearningQuizResponse {
+  @JsonKey(defaultValue: [])
   final List<QuizQuestion>? questions;
+  
+  @JsonKey(defaultValue: [])
   final List<DailyTip>? daily_tips;
 
   LearningQuizResponse({

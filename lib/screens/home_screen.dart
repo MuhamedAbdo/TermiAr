@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
         _searchResults = results;
       });
     } catch (e) {
-      // Handle error silently for now
+      // Handle error silently
     }
   }
 
@@ -77,7 +77,6 @@ class _HomeScreenState extends State<HomeScreen> {
       setState(() {
         _isLoading = false;
       });
-      // Show error snackbar
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -91,22 +90,14 @@ class _HomeScreenState extends State<HomeScreen> {
 
   IconData _getIconData(String iconName) {
     switch (iconName) {
-      case 'terminal':
-        return Icons.terminal;
-      case 'laptop_linux':
-        return Icons.computer;
-      case 'settings_system_daydream':
-        return Icons.settings_system_daydream;
-      case 'folder':
-        return Icons.folder;
-      case 'lan':
-        return Icons.lan;
-      case 'analytics':
-        return Icons.analytics;
-      case 'security':
-        return Icons.security;
-      default:
-        return Icons.category;
+      case 'terminal': return Icons.terminal;
+      case 'laptop_linux': return Icons.computer;
+      case 'settings_system_daydream': return Icons.settings_system_daydream;
+      case 'folder': return Icons.folder;
+      case 'lan': return Icons.lan;
+      case 'analytics': return Icons.analytics;
+      case 'security': return Icons.security;
+      default: return Icons.category;
     }
   }
 
@@ -121,14 +112,14 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header with search
+            // Header Section
             Padding(
-              padding: const EdgeInsets.all(16.0),
+              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
               child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Row(
                     children: [
+                      // Menu Button
                       IconButton(
                         onPressed: () {
                           _scaffoldKey.currentState?.openDrawer();
@@ -138,53 +129,65 @@ class _HomeScreenState extends State<HomeScreen> {
                           color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
                         ),
                       ),
+                      // Centered App Title using Expanded and Center
                       Expanded(
-                        child: BiDiHelper.buildMixedText(
-                          text: 'TermiAr',
-                          style: GoogleFonts.cairo(
-                            fontSize: 28,
-                            fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                        child: Center(
+                          child: Padding(
+                            padding: const EdgeInsets.only(right: 48.0), // تعويض مساحة الأيقونة لضمان التوسط الحقيقي
+                            child: BiDiHelper.buildMixedText(
+                              text: 'TermiAr',
+                              style: GoogleFonts.cairo(
+                                fontSize: 28,
+                                fontWeight: FontWeight.bold,
+                                color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                              ),
+                            ),
                           ),
                         ),
                       ),
                     ],
                   ),
-                  const SizedBox(height: 8),
-                  BiDiHelper.buildMixedText(
-                    text: 'Your Linux Command Companion',
-                    style: GoogleFonts.cairo(
-                      fontSize: 16,
-                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                  const SizedBox(height: 4),
+                  // Centered Subtitle
+                  Center(
+                    child: BiDiHelper.buildMixedText(
+                      text: 'Your Linux Command Companion',
+                      style: GoogleFonts.cairo(
+                        fontSize: 14,
+                        color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                      ),
                     ),
                   ),
                   const SizedBox(height: 16),
                   
-                  // Search bar
-                  TextField(
-                    controller: _searchController,
-                    textDirection: TextDirection.ltr,
-                    decoration: InputDecoration(
-                      hintText: 'Search commands...',
-                      prefixIcon: const Icon(Icons.search),
-                      suffixIcon: _isSearching
-                          ? IconButton(
-                              icon: const Icon(Icons.clear),
-                              onPressed: () {
-                                _searchController.clear();
-                              },
-                            )
-                          : null,
+                  // Search Bar
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                    child: TextField(
+                      controller: _searchController,
+                      textDirection: TextDirection.ltr,
+                      decoration: InputDecoration(
+                        hintText: 'Search commands...',
+                        prefixIcon: const Icon(Icons.search),
+                        suffixIcon: _isSearching
+                            ? IconButton(
+                                icon: const Icon(Icons.clear),
+                                onPressed: () {
+                                  _searchController.clear();
+                                },
+                              )
+                            : null,
+                      ),
                     ),
                   ),
                 ],
               ),
             ),
             
-            // Daily Tip Card
+            // Daily Tip Section
             if (!_isSearching) const DailyTipCard(),
             
-            // Content
+            // Content Section
             Expanded(
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
@@ -198,82 +201,68 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
+  // Widget _buildCategoriesGrid() and _buildSearchResults() remain the same as previous code
   Widget _buildCategoriesGrid() {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
-    
     return Padding(
-      padding: const EdgeInsets.all(16.0),
-      child: LayoutBuilder(
-        builder: (context, constraints) {
-        return GridView.builder(
-          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-            crossAxisCount: 2,
-            crossAxisSpacing: 16,
-            mainAxisSpacing: 16,
-            childAspectRatio: 1.2, // Adjusted for better content fit
-          ),
-            itemCount: _categories.length,
-            itemBuilder: (context, index) {
-              final category = _categories[index];
-              return Card(
-                elevation: 6,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                shadowColor: const Color(0xFF0055FF).withOpacity(0.2),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) => CategoryCommandsScreen(
-                          categoryId: category.id,
-                          categoryName: category.name_ar,
-                        ),
-                      ),
-                    );
-                  },
-                  borderRadius: BorderRadius.circular(20),
-                  child: Padding(
-                    padding: const EdgeInsets.all(16.0),
-                    child: Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Icon(
-                          _getIconData(category.icon),
-                          size: 40,
-                          color: const Color(0xFF0055FF),
-                        ),
-                        const SizedBox(height: 12),
-                        Flexible(
-                          child: BiDiHelper.buildMixedText(
-                            text: category.name_ar,
-                            style: GoogleFonts.cairo(
-                              fontSize: 16,
-                              fontWeight: FontWeight.bold,
-                              color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
-                            ),
-                            maxLines: 2,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                        const SizedBox(height: 4),
-                        Flexible(
-                          child: BiDiHelper.buildMixedText(
-                            text: category.name_en,
-                            style: GoogleFonts.cairo(
-                              fontSize: 12,
-                              color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                            ),
-                            maxLines: 1,
-                            overflow: TextOverflow.ellipsis,
-                          ),
-                        ),
-                      ],
+      padding: const EdgeInsets.symmetric(horizontal: 16.0),
+      child: GridView.builder(
+        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+          crossAxisSpacing: 16,
+          mainAxisSpacing: 16,
+          childAspectRatio: 1.1,
+        ),
+        itemCount: _categories.length,
+        itemBuilder: (context, index) {
+          final category = _categories[index];
+          return Card(
+            elevation: 4,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            child: InkWell(
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CategoryCommandsScreen(
+                      categoryId: category.id,
+                      categoryName: category.name_ar,
                     ),
                   ),
+                );
+              },
+              borderRadius: BorderRadius.circular(20),
+              child: Padding(
+                padding: const EdgeInsets.all(12.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(_getIconData(category.icon), size: 36, color: const Color(0xFF0055FF)),
+                    const SizedBox(height: 10),
+                    Text(
+                      category.name_ar,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.cairo(
+                        fontSize: 15,
+                        fontWeight: FontWeight.bold,
+                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                    Text(
+                      category.name_en,
+                      textAlign: TextAlign.center,
+                      style: GoogleFonts.cairo(
+                        fontSize: 11,
+                        color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                      ),
+                      maxLines: 1,
+                      overflow: TextOverflow.ellipsis,
+                    ),
+                  ],
                 ),
-              );
-            },
+              ),
+            ),
           );
         },
       ),
@@ -282,30 +271,18 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildSearchResults() {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
-    
     if (_searchResults.isEmpty) {
       return Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(
-              Icons.search_off,
-              size: 64,
-              color: Provider.of<ThemeProvider>(context).isDarkMode ? Colors.grey[600] : Colors.grey[400],
-            ),
+            Icon(Icons.search_off, size: 64, color: isDarkMode ? Colors.grey[600] : Colors.grey[400]),
             const SizedBox(height: 16),
-            Text(
-              'No commands found',
-              style: TextStyle(
-                fontSize: 18,
-                color: Provider.of<ThemeProvider>(context).isDarkMode ? Colors.grey[400] : Colors.grey[600],
-              ),
-            ),
+            Text('No commands found', style: TextStyle(fontSize: 18, color: isDarkMode ? Colors.grey[400] : Colors.grey[600])),
           ],
         ),
       );
     }
-
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
       itemCount: _searchResults.length,
@@ -316,72 +293,15 @@ class _HomeScreenState extends State<HomeScreen> {
           child: ListTile(
             leading: CircleAvatar(
               backgroundColor: const Color(0xFF0055FF),
-              child: Text(
-                command.command[0].toUpperCase(),
-                style: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              child: Text(command.command[0].toUpperCase(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
             ),
-            title: Text(
-              command.command,
-              style: const TextStyle(
-                fontWeight: FontWeight.bold,
-                fontSize: 16,
-              ),
-            ),
-            subtitle: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  command.name_ar,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
-                  ),
-                ),
-                const SizedBox(height: 4),
-                Container(
-                  padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 4),
-                  decoration: BoxDecoration(
-                    color: _getLevelColor(command.level).withOpacity(0.2),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    command.level,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: _getLevelColor(command.level),
-                      fontWeight: FontWeight.w500,
-                    ),
-                  ),
-                ),
-              ],
-            ),
+            title: Text(command.command, style: const TextStyle(fontWeight: FontWeight.bold)),
+            subtitle: Text(command.name_ar, style: TextStyle(color: isDarkMode ? Colors.grey[300] : Colors.grey[700])),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => CommandDetailsScreen(command: command),
-                ),
-              );
-            },
+            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommandDetailsScreen(command: command))),
           ),
         );
       },
     );
-  }
-
-  Color _getLevelColor(String level) {
-    switch (level) {
-      case 'مبتدئ':
-        return Colors.green;
-      case 'متوسط':
-        return Colors.orange;
-      case 'متقدم':
-        return Colors.red;
-      default:
-        return Colors.grey;
-    }
   }
 }

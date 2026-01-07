@@ -19,8 +19,22 @@ class DataService {
     try {
       final String jsonString = await rootBundle.loadString('assets/data/commands_bank.json');
       final Map<String, dynamic> jsonMap = json.decode(jsonString);
+      
+      // Log each command ID for debugging
+      if (jsonMap['commands'] != null) {
+        final commandsList = jsonMap['commands'] as List;
+        for (int i = 0; i < commandsList.length; i++) {
+          final command = commandsList[i] as Map<String, dynamic>;
+          final commandId = command['id'];
+          print('Loading command ID: $commandId');
+        }
+      }
+      
       return CommandsResponse.fromJson(jsonMap);
     } catch (e) {
+      // More detailed error logging
+      print('Error loading commands: $e');
+      print('Stack trace: ${StackTrace.current}');
       throw Exception('Failed to load commands: $e');
     }
   }

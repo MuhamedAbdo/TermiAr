@@ -5,6 +5,9 @@ import '../screens/home_screen.dart';
 import '../screens/categories_screen.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/about_screen.dart';
+import '../utils/bidi_helper.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:flutter/services.dart';
 
 class MainNavigation extends StatefulWidget {
   const MainNavigation({super.key});
@@ -23,16 +26,87 @@ class _MainNavigationState extends State<MainNavigation> {
     const AboutScreen(),
   ];
 
+  Future<bool> _showExitConfirmation(BuildContext context) async {
+    final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
+    final isDarkMode = themeProvider.isDarkMode;
+
+    return await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: isDarkMode ? const Color(0xFF2A2A2A) : Colors.white,
+        title: BiDiHelper.buildMixedText(
+          text: 'تأكيد الخروج',
+          style: GoogleFonts.cairo(
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+            color: isDarkMode ? Colors.white : Colors.black87,
+          ),
+        ),
+        content: BiDiHelper.buildMixedText(
+          text: 'هل تريد حقاً إغلاق التطبيق؟',
+          style: GoogleFonts.cairo(
+            fontSize: 16,
+            color: isDarkMode ? Colors.white70 : Colors.black87,
+          ),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.of(context).pop(false),
+            child: BiDiHelper.buildMixedText(
+              text: 'لا',
+              style: GoogleFonts.cairo(
+                fontSize: 14,
+                color: const Color(0xFF0055FF),
+              ),
+            ),
+          ),
+          ElevatedButton(
+            onPressed: () => Navigator.of(context).pop(true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF0055FF),
+              foregroundColor: Colors.white,
+            ),
+            child: BiDiHelper.buildMixedText(
+              text: 'نعم',
+              style: GoogleFonts.cairo(
+                fontSize: 14,
+                fontWeight: FontWeight.w500,
+              ),
+            ),
+          ),
+        ],
+      ),
+    ) ?? false;
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
 
-    return Scaffold(
-      body: IndexedStack(
-        index: _currentIndex,
-        children: _screens,
-      ),
+    return PopScope(
+      canPop: false,
+      onPopInvoked: (didPop) async {
+        if (didPop) return;
+        
+        if (_currentIndex != 0) {
+          // If not on Home tab, go back to Home tab
+          setState(() {
+            _currentIndex = 0;
+          });
+        } else {
+          // If on Home tab, show exit confirmation dialog
+          final shouldExit = await _showExitConfirmation(context);
+          if (shouldExit) {
+            SystemNavigator.pop();
+          }
+        }
+      },
+      child: Scaffold(
+        body: IndexedStack(
+          index: _currentIndex,
+          children: _screens,
+        ),
       bottomNavigationBar: Container(
         decoration: BoxDecoration(
           color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
@@ -87,6 +161,6 @@ class _MainNavigationState extends State<MainNavigation> {
           ],
         ),
       ),
-    );
+    ),);
   }
 }
