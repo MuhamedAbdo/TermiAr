@@ -43,6 +43,7 @@ class AppDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
+    final themeBrightness = Theme.of(context).brightness;
 
     return Drawer(
       // تم إزالة الشفافية من هنا لضمان عدم تداخل النصوص مع الصفحة الخلفية
@@ -66,8 +67,36 @@ class AppDrawer extends StatelessWidget {
               children: [
                 const SizedBox(height: 20),
                 // Logo
-                // تأكد من وجود ملفات الصور في الـ assets أو استخدم Icon افتراضي إذا لم تكن موجودة
-                const Icon(Icons.terminal, size: 80, color: Colors.white),
+                AnimatedSwitcher(
+                  duration: const Duration(milliseconds: 300),
+                  child: ClipOval(
+                    key: ValueKey(themeBrightness),
+                    child: Image.asset(
+                      themeBrightness == Brightness.dark
+                          ? 'assets/images/logo_dark.png'
+                          : 'assets/images/logo_light.png',
+                      width: 100,
+                      height: 100,
+                      fit: BoxFit.cover,
+                      errorBuilder: (context, error, stackTrace) {
+                        // Fallback to terminal icon if image not found
+                        return Container(
+                          width: 80,
+                          height: 80,
+                          decoration: const BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.white24,
+                          ),
+                          child: const Icon(
+                            Icons.terminal,
+                            size: 40,
+                            color: Colors.white,
+                          ),
+                        );
+                      },
+                    ),
+                  ),
+                ),
                 const SizedBox(height: 16),
                 Text(
                   'TermiAr',
@@ -79,15 +108,12 @@ class AppDrawer extends StatelessWidget {
                 ),
                 Text(
                   'Your Linux Command Companion',
-                  style: GoogleFonts.cairo(
-                    color: Colors.white70,
-                    fontSize: 14,
-                  ),
+                  style: GoogleFonts.cairo(color: Colors.white70, fontSize: 14),
                 ),
               ],
             ),
           ),
-          
+
           Expanded(
             child: SingleChildScrollView(
               child: Column(
@@ -97,14 +123,16 @@ class AppDrawer extends StatelessWidget {
                   _buildDrawerTile(
                     isDarkMode: isDarkMode,
                     icon: isDarkMode ? Icons.light_mode : Icons.dark_mode,
-                    title: isDarkMode ? 'الوضع الفاتح (Light Mode)' : 'الوضع المظلم (Dark Mode)',
+                    title: isDarkMode
+                        ? 'الوضع الفاتح (Light Mode)'
+                        : 'الوضع المظلم (Dark Mode)',
                     trailing: Switch(
                       value: isDarkMode,
                       onChanged: (value) {
                         themeProvider.toggleTheme();
                         Navigator.pop(context);
                       },
-                      activeColor: Colors.white,
+                      activeThumbColor: Colors.white,
                       activeTrackColor: const Color(0xFF0055FF),
                     ),
                     onTap: () {
@@ -125,12 +153,15 @@ class AppDrawer extends StatelessWidget {
                   // Developer Info
                   _buildSectionHeader(isDarkMode, 'عن المطور (Developer)'),
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 16.0,
+                      vertical: 8.0,
+                    ),
                     child: Container(
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
-                        color: isDarkMode 
-                            ? Colors.white.withOpacity(0.05) 
+                        color: isDarkMode
+                            ? Colors.white.withOpacity(0.05)
                             : Colors.black.withOpacity(0.03),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
@@ -140,11 +171,23 @@ class AppDrawer extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          _buildInfoRow(isDarkMode, Icons.person_outline, 'محمد عبد العال'),
+                          _buildInfoRow(
+                            isDarkMode,
+                            Icons.person_outline,
+                            'محمد عبد العال',
+                          ),
                           const SizedBox(height: 12),
-                          _buildInfoRow(isDarkMode, Icons.phone_outlined, '+201148578813'),
+                          _buildInfoRow(
+                            isDarkMode,
+                            Icons.phone_outlined,
+                            '+201148578813',
+                          ),
                           const SizedBox(height: 12),
-                          _buildInfoRow(isDarkMode, Icons.email_outlined, 'mohamedabdo9999933@gmail.com'),
+                          _buildInfoRow(
+                            isDarkMode,
+                            Icons.email_outlined,
+                            'mohamedabdo9999933@gmail.com',
+                          ),
                         ],
                       ),
                     ),
@@ -196,7 +239,10 @@ class AppDrawer extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 4),
       child: ListTile(
-        leading: Icon(icon, color: isDarkMode ? Colors.white70 : Colors.black87),
+        leading: Icon(
+          icon,
+          color: isDarkMode ? Colors.white70 : Colors.black87,
+        ),
         title: Text(
           title,
           style: GoogleFonts.cairo(
@@ -207,7 +253,9 @@ class AppDrawer extends StatelessWidget {
         trailing: trailing,
         onTap: onTap,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        tileColor: isDarkMode ? Colors.white.withOpacity(0.03) : Colors.black.withOpacity(0.01),
+        tileColor: isDarkMode
+            ? Colors.white.withOpacity(0.03)
+            : Colors.black.withOpacity(0.01),
       ),
     );
   }

@@ -1,280 +1,771 @@
 {
   "quiz_info": {
     "title": "اختبار معرفة أوامر لينكس",
-    "description": "اختبر معرفتك بأوامر لينكس المختلفة",
-    "total_questions": 30,
-    "passing_score": 7
+    "description": "اختبر معرفتك بناءً على نوع توزيعتك المفضلة مع توزيع عشوائي للإجابات",
+    "categories": [
+      {
+        "id": "debian_zorin",
+        "name_ar": "أوبنتو / زورين (Debian)",
+        "name_en": "Ubuntu / Zorin"
+      },
+      {
+        "id": "fedora_redhat",
+        "name_ar": "فيدورا (Red Hat)",
+        "name_en": "Fedora / RHEL"
+      }
+    ],
+    "total_questions_per_quiz": 15
   },
   "questions": [
     {
       "id": 1,
+      "distro": "common",
       "question_ar": "ما هو الأمر المستخدم للبحث في صفحات الدليل اليدوي عن كلمة مفتاحية؟",
       "question_en": "What command is used to search manual pages for a keyword?",
-      "options": ["apropos", "man", "help", "info"],
-      "correct_answer_index": 0,
-      "explanation_ar": "أمر apropos يبحث في أسماء وأوصاف صفحات الدليل عن الكلمات الرئيسية المحددة",
-      "explanation_en": "The apropos command searches manual page names and descriptions for the specified keyword"
+      "options": [
+        "man",
+        "apropos",
+        "help",
+        "info"
+      ],
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر apropos يبحث في أسماء وأوصاف صفحات الدليل",
+      "explanation_en": "The apropos command searches manual page names and descriptions"
     },
     {
       "id": 2,
+      "distro": "debian_zorin",
       "question_ar": "أمر 'apt install package' يستخدم لـ؟",
       "question_en": "The 'apt install package' command is used for?",
-      "options": ["إزالة حزمة", "تثبيت حزمة", "تحديث الحزم", "البحث عن حزمة"],
-      "correct_answer_index": 1,
-      "explanation_ar": "أمر apt install يستخدم لتثبيت الحزم الجديدة على النظام",
-      "explanation_en": "The apt install command is used to install new packages on the system"
+      "options": [
+        "تثبيت حزمة",
+        "إزالة حزمة",
+        "تحديث الحزم",
+        "البحث عن حزمة"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "أمر apt install يستخدم لتثبيت الحزم في توزيعات دبيان وأوبنتو",
+      "explanation_en": "The apt install command is used to install packages on Debian/Ubuntu"
     },
     {
       "id": 3,
-      "question_ar": "ما هو الأمر الذي يعرض بنية المعالج؟",
-      "question_en": "What command displays the processor architecture?",
-      "options": ["uname", "arch", "lscpu", "cpuinfo"],
-      "correct_answer_index": 1,
-      "explanation_ar": "أمر arch يعرض اسم بنية آلة الأجهزة مثل x86_64 أو arm64",
-      "explanation_en": "The arch command displays the hardware architecture name like x86_64 or arm64"
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر الأساسي لتثبيت حزمة في توزيعة فيدورا؟",
+      "question_en": "What is the primary command to install a package in Fedora?",
+      "options": [
+        "apt install",
+        "pacman -S",
+        "dnf install",
+        "yum-get"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "dnf هو مدير الحزم الحديث والمستخدم في فيدورا",
+      "explanation_en": "dnf is the modern package manager used in Fedora"
     },
     {
       "id": 4,
-      "question_ar": "أمر 'chattr +i file' يجعل الملف؟",
-      "question_en": "The 'chattr +i file' command makes the file?",
-      "options": ["قابلاً للتعديل", "غير قابل للتعديل", "مخفياً", "قابلاً للتنفيذ"],
-      "correct_answer_index": 1,
-      "explanation_ar": "السمة +i تجعل الملف غير قابل للتعديل (immutable)",
-      "explanation_en": "The +i attribute makes the file immutable (unchangeable)"
+      "distro": "fedora_redhat",
+      "question_ar": "كيف يمكنك تنظيف التخزين المؤقت (Cache) لمدير الحزم DNF؟",
+      "question_en": "How do you clean the DNF package manager cache?",
+      "options": [
+        "dnf remove all",
+        "dnf clear",
+        "dnf delete cache",
+        "dnf clean all"
+      ],
+      "correct_answer_index": 3,
+      "explanation_ar": "أمر dnf clean all يمسح كافة ملفات التخزين المؤقت للمستودعات",
+      "explanation_en": "The dnf clean all command removes all cached data from repositories"
     },
     {
       "id": 5,
-      "question_ar": "ما هو الأمر المستخدم لمسح شاشة الطرفية؟",
-      "question_en": "What command is used to clear the terminal screen?",
-      "options": ["clean", "clear", "cls", "reset"],
+      "distro": "common",
+      "question_ar": "ما هو الأمر الذي يعرض بنية المعالج؟",
+      "question_en": "What command displays the processor architecture?",
+      "options": [
+        "uname -a",
+        "arch",
+        "lscpu",
+        "cpuinfo"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر clear يمسح شاشة الطرفية وينقل المؤشر إلى الأعلى",
-      "explanation_en": "The clear command clears the terminal screen and moves the cursor to the top"
+      "explanation_ar": "أمر arch يعرض اسم بنية الأجهزة مثل x86_64",
+      "explanation_en": "The arch command displays the hardware architecture name"
     },
     {
       "id": 6,
-      "question_ar": "أمر 'base64 file.txt' يقوم بـ؟",
-      "question_en": "The 'base64 file.txt' command does?",
-      "options": ["فك ترميز الملف", "ترميز الملف", "ضغط الملف", "تشفير الملف"],
-      "correct_answer_index": 1,
-      "explanation_ar": "أمر base64 يقوم بترميز محتوى الملف إلى صيغة base64",
-      "explanation_en": "The base64 command encodes the file content to base64 format"
+      "distro": "debian_zorin",
+      "question_ar": "أي أمر يستخدم لتحديث قائمة المستودعات في أوبنتو؟",
+      "question_en": "Which command is used to update the repository list in Ubuntu?",
+      "options": [
+        "apt update",
+        "apt upgrade",
+        "apt search",
+        "apt-get config"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "apt update يقوم بجلب أحدث المعلومات عن الحزم المتاحة",
+      "explanation_en": "apt update fetches the latest information about available packages"
     },
     {
       "id": 7,
-      "question_ar": "ما هو الأمر المستخدم لمقارنة ملفين بايت بايت؟",
-      "question_en": "What command is used to compare two files byte by byte?",
-      "options": ["diff", "cmp", "comm", "compare"],
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر المستخدم لرؤية تاريخ عمليات DNF في فيدورا؟",
+      "question_en": "What command is used to see the DNF transaction history in Fedora?",
+      "options": [
+        "dnf log",
+        "dnf history",
+        "dnf record",
+        "dnf transactions"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر cmp يقارن ملفين بايت بايت ويظهر الفروقات",
-      "explanation_en": "The cmp command compares two files byte by byte and shows differences"
+      "explanation_ar": "dnf history يسمح لك برؤية قائمة بكافة عمليات التثبيت والحذف السابقة",
+      "explanation_en": "dnf history allows you to view a list of all past installations and removals"
     },
     {
       "id": 8,
-      "question_ar": "أمر 'chage -M 90 username' يضبط انتهاء صلاحية كلمة المرور إلى؟",
-      "question_en": "The 'chage -M 90 username' command sets password expiry to?",
-      "options": ["90 يوم", "90 ساعة", "90 دقيقة", "90 شهر"],
-      "correct_answer_index": 0,
-      "explanation_ar": "الخيار -M يضبط الحد الأقصى للأيام قبل انتهاء صلاحية كلمة المرور",
-      "explanation_en": "The -M option sets the maximum number of days before password expiry"
+      "distro": "common",
+      "question_ar": "ما هو الأمر الذي يعرض معلومات تفصيلية عن المعالج (CPU)؟",
+      "question_en": "What command displays detailed CPU information?",
+      "options": [
+        "uname",
+        "arch",
+        "lscpu",
+        "cpuinfo"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "أمر lscpu يعرض معلومات مفصلة عن بنية المعالج",
+      "explanation_en": "The lscpu command gathers CPU architecture information from sysfs"
     },
     {
       "id": 9,
-      "question_ar": "ما هو الأمر الذي يحاكي شاشة فيلم المصفوفة؟",
-      "question_en": "What command simulates the Matrix movie screen?",
-      "options": ["matrix", "cmatrix", "screen", "animation"],
+      "distro": "debian_zorin",
+      "question_ar": "ما هو الأمر المستخدم لعرض معلومات حزمة مثبتة في أوبنتو؟",
+      "question_en": "What command shows information about an installed package in Ubuntu?",
+      "options": [
+        "apt info package",
+        "apt show package",
+        "apt details package",
+        "apt describe package"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر cmatrix يحاكي تأثير الشاشة الخضراء من فيلم المصفوفة",
-      "explanation_en": "The cmatrix command simulates the green screen effect from the Matrix movie"
+      "explanation_ar": "apt show يعرض معلومات مفصلة عن الحزمة",
+      "explanation_en": "apt show displays detailed information about the package"
     },
     {
       "id": 10,
-      "question_ar": "أمر 'awk '{print $1}' file.txt' يطبع؟",
-      "question_en": "The 'awk '{print $1}' file.txt' command prints?",
-      "options": ["السطر الأول", "العمود الأول", "الحرف الأول", "الكلمة الأولى"],
-      "correct_answer_index": 1,
-      "explanation_ar": "awk '{print $1}' يطبع العمود الأول من كل سطر في الملف",
-      "explanation_en": "awk '{print $1}' prints the first column from each line in the file"
+      "distro": "debian_zorin",
+      "question_ar": "كيف تزيل حزمة بشكل كامل مع جميع ملفات الإعدادات في دبيان؟",
+      "question_en": "How do you remove a package completely with all config files in Debian?",
+      "options": [
+        "apt remove package",
+        "apt delete package",
+        "apt clean package",
+        "apt purge package"
+      ],
+      "correct_answer_index": 3,
+      "explanation_ar": "apt purge يزيل الحزمة مع جميع ملفات الإعدادات والتبعيات",
+      "explanation_en": "apt purge removes package with all config files and dependencies"
     },
     {
       "id": 11,
-      "question_ar": "ما هو الأمر المستخدم لنقل البيانات من URL في أوبونتو؟",
-      "question_en": "What command is used to transfer data from a URL in Ubuntu?",
-      "options": ["wget", "curl", "download", "fetch"],
-      "correct_answer_index": 1,
-      "explanation_ar": "أمر curl ينقل البيانات من أو إلى خادم باستخدام بروتوكولات مختلفة",
-      "explanation_en": "The curl command transfers data from or to a server using various protocols"
+      "distro": "debian_zorin",
+      "question_ar": "ما هو الأمر المستخدم لإضافة مستودع PPA جديد؟",
+      "question_en": "What command is used to add a new PPA repository?",
+      "options": [
+        "add-apt-repository",
+        "apt-add-repo",
+        "apt-repo add",
+        "apt repository add"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "add-apt-repository يضيف مستودع جديد لقائمة مصادر أوبنتو",
+      "explanation_en": "add-apt-repository adds new repository to Ubuntu sources list"
     },
     {
       "id": 12,
-      "question_ar": "أمر 'crontab -e' يستخدم لـ؟",
-      "question_en": "The 'crontab -e' command is used for?",
-      "options": ["عرض المهام", "تحرير المهام", "حذف المهام", "تشغيل المهام"],
-      "correct_answer_index": 1,
-      "explanation_ar": "crontab -e يفتح المحرر لتحرير المهام المجدولة للمستخدم",
-      "explanation_en": "crontab -e opens the editor to edit user's scheduled tasks"
+      "distro": "debian_zorin",
+      "question_ar": "كيف تبحث عن حزمة في مستودعات دبيان؟",
+      "question_en": "How do you search for a package in Debian repositories?",
+      "options": [
+        "apt find package",
+        "apt look package",
+        "apt search package",
+        "apt locate package"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "apt search يبحث عن الحزم المتاحة في المستودعات المفعلة",
+      "explanation_en": "apt search searches for available packages in all enabled repositories"
     },
     {
       "id": 13,
-      "question_ar": "ما هو الأمر المستخدم للبحث DNS في أوبونتو؟",
-      "question_en": "What command is used for DNS lookup in Ubuntu?",
-      "options": ["nslookup", "dig", "host", "ping"],
-      "correct_answer_index": 1,
-      "explanation_ar": "أمر dig هو أداة بحث DNS قوية في أوبونتو",
-      "explanation_en": "The dig command is a powerful DNS lookup tool in Ubuntu"
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر المستخدم لعرض معلومات حزمة في فيدورا؟",
+      "question_en": "What command shows package information in Fedora?",
+      "options": [
+        "dnf info package",
+        "dnf show package",
+        "dnf details package",
+        "dnf describe package"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "dnf info يعرض معلومات مفصلة عن الحزمة في مستودعات فيدورا",
+      "explanation_en": "dnf info displays detailed information about package in Fedora repositories"
     },
     {
       "id": 14,
-      "question_ar": "أمر 'dconf read' يستخدم في زورين لـ؟",
-      "question_en": "The 'dconf read' command in Zorin is used for?",
-      "options": ["كتابة قيمة", "قراءة قيمة", "حذف قيمة", "تعديل قيمة"],
-      "correct_answer_index": 1,
-      "explanation_ar": "dconf read يقرأ قيمة من نظام تكوين زورين",
-      "explanation_en": "dconf read reads a value from Zorin's configuration system"
+      "distro": "fedora_redhat",
+      "question_ar": "كيف تقوم بتحديث جميع الحزم في فيدورا؟",
+      "question_en": "How do you upgrade all packages in Fedora?",
+      "options": [
+        "dnf refresh",
+        "dnf update",
+        "dnf upgrade",
+        "dnf sync"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "dnf upgrade يقوم بتحديث جميع الحزم المثبتة إلى أحدث الإصدارات",
+      "explanation_en": "dnf upgrade upgrades all installed packages to latest versions"
     },
     {
       "id": 15,
-      "question_ar": "ما هو الأمر المستخدم للتحقق من ملفات سطح المكتب في زورين؟",
-      "question_en": "What command validates desktop files in Zorin?",
-      "options": ["desktop-check", "desktop-file-validate", "validate-desktop", "check-desktop"],
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر المستخدم لتثبيت حزمة من ملف RPM محلي؟",
+      "question_en": "What command installs a package from local RPM file?",
+      "options": [
+        "dnf install file.rpm",
+        "dnf localinstall file.rpm",
+        "rpm -i file.rpm",
+        "rpm install file.rpm"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "desktop-file-validate يتحقق من صحة ملفات إدخال سطح المكتب",
-      "explanation_en": "desktop-file-validate validates desktop entry files"
+      "explanation_ar": "dnf localinstall يثبت حزمة محلياً من ملف RPM ويتعامل مع التبعيات",
+      "explanation_en": "dnf localinstall installs package locally from RPM file"
     },
     {
       "id": 16,
-      "question_ar": "أمر 'delv' في كالي يستخدم لـ؟",
-      "question_en": "The 'delv' command in Kali is used for?",
-      "options": ["بحث DNS", "التحقق من DNS", "مسح الشبكة", "فحص المنافذ"],
-      "correct_answer_index": 1,
-      "explanation_ar": "delv هي أداة بحث والتحقق من DNS في كالي لينكس",
-      "explanation_en": "delv is a DNS lookup and validation utility in Kali Linux"
+      "distro": "fedora_redhat",
+      "question_ar": "كيف تعرض قائمة بالمجموعات البرمجية المتاحة في فيدورا؟",
+      "question_en": "How do you list available software groups in Fedora?",
+      "options": [
+        "dnf group-list",
+        "dnf groups list",
+        "dnf list groups",
+        "dnf show-groups"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "dnf group-list يعرض جميع مجموعات البرمجيات المتاحة للتثبيت",
+      "explanation_en": "dnf group-list displays all available software groups for installation"
     },
     {
       "id": 17,
-      "question_ar": "ما هو الأمر المستخدم لحساب CRC-32 في كالي؟",
-      "question_en": "What command calculates CRC-32 in Kali?",
-      "options": ["checksum", "crc32", "hash", "md5"],
-      "correct_answer_index": 1,
-      "explanation_ar": "crc32 يحسب مجموعات التحقق CRC-32 للملفات",
-      "explanation_en": "crc32 computes CRC-32 checksums for files"
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر المستخدم لتنشيط مستودع معطل في فيدورا؟",
+      "question_en": "What command enables a disabled repository in Fedora?",
+      "options": [
+        "dnf enable-repo",
+        "dnf repo-enable",
+        "dnf config-manager --enable",
+        "dnf activate-repo"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "dnf config-manager --enable ينشط مستودع معطل",
+      "explanation_en": "dnf config-manager --enable enables a disabled repository"
     },
     {
       "id": 18,
-      "question_ar": "أمر 'diff3' يقارن؟",
-      "question_en": "The 'diff3' command compares?",
-      "options": ["ملفين", "ثلاثة ملفات", "أربعة ملفات", "مجلدات"],
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لعرض العمليات الجارية حالياً؟",
+      "question_en": "What command displays currently running processes?",
+      "options": [
+        "top",
+        "ps",
+        "jobs",
+        "processes"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "diff3 يقارن ثلاثة ملفات سطر بسطر",
-      "explanation_en": "diff3 compares three files line by line"
+      "explanation_ar": "أمر ps يعرض لقطة بالعمليات الجارية حالياً",
+      "explanation_en": "ps command displays a snapshot of currently running processes"
     },
     {
       "id": 19,
-      "question_ar": "أمر 'dbus-send' في زورين يستخدم لـ؟",
-      "question_en": "The 'dbus-send' command in Zorin is used for?",
-      "options": ["إرسال بريد", "إرسال رسالة D-Bus", "إرسال إشعار", "إرسال ملف"],
-      "correct_answer_index": 1,
-      "explanation_ar": "dbus-send يرسل رسالة إلى ناقل رسائل D-Bus",
-      "explanation_en": "dbus-send sends a message to the D-Bus message bus"
+      "distro": "common",
+      "question_ar": "كيف تقتل عملية بشكل قسري باستخدام معرفها (PID)؟",
+      "question_en": "How do you kill a process forcefully using its PID?",
+      "options": [
+        "kill -TERM PID",
+        "kill -STOP PID",
+        "kill -9 PID",
+        "kill -INT PID"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "kill -9 يرسل إشارة SIGKILL لقتل العملية فوراً",
+      "explanation_en": "kill -9 sends SIGKILL signal to terminate process immediately"
     },
     {
       "id": 20,
-      "question_ar": "ما هو الأمر المستخدم لإعادة تجزئة الشهادات في كالي؟",
-      "question_en": "What command rehashes certificates in Kali?",
-      "options": ["cert-rehash", "c_rehash", "rehash-cert", "cert-rebuild"],
-      "correct_answer_index": 1,
-      "explanation_ar": "c_rehash ينشئ روابط رمزية للملفات المسماة بقيم التجزئة",
-      "explanation_en": "c_rehash creates symbolic links to files named by hash values"
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لعرض مساحة القرص المستخدمة والمتاحة؟",
+      "question_en": "What command displays used and available disk space?",
+      "options": [
+        "df",
+        "du",
+        "disk",
+        "usage"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "أمر df يعرض مساحة القرص المستخدمة والمتاحة للملفات",
+      "explanation_en": "df command displays used and available disk space"
     },
     {
       "id": 21,
-      "question_ar": "أمر 'cut -d: -f1' يقوم بـ؟",
-      "question_en": "The 'cut -d: -f1' command does?",
-      "options": ["قطع الأحرف", "استخراج العمود الأول", "تقسيم الملف", "حذف الأسطر"],
+      "distro": "common",
+      "question_ar": "كيف تعرض حجم المجلدات والملفات بصيغة سهلة القراءة؟",
+      "question_en": "How do you display file/directory sizes in human readable format?",
+      "options": [
+        "ls -lh",
+        "du -sh",
+        "size -a",
+        "disk-usage"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "cut -d: -f1 يستخرج العمود الأول باستخدام النقطتين كفاصل",
-      "explanation_en": "cut -d: -f1 extracts the first column using colon as delimiter"
+      "explanation_ar": "du -sh يعرض إجمالي حجم كل ملف ومجلد بصيغة مقروءة (G, M, K)",
+      "explanation_en": "du -sh displays total size in human readable format"
     },
     {
       "id": 22,
-      "question_ar": "ما هو الأمر المستخدم لجدولة المهام في أوبونتو؟",
-      "question_en": "What command is used for task scheduling in Ubuntu?",
-      "options": ["schedule", "cron", "crontab", "task"],
-      "correct_answer_index": 2,
-      "explanation_ar": "crontab يحافظ على ملفات المهام المجدولة للمستخدمين",
-      "explanation_en": "crontab maintains crontab files for individual users"
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لنسخ ملف من مسار لآخر؟",
+      "question_en": "What command is used to copy a file?",
+      "options": [
+        "duplicate",
+        "clone",
+        "copy",
+        "cp"
+      ],
+      "correct_answer_index": 3,
+      "explanation_ar": "أمر cp ينسخ الملفات والمجلدات",
+      "explanation_en": "cp command copies files and directories"
     },
     {
       "id": 23,
-      "question_ar": "أمر 'dirmngr' في كالي هو؟",
-      "question_en": "The 'dirmngr' command in Kali is?",
-      "options": ["مدير الملفات", "مدير الشبكة", "خادم CRL و OCSP", "مدير العمليات"],
-      "correct_answer_index": 2,
-      "explanation_ar": "dirmngr هو خادم CRL و OCSP لإدارة الشهادات",
-      "explanation_en": "dirmngr is a CRL and OCSP daemon for certificate management"
+      "distro": "common",
+      "question_ar": "كيف تنقل ملفاً أو تعيد تسميته؟",
+      "question_en": "How do you move or rename a file?",
+      "options": [
+        "mv",
+        "move",
+        "transfer",
+        "relocate"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "أمر mv ينقل الملفات ويعيد تسميتها",
+      "explanation_en": "mv command moves files and can rename them"
     },
     {
       "id": 24,
-      "question_ar": "أمر 'csplit' يستخدم لـ؟",
-      "question_en": "The 'csplit' command is used for?",
-      "options": ["تقسيم الملفات حسب الحجم", "تقسيم الملفات حسب السياق", "تقسيم الملفات حسب التاريخ", "تقسيم الملفات حسب النوع"],
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لحذف ملف نهائياً؟",
+      "question_en": "What command is used to delete a file permanently?",
+      "options": [
+        "delete",
+        "rm",
+        "remove",
+        "del"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "csplit يقسم ملف إلى أقسام محددة بأسطر السياق",
-      "explanation_en": "csplit splits a file into sections determined by context lines"
+      "explanation_ar": "أمر rm يحذف الملفات والمجلدات (كن حذراً!)",
+      "explanation_en": "rm command deletes files and directories"
     },
     {
       "id": 25,
-      "question_ar": "ما هو الأمر المستخدم لتحرير ملفات سطح المكتب في زورين؟",
-      "question_en": "What command edits desktop files in Zorin?",
-      "options": ["edit-desktop", "desktop-edit", "desktop-file-edit", "file-desktop-edit"],
+      "distro": "common",
+      "question_ar": "كيف تنشئ ملفاً نصياً فارغاً جديداً؟",
+      "question_en": "How do you create a new empty text file?",
+      "options": [
+        "create filename",
+        "new filename",
+        "touch filename",
+        "make filename"
+      ],
       "correct_answer_index": 2,
-      "explanation_ar": "desktop-file-edit يحرر ملفات سطح المكتب في زورين",
-      "explanation_en": "desktop-file-edit edits desktop files in Zorin"
+      "explanation_ar": "touch ينشئ ملفاً فارغاً إذا لم يكن موجوداً",
+      "explanation_en": "touch creates an empty file"
     },
     {
       "id": 26,
-      "question_ar": "أمر 'diffstat' يعرض؟",
-      "question_en": "The 'diffstat' command displays?",
-      "options": ["مخطط بياني", "مدرج تكراري", "جدول", "قائمة"],
-      "correct_answer_index": 1,
-      "explanation_ar": "diffstat ينشئ مدرج تكراري من مخرجات diff",
-      "explanation_en": "diffstat creates a histogram from diff-output"
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لإنشاء مجلد جديد؟",
+      "question_en": "What command creates a new directory?",
+      "options": [
+        "mkdir dirname",
+        "create dirname",
+        "newdir dirname",
+        "md dirname"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "mkdir ينشئ مجلد جديد بالاسم المحدد",
+      "explanation_en": "mkdir creates new directory"
     },
     {
       "id": 27,
-      "question_ar": "أمر 'debconf' في زورين يستخدم لـ؟",
-      "question_en": "The 'debconf' command in Zorin is used for?",
-      "options": ["تثبيت الحزم", "تكوين الحزم", "تحديث الحزم", "حذف الحزم"],
-      "correct_answer_index": 1,
-      "explanation_ar": "debconf يشغل برنامج يستخدم نظام تكوين دبيان",
-      "explanation_en": "debconf runs a program using the debconf configuration system"
+      "distro": "common",
+      "question_ar": "كيف تعرض محتويات ملف نصي على الطرفية مباشرة؟",
+      "question_en": "How do you display text file contents in terminal?",
+      "options": [
+        "show filename",
+        "display filename",
+        "cat filename",
+        "view filename"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "cat يعرض محتويات الملف بالكامل",
+      "explanation_en": "cat displays entire file contents"
     },
     {
       "id": 28,
-      "question_ar": "ما هو الأمر المستخدم لعرض إحصائيات الفروقات؟",
-      "question_en": "What command displays difference statistics?",
-      "options": ["diff-stats", "diffstat", "stat-diff", "stats-diff"],
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لعرض ملف كبير صفحة بصفحة؟",
+      "question_en": "What command displays a large file page by page?",
+      "options": [
+        "more filename",
+        "less filename",
+        "page filename",
+        "view-page filename"
+      ],
       "correct_answer_index": 1,
-      "explanation_ar": "diffstat ينشئ مدرج تكراري من مخرجات مقارنة الملفات",
-      "explanation_en": "diffstat makes a histogram from diff-output"
+      "explanation_ar": "less يعرض الملف صفحة بصفحة مع إمكانية التمرير للأعلى والأسفل",
+      "explanation_en": "less displays file page by page with scrolling"
     },
     {
       "id": 29,
-      "question_ar": "أمر 'dirname /path/to/file' يعيد؟",
-      "question_en": "The 'dirname /path/to/file' command returns?",
-      "options": ["file", "to", "/path/to", "path"],
+      "distro": "common",
+      "question_ar": "كيف تبحث عن كلمة أو نمط معين داخل ملف؟",
+      "question_en": "How do you search for a pattern inside a file?",
+      "options": [
+        "search pattern file",
+        "find pattern file",
+        "grep pattern file",
+        "locate pattern file"
+      ],
       "correct_answer_index": 2,
-      "explanation_ar": "dirname يزيل الجزء الأخير من المسار ويعيد الدليل",
-      "explanation_en": "dirname removes the last part of the path and returns the directory"
+      "explanation_ar": "grep يبحث عن نمط نصي داخل الملفات",
+      "explanation_en": "grep searches for text patterns inside files"
     },
     {
       "id": 30,
-      "question_ar": "أمر 'dircolors' يستخدم لـ؟",
-      "question_en": "The 'dircolors' command is used for?",
-      "options": ["تلوين الملفات", "تلوين الدلائل", "إعداد ألوان ls", "تغيير ألوان الطرفية"],
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لتغيير صلاحيات ملف (مثل جعله قابلاً للتنفيذ)؟",
+      "question_en": "What command changes file permissions?",
+      "options": [
+        "chmod",
+        "perm",
+        "modify",
+        "access"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "chmod يغير صلاحيات الوصول للملف (قراءة، كتابة، تنفيذ)",
+      "explanation_en": "chmod changes file access permissions"
+    },
+    {
+      "id": 31,
+      "distro": "debian_zorin",
+      "question_ar": "كيف تصلح الحزم المعطوبة في أوبنتو عبر الطرفية؟",
+      "question_en": "How do you fix broken packages in Ubuntu terminal?",
+      "options": [
+        "apt --fix-broken install",
+        "apt-get -f install",
+        "dpkg --configure -a",
+        "جميع ما سبق"
+      ],
+      "correct_answer_index": 3,
+      "explanation_ar": "هذه الأوامر تساعد في إصلاح وإعادة إعداد الحزم المعطوبة",
+      "explanation_en": "These commands help fix and reconfigure broken packages"
+    },
+    {
+      "id": 32,
+      "distro": "debian_zorin",
+      "question_ar": "ما هو الأمر المستخدم لعرض الحزم التي تم حذفها ولكن بقت ملفات إعداداتها؟",
+      "question_en": "What command shows packages removed but config remain?",
+      "options": [
+        "dpkg -l | grep ^rc",
+        "apt list --removed",
+        "apt-show-removed",
+        "dpkg --removed"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "dpkg -l | grep ^rc يعرض الحزم التي تم حذفها وبقت ملفات الإعدادات",
+      "explanation_en": "dpkg -l | grep ^rc shows packages removed but config files remain"
+    },
+    {
+      "id": 33,
+      "distro": "fedora_redhat",
+      "question_ar": "كيف تعرض تفاصيل عملية DNF معينة باستخدام معرفها؟",
+      "question_en": "How do you show specific DNF transaction history details?",
+      "options": [
+        "dnf history detail ID",
+        "dnf history info ID",
+        "dnf log show ID",
+        "dnf transaction-info ID"
+      ],
+      "correct_answer_index": 1,
+      "explanation_ar": "dnf history info يعرض تفاصيل عملية معينة بالمعرف",
+      "explanation_en": "dnf history info shows details of specific transaction by ID"
+    },
+    {
+      "id": 34,
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر المستخدم لتنزيل حزمة إلى إصدار أقدم في فيدورا؟",
+      "question_en": "What command downgrades a package in Fedora?",
+      "options": [
+        "dnf downgrade package",
+        "dnf rollback package",
+        "dnf undo package",
+        "dnf revert package"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "dnf downgrade يعود إلى إصدار أقدم من الحزمة",
+      "explanation_en": "dnf downgrade reverts to older version of package"
+    },
+    {
+      "id": 35,
+      "distro": "fedora_redhat",
+      "question_ar": "كيف تثبت مجموعة برمجيات كاملة (مثل واجهة سطح مكتب) في فيدورا؟",
+      "question_en": "How do you install a software group in Fedora?",
+      "options": [
+        "dnf group install",
+        "dnf install-group",
+        "dnf groupinstall",
+        "dnf install --group"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "dnf group install يثبت مجموعة كاملة من البرامج المرتبطة",
+      "explanation_en": "dnf group install installs complete group of software"
+    },
+    {
+      "id": 36,
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لعرض اتصالات الشبكة النشطة؟",
+      "question_en": "What command shows active network connections?",
+      "options": [
+        "netstat",
+        "ifconfig",
+        "ip addr",
+        "networkctl"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "netstat يعرض جميع الاتصالات الشبكية النشطة والمنافذ",
+      "explanation_en": "netstat displays all active network connections"
+    },
+    {
+      "id": 37,
+      "distro": "common",
+      "question_ar": "كيف تختبر جودة الاتصال بخادم معين أو موقع؟",
+      "question_en": "How do you test connectivity to a server?",
+      "options": [
+        "test-net",
+        "ping",
+        "check-host",
+        "connect-test"
+      ],
+      "correct_answer_index": 1,
+      "explanation_ar": "ping يرسل حزم ICMP لاختبار سرعة واستقرار الاتصال",
+      "explanation_en": "ping sends ICMP packets to test connectivity"
+    },
+    {
+      "id": 38,
+      "distro": "common",
+      "question_ar": "ما هو الأمر الحديث المستخدم لعرض عناوين IP للواجهات؟",
+      "question_en": "What modern command shows interface IP addresses?",
+      "options": [
+        "ifconfig",
+        "ipconfig",
+        "ip addr",
+        "net-addr"
+      ],
       "correct_answer_index": 2,
-      "explanation_ar": "dircolors يعدد الألوان المستخدمة في أمر ls",
-      "explanation_en": "dircolors sets up colors used by the ls command"
+      "explanation_ar": "ip addr هو البديل الحديث لأمر ifconfig القديم",
+      "explanation_en": "ip addr is the modern replacement for ifconfig"
+    },
+    {
+      "id": 39,
+      "distro": "common",
+      "question_ar": "كيف تعرض المنافذ (Ports) التي تستمع للاتصالات حالياً؟",
+      "question_en": "How do you show listening ports on the system?",
+      "options": [
+        "ss -tulpn",
+        "netstat -l",
+        "lsof -i",
+        "جميع ما سبق"
+      ],
+      "correct_answer_index": 3,
+      "explanation_ar": "يمكن استخدام هذه الأوامر لعرض المنافذ المفتوحة والعمليات المرتبطة بها",
+      "explanation_en": "These commands can be used to show listening ports"
+    },
+    {
+      "id": 40,
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لضغط ملف مفرد؟",
+      "question_en": "What command compresses a single file?",
+      "options": [
+        "gzip",
+        "compress",
+        "zip",
+        "pack"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "gzip يضغط الملف ويضيف له امتداد .gz",
+      "explanation_en": "gzip compresses file using gzip algorithm"
+    },
+    {
+      "id": 41,
+      "distro": "common",
+      "question_ar": "كيف تفك ضغط ملف ينتهي بـ .gz؟",
+      "question_en": "How do you decompress a .gz file?",
+      "options": [
+        "gunzip",
+        "gzip -d",
+        "unzip",
+        "الخياران الأول والثاني"
+      ],
+      "correct_answer_index": 3,
+      "explanation_ar": "gunzip أو gzip -d كلاهما يفك ضغط ملفات gzip",
+      "explanation_en": "Both gunzip and gzip -d decompress gzip files"
+    },
+    {
+      "id": 42,
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لإنشاء ملف أرشيف (تجميع ملفات)؟",
+      "question_en": "What command creates an archive file?",
+      "options": [
+        "archive",
+        "zip",
+        "tar -cvf",
+        "pack"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "أمر tar يجمع عدة ملفات في ملف واحد يسمى أرشيف",
+      "explanation_en": "tar command archives multiple files into one"
+    },
+    {
+      "id": 43,
+      "distro": "common",
+      "question_ar": "كيف تستخرج ملفات من أرشيف مضغوط .tar.gz؟",
+      "question_en": "How do you extract .tar.gz archive?",
+      "options": [
+        "tar -xzvf",
+        "extract",
+        "untar",
+        "unpack"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "tar -xzvf يستخرج محتويات الأرشيف المضغوط",
+      "explanation_en": "tar -xzvf extracts compressed archive contents"
+    },
+    {
+      "id": 44,
+      "distro": "common",
+      "question_ar": "ما هو محرر النصوص الافتراضي البسيط في معظم التوزيعات؟",
+      "question_en": "What is the simple default text editor in most distros?",
+      "options": [
+        "vim",
+        "nano",
+        "emacs",
+        "gedit"
+      ],
+      "correct_answer_index": 1,
+      "explanation_ar": "nano محرر نصوص طرفي سهل الاستخدام للمبتدئين",
+      "explanation_en": "nano is an easy-to-use terminal text editor"
+    },
+    {
+      "id": 45,
+      "distro": "common",
+      "question_ar": "كيف تبحث عن ملف بناءً على اسمه في القرص؟",
+      "question_en": "How do you find a file by name on disk?",
+      "options": [
+        "find",
+        "locate",
+        "search",
+        "whereis"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "أمر find يبحث بعمق في المجلدات بناءً على معايير محددة",
+      "explanation_en": "find command searches for files based on criteria"
+    },
+    {
+      "id": 46,
+      "distro": "common",
+      "question_ar": "ما هو الأمر المستخدم لمعرفة مكانك الحالي في المجلدات؟",
+      "question_en": "What command shows your current directory?",
+      "options": [
+        "cwd",
+        "whereami",
+        "pwd",
+        "path"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "pwd (Print Working Directory) يعرض المسار الكامل",
+      "explanation_en": "pwd prints the full path of current directory"
+    },
+    {
+      "id": 47,
+      "distro": "common",
+      "question_ar": "كيف تعود خطوة واحدة للخلف في شجرة المجلدات؟",
+      "question_en": "How do you move up one directory level?",
+      "options": [
+        "cd ..",
+        "cd -",
+        "back",
+        "up"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "cd .. ينقلك للمجلد الأب مباشرة",
+      "explanation_en": "cd .. navigates to parent directory"
+    },
+    {
+      "id": 48,
+      "distro": "common",
+      "question_ar": "ما هو الأمر الذي يطبع قائمة بكل ما كتبت من أوامر سابقاً؟",
+      "question_en": "What command lists all previous commands?",
+      "options": [
+        "history",
+        "hist",
+        "log",
+        "prev"
+      ],
+      "correct_answer_index": 0,
+      "explanation_ar": "history يعرض سجل الأوامر التي تم تنفيذها في الجلسة",
+      "explanation_en": "history displays command history list"
+    },
+    {
+      "id": 49,
+      "distro": "debian_zorin",
+      "question_ar": "كيف تضيف مفتاح GPG لمستودع خارجي في أوبنتو؟",
+      "question_en": "How do you add a GPG key in Ubuntu?",
+      "options": [
+        "apt-key add",
+        "gpg --import",
+        "الخيار الأول والثاني",
+        "لا يمكن إضافة مفاتيح"
+      ],
+      "correct_answer_index": 2,
+      "explanation_ar": "يستخدم apt-key أو استيراد gpg لإدارة مفاتيح الموثوقية للمستودعات",
+      "explanation_en": "apt-key or gpg import is used to manage repository trust keys"
+    },
+    {
+      "id": 50,
+      "distro": "fedora_redhat",
+      "question_ar": "ما هو الأمر المستخدم لاستيراد مفتاح توقيع RPM في فيدورا؟",
+      "question_en": "What command imports RPM signing key in Fedora?",
+      "options": [
+        "dnf import-key",
+        "rpm --import",
+        "gpg --import",
+        "rpm-add-key"
+      ],
+      "correct_answer_index": 1,
+      "explanation_ar": "rpm --import يضمن صحة وموثوقية حزم RPM المثبتة",
+      "explanation_en": "rpm --import imports GPG key to RPM database"
     }
   ],
   "daily_tips": [
@@ -307,36 +798,6 @@
       "tip_ar": "استخدم 'man command' لعرض صفحة الدليل الكاملة لأي أمر",
       "tip_en": "Use 'man command' to display the complete manual page for any command",
       "category_id": "learning"
-    },
-    {
-      "id": 6,
-      "tip_ar": "اختصار 'Ctrl + L' يمسح شاشة الطرفية بسرعة",
-      "tip_en": "The 'Ctrl + L' shortcut quickly clears the terminal screen",
-      "category_id": "shortcuts"
-    },
-    {
-      "id": 7,
-      "tip_ar": "استخدم 'cd -' للعودة إلى الدليل السابق الذي كنت فيه",
-      "tip_en": "Use 'cd -' to return to the previous directory you were in",
-      "category_id": "navigation"
-    },
-    {
-      "id": 8,
-      "tip_ar": "أمر 'pwd' يعرض المسار الكامل للدليل الحالي",
-      "tip_en": "The 'pwd' command displays the full path of the current directory",
-      "category_id": "navigation"
-    },
-    {
-      "id": 9,
-      "tip_ar": "استخدم 'ls -la' لعرض جميع الملفات بما في ذلك الملفات المخفية",
-      "tip_en": "Use 'ls -la' to display all files including hidden files",
-      "category_id": "file_management"
-    },
-    {
-      "id": 10,
-      "tip_ar": "أمر 'top' يعرض العمليات النشطة واستخدام الموارد في الوقت الفعلي",
-      "tip_en": "The 'top' command displays active processes and resource usage in real-time",
-      "category_id": "monitoring"
     }
   ]
 }
