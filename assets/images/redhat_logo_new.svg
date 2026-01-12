@@ -1,0 +1,25 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="redhatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#CC0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#990000;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle with gradient -->
+  <circle cx="32" cy="32" r="30" fill="url(#redhatGradient)" stroke="#990000" stroke-width="2"/>
+  
+  <!-- Red Hat shadowman logo -->
+  <g transform="translate(32, 32)">
+    <!-- Hat shape -->
+    <path d="M -12,-8 Q -12,-12 -8,-12 Q -4,-12 0,-10 Q 4,-12 8,-12 Q 12,-12 12,-8 Q 12,-4 8,-2 Q 4,0 0,0 Q -4,0 -8,-2 Q -12,-4 -12,-8 Z" 
+          fill="white" opacity="0.95"/>
+    <!-- Hat brim -->
+    <rect x="-14" y="-6" width="28" height="3" rx="1" fill="white" opacity="0.9"/>
+    <!-- Shadow effect -->
+    <ellipse cx="0" cy="8" rx="8" ry="3" fill="#000000" opacity="0.3"/>
+  </g>
+  
+  <!-- Red Hat text -->
+  <text x="32" y="52" font-family="Arial Black, sans-serif" font-size="7" font-weight="900" 
+        fill="white" text-anchor="middle">RED HAT</text>
+</svg>

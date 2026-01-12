@@ -8,16 +8,16 @@
       "description": "الأوامر الأساسية التي تعمل على جميع توزيعات لينكس بلا استثناء."
     },
     {
-      "id": "zorin_ubuntu",
-      "name_ar": "عائلة زورين وأوبنتو",
-      "name_en": "Zorin & Ubuntu",
+      "id": "debian_family",
+      "name_ar": "عائلة دبيان",
+      "name_en": "Debian Family",
       "icon": "laptop_linux",
       "description": "أوامر إدارة الحزم والنظام الخاصة بتوزيعات Debian و Ubuntu و Zorin OS."
     },
     {
-      "id": "fedora_redhat",
-      "name_ar": "عائلة فيدورا",
-      "name_en": "Fedora & RedHat",
+      "id": "redhat_family",
+      "name_ar": "عائلة ريد هات",
+      "name_en": "Red Hat Family",
       "icon": "settings_system_daydream",
       "description": "الأوامر الخاصة بتوزيعات Fedora و RedHat التي تستخدم مدير حزم DNF."
     },

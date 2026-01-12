@@ -4,14 +4,14 @@
     "description": "اختبر معرفتك بناءً على نوع توزيعتك المفضلة مع توزيع عشوائي للإجابات",
     "categories": [
       {
-        "id": "debian_zorin",
-        "name_ar": "أوبنتو / زورين (Debian)",
-        "name_en": "Ubuntu / Zorin"
+        "id": "debian_family",
+        "name_ar": "عائلة دبيان",
+        "name_en": "Debian Family"
       },
       {
-        "id": "fedora_redhat",
-        "name_ar": "فيدورا (Red Hat)",
-        "name_en": "Fedora / RHEL"
+        "id": "redhat_family",
+        "name_ar": "عائلة ريد هات",
+        "name_en": "Red Hat Family"
       }
     ],
     "total_questions_per_quiz": 15
@@ -34,7 +34,7 @@
     },
     {
       "id": 2,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "أمر 'apt install package' يستخدم لـ؟",
       "question_en": "The 'apt install package' command is used for?",
       "options": [
@@ -49,7 +49,7 @@
     },
     {
       "id": 3,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر الأساسي لتثبيت حزمة في توزيعة فيدورا؟",
       "question_en": "What is the primary command to install a package in Fedora?",
       "options": [
@@ -64,7 +64,7 @@
     },
     {
       "id": 4,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "كيف يمكنك تنظيف التخزين المؤقت (Cache) لمدير الحزم DNF؟",
       "question_en": "How do you clean the DNF package manager cache?",
       "options": [
@@ -94,7 +94,7 @@
     },
     {
       "id": 6,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "أي أمر يستخدم لتحديث قائمة المستودعات في أوبنتو؟",
       "question_en": "Which command is used to update the repository list in Ubuntu?",
       "options": [
@@ -109,7 +109,7 @@
     },
     {
       "id": 7,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر المستخدم لرؤية تاريخ عمليات DNF في فيدورا؟",
       "question_en": "What command is used to see the DNF transaction history in Fedora?",
       "options": [
@@ -139,7 +139,7 @@
     },
     {
       "id": 9,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "ما هو الأمر المستخدم لعرض معلومات حزمة مثبتة في أوبنتو؟",
       "question_en": "What command shows information about an installed package in Ubuntu?",
       "options": [
@@ -154,7 +154,7 @@
     },
     {
       "id": 10,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "كيف تزيل حزمة بشكل كامل مع جميع ملفات الإعدادات في دبيان؟",
       "question_en": "How do you remove a package completely with all config files in Debian?",
       "options": [
@@ -169,7 +169,7 @@
     },
     {
       "id": 11,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "ما هو الأمر المستخدم لإضافة مستودع PPA جديد؟",
       "question_en": "What command is used to add a new PPA repository?",
       "options": [
@@ -184,7 +184,7 @@
     },
     {
       "id": 12,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "كيف تبحث عن حزمة في مستودعات دبيان؟",
       "question_en": "How do you search for a package in Debian repositories?",
       "options": [
@@ -199,7 +199,7 @@
     },
     {
       "id": 13,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر المستخدم لعرض معلومات حزمة في فيدورا؟",
       "question_en": "What command shows package information in Fedora?",
       "options": [
@@ -214,7 +214,7 @@
     },
     {
       "id": 14,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "كيف تقوم بتحديث جميع الحزم في فيدورا؟",
       "question_en": "How do you upgrade all packages in Fedora?",
       "options": [
@@ -229,7 +229,7 @@
     },
     {
       "id": 15,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر المستخدم لتثبيت حزمة من ملف RPM محلي؟",
       "question_en": "What command installs a package from local RPM file?",
       "options": [
@@ -244,7 +244,7 @@
     },
     {
       "id": 16,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "كيف تعرض قائمة بالمجموعات البرمجية المتاحة في فيدورا؟",
       "question_en": "How do you list available software groups in Fedora?",
       "options": [
@@ -259,7 +259,7 @@
     },
     {
       "id": 17,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر المستخدم لتنشيط مستودع معطل في فيدورا؟",
       "question_en": "What command enables a disabled repository in Fedora?",
       "options": [
@@ -469,7 +469,7 @@
     },
     {
       "id": 31,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "كيف تصلح الحزم المعطوبة في أوبنتو عبر الطرفية؟",
       "question_en": "How do you fix broken packages in Ubuntu terminal?",
       "options": [
@@ -484,7 +484,7 @@
     },
     {
       "id": 32,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "ما هو الأمر المستخدم لعرض الحزم التي تم حذفها ولكن بقت ملفات إعداداتها؟",
       "question_en": "What command shows packages removed but config remain?",
       "options": [
@@ -499,7 +499,7 @@
     },
     {
       "id": 33,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "كيف تعرض تفاصيل عملية DNF معينة باستخدام معرفها؟",
       "question_en": "How do you show specific DNF transaction history details?",
       "options": [
@@ -514,7 +514,7 @@
     },
     {
       "id": 34,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر المستخدم لتنزيل حزمة إلى إصدار أقدم في فيدورا؟",
       "question_en": "What command downgrades a package in Fedora?",
       "options": [
@@ -529,7 +529,7 @@
     },
     {
       "id": 35,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "كيف تثبت مجموعة برمجيات كاملة (مثل واجهة سطح مكتب) في فيدورا؟",
       "question_en": "How do you install a software group in Fedora?",
       "options": [
@@ -739,7 +739,7 @@
     },
     {
       "id": 49,
-      "distro": "debian_zorin",
+      "distro": "debian_family",
       "question_ar": "كيف تضيف مفتاح GPG لمستودع خارجي في أوبنتو؟",
       "question_en": "How do you add a GPG key in Ubuntu?",
       "options": [
@@ -754,7 +754,7 @@
     },
     {
       "id": 50,
-      "distro": "fedora_redhat",
+      "distro": "redhat_family",
       "question_ar": "ما هو الأمر المستخدم لاستيراد مفتاح توقيع RPM في فيدورا؟",
       "question_en": "What command imports RPM signing key in Fedora?",
       "options": [

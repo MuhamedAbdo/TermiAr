@@ -13,7 +13,7 @@
     },
     {
       "id": 2,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt update",
       "syntax": "sudo apt update",
       "level": "مبتدئ",
@@ -24,7 +24,7 @@
     },
     {
       "id": 3,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf install",
       "syntax": "sudo dnf install [package]",
       "level": "مبتدئ",
@@ -101,7 +101,7 @@
     },
     {
       "id": 10,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt install",
       "syntax": "sudo apt install [package]",
       "level": "مبتدئ",
@@ -167,7 +167,7 @@
     },
     {
       "id": 16,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt remove",
       "syntax": "sudo apt remove [package]",
       "level": "مبتدئ",
@@ -178,7 +178,7 @@
     },
     {
       "id": 17,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf search",
       "syntax": "dnf search [keyword]",
       "level": "مبتدئ",
@@ -288,7 +288,7 @@
     },
     {
       "id": 27,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt search",
       "syntax": "apt search [name]",
       "level": "مبتدئ",
@@ -376,7 +376,7 @@
     },
     {
       "id": 35,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf check-update",
       "syntax": "dnf check-update",
       "level": "مبتدئ",
@@ -387,7 +387,7 @@
     },
     {
       "id": 36,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt list --installed",
       "syntax": "apt list --installed",
       "level": "مبتدئ",
@@ -563,7 +563,7 @@
     },
     {
       "id": 52,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt clean",
       "syntax": "sudo apt clean",
       "level": "مبتدئ",
@@ -574,7 +574,7 @@
     },
     {
       "id": 53,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf upgrade",
       "syntax": "sudo dnf upgrade",
       "level": "مبتدئ",
@@ -717,7 +717,7 @@
     },
     {
       "id": 66,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt autoremove",
       "syntax": "sudo apt autoremove",
       "level": "مبتدئ",
@@ -728,7 +728,7 @@
     },
     {
       "id": 67,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list updates",
       "syntax": "dnf list updates",
       "level": "مبتدئ",
@@ -1058,7 +1058,7 @@
     },
     {
       "id": 97,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "add-apt-repository",
       "syntax": "sudo add-apt-repository ppa:[name]",
       "level": "متوسط",
@@ -1993,7 +1993,7 @@
     },
     {
       "id": 181,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt upgrade",
       "syntax": "sudo apt upgrade",
       "level": "مبتدئ",
@@ -2004,7 +2004,7 @@
     },
     {
       "id": 182,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt dist-upgrade",
       "syntax": "sudo apt dist-upgrade",
       "level": "متوسط",
@@ -2015,7 +2015,7 @@
     },
     {
       "id": 183,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-cache policy",
       "syntax": "apt-cache policy [package]",
       "level": "متوسط",
@@ -2026,7 +2026,7 @@
     },
     {
       "id": 184,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "dpkg -i",
       "syntax": "sudo dpkg -i [package.deb]",
       "level": "مبتدئ",
@@ -2037,7 +2037,7 @@
     },
     {
       "id": 185,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt purge",
       "syntax": "sudo apt purge [package]",
       "level": "متوسط",
@@ -2048,7 +2048,7 @@
     },
     {
       "id": 186,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "add-apt-repository --remove",
       "syntax": "sudo add-apt-repository --remove ppa:[name]",
       "level": "متوسط",
@@ -2059,7 +2059,7 @@
     },
     {
       "id": 187,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "dpkg -l",
       "syntax": "dpkg -l | grep [name]",
       "level": "مبتدئ",
@@ -2070,7 +2070,7 @@
     },
     {
       "id": 188,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-get check",
       "syntax": "sudo apt-get check",
       "level": "متقدم",
@@ -2081,7 +2081,7 @@
     },
     {
       "id": 189,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-mark hold",
       "syntax": "sudo apt-mark hold [package]",
       "level": "متقدم",
@@ -2092,7 +2092,7 @@
     },
     {
       "id": 190,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "do-release-upgrade",
       "syntax": "sudo do-release-upgrade",
       "level": "متقدم",
@@ -2103,7 +2103,7 @@
     },
     {
       "id": 191,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt depends",
       "syntax": "apt depends [package]",
       "level": "متوسط",
@@ -2114,7 +2114,7 @@
     },
     {
       "id": 192,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "ppa-purge",
       "syntax": "sudo ppa-purge ppa:[name]",
       "level": "متقدم",
@@ -2125,7 +2125,7 @@
     },
     {
       "id": 193,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "gnome-shell --replace",
       "syntax": "gnome-shell --replace &",
       "level": "متقدم",
@@ -2136,7 +2136,7 @@
     },
     {
       "id": 194,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "gsettings reset-recursively",
       "syntax": "gsettings reset-recursively org.gnome.desktop.interface",
       "level": "متقدم",
@@ -2147,7 +2147,7 @@
     },
     {
       "id": 195,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "ubuntu-drivers devices",
       "syntax": "ubuntu-drivers devices",
       "level": "متوسط",
@@ -2158,7 +2158,7 @@
     },
     {
       "id": 196,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo ubuntu-drivers autoinstall",
       "syntax": "sudo ubuntu-drivers autoinstall",
       "level": "متوسط",
@@ -2169,7 +2169,7 @@
     },
     {
       "id": 197,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt list --upgradable",
       "syntax": "apt list --upgradable",
       "level": "مبتدئ",
@@ -2180,7 +2180,7 @@
     },
     {
       "id": 198,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo apt-get install -f",
       "syntax": "sudo apt-get install -f",
       "level": "متوسط",
@@ -2191,7 +2191,7 @@
     },
     {
       "id": 199,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "dconf reset -f /",
       "syntax": "dconf reset -f /",
       "level": "متقدم",
@@ -2202,7 +2202,7 @@
     },
     {
       "id": 200,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "lsb_release -a",
       "syntax": "lsb_release -a",
       "level": "مبتدئ",
@@ -2213,7 +2213,7 @@
     },
     {
       "id": 201,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo dpkg --configure -a",
       "syntax": "sudo dpkg --configure -a",
       "level": "متوسط",
@@ -2224,7 +2224,7 @@
     },
     {
       "id": 202,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-cache search",
       "syntax": "apt-cache search [keyword]",
       "level": "مبتدئ",
@@ -2235,7 +2235,7 @@
     },
     {
       "id": 203,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "update-grub",
       "syntax": "sudo update-grub",
       "level": "متوسط",
@@ -2246,7 +2246,7 @@
     },
     {
       "id": 204,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "snap install",
       "syntax": "sudo snap install [package]",
       "level": "مبتدئ",
@@ -2257,7 +2257,7 @@
     },
     {
       "id": 205,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "snap list",
       "syntax": "snap list",
       "level": "مبتدئ",
@@ -2268,7 +2268,7 @@
     },
     {
       "id": 206,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "flatpak install",
       "syntax": "flatpak install flathub [package]",
       "level": "متوسط",
@@ -2279,7 +2279,7 @@
     },
     {
       "id": 207,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "gnome-extensions list",
       "syntax": "gnome-extensions list",
       "level": "متوسط",
@@ -2290,7 +2290,7 @@
     },
     {
       "id": 208,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo apt clean",
       "syntax": "sudo apt clean",
       "level": "مبتدئ",
@@ -2301,7 +2301,7 @@
     },
     {
       "id": 209,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "nm-connection-editor",
       "syntax": "nm-connection-editor",
       "level": "متوسط",
@@ -2312,7 +2312,7 @@
     },
     {
       "id": 210,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "journalctl -u gdm",
       "syntax": "journalctl -u gdm",
       "level": "متقدم",
@@ -2323,7 +2323,7 @@
     },
     {
       "id": 211,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "zorin-appearance",
       "syntax": "zorin-appearance",
       "level": "مبتدئ",
@@ -2334,7 +2334,7 @@
     },
     {
       "id": 212,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-get download",
       "syntax": "apt-get download [package]",
       "level": "متوسط",
@@ -2345,7 +2345,7 @@
     },
     {
       "id": 213,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "grub-reboot",
       "syntax": "sudo grub-reboot [number]",
       "level": "متقدم",
@@ -2356,7 +2356,7 @@
     },
     {
       "id": 214,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "add-apt-repository --list",
       "syntax": "add-apt-repository --list",
       "level": "متوسط",
@@ -2367,7 +2367,7 @@
     },
     {
       "id": 215,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "user-admin",
       "syntax": "sudo user-admin",
       "level": "مبتدئ",
@@ -2378,7 +2378,7 @@
     },
     {
       "id": 216,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "software-properties-gtk",
       "syntax": "software-properties-gtk",
       "level": "متوسط",
@@ -2389,7 +2389,7 @@
     },
     {
       "id": 217,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt autoremove --purge",
       "syntax": "sudo apt autoremove --purge",
       "level": "متوسط",
@@ -2400,7 +2400,7 @@
     },
     {
       "id": 218,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "gnome-control-center",
       "syntax": "gnome-control-center",
       "level": "مبتدئ",
@@ -2411,7 +2411,7 @@
     },
     {
       "id": 219,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sed",
       "syntax": "sudo sed -i 's/NoDisplay=true/NoDisplay=false/g' /etc/xdg/autostart/*.desktop",
       "level": "متقدم",
@@ -2422,7 +2422,7 @@
     },
     {
       "id": 220,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "systemd-analyze",
       "syntax": "systemd-analyze",
       "level": "متوسط",
@@ -2433,7 +2433,7 @@
     },
     {
       "id": 221,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "systemd-analyze blame",
       "syntax": "systemd-analyze blame",
       "level": "متقدم",
@@ -2444,7 +2444,7 @@
     },
     {
       "id": 222,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-get source",
       "syntax": "apt-get source [package]",
       "level": "متقدم",
@@ -2455,7 +2455,7 @@
     },
     {
       "id": 223,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "update-alternatives",
       "syntax": "sudo update-alternatives --config java",
       "level": "متوسط",
@@ -2466,7 +2466,7 @@
     },
     {
       "id": 224,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "checkinstall",
       "syntax": "sudo checkinstall",
       "level": "متقدم",
@@ -2477,7 +2477,7 @@
     },
     {
       "id": 225,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "gdb",
       "syntax": "gdb [program]",
       "level": "متقدم",
@@ -2488,7 +2488,7 @@
     },
     {
       "id": 226,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "gnome-session-quit",
       "syntax": "gnome-session-quit --logout",
       "level": "مبتدئ",
@@ -2499,7 +2499,7 @@
     },
     {
       "id": 227,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "unity-control-center",
       "syntax": "unity-control-center",
       "level": "متوسط",
@@ -2510,7 +2510,7 @@
     },
     {
       "id": 228,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-mark showhold",
       "syntax": "apt-mark showhold",
       "level": "متوسط",
@@ -2521,7 +2521,7 @@
     },
     {
       "id": 229,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo update-locale",
       "syntax": "sudo update-locale LANG=[language]",
       "level": "متوسط",
@@ -2532,7 +2532,7 @@
     },
     {
       "id": 230,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "flatpak update",
       "syntax": "flatpak update",
       "level": "مبتدئ",
@@ -2543,7 +2543,7 @@
     },
     {
       "id": 231,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "snap refresh",
       "syntax": "sudo snap refresh",
       "level": "مبتدئ",
@@ -2554,7 +2554,7 @@
     },
     {
       "id": 232,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "zorin-os-pro-manager",
       "syntax": "zorin-os-pro-manager",
       "level": "مبتدئ",
@@ -2565,7 +2565,7 @@
     },
     {
       "id": 233,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "Ctrl + Alt + F3",
       "syntax": "Ctrl + Alt + F3",
       "level": "متقدم",
@@ -2576,7 +2576,7 @@
     },
     {
       "id": 234,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "REISUB",
       "syntax": "Alt + SysRq + [R-E-I-S-U-B]",
       "level": "متقدم",
@@ -2587,7 +2587,7 @@
     },
     {
       "id": 235,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo dpkg --configure -a",
       "syntax": "sudo dpkg --configure -a",
       "level": "متوسط",
@@ -2598,7 +2598,7 @@
     },
     {
       "id": 236,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "fsck",
       "syntax": "sudo fsck /dev/sda1",
       "level": "متقدم",
@@ -2609,7 +2609,7 @@
     },
     {
       "id": 237,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "passwd",
       "syntax": "sudo passwd [username]",
       "level": "متوسط",
@@ -2620,7 +2620,7 @@
     },
     {
       "id": 238,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "testdisk",
       "syntax": "sudo testdisk",
       "level": "متقدم",
@@ -2631,7 +2631,7 @@
     },
     {
       "id": 239,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "photorec",
       "syntax": "sudo photorec",
       "level": "متقدم",
@@ -2642,7 +2642,7 @@
     },
     {
       "id": 240,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "badblocks",
       "syntax": "sudo badblocks -v /dev/sda",
       "level": "متقدم",
@@ -2653,7 +2653,7 @@
     },
     {
       "id": 241,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "memtest86+",
       "syntax": "sudo memtest86+",
       "level": "متقدم",
@@ -2664,7 +2664,7 @@
     },
     {
       "id": 242,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "journalctl -p 3 -xb",
       "syntax": "journalctl -p 3 -xb",
       "level": "متقدم",
@@ -2675,7 +2675,7 @@
     },
     {
       "id": 243,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sudo rm /var/lib/dpkg/lock-frontend",
       "syntax": "sudo rm /var/lib/dpkg/lock-frontend",
       "level": "متقدم",
@@ -2686,7 +2686,7 @@
     },
     {
       "id": 244,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "X -configure",
       "syntax": "sudo X -configure",
       "level": "متقدم",
@@ -2697,7 +2697,7 @@
     },
     {
       "id": 245,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "pkill -u [username]",
       "syntax": "sudo pkill -u [username]",
       "level": "متوسط",
@@ -2708,7 +2708,7 @@
     },
     {
       "id": 246,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "debsums",
       "syntax": "sudo debsums -s",
       "level": "متقدم",
@@ -2719,7 +2719,7 @@
     },
     {
       "id": 247,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "apt-get clean && apt-get update",
       "syntax": "sudo apt-get clean && sudo apt-get update",
       "level": "متوسط",
@@ -2730,7 +2730,7 @@
     },
     {
       "id": 248,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "kill -9 -1",
       "syntax": "sudo kill -9 -1",
       "level": "متقدم",
@@ -2741,7 +2741,7 @@
     },
     {
       "id": 249,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "history -w",
       "syntax": "history -w",
       "level": "متوسط",
@@ -2752,7 +2752,7 @@
     },
     {
       "id": 250,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "sync && echo 3 > /proc/sys/vm/drop_caches",
       "level": "متقدم",
       "name_ar": "تفريغ الـ Cache قسرياً",
@@ -2762,7 +2762,7 @@
     },
     {
       "id": 251,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "modprobe -r [module]",
       "syntax": "sudo modprobe -r [module_name]",
       "level": "متقدم",
@@ -2773,7 +2773,7 @@
     },
     {
       "id": 252,
-      "category_id": "zorin_ubuntu",
+      "category_id": "debian_family",
       "command": "reboot -f",
       "syntax": "sudo reboot -f",
       "level": "متقدم",
@@ -2784,7 +2784,7 @@
     },
     {
       "id": 253,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf remove",
       "syntax": "sudo dnf remove [package]",
       "level": "مبتدئ",
@@ -2795,7 +2795,7 @@
     },
     {
       "id": 254,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list updates",
       "syntax": "dnf list updates",
       "level": "مبتدئ",
@@ -2806,7 +2806,7 @@
     },
     {
       "id": 255,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf clean all",
       "syntax": "sudo dnf clean all",
       "level": "مبتدئ",
@@ -2817,7 +2817,7 @@
     },
     {
       "id": 256,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf autoremove",
       "syntax": "sudo dnf autoremove",
       "level": "مبتدئ",
@@ -2828,7 +2828,7 @@
     },
     {
       "id": 257,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf reinstall",
       "syntax": "sudo dnf reinstall [package]",
       "level": "مبتدئ",
@@ -2839,7 +2839,7 @@
     },
     {
       "id": 258,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list installed",
       "syntax": "dnf list installed",
       "level": "مبتدئ",
@@ -2850,7 +2850,7 @@
     },
     {
       "id": 259,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repolist",
       "syntax": "dnf repolist",
       "level": "مبتدئ",
@@ -2861,7 +2861,7 @@
     },
     {
       "id": 260,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf info",
       "syntax": "dnf info [package]",
       "level": "مبتدئ",
@@ -2872,7 +2872,7 @@
     },
     {
       "id": 261,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf group list",
       "syntax": "dnf group list",
       "level": "مبتدئ",
@@ -2883,7 +2883,7 @@
     },
     {
       "id": 262,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf help",
       "syntax": "dnf help",
       "level": "مبتدئ",
@@ -2894,7 +2894,7 @@
     },
     {
       "id": 263,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list available",
       "syntax": "dnf list available",
       "level": "مبتدئ",
@@ -2905,7 +2905,7 @@
     },
     {
       "id": 264,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf makecache",
       "syntax": "sudo dnf makecache",
       "level": "مبتدئ",
@@ -2916,7 +2916,7 @@
     },
     {
       "id": 265,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf search all",
       "syntax": "dnf search all [keyword]",
       "level": "مبتدئ",
@@ -2927,7 +2927,7 @@
     },
     {
       "id": 266,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history",
       "syntax": "dnf history",
       "level": "مبتدئ",
@@ -2938,7 +2938,7 @@
     },
     {
       "id": 267,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoinfo",
       "syntax": "dnf repoinfo",
       "level": "مبتدئ",
@@ -2949,7 +2949,7 @@
     },
     {
       "id": 268,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list extras",
       "syntax": "dnf list extras",
       "level": "مبتدئ",
@@ -2960,7 +2960,7 @@
     },
     {
       "id": 269,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list recent",
       "syntax": "dnf list recent",
       "level": "مبتدئ",
@@ -2971,7 +2971,7 @@
     },
     {
       "id": 270,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf deplist",
       "syntax": "dnf deplist [package]",
       "level": "مبتدئ",
@@ -2982,7 +2982,7 @@
     },
     {
       "id": 271,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf check",
       "syntax": "sudo dnf check",
       "level": "مبتدئ",
@@ -2993,7 +2993,7 @@
     },
     {
       "id": 272,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf downgrade",
       "syntax": "sudo dnf downgrade [package]",
       "level": "مبتدئ",
@@ -3004,7 +3004,7 @@
     },
     {
       "id": 273,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list obsoletes",
       "syntax": "dnf list obsoletes",
       "level": "مبتدئ",
@@ -3015,7 +3015,7 @@
     },
     {
       "id": 274,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf group info",
       "syntax": "dnf group info \"[Group Name]\"",
       "level": "مبتدئ",
@@ -3026,7 +3026,7 @@
     },
     {
       "id": 275,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf provides",
       "syntax": "dnf provides [file]",
       "level": "مبتدئ",
@@ -3037,7 +3037,7 @@
     },
     {
       "id": 276,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list duplicates",
       "syntax": "dnf list duplicates",
       "level": "مبتدئ",
@@ -3048,7 +3048,7 @@
     },
     {
       "id": 277,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery",
       "syntax": "dnf repoquery [package]",
       "level": "مبتدئ",
@@ -3059,7 +3059,7 @@
     },
     {
       "id": 278,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf config-manager",
       "syntax": "dnf config-manager --help",
       "level": "مبتدئ",
@@ -3070,7 +3070,7 @@
     },
     {
       "id": 279,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list updates --security",
       "syntax": "dnf list updates --security",
       "level": "مبتدئ",
@@ -3081,7 +3081,7 @@
     },
     {
       "id": 280,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history summary",
       "syntax": "dnf history summary",
       "level": "مبتدئ",
@@ -3092,7 +3092,7 @@
     },
     {
       "id": 281,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf group summary",
       "syntax": "dnf group summary",
       "level": "مبتدئ",
@@ -3103,7 +3103,7 @@
     },
     {
       "id": 282,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf mark remove",
       "syntax": "sudo dnf mark remove [package]",
       "level": "مبتدئ",
@@ -3114,7 +3114,7 @@
     },
     {
       "id": 283,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list installed [keyword]",
       "syntax": "dnf list installed \"*keyword*\"",
       "level": "مبتدئ",
@@ -3125,7 +3125,7 @@
     },
     {
       "id": 284,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf module list",
       "syntax": "dnf module list",
       "level": "مبتدئ",
@@ -3136,7 +3136,7 @@
     },
     {
       "id": 285,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf version",
       "syntax": "dnf --version",
       "level": "مبتدئ",
@@ -3147,7 +3147,7 @@
     },
     {
       "id": 286,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf upgrade-minimal",
       "syntax": "sudo dnf upgrade-minimal",
       "level": "مبتدئ",
@@ -3158,7 +3158,7 @@
     },
     {
       "id": 287,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list available [keyword]",
       "syntax": "dnf list available \"*keyword*\"",
       "level": "مبتدئ",
@@ -3169,7 +3169,7 @@
     },
     {
       "id": 288,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf clean metadata",
       "syntax": "sudo dnf clean metadata",
       "level": "مبتدئ",
@@ -3180,7 +3180,7 @@
     },
     {
       "id": 289,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history info",
       "syntax": "dnf history info [ID]",
       "level": "متوسط",
@@ -3191,7 +3191,7 @@
     },
     {
       "id": 290,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf group install",
       "syntax": "sudo dnf group install \"[Group Name]\"",
       "level": "متوسط",
@@ -3202,7 +3202,7 @@
     },
     {
       "id": 291,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf config-manager --add-repo",
       "syntax": "sudo dnf config-manager --add-repo [URL]",
       "level": "متوسط",
@@ -3213,7 +3213,7 @@
     },
     {
       "id": 292,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list extras",
       "syntax": "dnf list extras",
       "level": "متوسط",
@@ -3224,7 +3224,7 @@
     },
     {
       "id": 293,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf check-update --refresh",
       "syntax": "dnf check-update --refresh",
       "level": "متوسط",
@@ -3235,7 +3235,7 @@
     },
     {
       "id": 294,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf module install",
       "syntax": "sudo dnf module install [module:stream]",
       "level": "متوسط",
@@ -3246,7 +3246,7 @@
     },
     {
       "id": 295,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repolist all",
       "syntax": "dnf repolist all",
       "level": "متوسط",
@@ -3257,7 +3257,7 @@
     },
     {
       "id": 296,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history list",
       "syntax": "dnf history list [package]",
       "level": "متوسط",
@@ -3268,7 +3268,7 @@
     },
     {
       "id": 297,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --depends",
       "syntax": "dnf repoquery --depends [package]",
       "level": "متوسط",
@@ -3279,7 +3279,7 @@
     },
     {
       "id": 298,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf config-manager --set-enabled",
       "syntax": "sudo dnf config-manager --set-enabled [repo-id]",
       "level": "متوسط",
@@ -3290,7 +3290,7 @@
     },
     {
       "id": 299,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf swap",
       "syntax": "sudo dnf swap [package_a] [package_b]",
       "level": "متوسط",
@@ -3301,7 +3301,7 @@
     },
     {
       "id": 300,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --whatrequires",
       "syntax": "dnf repoquery --whatrequires [package]",
       "level": "متوسط",
@@ -3312,7 +3312,7 @@
     },
     {
       "id": 301,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf config-manager --set-disabled",
       "syntax": "sudo dnf config-manager --set-disabled [repo-id]",
       "level": "متوسط",
@@ -3323,7 +3323,7 @@
     },
     {
       "id": 302,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf mark install",
       "syntax": "sudo dnf mark install [package]",
       "level": "متوسط",
@@ -3334,7 +3334,7 @@
     },
     {
       "id": 303,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf group remove",
       "syntax": "sudo dnf group remove \"[Group Name]\"",
       "level": "متوسط",
@@ -3345,7 +3345,7 @@
     },
     {
       "id": 304,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf download",
       "syntax": "dnf download [package]",
       "level": "متوسط",
@@ -3356,7 +3356,7 @@
     },
     {
       "id": 305,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history rollback",
       "syntax": "sudo dnf history rollback [ID]",
       "level": "متوسط",
@@ -3367,7 +3367,7 @@
     },
     {
       "id": 306,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -qa",
       "syntax": "rpm -qa",
       "level": "متوسط",
@@ -3378,7 +3378,7 @@
     },
     {
       "id": 307,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list available",
       "syntax": "dnf list available",
       "level": "متوسط",
@@ -3389,7 +3389,7 @@
     },
     {
       "id": 308,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf module reset",
       "syntax": "sudo dnf module reset [module]",
       "level": "متوسط",
@@ -3400,7 +3400,7 @@
     },
     {
       "id": 309,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history userinstalled",
       "syntax": "dnf history userinstalled",
       "level": "متوسط",
@@ -3411,7 +3411,7 @@
     },
     {
       "id": 310,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf upgrade --security",
       "syntax": "sudo dnf upgrade --security",
       "level": "متوسط",
@@ -3422,7 +3422,7 @@
     },
     {
       "id": 311,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --file",
       "syntax": "dnf repoquery --file [file_path]",
       "level": "متوسط",
@@ -3433,7 +3433,7 @@
     },
     {
       "id": 312,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list installed --last",
       "syntax": "dnf list installed --last",
       "level": "متوسط",
@@ -3444,7 +3444,7 @@
     },
     {
       "id": 313,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf search --value",
       "syntax": "dnf search --value [keyword]",
       "level": "متوسط",
@@ -3455,7 +3455,7 @@
     },
     {
       "id": 314,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --list",
       "syntax": "dnf repoquery --list [package]",
       "level": "متوسط",
@@ -3466,7 +3466,7 @@
     },
     {
       "id": 315,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history redo",
       "syntax": "sudo dnf history redo [ID]",
       "level": "متوسط",
@@ -3477,7 +3477,7 @@
     },
     {
       "id": 316,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf module info",
       "syntax": "dnf module info [module]",
       "level": "متوسط",
@@ -3488,7 +3488,7 @@
     },
     {
       "id": 317,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf group update",
       "syntax": "sudo dnf group update \"[Group Name]\"",
       "level": "متوسط",
@@ -3499,7 +3499,7 @@
     },
     {
       "id": 318,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -qf",
       "syntax": "rpm -qf [file_path]",
       "level": "متوسط",
@@ -3510,7 +3510,7 @@
     },
     {
       "id": 319,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list --recent",
       "syntax": "dnf list --recent",
       "level": "متوسط",
@@ -3521,7 +3521,7 @@
     },
     {
       "id": 320,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --conflicts",
       "syntax": "dnf repoquery --conflicts [package]",
       "level": "متوسط",
@@ -3532,7 +3532,7 @@
     },
     {
       "id": 321,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history userinstalled",
       "syntax": "dnf history userinstalled",
       "level": "متوسط",
@@ -3543,7 +3543,7 @@
     },
     {
       "id": 322,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf provides",
       "syntax": "dnf provides */[filename]",
       "level": "متوسط",
@@ -3554,7 +3554,7 @@
     },
     {
       "id": 323,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list upgrades",
       "syntax": "dnf list upgrades",
       "level": "متوسط",
@@ -3565,7 +3565,7 @@
     },
     {
       "id": 324,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf clean metadata",
       "syntax": "sudo dnf clean metadata",
       "level": "متوسط",
@@ -3576,7 +3576,7 @@
     },
     {
       "id": 325,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf history undo",
       "syntax": "sudo dnf history undo [ID]",
       "level": "متقدم",
@@ -3587,7 +3587,7 @@
     },
     {
       "id": 326,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -Va",
       "syntax": "sudo rpm -Va",
       "level": "متقدم",
@@ -3598,7 +3598,7 @@
     },
     {
       "id": 327,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf shell",
       "syntax": "sudo dnf shell",
       "level": "متقدم",
@@ -3609,7 +3609,7 @@
     },
     {
       "id": 328,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -e --nodeps",
       "syntax": "sudo rpm -e --nodeps [package]",
       "level": "متقدم",
@@ -3620,7 +3620,7 @@
     },
     {
       "id": 329,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf system-upgrade",
       "syntax": "sudo dnf system-upgrade download --releasever=[version]",
       "level": "متقدم",
@@ -3631,7 +3631,7 @@
     },
     {
       "id": 330,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -q --changelog",
       "syntax": "rpm -q --changelog [package]",
       "level": "متقدم",
@@ -3642,7 +3642,7 @@
     },
     {
       "id": 331,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --conflicts",
       "syntax": "dnf repoquery --conflicts [package]",
       "level": "متقدم",
@@ -3653,7 +3653,7 @@
     },
     {
       "id": 332,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf mark group",
       "syntax": "sudo dnf mark group [package]",
       "level": "متقدم",
@@ -3664,7 +3664,7 @@
     },
     {
       "id": 333,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -qpR",
       "syntax": "rpm -qpR [package.rpm]",
       "level": "متقدم",
@@ -3675,7 +3675,7 @@
     },
     {
       "id": 334,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf builddep",
       "syntax": "sudo dnf builddep [package]",
       "level": "متقدم",
@@ -3686,7 +3686,7 @@
     },
     {
       "id": 335,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "grub2-mkconfig",
       "syntax": "sudo grub2-mkconfig -o /boot/grub2/grub.cfg",
       "level": "متقدم",
@@ -3697,7 +3697,7 @@
     },
     {
       "id": 336,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf debug-dump",
       "syntax": "sudo dnf debug-dump",
       "level": "متقدم",
@@ -3708,7 +3708,7 @@
     },
     {
       "id": 337,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "sestatus",
       "syntax": "sestatus",
       "level": "متقدم",
@@ -3719,7 +3719,7 @@
     },
     {
       "id": 338,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "setenforce",
       "syntax": "sudo setenforce [0|1]",
       "level": "متقدم",
@@ -3730,7 +3730,7 @@
     },
     {
       "id": 339,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "systemctl list-unit-files",
       "syntax": "systemctl list-unit-files --type=service",
       "level": "متقدم",
@@ -3741,7 +3741,7 @@
     },
     {
       "id": 340,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "journalctl -u",
       "syntax": "sudo journalctl -u [service_name]",
       "level": "متقدم",
@@ -3752,7 +3752,7 @@
     },
     {
       "id": 341,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf autoremove --protect-packages",
       "syntax": "sudo dnf autoremove",
       "level": "متقدم",
@@ -3763,7 +3763,7 @@
     },
     {
       "id": 342,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "nmcli device show",
       "syntax": "nmcli device show [interface]",
       "level": "متقدم",
@@ -3774,7 +3774,7 @@
     },
     {
       "id": 343,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "firewall-cmd --list-all",
       "syntax": "sudo firewall-cmd --list-all",
       "level": "متقدم",
@@ -3785,7 +3785,7 @@
     },
     {
       "id": 344,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "rpm -q --scripts",
       "syntax": "rpm -q --scripts [package]",
       "level": "متقدم",
@@ -3796,7 +3796,7 @@
     },
     {
       "id": 345,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf repoquery --duplicated",
       "syntax": "dnf repoquery --duplicated",
       "level": "متقدم",
@@ -3807,7 +3807,7 @@
     },
     {
       "id": 346,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "hostnamectl",
       "syntax": "hostnamectl set-hostname [new_name]",
       "level": "متقدم",
@@ -3818,7 +3818,7 @@
     },
     {
       "id": 347,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "dnf list installed --showduplicates",
       "syntax": "dnf list installed --showduplicates [package]",
       "level": "متقدم",
@@ -3829,7 +3829,7 @@
     },
     {
       "id": 348,
-      "category_id": "fedora_redhat",
+      "category_id": "redhat_family",
       "command": "ausearch",
       "syntax": "sudo ausearch -m avc -ts recent",
       "level": "متقدم",

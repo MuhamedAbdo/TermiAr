@@ -1,0 +1,26 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="debianGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#D70A53;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#A80030;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <!-- Background circle with gradient -->
+  <circle cx="32" cy="32" r="30" fill="url(#debianGradient)" stroke="#8B0026" stroke-width="2"/>
+  
+  <!-- Debian spiral logo -->
+  <g transform="translate(32, 32)">
+    <!-- Outer spiral -->
+    <path d="M 0,-15 Q -8,-15 -8,-8 Q -8,0 -8,8 Q -8,15 0,15 Q 8,15 8,8 Q 8,0 8,-8 Q 8,-15 0,-15 Z" 
+          fill="white" opacity="0.9"/>
+    <!-- Inner spiral detail -->
+    <path d="M 0,-8 Q -4,-8 -4,-4 Q -4,0 -4,4 Q -4,8 0,8 Q 4,8 4,4 Q 4,0 4,-4 Q 4,-8 0,-8 Z" 
+          fill="#D70A53" opacity="0.8"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="0" r="2" fill="white"/>
+  </g>
+  
+  <!-- Debian text -->
+  <text x="32" y="52" font-family="Arial, sans-serif" font-size="8" font-weight="bold" 
+        fill="white" text-anchor="middle">DEBIAN</text>
+</svg>

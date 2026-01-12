@@ -57,14 +57,14 @@ class _QuizScreenState extends State<QuizScreen> {
   void _setDefaultCategories() {
     _categories = [
       QuizCategory(
-        id: 'debian_zorin',
-        name_ar: 'عائلة أوبنتو وزورين',
-        name_en: 'Ubuntu & Zorin Family',
+        id: 'debian_family',
+        name_ar: 'عائلة دبيان',
+        name_en: 'Debian Family',
       ),
       QuizCategory(
-        id: 'fedora_redhat',
-        name_ar: 'عائلة فيدورا وريد هات',
-        name_en: 'Fedora & RedHat Family',
+        id: 'redhat_family',
+        name_ar: 'عائلة ريد هات',
+        name_en: 'Red Hat Family',
       ),
     ];
   }
@@ -176,9 +176,9 @@ class _QuizScreenState extends State<QuizScreen> {
     return Scaffold(
       appBar: AppBar(
         title: Text(
-          _selectedDistro == 'debian_zorin'
-              ? 'Ubuntu/Zorin Quiz'
-              : 'Fedora/RHEL Quiz',
+          _selectedDistro == 'debian_family'
+              ? 'Debian Family Quiz'
+              : 'Red Hat Family Quiz',
         ),
         centerTitle: true,
       ),
@@ -276,9 +276,9 @@ class _QuizScreenState extends State<QuizScreen> {
 
     Color borderColor = Colors.grey.withOpacity(0.3);
     if (_isAnswered) {
-      if (isCorrect)
+      if (isCorrect) {
         borderColor = Colors.green;
-      else if (isSelected)
+      } else if (isSelected)
         borderColor = Colors.red;
     } else if (isSelected) {
       borderColor = const Color(0xFF0055FF);
