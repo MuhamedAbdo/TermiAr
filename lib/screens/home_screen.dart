@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../models/category_model.dart';
 import '../models/command_model.dart';
@@ -90,14 +91,22 @@ class _HomeScreenState extends State<HomeScreen> {
 
   IconData _getIconData(String iconName) {
     switch (iconName) {
-      case 'terminal': return Icons.terminal;
-      case 'laptop_linux': return Icons.computer;
-      case 'settings_system_daydream': return Icons.settings_system_daydream;
-      case 'folder': return Icons.folder;
-      case 'lan': return Icons.lan;
-      case 'analytics': return Icons.analytics;
-      case 'security': return Icons.security;
-      default: return Icons.category;
+      case 'terminal':
+        return Icons.terminal;
+      case 'laptop_linux':
+        return Icons.computer;
+      case 'settings_system_daydream':
+        return Icons.settings_system_daydream;
+      case 'folder':
+        return Icons.folder;
+      case 'lan':
+        return Icons.lan;
+      case 'analytics':
+        return Icons.analytics;
+      case 'security':
+        return Icons.security;
+      default:
+        return Icons.category;
     }
   }
 
@@ -114,7 +123,10 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // Header Section
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 16.0),
+              padding: const EdgeInsets.symmetric(
+                horizontal: 8.0,
+                vertical: 16.0,
+              ),
               child: Column(
                 children: [
                   Row(
@@ -126,20 +138,26 @@ class _HomeScreenState extends State<HomeScreen> {
                         },
                         icon: Icon(
                           Icons.menu,
-                          color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                          color: isDarkMode
+                              ? Colors.white
+                              : const Color(0xFF1A1A1A),
                         ),
                       ),
                       // Centered App Title using Expanded and Center
                       Expanded(
                         child: Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(right: 48.0), // تعويض مساحة الأيقونة لضمان التوسط الحقيقي
+                            padding: const EdgeInsets.only(
+                              right: 48.0,
+                            ), // تعويض مساحة الأيقونة لضمان التوسط الحقيقي
                             child: BiDiHelper.buildMixedText(
                               text: 'TermiAr',
                               style: GoogleFonts.cairo(
                                 fontSize: 28,
                                 fontWeight: FontWeight.bold,
-                                color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                                color: isDarkMode
+                                    ? Colors.white
+                                    : const Color(0xFF1A1A1A),
                               ),
                             ),
                           ),
@@ -159,7 +177,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     ),
                   ),
                   const SizedBox(height: 16),
-                  
+
                   // Search Bar
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
@@ -183,17 +201,17 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
             ),
-            
+
             // Daily Tip Section
             if (!_isSearching) const DailyTipCard(),
-            
+
             // Content Section
             Expanded(
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
                   : _isSearching
-                      ? _buildSearchResults()
-                      : _buildCategoriesGrid(),
+                  ? _buildSearchResults()
+                  : _buildCategoriesGrid(),
             ),
           ],
         ),
@@ -218,7 +236,9 @@ class _HomeScreenState extends State<HomeScreen> {
           final category = _categories[index];
           return Card(
             elevation: 4,
-            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: InkWell(
               onTap: () {
                 Navigator.of(context).push(
@@ -236,7 +256,25 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    Icon(_getIconData(category.icon), size: 36, color: const Color(0xFF0055FF)),
+                    // Use official logos for Debian and Red Hat families
+                    if (category.id == 'debian_family')
+                      SvgPicture.asset(
+                        'assets/images/debian_official_logo.svg',
+                        width: 36,
+                        height: 36,
+                      )
+                    else if (category.id == 'redhat_family')
+                      SvgPicture.asset(
+                        'assets/images/redhat_official_logo.svg',
+                        width: 36,
+                        height: 36,
+                      )
+                    else
+                      Icon(
+                        _getIconData(category.icon),
+                        size: 36,
+                        color: const Color(0xFF0055FF),
+                      ),
                     const SizedBox(height: 10),
                     Text(
                       category.name_ar,
@@ -244,7 +282,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: GoogleFonts.cairo(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
-                        color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                        color: isDarkMode
+                            ? Colors.white
+                            : const Color(0xFF1A1A1A),
                       ),
                       maxLines: 1,
                       overflow: TextOverflow.ellipsis,
@@ -276,9 +316,19 @@ class _HomeScreenState extends State<HomeScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(Icons.search_off, size: 64, color: isDarkMode ? Colors.grey[600] : Colors.grey[400]),
+            Icon(
+              Icons.search_off,
+              size: 64,
+              color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
+            ),
             const SizedBox(height: 16),
-            Text('No commands found', style: TextStyle(fontSize: 18, color: isDarkMode ? Colors.grey[400] : Colors.grey[600])),
+            Text(
+              'No commands found',
+              style: TextStyle(
+                fontSize: 18,
+                color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+              ),
+            ),
           ],
         ),
       );
@@ -291,14 +341,42 @@ class _HomeScreenState extends State<HomeScreen> {
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
           child: ListTile(
-            leading: CircleAvatar(
-              backgroundColor: const Color(0xFF0055FF),
-              child: Text(command.command[0].toUpperCase(), style: const TextStyle(color: Colors.white, fontWeight: FontWeight.bold)),
+            leading: Container(
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: const Color(0xFF0055FF),
+              ),
+              child: Center(
+                child: Text(
+                  command.command[0].toUpperCase(),
+                  style: GoogleFonts.cairo(
+                    height: 1.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
             ),
-            title: Text(command.command, style: const TextStyle(fontWeight: FontWeight.bold)),
-            subtitle: Text(command.name_ar, style: TextStyle(color: isDarkMode ? Colors.grey[300] : Colors.grey[700])),
+            title: Text(
+              command.command,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+            subtitle: Text(
+              command.name_ar,
+              style: TextStyle(
+                color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+              ),
+            ),
             trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () => Navigator.of(context).push(MaterialPageRoute(builder: (context) => CommandDetailsScreen(command: command))),
+            onTap: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => CommandDetailsScreen(command: command),
+              ),
+            ),
           ),
         );
       },

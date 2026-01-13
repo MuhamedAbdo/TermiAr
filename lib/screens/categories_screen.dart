@@ -166,13 +166,13 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   ),
                   child: category.id == 'debian_family'
                       ? SvgPicture.asset(
-                          'assets/images/debian_logo_new.svg',
+                          'assets/images/debian_official_logo.svg',
                           width: 40,
                           height: 40,
                         )
                       : category.id == 'redhat_family'
                       ? SvgPicture.asset(
-                          'assets/images/redhat_logo_new.svg',
+                          'assets/images/redhat_official_logo.svg',
                           width: 40,
                           height: 40,
                         )

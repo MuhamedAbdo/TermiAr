@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../models/quiz_model.dart';
 import '../providers/theme_provider.dart';
@@ -199,116 +200,134 @@ class _QuizScreenState extends State<QuizScreen> {
         flexibleSpace: Container(
           decoration: BoxDecoration(
             gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.centerRight,
               colors: isDarkMode
                   ? categoryTheme['darkGradient']
                   : categoryTheme['lightGradient'],
-              begin: Alignment.centerLeft,
-              end: Alignment.centerRight,
             ),
           ),
         ),
       ),
-      backgroundColor: isDarkMode ? const Color(0xFF121212) : Colors.grey[50],
-      body: Stack(
-        children: [
-          // Watermark background
-          Positioned.fill(
-            child: Opacity(
-              opacity: 0.05,
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) async {
+          if (didPop) return;
+
+          if (!_showCategorySelection) {
+            setState(() => _showCategorySelection = true);
+          } else {
+            widget.onNavigateToHome?.call();
+          }
+        },
+        child: Stack(
+          children: [
+            // Watermark background
+            Positioned.fill(
               child: Center(
-                child: Icon(
-                  _selectedDistro == 'debian_family'
-                      ? Icons.settings_suggest
-                      : Icons.security,
-                  size: 250,
-                  color: _selectedDistro == 'debian_family'
-                      ? const Color(0xFFD70A53)
-                      : const Color(0xFFCC0000),
-                ),
+                child: _selectedDistro == 'debian_family'
+                    ? SvgPicture.asset(
+                        'assets/images/debian_watermark_official.svg',
+                        width: 250,
+                        height: 250,
+                      )
+                    : SvgPicture.asset(
+                        'assets/images/redhat_watermark_official.svg',
+                        width: 250,
+                        height: 250,
+                      ),
               ),
             ),
-          ),
-          // Main content
-          SafeArea(
-            child: SingleChildScrollView(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-                children: [
-                  const SizedBox(height: 10),
-                  // Progress Bar
-                  Container(
-                    height: 12,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      color: isDarkMode ? Colors.grey[700] : Colors.grey[300],
-                    ),
-                    child: FractionallySizedBox(
-                      alignment: Alignment.centerLeft,
-                      widthFactor:
-                          (_currentQuestionIndex + 1) /
-                          _currentQuizQuestions.length,
-                      child: Container(
-                        decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(6),
-                          gradient: LinearGradient(
-                            colors: isDarkMode
-                                ? categoryTheme['darkGradient']
-                                : categoryTheme['lightGradient'],
+            // Main content
+            SafeArea(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.all(16.0),
+                child: Column(
+                  children: [
+                    const SizedBox(height: 10),
+                    // Progress Bar
+                    Container(
+                      height: 12,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(6),
+                        color: isDarkMode ? Colors.grey[700] : Colors.grey[300],
+                      ),
+                      child: FractionallySizedBox(
+                        alignment: Alignment.centerLeft,
+                        widthFactor:
+                            (_currentQuestionIndex + 1) /
+                            _currentQuizQuestions.length,
+                        child: Container(
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(6),
+                            gradient: LinearGradient(
+                              colors: isDarkMode
+                                  ? categoryTheme['darkGradient']
+                                  : categoryTheme['lightGradient'],
+                            ),
                           ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 24),
-                  // Question Card
-                  Container(
-                    width: double.infinity,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(20),
-                      color: isDarkMode
-                          ? Colors.white.withOpacity(0.1)
-                          : Colors.white,
-                      border: Border.all(
-                        color: categoryTheme['borderColor']!.withOpacity(0.3),
-                        width: 1,
-                      ),
-                      boxShadow: [
-                        BoxShadow(
-                          color: Colors.black.withOpacity(0.1),
-                          blurRadius: 10,
-                          offset: const Offset(0, 4),
+                    const SizedBox(height: 30),
+                    // Question Card
+                    Container(
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        gradient: LinearGradient(
+                          begin: Alignment.topLeft,
+                          end: Alignment.bottomRight,
+                          colors: isDarkMode
+                              ? [
+                                  Colors.grey[800]!.withOpacity(0.8),
+                                  Colors.grey[900]!.withOpacity(0.8),
+                                ]
+                              : [
+                                  Colors.white.withOpacity(0.9),
+                                  Colors.grey[100]!.withOpacity(0.9),
+                                ],
                         ),
-                      ],
-                    ),
-                    child: Padding(
-                      padding: const EdgeInsets.all(24.0),
-                      child: BiDiHelper.buildMixedText(
-                        text: currentQuestion.question_ar,
-                        style: GoogleFonts.cairo(
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold,
-                          color: isDarkMode ? Colors.white : Colors.black87,
+                        boxShadow: [
+                          BoxShadow(
+                            color: Colors.black.withOpacity(0.1),
+                            blurRadius: 10,
+                            offset: const Offset(0, 5),
+                          ),
+                        ],
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(24.0),
+                        child: BiDiHelper.buildMixedText(
+                          text: currentQuestion.question_ar,
+                          style: GoogleFonts.cairo(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: isDarkMode ? Colors.white : Colors.black87,
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  const SizedBox(height: 20),
-                  // Options
-                  ...List.generate(currentQuestion.options.length, (index) {
-                    return _buildOptionCard(index, currentQuestion, isDarkMode);
-                  }),
-                  if (_isAnswered)
-                    _buildExplanation(currentQuestion, isDarkMode),
-                ],
+                    const SizedBox(height: 20),
+                    // Options
+                    ...List.generate(currentQuestion.options.length, (index) {
+                      return _buildOptionCard(
+                        index,
+                        currentQuestion,
+                        isDarkMode,
+                      );
+                    }),
+                    if (_isAnswered)
+                      _buildExplanation(currentQuestion, isDarkMode),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
-
-  // تم إصلاح الدوال الفرعية وإضافة الأقواس الناقصة
 
   Widget _buildCategorySelection(bool isDarkMode) {
     return Scaffold(
@@ -329,12 +348,19 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
         ),
       ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: _categories
-              .map((cat) => _buildCategoryCard(cat, isDarkMode))
-              .toList(),
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) async {
+          if (didPop) return;
+          widget.onNavigateToHome?.call();
+        },
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: _categories
+                .map((cat) => _buildCategoryCard(cat, isDarkMode))
+                .toList(),
+          ),
         ),
       ),
     );
@@ -428,12 +454,24 @@ class _QuizScreenState extends State<QuizScreen> {
         ),
         child: Row(
           children: [
-            CircleAvatar(
-              backgroundColor: isSelected ? borderColor : Colors.grey,
-              radius: 15,
-              child: Text(
-                String.fromCharCode(65 + index),
-                style: const TextStyle(color: Colors.white, fontSize: 12),
+            Container(
+              width: 40,
+              height: 40,
+              alignment: Alignment.center,
+              decoration: BoxDecoration(
+                shape: BoxShape.circle,
+                color: isSelected ? borderColor : Colors.grey,
+              ),
+              child: Center(
+                child: Text(
+                  String.fromCharCode(65 + index),
+                  style: GoogleFonts.cairo(
+                    height: 1.0,
+                    color: Colors.white,
+                    fontSize: 12,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ),
             ),
             const SizedBox(width: 15),
@@ -496,10 +534,14 @@ class _QuizScreenState extends State<QuizScreen> {
             const SizedBox(height: 30),
             ElevatedButton(
               onPressed: () => setState(() => _showCategorySelection = true),
-              child: const Text('إعادة الاختبار'),
+              child: const Text('اختر اختبار آخر'),
             ),
-            TextButton(
+            ElevatedButton(
               onPressed: widget.onNavigateToHome,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Colors.grey[600],
+                foregroundColor: Colors.white,
+              ),
               child: const Text('العودة للرئيسية'),
             ),
           ],

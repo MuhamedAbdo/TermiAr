@@ -4,14 +4,12 @@ import 'package:provider/provider.dart';
 import '../models/command_model.dart';
 import '../providers/theme_provider.dart';
 import '../utils/bidi_helper.dart'; // إضافة المساعد
+import 'package:google_fonts/google_fonts.dart';
 
 class CommandDetailsScreen extends StatelessWidget {
   final CommandModel command;
 
-  const CommandDetailsScreen({
-    super.key,
-    required this.command,
-  });
+  const CommandDetailsScreen({super.key, required this.command});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +23,7 @@ class CommandDetailsScreen extends StatelessWidget {
         actions: [
           IconButton(
             icon: const Icon(Icons.copy),
-            onPressed: () => _copyToClipboard(context, command.command),
+            onPressed: () => _copyCommandToClipboard(context),
           ),
         ],
       ),
@@ -43,13 +41,23 @@ class CommandDetailsScreen extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        CircleAvatar(
-                          backgroundColor: const Color(0xFF0055FF),
-                          child: Text(
-                            command.command[0].toUpperCase(),
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
+                        Container(
+                          width: 40,
+                          height: 40,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: const Color(0xFF0055FF),
+                          ),
+                          child: Center(
+                            child: Text(
+                              command.command[0].toUpperCase(),
+                              style: GoogleFonts.cairo(
+                                height: 1.0,
+                                color: Colors.white,
+                                fontWeight: FontWeight.bold,
+                                fontSize: 18,
+                              ),
                             ),
                           ),
                         ),
@@ -63,7 +71,9 @@ class CommandDetailsScreen extends StatelessWidget {
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
-                                  color: isDarkMode ? Colors.white : const Color(0xFF1A1A1A),
+                                  color: isDarkMode
+                                      ? Colors.white
+                                      : const Color(0xFF1A1A1A),
                                 ),
                               ),
                               // استخدام المساعد للاسم العربي
@@ -71,7 +81,9 @@ class CommandDetailsScreen extends StatelessWidget {
                                 text: command.name_ar,
                                 style: TextStyle(
                                   fontSize: 16,
-                                  color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                                  color: isDarkMode
+                                      ? Colors.grey[300]
+                                      : Colors.grey[700],
                                 ),
                               ),
                             ],
@@ -81,7 +93,10 @@ class CommandDetailsScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
                       decoration: BoxDecoration(
                         color: _getLevelColor(command.level).withOpacity(0.2),
                         borderRadius: BorderRadius.circular(16),
@@ -98,9 +113,9 @@ class CommandDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // قسم الصياغة (Syntax) - VS Code Style
             _buildSectionCard(
               context,
@@ -112,16 +127,17 @@ class CommandDetailsScreen extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: const Color(0xFF1E1E1E), // VS Code dark background
                   borderRadius: BorderRadius.circular(8),
-                  border: Border.all(
-                    color: const Color(0xFF333333),
-                  ),
+                  border: Border.all(color: const Color(0xFF333333)),
                 ),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     // Terminal Header - Three colored dots
                     Container(
-                      padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                      padding: const EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 8,
+                      ),
                       decoration: BoxDecoration(
                         color: const Color(0xFF252526),
                         borderRadius: const BorderRadius.only(
@@ -180,16 +196,17 @@ class CommandDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // قسم الوصف (Description) - أهم جزء للتعديل
             _buildSectionCard(
               context,
               title: 'الوصف',
               icon: Icons.description,
               isDarkMode: isDarkMode,
-              child: BiDiHelper.buildRichTextWithCommands( // ✅ الحل الجذري هنا
+              child: BiDiHelper.buildRichTextWithCommands(
+                // ✅ الحل الجذري هنا
                 text: command.description,
                 style: TextStyle(
                   fontSize: 16,
@@ -198,16 +215,17 @@ class CommandDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 16),
-            
+
             // قسم كيفية الاستخدام (How to use)
             _buildSectionCard(
               context,
               title: 'كيفية الاستخدام',
               icon: Icons.play_circle,
               isDarkMode: isDarkMode,
-              child: BiDiHelper.buildRichTextWithCommands( // ✅ الحل الجذري هنا
+              child: BiDiHelper.buildRichTextWithCommands(
+                // ✅ الحل الجذري هنا
                 text: command.how_to_use,
                 style: TextStyle(
                   fontSize: 16,
@@ -216,21 +234,23 @@ class CommandDetailsScreen extends StatelessWidget {
                 ),
               ),
             ),
-            
+
             const SizedBox(height: 24),
-            
+
             // زر نسخ الأمر
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
-                onPressed: () => _copyToClipboard(context, command.command),
+                onPressed: () => _copyCodeToClipboard(context),
                 icon: const Icon(Icons.copy),
-                label: const Text('نسخ الأمر الرئيسي'),
+                label: const Text('نسخ الكود'),
                 style: ElevatedButton.styleFrom(
                   padding: const EdgeInsets.symmetric(vertical: 16),
                   backgroundColor: const Color(0xFF0055FF),
                   foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                  ),
                 ),
               ),
             ),
@@ -241,7 +261,8 @@ class CommandDetailsScreen extends StatelessWidget {
   }
 
   // ويدجيت مساعد لبناء الكروت بشكل موحد ومنظم
-  Widget _buildSectionCard(BuildContext context, {
+  Widget _buildSectionCard(
+    BuildContext context, {
     required String title,
     required IconData icon,
     required Widget child,
@@ -277,19 +298,37 @@ class CommandDetailsScreen extends StatelessWidget {
 
   Color _getLevelColor(String level) {
     switch (level) {
-      case 'مبتدئ': return Colors.green;
-      case 'متوسط': return Colors.orange;
-      case 'متقدم': return Colors.red;
-      default: return Colors.grey;
+      case 'مبتدئ':
+        return Colors.green;
+      case 'متوسط':
+        return Colors.orange;
+      case 'متقدم':
+        return Colors.red;
+      default:
+        return Colors.grey;
     }
   }
 
-  void _copyToClipboard(BuildContext context, String text) {
-    Clipboard.setData(ClipboardData(text: text));
+  void _copyCommandToClipboard(BuildContext context) {
+    Clipboard.setData(ClipboardData(text: command.command));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: BiDiHelper.buildMixedText(
-          text: 'تم النسخ إلى الحافظة',
+          text: 'تم نسخ الأمر',
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.green,
+        duration: const Duration(seconds: 2),
+      ),
+    );
+  }
+
+  void _copyCodeToClipboard(BuildContext context) {
+    Clipboard.setData(ClipboardData(text: command.syntax));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(
+        content: BiDiHelper.buildMixedText(
+          text: 'تم نسخ الكود',
           style: const TextStyle(color: Colors.white),
         ),
         backgroundColor: Colors.green,

@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../models/command_model.dart';
 import '../providers/theme_provider.dart';
 import '../services/data_service.dart';
 import '../screens/command_details_screen.dart';
 import '../utils/bidi_helper.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class CategoryCommandsScreen extends StatefulWidget {
   final String categoryId;
@@ -91,26 +93,20 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
-                  color: widget.categoryId == 'debian_family'
-                      ? const Color(0xFFD70A53)
-                      : const Color(0xFFCC0000).withOpacity(0.03),
+                  color: isDarkMode ? Colors.transparent : Colors.transparent,
                 ),
                 child: Center(
-                  child: Container(
-                    width: 200,
-                    height: 200,
-                    decoration: BoxDecoration(
-                      color: Colors.white.withOpacity(0.1),
-                      borderRadius: BorderRadius.circular(100),
-                    ),
-                    child: Icon(
-                      widget.categoryId == 'debian_family'
-                          ? Icons.computer
-                          : Icons.security,
-                      size: 80,
-                      color: Colors.white.withOpacity(0.3),
-                    ),
-                  ),
+                  child: widget.categoryId == 'debian_family'
+                      ? SvgPicture.asset(
+                          'assets/images/debian_watermark_official.svg',
+                          width: 250,
+                          height: 250,
+                        )
+                      : SvgPicture.asset(
+                          'assets/images/redhat_watermark_official.svg',
+                          width: 250,
+                          height: 250,
+                        ),
                 ),
               ),
             ),
@@ -235,6 +231,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
               leading: Container(
                 width: 50,
                 height: 50,
+                alignment: Alignment.center,
                 decoration: BoxDecoration(
                   gradient: LinearGradient(
                     begin: Alignment.topLeft,
@@ -243,14 +240,17 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
                         ? categoryTheme['darkGradient']!
                         : categoryTheme['lightGradient']!,
                   ),
-                  borderRadius: BorderRadius.circular(25),
+                  shape: BoxShape.circle,
                 ),
-                child: Text(
-                  command.command[0].toUpperCase(),
-                  style: const TextStyle(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 20,
+                child: Center(
+                  child: Text(
+                    command.command[0].toUpperCase(),
+                    style: GoogleFonts.cairo(
+                      height: 1.0,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20,
+                    ),
                   ),
                 ),
               ),

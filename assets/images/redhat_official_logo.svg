@@ -1,0 +1,61 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="redhatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EE0000;stop-opacity:1" />
+      <stop offset="50%" style="stop-color:#CC0000;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#990000;stop-opacity:1" />
+    </linearGradient>
+    <linearGradient id="redhatShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0.3" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.1" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Official Red Hat Fedora Logo -->
+  <g transform="translate(32, 32)">
+    <!-- Shadow beneath the hat -->
+    <ellipse cx="0" cy="12" rx="14" ry="4" fill="url(#redhatShadow)" opacity="0.6"/>
+    
+    <!-- Main fedora hat body -->
+    <path d="M -16,-4 
+             C -16,-10 -12,-14 -6,-14
+             L 6,-14
+             C 12,-14 16,-10 16,-4
+             L 16,2
+             C 16,6 14,8 10,8
+             L -10,8
+             C -14,8 -16,6 -16,2
+             Z"
+          fill="url(#redhatGradient)" 
+          stroke="#990000" 
+          stroke-width="1.5"/>
+    
+    <!-- Hat brim -->
+    <ellipse cx="0" cy="0" rx="18" ry="6" 
+             fill="url(#redhatGradient)" 
+             stroke="#990000" 
+             stroke-width="1.5"/>
+    
+    <!-- Hat band -->
+    <rect x="-16" y="-6" width="32" height="4" rx="1" 
+          fill="#8B0000" opacity="0.8"/>
+    
+    <!-- Highlight for 3D effect -->
+    <path d="M -12,-8 
+             C -12,-11 -9,-13 -6,-13
+             L -2,-13
+             C -1,-13 -1,-11 -2,-10
+             L -8,-10
+             C -11,-10 -12,-9 -12,-8"
+          fill="#FF6B6B" 
+          opacity="0.4"/>
+    
+    <!-- Red Hat text (simplified for small scale) -->
+    <text x="0" y="20" 
+          font-family="Arial Black, sans-serif" 
+          font-size="6" 
+          font-weight="900" 
+          fill="#990000" 
+          text-anchor="middle">RED HAT</text>
+  </g>
+</svg>

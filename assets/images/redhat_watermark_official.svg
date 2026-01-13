@@ -1,0 +1,55 @@
+<svg width="300" height="300" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="redhatGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#EE0000;stop-opacity:0.04" />
+      <stop offset="50%" style="stop-color:#CC0000;stop-opacity:0.04" />
+      <stop offset="100%" style="stop-color:#990000;stop-opacity:0.04" />
+    </linearGradient>
+    <linearGradient id="redhatShadow" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:#000000;stop-opacity:0.02" />
+      <stop offset="100%" style="stop-color:#000000;stop-opacity:0.01" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Large watermark version of Red Hat Fedora -->
+  <g transform="translate(150, 150) scale(3.5)">
+    <!-- Shadow beneath the hat -->
+    <ellipse cx="0" cy="12" rx="14" ry="4" fill="url(#redhatShadow)"/>
+    
+    <!-- Main fedora hat body -->
+    <path d="M -16,-4 
+             C -16,-10 -12,-14 -6,-14
+             L 6,-14
+             C 12,-14 16,-10 16,-4
+             L 16,2
+             C 16,6 14,8 10,8
+             L -10,8
+             C -14,8 -16,6 -16,2
+             Z"
+          fill="url(#redhatGradient)" 
+          stroke="#990000" 
+          stroke-width="1.5"
+          stroke-opacity="0.04"/>
+    
+    <!-- Hat brim -->
+    <ellipse cx="0" cy="0" rx="18" ry="6" 
+             fill="url(#redhatGradient)" 
+             stroke="#990000" 
+             stroke-width="1.5"
+             stroke-opacity="0.04"/>
+    
+    <!-- Hat band -->
+    <rect x="-16" y="-6" width="32" height="4" rx="1" 
+          fill="#8B0000" opacity="0.03"/>
+    
+    <!-- Highlight for 3D effect -->
+    <path d="M -12,-8 
+             C -12,-11 -9,-13 -6,-13
+             L -2,-13
+             C -1,-13 -1,-11 -2,-10
+             L -8,-10
+             C -11,-10 -12,-9 -12,-8"
+          fill="#FF6B6B" 
+          opacity="0.02"/>
+  </g>
+</svg>
