@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import '../screens/home_screen.dart';
-import '../screens/categories_screen.dart';
+import '../screens/favorites_screen.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/about_screen.dart';
 import '../utils/bidi_helper.dart';
@@ -35,7 +35,7 @@ class _MainNavigationState extends State<MainNavigation> {
   // Build screens dynamically to access navigateToTab
   List<Widget> get _screens => [
     const HomeScreen(),
-    const CategoriesScreen(),
+    const FavoritesScreen(),
     QuizScreen(
       key: ValueKey('quiz_$_quizKeyCounter'),
       onNavigateToHome: () => navigateToTab(0),
@@ -166,9 +166,9 @@ class _MainNavigationState extends State<MainNavigation> {
                 label: 'Home',
               ),
               BottomNavigationBarItem(
-                icon: Icon(Icons.category_outlined),
-                activeIcon: Icon(Icons.category),
-                label: 'Categories',
+                icon: Icon(Icons.favorite_border),
+                activeIcon: Icon(Icons.favorite),
+                label: 'Favorites',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.quiz_outlined),

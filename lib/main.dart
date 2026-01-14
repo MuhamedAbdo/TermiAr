@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'providers/theme_provider.dart';
+import 'providers/favorites_provider.dart';
 import 'screens/splash_screen.dart';
 import 'screens/main_navigation.dart';
 
@@ -13,8 +14,11 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => ThemeProvider(),
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => ThemeProvider()),
+        ChangeNotifierProvider(create: (context) => FavoritesProvider()),
+      ],
       child: Consumer<ThemeProvider>(
         builder: (context, themeProvider, child) {
           return MaterialApp(
@@ -24,9 +28,7 @@ class MyApp extends StatelessWidget {
             darkTheme: ThemeProvider.darkTheme,
             themeMode: themeProvider.themeMode,
             home: const SplashScreen(),
-            routes: {
-              '/home': (context) => const MainNavigation(),
-            },
+            routes: {'/home': (context) => const MainNavigation()},
           );
         },
       ),

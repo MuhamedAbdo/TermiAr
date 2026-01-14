@@ -3,6 +3,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import '../models/command_model.dart';
 import '../providers/theme_provider.dart';
+import '../providers/favorites_provider.dart';
 import '../services/data_service.dart';
 import '../screens/command_details_screen.dart';
 import '../utils/bidi_helper.dart';
@@ -207,135 +208,159 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
     bool isDarkMode,
     Map<String, dynamic> categoryTheme,
   ) {
-    return ListView.builder(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      itemCount: _filteredCommands.length,
-      itemBuilder: (context, index) {
-        final command = _filteredCommands[index];
-        return AnimatedContainer(
-          duration: const Duration(milliseconds: 300),
-          curve: Curves.easeInOut,
-          margin: const EdgeInsets.only(bottom: 12),
-          child: Card(
-            elevation: 4,
-            shadowColor: categoryTheme['shadowColor'],
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(12),
-              side: BorderSide(
-                color: categoryTheme['borderColor']!.withOpacity(0.3),
-                width: 1,
-              ),
-            ),
-            child: ListTile(
-              contentPadding: const EdgeInsets.all(16),
-              leading: Container(
-                width: 50,
-                height: 50,
-                alignment: Alignment.center,
-                decoration: BoxDecoration(
-                  gradient: LinearGradient(
-                    begin: Alignment.topLeft,
-                    end: Alignment.bottomRight,
-                    colors: isDarkMode
-                        ? categoryTheme['darkGradient']!
-                        : categoryTheme['lightGradient']!,
-                  ),
-                  shape: BoxShape.circle,
-                ),
-                child: Center(
-                  child: Text(
-                    command.command[0].toUpperCase(),
-                    style: GoogleFonts.cairo(
-                      height: 1.0,
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 20,
-                    ),
+    return Consumer<FavoritesProvider>(
+      builder: (context, favoritesProvider, child) {
+        return ListView.builder(
+          padding: const EdgeInsets.symmetric(horizontal: 16.0),
+          itemCount: _filteredCommands.length,
+          itemBuilder: (context, index) {
+            final command = _filteredCommands[index];
+            final isFavorite = favoritesProvider.isFavorite(command.id);
+
+            return AnimatedContainer(
+              duration: const Duration(milliseconds: 300),
+              curve: Curves.easeInOut,
+              margin: const EdgeInsets.only(bottom: 12),
+              child: Card(
+                elevation: 4,
+                shadowColor: categoryTheme['shadowColor'],
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12),
+                  side: BorderSide(
+                    color: categoryTheme['borderColor']!.withOpacity(0.3),
+                    width: 1,
                   ),
                 ),
-              ),
-              title: BiDiHelper.buildMixedText(
-                text: command.command,
-                style: const TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontSize: 16,
-                ),
-              ),
-              subtitle: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  BiDiHelper.buildMixedText(
-                    text: command.name_ar,
-                    style: TextStyle(
-                      color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
-                    ),
-                  ),
-                  const SizedBox(height: 4),
-                  BiDiHelper.buildMixedText(
-                    text: command.description,
-                    style: TextStyle(
-                      fontSize: 12,
-                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                    ),
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
-                  ),
-                  const SizedBox(height: 8),
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                      horizontal: 8,
-                      vertical: 4,
-                    ),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.all(16),
+                  leading: Container(
+                    width: 50,
+                    height: 50,
+                    alignment: Alignment.center,
                     decoration: BoxDecoration(
-                      color: _getLevelColor(command.level).withOpacity(0.2),
-                      borderRadius: BorderRadius.circular(12),
+                      gradient: LinearGradient(
+                        begin: Alignment.topLeft,
+                        end: Alignment.bottomRight,
+                        colors: isDarkMode
+                            ? categoryTheme['darkGradient']!
+                            : categoryTheme['lightGradient']!,
+                      ),
+                      shape: BoxShape.circle,
                     ),
-                    child: BiDiHelper.buildMixedText(
-                      text: command.level,
-                      style: TextStyle(
-                        fontSize: 12,
-                        color: _getLevelColor(command.level),
-                        fontWeight: FontWeight.w500,
+                    child: Center(
+                      child: Text(
+                        command.command[0].toUpperCase(),
+                        style: GoogleFonts.cairo(
+                          height: 1.0,
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 20,
+                        ),
                       ),
                     ),
                   ),
-                ],
-              ),
-              trailing: Container(
-                padding: const EdgeInsets.all(8),
-                decoration: BoxDecoration(
-                  color: categoryTheme['borderColor']!.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(8),
-                ),
-                child: Icon(
-                  Icons.arrow_forward_ios,
-                  color: categoryTheme['borderColor'],
-                  size: 16,
-                ),
-              ),
-              onTap: () {
-                Navigator.of(context).push(
-                  PageRouteBuilder(
-                    pageBuilder: (context, animation, secondaryAnimation) =>
-                        CommandDetailsScreen(command: command),
-                    transitionsBuilder:
-                        (context, animation, secondaryAnimation, child) {
-                          return SlideTransition(
-                            position: animation.drive(
-                              Tween(
-                                begin: const Offset(1.0, 0.0),
-                                end: Offset.zero,
-                              ),
-                            ),
-                            child: child,
-                          );
-                        },
-                    transitionDuration: const Duration(milliseconds: 300),
+                  title: BiDiHelper.buildMixedText(
+                    text: command.command,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 16,
+                    ),
                   ),
-                );
-              },
-            ),
-          ),
+                  subtitle: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      BiDiHelper.buildMixedText(
+                        text: command.name_ar,
+                        style: TextStyle(
+                          color: isDarkMode
+                              ? Colors.grey[300]
+                              : Colors.grey[700],
+                        ),
+                      ),
+                      const SizedBox(height: 4),
+                      BiDiHelper.buildMixedText(
+                        text: command.description,
+                        style: TextStyle(
+                          fontSize: 12,
+                          color: isDarkMode
+                              ? Colors.grey[400]
+                              : Colors.grey[600],
+                        ),
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                      ),
+                      const SizedBox(height: 8),
+                      Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 8,
+                          vertical: 4,
+                        ),
+                        decoration: BoxDecoration(
+                          color: _getLevelColor(command.level).withOpacity(0.2),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        child: BiDiHelper.buildMixedText(
+                          text: command.level,
+                          style: TextStyle(
+                            fontSize: 12,
+                            color: _getLevelColor(command.level),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  trailing: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: [
+                      IconButton(
+                        icon: Icon(
+                          isFavorite ? Icons.favorite : Icons.favorite_border,
+                          color: isFavorite ? Colors.red : Colors.grey,
+                        ),
+                        onPressed: () {
+                          favoritesProvider.toggleFavorite(command.id);
+                        },
+                      ),
+                      Container(
+                        padding: const EdgeInsets.all(8),
+                        decoration: BoxDecoration(
+                          color: categoryTheme['borderColor']!.withOpacity(0.1),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Icon(
+                          Icons.arrow_forward_ios,
+                          color: categoryTheme['borderColor'],
+                          size: 16,
+                        ),
+                      ),
+                    ],
+                  ),
+                  onTap: () {
+                    Navigator.of(context).push(
+                      PageRouteBuilder(
+                        pageBuilder: (context, animation, secondaryAnimation) =>
+                            CommandDetailsScreen(command: command),
+                        transitionsBuilder:
+                            (context, animation, secondaryAnimation, child) {
+                              return SlideTransition(
+                                position: animation.drive(
+                                  Tween(
+                                    begin: const Offset(1.0, 0.0),
+                                    end: Offset.zero,
+                                  ),
+                                ),
+                                child: child,
+                              );
+                            },
+                        transitionDuration: const Duration(milliseconds: 300),
+                      ),
+                    );
+                  },
+                ),
+              ),
+            );
+          },
         );
       },
     );

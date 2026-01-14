@@ -3,24 +3,41 @@ import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
 import '../models/command_model.dart';
 import '../providers/theme_provider.dart';
+import '../providers/favorites_provider.dart';
 import '../utils/bidi_helper.dart'; // إضافة المساعد
 import 'package:google_fonts/google_fonts.dart';
 
-class CommandDetailsScreen extends StatelessWidget {
+class CommandDetailsScreen extends StatefulWidget {
   final CommandModel command;
 
   const CommandDetailsScreen({super.key, required this.command});
 
   @override
+  State<CommandDetailsScreen> createState() => _CommandDetailsScreenState();
+}
+
+class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
+  @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
+    final favoritesProvider = Provider.of<FavoritesProvider>(context);
     final isDarkMode = themeProvider.isDarkMode;
+    final isFavorite = favoritesProvider.isFavorite(widget.command.id);
 
     return Scaffold(
       appBar: AppBar(
-        title: Text(command.command),
+        title: Text(widget.command.command),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: Icon(
+              isFavorite ? Icons.favorite : Icons.favorite_border,
+              color: isFavorite ? Colors.red : null,
+            ),
+            onPressed: () {
+              favoritesProvider.toggleFavorite(widget.command.id);
+            },
+          ),
           IconButton(
             icon: const Icon(Icons.copy),
             onPressed: () => _copyCommandToClipboard(context),
@@ -51,7 +68,7 @@ class CommandDetailsScreen extends StatelessWidget {
                           ),
                           child: Center(
                             child: Text(
-                              command.command[0].toUpperCase(),
+                              widget.command.command[0].toUpperCase(),
                               style: GoogleFonts.cairo(
                                 height: 1.0,
                                 color: Colors.white,
@@ -67,7 +84,7 @@ class CommandDetailsScreen extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                command.command,
+                                widget.command.command,
                                 style: TextStyle(
                                   fontSize: 24,
                                   fontWeight: FontWeight.bold,
@@ -78,7 +95,7 @@ class CommandDetailsScreen extends StatelessWidget {
                               ),
                               // استخدام المساعد للاسم العربي
                               BiDiHelper.buildMixedText(
-                                text: command.name_ar,
+                                text: widget.command.name_ar,
                                 style: TextStyle(
                                   fontSize: 16,
                                   color: isDarkMode
@@ -98,13 +115,15 @@ class CommandDetailsScreen extends StatelessWidget {
                         vertical: 6,
                       ),
                       decoration: BoxDecoration(
-                        color: _getLevelColor(command.level).withOpacity(0.2),
+                        color: _getLevelColor(
+                          widget.command.level,
+                        ).withOpacity(0.2),
                         borderRadius: BorderRadius.circular(16),
                       ),
                       child: BiDiHelper.buildMixedText(
-                        text: command.level,
+                        text: widget.command.level,
                         style: TextStyle(
-                          color: _getLevelColor(command.level),
+                          color: _getLevelColor(widget.command.level),
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -182,7 +201,7 @@ class CommandDetailsScreen extends StatelessWidget {
                       child: SingleChildScrollView(
                         scrollDirection: Axis.horizontal,
                         child: Text(
-                          command.syntax,
+                          widget.command.syntax,
                           style: const TextStyle(
                             fontFamily: 'monospace',
                             fontSize: 14,
@@ -207,7 +226,7 @@ class CommandDetailsScreen extends StatelessWidget {
               isDarkMode: isDarkMode,
               child: BiDiHelper.buildRichTextWithCommands(
                 // ✅ الحل الجذري هنا
-                text: command.description,
+                text: widget.command.description,
                 style: TextStyle(
                   fontSize: 16,
                   height: 1.6,
@@ -226,7 +245,7 @@ class CommandDetailsScreen extends StatelessWidget {
               isDarkMode: isDarkMode,
               child: BiDiHelper.buildRichTextWithCommands(
                 // ✅ الحل الجذري هنا
-                text: command.how_to_use,
+                text: widget.command.how_to_use,
                 style: TextStyle(
                   fontSize: 16,
                   height: 1.6,
@@ -310,7 +329,7 @@ class CommandDetailsScreen extends StatelessWidget {
   }
 
   void _copyCommandToClipboard(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: command.command));
+    Clipboard.setData(ClipboardData(text: widget.command.command));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: BiDiHelper.buildMixedText(
@@ -324,7 +343,7 @@ class CommandDetailsScreen extends StatelessWidget {
   }
 
   void _copyCodeToClipboard(BuildContext context) {
-    Clipboard.setData(ClipboardData(text: command.syntax));
+    Clipboard.setData(ClipboardData(text: widget.command.syntax));
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: BiDiHelper.buildMixedText(

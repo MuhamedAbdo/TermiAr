@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../models/category_model.dart';
 import '../models/command_model.dart';
 import '../providers/theme_provider.dart';
+import '../providers/favorites_provider.dart';
 import '../services/data_service.dart';
 import '../screens/command_details_screen.dart';
 import '../screens/category_commands_screen.dart';
@@ -310,74 +311,96 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildSearchResults() {
-    final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
-    if (_searchResults.isEmpty) {
-      return Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Icon(
-              Icons.search_off,
-              size: 64,
-              color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
-            ),
-            const SizedBox(height: 16),
-            Text(
-              'No commands found',
-              style: TextStyle(
-                fontSize: 18,
-                color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-              ),
-            ),
-          ],
-        ),
-      );
-    }
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: _searchResults.length,
-      itemBuilder: (context, index) {
-        final command = _searchResults[index];
-        return Card(
-          margin: const EdgeInsets.only(bottom: 12),
-          child: ListTile(
-            leading: Container(
-              width: 40,
-              height: 40,
-              alignment: Alignment.center,
-              decoration: BoxDecoration(
-                shape: BoxShape.circle,
-                color: const Color(0xFF0055FF),
-              ),
-              child: Center(
-                child: Text(
-                  command.command[0].toUpperCase(),
-                  style: GoogleFonts.cairo(
-                    height: 1.0,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
+    return Consumer<FavoritesProvider>(
+      builder: (context, favoritesProvider, child) {
+        final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
+
+        if (_searchResults.isEmpty) {
+          return Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(
+                  Icons.search_off,
+                  size: 64,
+                  color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
+                ),
+                const SizedBox(height: 16),
+                Text(
+                  'No commands found',
+                  style: TextStyle(
                     fontSize: 18,
+                    color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                  ),
+                ),
+              ],
+            ),
+          );
+        }
+        return ListView.builder(
+          padding: const EdgeInsets.all(16.0),
+          itemCount: _searchResults.length,
+          itemBuilder: (context, index) {
+            final command = _searchResults[index];
+            final isFavorite = favoritesProvider.isFavorite(command.id);
+
+            return Card(
+              margin: const EdgeInsets.only(bottom: 12),
+              child: ListTile(
+                leading: Container(
+                  width: 40,
+                  height: 40,
+                  alignment: Alignment.center,
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: const Color(0xFF0055FF),
+                  ),
+                  child: Center(
+                    child: Text(
+                      command.command[0].toUpperCase(),
+                      style: GoogleFonts.cairo(
+                        height: 1.0,
+                        color: Colors.white,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 18,
+                      ),
+                    ),
+                  ),
+                ),
+                title: Text(
+                  command.command,
+                  style: const TextStyle(fontWeight: FontWeight.bold),
+                ),
+                subtitle: Text(
+                  command.name_ar,
+                  style: TextStyle(
+                    color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                  ),
+                ),
+                trailing: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    IconButton(
+                      icon: Icon(
+                        isFavorite ? Icons.favorite : Icons.favorite_border,
+                        color: isFavorite ? Colors.red : Colors.grey,
+                      ),
+                      onPressed: () {
+                        favoritesProvider.toggleFavorite(command.id);
+                      },
+                    ),
+                    const Icon(Icons.arrow_forward_ios, size: 16),
+                  ],
+                ),
+                onTap: () => Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) =>
+                        CommandDetailsScreen(command: command),
                   ),
                 ),
               ),
-            ),
-            title: Text(
-              command.command,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-            subtitle: Text(
-              command.name_ar,
-              style: TextStyle(
-                color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
-              ),
-            ),
-            trailing: const Icon(Icons.arrow_forward_ios, size: 16),
-            onTap: () => Navigator.of(context).push(
-              MaterialPageRoute(
-                builder: (context) => CommandDetailsScreen(command: command),
-              ),
-            ),
-          ),
+            );
+          },
         );
       },
     );
