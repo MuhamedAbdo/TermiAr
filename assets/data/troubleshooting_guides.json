@@ -1,0 +1,243 @@
+{
+  "guides": [
+    {
+      "id": "linux_mint_setup",
+      "title_ar": "إعداد وصيانة Linux Mint و Ubuntu بعد التثبيت",
+      "title_en": "Linux Mint Initial Setup & Maintenance",
+      "category": "system",
+      "icon": "computer",
+      "description_ar": "دليل شامل لتهيئة بيئة لينكس جديدة، تحديث المستودعات بأمان، تثبيت برامج الترميز والوسائط المتعددة، وإصلاح الحزم المعلقة.",
+      "severity": "info",
+      "diagnostic_steps": [
+        {
+          "step_number": 1,
+          "title": "فحص سلامة واستجابة خوادم المستودعات الحالية",
+          "command": "apt-cache policy",
+          "description": "استعلام آمن للقراءة فقط يتحقق من المستودعات النشطة وعناوينها وسرعة استجابتها دون تعديل أي ملفات."
+        },
+        {
+          "step_number": 2,
+          "title": "التحقق من حالة الحزم المعلقة أو المكسورة في النظام",
+          "command": "dpkg --audit",
+          "description": "فحص سريع لقاعدة بيانات dpkg لكشف أي حزم غير مكتملة التثبيت أو تحتاج إلى تهيئة."
+        },
+        {
+          "step_number": 3,
+          "title": "كشف أي خدمات نظام تعطلت أثناء بدء التشغيل",
+          "command": "systemctl --failed",
+          "description": "يعرض قائمة بالخدمات (Services) التي فشل النظام في تشغيلها تلقائياً لمعرفة سبب بطء الإقلاع."
+        }
+      ],
+      "solutions": [
+        {
+          "step_number": 1,
+          "title": "تحديث فهارس الحزم وترقية كافة مكونات النظام بأمان",
+          "command": "sudo apt update && sudo apt upgrade -y",
+          "description": "يقوم بتحديث قوائم المستودعات وتثبيت أحدث التصحيحات الأمنية واستقرار النظام."
+        },
+        {
+          "step_number": 2,
+          "title": "إصلاح أي تبعيات معطوبة أو حزم معلقة تلقائياً",
+          "command": "sudo apt --fix-broken install",
+          "description": "يعالج الأخطاء التي تحدث عند انقطاع التثبيت أو تعارض الحزم ويصلح شجرة الاعتماديات."
+        },
+        {
+          "step_number": 3,
+          "title": "تثبيت حزم الوسائط المتعددة وبرامج الترميز والخطوط (Codecs)",
+          "command": "sudo apt install -y ubuntu-restricted-extras",
+          "description": "يثبت حزم دعم تشغيل مقاطع الفيديو والصوتيات MP3/MP4 وخطوط مايكروسوفت الأساسية."
+        },
+        {
+          "step_number": 4,
+          "title": "تنظيف كاش الحزم المؤقتة ومسح الأنوية القديمة غير المستخدمة",
+          "command": "sudo apt autoremove --purge -y && sudo apt clean",
+          "description": "يزيل الحزم القديمة والأنوية السابقة لتوفير مساحة التخزين وحماية النظام من التراكمات."
+        }
+      ],
+      "pro_tips": [
+        "يُفضل تفعيل النسخ الاحتياطي التلقائي عبر أداة Timeshift قبل إجراء أي ترقية رئيسية للنواة (Kernel).",
+        "تجنب إضافة مستودعات PPA غير موثوقة لأنها السبب الأول في كسر توافق الحزم الرسمية."
+      ]
+    },
+    {
+      "id": "android_adb_troubleshoot",
+      "title_ar": "تشخيص وحل مشاكل اتصال أجهزة أندرويد و ADB",
+      "title_en": "Android ADB Device & Emulator Troubleshooting",
+      "category": "android",
+      "icon": "android",
+      "description_ar": "خطوات علاج عدم استجابة خادم ADB، مشكلة الجهاز غير المصرح (unauthorized)، أو عدم تعرف نظام لينكس على هاتف أندرويد المتصل.",
+      "diagnostic_steps": [
+        {
+          "step_number": 1,
+          "title": "فحص اتصال الأجهزة عبر جسر تصحيح أندرويد وحالتها",
+          "command": "adb devices -l",
+          "description": "يعرض الأجهزة المتصلة والمعرف الخاص بها وحالتها (device أو unauthorized أو offline)."
+        },
+        {
+          "step_number": 2,
+          "title": "التحقق من أن نواة لينكس تتعرف عتادياً على كابل ومنفذ USB",
+          "command": "lsusb",
+          "description": "يسرد كافة أجهزة USB المتصلة بالحاسوب للتأكد من سلامة الكابل والمنفذ بدون الحاجة لأدوات ADB."
+        },
+        {
+          "step_number": 3,
+          "title": "التحقق من مسار وإصدار أداة ADB المثبتة في النظام",
+          "command": "adb version",
+          "description": "يتأكد من تثبيت أدوات Android SDK Platform Tools وتوافق نسختها."
+        }
+      ],
+      "solutions": [
+        {
+          "step_number": 1,
+          "title": "إعادة تشغيل خادم ADB وتصفير المقابس المعلقة (Kill & Restart)",
+          "command": "adb kill-server && adb start-server",
+          "description": "يحل 90% من مشاكل تعليق المنفذ والاتصال المتجمد بين الحاسوب والهاتف."
+        },
+        {
+          "step_number": 2,
+          "title": "إضافة حساب المستخدم إلى مجموعة plugdev للوصول لأجهزة USB",
+          "command": "sudo usermod -aG plugdev $USER",
+          "description": "يمنح المستخدم صلاحيات قراءة أجهزة أندرويد عبر منفذ USB دون الحاجة لتشغيل ADB بصلاحية root."
+        },
+        {
+          "step_number": 3,
+          "title": "قبول مصادقة تصحيح USB على شاشة الهاتف",
+          "command": "adb reconnect",
+          "description": "افتح شاشة هاتفك بعد تفعيل USB Debugging وضع علامة صح على 'Always allow from this computer' ثم وافق."
+        },
+        {
+          "step_number": 4,
+          "title": "تحديث قواعد UDEV للتعرف التلقائي على أجهزة أندرويد",
+          "command": "sudo apt install -y android-sdk-platform-tools-common",
+          "description": "يثبت حزمة قواعد udev المعتمدة للتعرف على مختلف موديلات هواتف أندرويد في لينكس."
+        }
+      ],
+      "pro_tips": [
+        "تأكد من استخدام كابل USB يدعم نقل البيانات (Data Cable) وليس كابل شحن تجاري فقط.",
+        "في حال كان هاتفك في وضع الشحن فقط، اسحب شريط الإشعارات وغير وضع USB إلى 'نقل الملفات (File Transfer / MTP)'."
+      ]
+    },
+    {
+      "id": "flutter_sdk_build_troubleshoot",
+      "title_ar": "حل أخطاء بناء فلاتر ومسارات Android SDK و Gradle",
+      "title_en": "Flutter Build & SDK Path Diagnostics",
+      "category": "flutter",
+      "icon": "flutter",
+      "description_ar": "دليل معالجة تعليق مهام Gradle، خطأ تراخيص أندرويد غير المقبولة (Android license status unknown)، وتلف كاش بناء فلاتر.",
+      "diagnostic_steps": [
+        {
+          "step_number": 1,
+          "title": "تشخيص كامل لبيئة فلاتر وفحص سلامة التبعيات",
+          "command": "flutter doctor -v",
+          "description": "يفحص حالة Flutter، ومسار Android SDK، وتوافق Java، والمتصفحات والمحررات المثبتة بالتفصيل."
+        },
+        {
+          "step_number": 2,
+          "title": "التحقق من قيمة متغيرات البيئة ANDROID_HOME و JAVA_HOME",
+          "command": "echo \"SDK: $ANDROID_HOME\" && echo \"JAVA: $JAVA_HOME\"",
+          "description": "يتحقق من أن مسارات أدوات البناء معرفة في بيئة النظام وليست فارغة."
+        },
+        {
+          "step_number": 3,
+          "title": "استعراض الأجهزة المتاحة للتشغيل في بيئة فلاتر",
+          "command": "flutter devices",
+          "description": "يتحقق من جاهزية المحاكيات أو الهواتف أو المتصفحات لتشغيل التطبيق."
+        }
+      ],
+      "solutions": [
+        {
+          "step_number": 1,
+          "title": "قبول ومراجعة كافة تراخيص Android SDK المفقودة",
+          "command": "flutter doctor --android-licenses",
+          "description": "شغّل الأمر واضغط على حرف 'y' عند كل مطالبة لقبول الشروط وتمكين أدوات البناء."
+        },
+        {
+          "step_number": 2,
+          "title": "تصفير كاش بناء فلاتر وإعادة جلب الحزم بنظافة تامة",
+          "command": "flutter clean && flutter pub get",
+          "description": "يمحو مجلدات build/ و .dart_tool/ التالفة ويعيد تنزيل الحزم من الصفر."
+        },
+        {
+          "step_number": 3,
+          "title": "تنظيف كاش تجميع Gradle الخاص بنظام أندرويد",
+          "command": "cd android && ./gradlew clean && cd ..",
+          "description": "يحل مشاكل تعارض مكتبات أندرويد وتراكم ملفات Gradle القديمة."
+        },
+        {
+          "step_number": 4,
+          "title": "إعادة تحميل وتحديث كود لغة دارت في المشروع",
+          "command": "dart pub cache repair",
+          "description": "يفحص كافة الحزم المخزنة مؤقتاً في كاش دارت ويعيد تنزيل أي حزمة فاسدة."
+        }
+      ],
+      "pro_tips": [
+        "إذا واجهت تعارضاً في إصدار Java، تأكد من تثبيت OpenJDK 17 عبر: sudo apt install openjdk-17-jdk.",
+        "لا تقم بتعديل ملفات Gradle في مجلد .gradle المؤقت؛ دائماً عدل ملفات android/build.gradle المباشرة."
+      ]
+    },
+    {
+      "id": "nvidia_disk_space_troubleshoot",
+      "title_ar": "تشخيص مشاكل تعريفات NVIDIA وامتلاء مساحة القرص",
+      "title_en": "NVIDIA Drivers & Disk Space Troubleshooting",
+      "category": "hardware",
+      "icon": "storage",
+      "description_ar": "حل مشكلة تعطل الرسوميات أو الشاشة السوداء في كروت NVIDIA، واستكشاف أسباب امتلاء مساحة التخزين بنسبة 100% وحذف السجلات الضخمة.",
+      "diagnostic_steps": [
+        {
+          "step_number": 1,
+          "title": "فحص حالة كرت شاشة NVIDIA والتعريف النشط واستهلاك VRAM",
+          "command": "nvidia-smi",
+          "description": "استعلام آمن يعرض حالة الكرت وإصداره ودرجة الحرارة واستخدام العمليات له."
+        },
+        {
+          "step_number": 2,
+          "title": "فحص المساحة الحرة والمستخدمة على القرص الرئيسي للنظام",
+          "command": "df -h /",
+          "description": "يعرض سعة القسم الأساسي ونسبة الامتلاء والمساحة المتوفرة بوحدات مقروءة (GB)."
+        },
+        {
+          "step_number": 3,
+          "title": "فحص حجم سجلات النظام systemd المخزنة على القرص",
+          "command": "journalctl --disk-usage",
+          "description": "يكشف عن المساحة التي تستهلكها سجلات النظام والتي قد تصل أحياناً لعشرات الجيجابايت."
+        },
+        {
+          "step_number": 4,
+          "title": "استكشاف أكبر 10 ملفات أو مجلدات تستهلك مساحة التخزين في /var/log",
+          "command": "sudo du -ahx /var/log | sort -rh | head -n 10",
+          "description": "يرتب ملفات السجلات التراكمية تنازلياً لمعرفة الملفات المتضخمة فوراً."
+        }
+      ],
+      "solutions": [
+        {
+          "step_number": 1,
+          "title": "تقليص حجم سجلات النظام فوراً وتوفير عدة جيجابايت من المساحة",
+          "command": "sudo journalctl --vacuum-size=200M",
+          "description": "يحذف السجلات القديمة ويحدد الحد الأقصى للسجلات بـ 200 ميجابايت فقط."
+        },
+        {
+          "step_number": 2,
+          "title": "تفريغ كاش الحزم المؤقتة والأنوية المحذوفة لتوفير المساحة",
+          "command": "sudo apt clean && sudo apt autoremove -y",
+          "description": "يمحو مئات الميجابايت من ملفات التثبيت السابقة المخزنة في /var/cache/apt/archives."
+        },
+        {
+          "step_number": 3,
+          "title": "الكشف عن كروت الشاشة وتثبيت تعريف NVIDIA الموصى به تلقائياً",
+          "command": "sudo ubuntu-drivers autoinstall",
+          "description": "يفحص عتاد الجهاز ويثبت التعريف الأكثر استقراراً وتوافقاً مع نواة لينكس."
+        },
+        {
+          "step_number": 4,
+          "title": "إعادة تشغيل واجهة العرض الرسومية في حال تجمد الشاشة",
+          "command": "sudo systemctl restart display-manager",
+          "description": "يعيد تشغيل مدير النوافذ الرسومي (GDM أو LightDM) دون الحاجة لإعادة تشغيل الجهاز كاملاً."
+        }
+      ],
+      "pro_tips": [
+        "إذا واجهت شاشة سوداء بعد تحديث النواة، اضغط Ctrl + Alt + F3 للدخول إلى الطرفية النصية وتثبيت التعريف.",
+        "لأجهزة اللابتوب الهجينة (NVIDIA + Intel/AMD)، استخدم الأمر prime-select on-demand لتوفير استهلاك البطارية."
+      ]
+    }
+  ]
+}

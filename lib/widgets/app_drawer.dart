@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import '../utils/bidi_helper.dart';
 import 'package:flutter/services.dart';
+import '../screens/troubleshooting_screen.dart';
 
 class AppDrawer extends StatelessWidget {
   const AppDrawer({super.key});
@@ -138,6 +139,23 @@ class AppDrawer extends StatelessWidget {
                     onTap: () {
                       themeProvider.toggleTheme();
                       Navigator.pop(context);
+                    },
+                  ),
+
+                  // Tools & Help
+                  _buildSectionHeader(isDarkMode, 'المساعدة والأدوات (Tools)'),
+                  _buildDrawerTile(
+                    isDarkMode: isDarkMode,
+                    icon: Icons.build_circle_outlined,
+                    title: 'دليل حل المشكلات (Troubleshooting)',
+                    onTap: () {
+                      Navigator.pop(context);
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const TroubleshootingScreen(),
+                        ),
+                      );
                     },
                   ),
 

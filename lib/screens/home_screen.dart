@@ -8,6 +8,7 @@ import '../providers/favorites_provider.dart';
 import '../services/data_service.dart';
 import '../screens/command_details_screen.dart';
 import '../screens/category_commands_screen.dart';
+import '../screens/troubleshooting_screen.dart';
 import '../widgets/daily_tip_card.dart';
 import '../widgets/app_drawer.dart';
 import '../utils/bidi_helper.dart';
@@ -284,6 +285,71 @@ class _HomeScreenState extends State<HomeScreen> {
 
             // كارت نصيحة اليوم (يختفي عند البحث أو التصفية لتوفير المساحة)
             if (!_isSearchingOrFiltering) const DailyTipCard(),
+
+            // شريط دليل حل المشكلات والتشخيص
+            if (!_isSearchingOrFiltering)
+              Padding(
+                padding: const EdgeInsets.fromLTRB(16, 2, 16, 8),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const TroubleshootingScreen(),
+                      ),
+                    );
+                  },
+                  borderRadius: BorderRadius.circular(12),
+                  child: Container(
+                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+                    decoration: BoxDecoration(
+                      color: isDarkMode
+                          ? const Color(0xFF0055FF).withValues(alpha: 0.12)
+                          : const Color(0xFF0055FF).withValues(alpha: 0.08),
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color: const Color(0xFF0055FF).withValues(alpha: 0.3),
+                      ),
+                    ),
+                    child: Row(
+                      children: [
+                        Container(
+                          padding: const EdgeInsets.all(6),
+                          decoration: BoxDecoration(
+                            color: const Color(0xFF0055FF).withValues(alpha: 0.2),
+                            borderRadius: BorderRadius.circular(8),
+                          ),
+                          child: const Icon(Icons.build_circle_outlined, color: Color(0xFF0055FF), size: 20),
+                        ),
+                        const SizedBox(width: 12),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                'دليل حل المشكلات (Troubleshooting)',
+                                style: TextStyle(
+                                  fontSize: 13,
+                                  fontWeight: FontWeight.bold,
+                                  color: isDarkMode ? Colors.white : const Color(0xFF003DCC),
+                                ),
+                              ),
+                              Text(
+                                'إرشادات تشخيصية وأوامر حلول خطوة بخطوة',
+                                style: TextStyle(
+                                  fontSize: 11,
+                                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFF0055FF)),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
 
             // قسم المحتوى الرئيسي: نتائج البحث أو شبكة الأقسام
             Expanded(

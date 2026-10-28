@@ -4,16 +4,19 @@ import 'package:flutter/services.dart';
 import '../models/category_model.dart';
 import '../models/command_model.dart';
 import '../models/quiz_model.dart';
+import '../models/troubleshooting_model.dart';
 
 class DataService {
   static CategoriesResponse? _cachedCategories;
   static CommandsResponse? _cachedCommands;
   static LearningQuizResponse? _cachedQuizData;
+  static TroubleshootingResponse? _cachedTroubleshootingGuides;
 
   static void clearCache() {
     _cachedCategories = null;
     _cachedCommands = null;
     _cachedQuizData = null;
+    _cachedTroubleshootingGuides = null;
   }
 
   static Future<CategoriesResponse> loadCategories() async {
@@ -71,6 +74,29 @@ class DataService {
     } catch (e) {
       _cachedQuizData = LearningQuizResponse(questions: [], daily_tips: []);
       return _cachedQuizData!;
+    }
+  }
+
+  static Future<TroubleshootingResponse> loadTroubleshootingGuides() async {
+    if (_cachedTroubleshootingGuides != null) {
+      return _cachedTroubleshootingGuides!;
+    }
+
+    try {
+      final String jsonString = await rootBundle.loadString(
+        'assets/data/troubleshooting_guides.json',
+      );
+      if (jsonString.isEmpty) {
+        _cachedTroubleshootingGuides = TroubleshootingResponse(guides: []);
+        return _cachedTroubleshootingGuides!;
+      }
+      final Map<String, dynamic> jsonMap = json.decode(jsonString);
+      _cachedTroubleshootingGuides = TroubleshootingResponse.fromJson(jsonMap);
+      return _cachedTroubleshootingGuides!;
+    } catch (e) {
+      debugPrint('Error loading troubleshooting guides: $e');
+      _cachedTroubleshootingGuides = TroubleshootingResponse(guides: []);
+      return _cachedTroubleshootingGuides!;
     }
   }
 

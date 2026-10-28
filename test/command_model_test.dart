@@ -323,5 +323,42 @@ void main() {
       expect(sampleQ.options_explanations_ar.length, 4);
       expect(sampleQ.explanation_ar.isNotEmpty, isTrue);
     });
+
+    test('Troubleshooting guides load offline and contain diagnostic steps and solutions', () async {
+      DataService.clearCache();
+      final response = await DataService.loadTroubleshootingGuides();
+
+      expect(response.guides, isNotEmpty);
+      expect(response.guides.length, greaterThanOrEqualTo(4));
+
+      final guideIds = response.guides.map((g) => g.id).toSet();
+      // Verify all 4 required scenarios exist
+      expect(guideIds.contains('linux_mint_setup'), isTrue);
+      expect(guideIds.contains('android_adb_troubleshoot'), isTrue);
+      expect(guideIds.contains('flutter_sdk_build_troubleshoot'), isTrue);
+      expect(guideIds.contains('nvidia_disk_space_troubleshoot'), isTrue);
+
+      // Verify every guide has safe diagnostics, step-by-step solutions, and pro tips
+      for (final guide in response.guides) {
+        expect(guide.title_ar.isNotEmpty, isTrue);
+        expect(guide.title_en.isNotEmpty, isTrue);
+        expect(guide.description_ar.isNotEmpty, isTrue);
+        expect(guide.diagnostic_steps, isNotEmpty);
+        expect(guide.solutions, isNotEmpty);
+        expect(guide.pro_tips, isNotEmpty);
+
+        for (final diag in guide.diagnostic_steps) {
+          expect(diag.title.isNotEmpty, isTrue);
+          expect(diag.command.isNotEmpty, isTrue);
+          expect(diag.description.isNotEmpty, isTrue);
+        }
+
+        for (final sol in guide.solutions) {
+          expect(sol.title.isNotEmpty, isTrue);
+          expect(sol.command.isNotEmpty, isTrue);
+          expect(sol.description.isNotEmpty, isTrue);
+        }
+      }
+    });
   });
 }
