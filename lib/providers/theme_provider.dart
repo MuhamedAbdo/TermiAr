@@ -3,7 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class ThemeProvider extends ChangeNotifier {
   static const String _themeKey = 'theme_mode';
-  
+
   ThemeMode _themeMode = ThemeMode.light;
   bool _isInitialized = false;
 
@@ -12,18 +12,18 @@ class ThemeProvider extends ChangeNotifier {
   bool get isInitialized => _isInitialized;
 
   ThemeProvider() {
-    _loadThemeMode();
+    Future.microtask(() => _loadThemeMode());
   }
 
   Future<void> _loadThemeMode() async {
     try {
       final prefs = await SharedPreferences.getInstance();
       final savedTheme = prefs.getString(_themeKey);
-      
+
       if (savedTheme != null) {
         _themeMode = savedTheme == 'dark' ? ThemeMode.dark : ThemeMode.light;
       }
-      
+
       _isInitialized = true;
       notifyListeners();
     } catch (e) {
@@ -33,15 +33,20 @@ class ThemeProvider extends ChangeNotifier {
   }
 
   Future<void> toggleTheme() async {
-    _themeMode = _themeMode == ThemeMode.light ? ThemeMode.dark : ThemeMode.light;
-    
+    _themeMode = _themeMode == ThemeMode.light
+        ? ThemeMode.dark
+        : ThemeMode.light;
+
     try {
       final prefs = await SharedPreferences.getInstance();
-      await prefs.setString(_themeKey, _themeMode == ThemeMode.dark ? 'dark' : 'light');
+      await prefs.setString(
+        _themeKey,
+        _themeMode == ThemeMode.dark ? 'dark' : 'light',
+      );
     } catch (e) {
       // Handle error silently
     }
-    
+
     notifyListeners();
   }
 
@@ -49,6 +54,7 @@ class ThemeProvider extends ChangeNotifier {
   static ThemeData get lightTheme {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'Cairo',
       brightness: Brightness.light,
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF0055FF), // Zorin Blue
@@ -62,23 +68,17 @@ class ThemeProvider extends ChangeNotifier {
       ),
       cardTheme: CardThemeData(
         elevation: 2,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF0055FF),
           foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(
-        border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
         filled: true,
         fillColor: Colors.grey[50],
       ),
@@ -88,6 +88,7 @@ class ThemeProvider extends ChangeNotifier {
   static ThemeData get darkTheme {
     return ThemeData(
       useMaterial3: true,
+      fontFamily: 'Cairo',
       brightness: Brightness.dark,
       colorScheme: ColorScheme.fromSeed(
         seedColor: const Color(0xFF0055FF), // Zorin Blue
@@ -102,17 +103,13 @@ class ThemeProvider extends ChangeNotifier {
       cardTheme: CardThemeData(
         elevation: 4,
         color: const Color(0xFF2A2A2A),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(12),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF0055FF),
           foregroundColor: Colors.white,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(8),
-          ),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
       ),
       inputDecorationTheme: InputDecorationTheme(

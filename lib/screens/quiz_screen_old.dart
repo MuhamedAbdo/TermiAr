@@ -4,7 +4,6 @@ import '../models/quiz_model.dart';
 import '../providers/theme_provider.dart';
 import '../services/data_service.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class QuizScreen extends StatefulWidget {
   const QuizScreen({super.key});
@@ -197,7 +196,7 @@ class _QuizScreenState extends State<QuizScreen> {
                 padding: const EdgeInsets.all(20.0),
                 child: BiDiHelper.buildMixedText(
                   text: currentQuestion.question_ar,
-                  style: GoogleFonts.cairo(
+                  style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                     color: isDarkMode ? Colors.white : Colors.black,
@@ -253,7 +252,7 @@ class _QuizScreenState extends State<QuizScreen> {
               const SizedBox(height: 10),
               Text(
                 cat.name_ar, // تأكد من مطابقة اسم الحقل في الموديل
-                style: GoogleFonts.cairo(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
@@ -274,12 +273,13 @@ class _QuizScreenState extends State<QuizScreen> {
     bool isSelected = _selectedAnswerIndex == index;
     bool isCorrect = index == q.correct_answer_index;
 
-    Color borderColor = Colors.grey.withOpacity(0.3);
+    Color borderColor = Colors.grey.withValues(alpha: 0.3);
     if (_isAnswered) {
       if (isCorrect) {
         borderColor = Colors.green;
-      } else if (isSelected)
+      } else if (isSelected) {
         borderColor = Colors.red;
+      }
     } else if (isSelected) {
       borderColor = const Color(0xFF0055FF);
     }
@@ -308,7 +308,7 @@ class _QuizScreenState extends State<QuizScreen> {
     return Padding(
       padding: const EdgeInsets.only(top: 20),
       child: Card(
-        color: Colors.blue.withOpacity(0.1),
+        color: Colors.blue.withValues(alpha: 0.1),
         child: Padding(
           padding: const EdgeInsets.all(15),
           child: Column(

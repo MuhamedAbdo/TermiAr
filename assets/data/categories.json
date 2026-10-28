@@ -48,6 +48,27 @@
       "name_en": "Security & Permissions",
       "icon": "security",
       "description": "إدارة المستخدمين، تغيير صلاحيات الوصول، وجدران الحماية."
+    },
+    {
+      "id": "flutter_dart",
+      "name_ar": "فلاتر ودارت",
+      "name_en": "Flutter & Dart",
+      "icon": "flutter",
+      "description": "أوامر سطر الأوامر الخاصة بإنشاء، فحص، تشغيل، وبناء تطبيقات فلاتر وإدارة حزم دارت."
+    },
+    {
+      "id": "android_dev",
+      "name_ar": "تطوير أندرويد (ADB)",
+      "name_en": "Android Development",
+      "icon": "android",
+      "description": "أدوات مطوري أندرويد عبر الطرفية: أوامر ADB وFastboot لإدارة الأجهزة والمحاكيات ومراقبة السجلات."
+    },
+    {
+      "id": "git_github",
+      "name_ar": "إدارة الإصدارات (Git)",
+      "name_en": "Git & GitHub",
+      "icon": "git",
+      "description": "نظام إدارة وتتبع النسخ Git: التعامل مع المستودعات، إدارة الفروع، وتوثيق ومزامنة التغييرات البرمجية."
     }
   ]
 }

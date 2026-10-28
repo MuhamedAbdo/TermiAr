@@ -4,7 +4,6 @@ import '../models/quiz_model.dart';
 import '../providers/theme_provider.dart';
 import '../services/daily_tip_service.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class DailyTipCard extends StatefulWidget {
   const DailyTipCard({super.key});
@@ -31,7 +30,7 @@ class _DailyTipCardState extends State<DailyTipCard> {
         _isLoading = false;
       });
     } catch (e) {
-      print('Error loading daily tip: $e');
+      debugPrint('Error loading daily tip: $e');
       setState(() => _isLoading = false);
     }
   }
@@ -47,9 +46,9 @@ class _DailyTipCardState extends State<DailyTipCard> {
       child: Container(
         padding: const EdgeInsets.all(16.0),
         decoration: BoxDecoration(
-          color: isDarkMode ? Colors.white.withOpacity(0.05) : Colors.blue.withOpacity(0.05),
+          color: isDarkMode ? Colors.white.withValues(alpha: 0.05) : Colors.blue.withValues(alpha: 0.05),
           borderRadius: BorderRadius.circular(16),
-          border: Border.all(color: Colors.blue.withOpacity(0.2)),
+          border: Border.all(color: Colors.blue.withValues(alpha: 0.2)),
         ),
         child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
@@ -62,7 +61,7 @@ class _DailyTipCardState extends State<DailyTipCard> {
                 children: [
                   BiDiHelper.buildMixedText(
                     text: "نصيحة اليوم (Daily Tip)",
-                    style: GoogleFonts.cairo(
+                    style: const TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 14,
                       color: Colors.blue,
@@ -72,7 +71,7 @@ class _DailyTipCardState extends State<DailyTipCard> {
                   // هنا نستخدم buildRichTextWithCommands في حال وجود أوامر داخل النصيحة
                   BiDiHelper.buildRichTextWithCommands(
                     text: _dailyTip?.tip_ar ?? DailyTipService.fallbackTip,
-                    style: GoogleFonts.cairo(
+                    style: TextStyle(
                       fontSize: 13,
                       color: isDarkMode ? Colors.white70 : Colors.black87,
                     ),

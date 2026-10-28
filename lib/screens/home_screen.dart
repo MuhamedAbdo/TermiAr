@@ -11,7 +11,6 @@ import '../screens/category_commands_screen.dart';
 import '../widgets/daily_tip_card.dart';
 import '../widgets/app_drawer.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -25,8 +24,50 @@ class _HomeScreenState extends State<HomeScreen> {
   List<CommandModel> _searchResults = [];
   List<CategoryModel> _categories = [];
   bool _isLoading = true;
-  bool _isSearching = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
+  // Filter States
+  String? _selectedCategoryId;
+  String? _selectedDistro;
+  String? _selectedLevel;
+
+  bool get _hasActiveFilters =>
+      _selectedCategoryId != null ||
+      _selectedDistro != null ||
+      _selectedLevel != null;
+
+  bool get _isSearchingOrFiltering =>
+      _searchController.text.trim().isNotEmpty || _hasActiveFilters;
+
+  // Filter options mapping
+  final Map<String, String> _categoryFilterOptions = {
+    'all': 'جميع الأقسام',
+    'universal': 'أوامر مشتركة (Universal)',
+    'debian_family': 'عائلة دبيان (Debian / Ubuntu)',
+    'redhat_family': 'عائلة ريد هات (Red Hat / Fedora)',
+    'file_management': 'إدارة الملفات والمجلدات',
+    'network': 'الشبكات والاتصال',
+    'system_monitor': 'مراقبة النظام والأداء',
+    'security': 'الأمان والصلاحيات',
+    'flutter_dart': 'فلاتر ودارت (Flutter & Dart)',
+    'android_dev': 'تطوير أندرويد (Android & ADB)',
+    'git_github': 'إدارة الإصدارات (Git & GitHub)',
+  };
+
+  final Map<String, String> _distroFilterOptions = {
+    'all': 'جميع التوزيعات',
+    'universal': 'أوامر عامة (Universal)',
+    'debian': 'دبيان وأوبنتو (Debian / Ubuntu)',
+    'redhat': 'ريد هات وفيدورا (RHEL / Fedora)',
+    'arch': 'آرش لينكس (Arch Linux)',
+  };
+
+  final Map<String, String> _levelFilterOptions = {
+    'all': 'جميع المستويات',
+    'مبتدئ': 'مبتدئ (Beginner)',
+    'متوسط': 'متوسط (Intermediate)',
+    'متقدم': 'متقدم (Advanced)',
+  };
 
   @override
   void initState() {
@@ -43,29 +84,46 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   void _onSearchChanged() {
-    final query = _searchController.text.trim();
-    if (query.isEmpty) {
-      setState(() {
-        _isSearching = false;
-        _searchResults.clear();
-      });
-    } else {
-      setState(() {
-        _isSearching = true;
-      });
-      _performSearch(query);
-    }
+    _performSearch();
   }
 
-  Future<void> _performSearch(String query) async {
+  Future<void> _performSearch() async {
+    final query = _searchController.text.trim();
+
+    if (query.isEmpty && !_hasActiveFilters) {
+      if (mounted) {
+        setState(() {
+          _searchResults.clear();
+        });
+      }
+      return;
+    }
+
     try {
-      final results = await DataService.searchCommands(query);
-      setState(() {
-        _searchResults = results;
-      });
+      final results = await DataService.searchCommands(
+        query,
+        categoryId: _selectedCategoryId,
+        distro: _selectedDistro,
+        level: _selectedLevel,
+      );
+      if (mounted) {
+        setState(() {
+          _searchResults = results;
+        });
+      }
     } catch (e) {
       // Handle error silently
     }
+  }
+
+  void _clearAllFilters() {
+    setState(() {
+      _selectedCategoryId = null;
+      _selectedDistro = null;
+      _selectedLevel = null;
+      _searchController.clear();
+      _searchResults.clear();
+    });
   }
 
   Future<void> _loadData() async {
@@ -82,7 +140,7 @@ class _HomeScreenState extends State<HomeScreen> {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('Error loading data: $e'),
+            content: Text('خطأ في تحميل البيانات: $e'),
             backgroundColor: Colors.red,
           ),
         );
@@ -111,6 +169,19 @@ class _HomeScreenState extends State<HomeScreen> {
     }
   }
 
+  Color _getLevelColor(String level) {
+    switch (level) {
+      case 'مبتدئ':
+        return const Color(0xFF43A047);
+      case 'متوسط':
+        return const Color(0xFFFB8C00);
+      case 'متقدم':
+        return const Color(0xFFE53935);
+      default:
+        return Colors.grey;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
@@ -122,17 +193,17 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header Section
+            // Header Section: Title, Search, and Filters
             Padding(
               padding: const EdgeInsets.symmetric(
                 horizontal: 8.0,
-                vertical: 16.0,
+                vertical: 12.0,
               ),
               child: Column(
                 children: [
                   Row(
                     children: [
-                      // Menu Button
+                      // زر القائمة الجانبية
                       IconButton(
                         onPressed: () {
                           _scaffoldKey.currentState?.openDrawer();
@@ -144,17 +215,15 @@ class _HomeScreenState extends State<HomeScreen> {
                               : const Color(0xFF1A1A1A),
                         ),
                       ),
-                      // Centered App Title using Expanded and Center
+                      // عنوان التطبيق في المنتصف
                       Expanded(
                         child: Center(
                           child: Padding(
-                            padding: const EdgeInsets.only(
-                              right: 48.0,
-                            ), // تعويض مساحة الأيقونة لضمان التوسط الحقيقي
+                            padding: const EdgeInsets.only(right: 48.0),
                             child: BiDiHelper.buildMixedText(
                               text: 'TermiAr',
-                              style: GoogleFonts.cairo(
-                                fontSize: 28,
+                              style: TextStyle(
+                                fontSize: 26,
                                 fontWeight: FontWeight.bold,
                                 color: isDarkMode
                                     ? Colors.white
@@ -166,51 +235,61 @@ class _HomeScreenState extends State<HomeScreen> {
                       ),
                     ],
                   ),
-                  const SizedBox(height: 4),
-                  // Centered Subtitle
+                  const SizedBox(height: 2),
                   Center(
                     child: BiDiHelper.buildMixedText(
-                      text: 'Your Linux Command Companion',
-                      style: GoogleFonts.cairo(
-                        fontSize: 14,
+                      text: 'دليلك الشامل لأوامر لينكس',
+                      style: TextStyle(
+                        fontSize: 13,
                         color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
                       ),
                     ),
                   ),
-                  const SizedBox(height: 16),
+                  const SizedBox(height: 12),
 
-                  // Search Bar
+                  // شريط البحث الذكي
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: TextField(
                       controller: _searchController,
-                      textDirection: TextDirection.ltr,
                       decoration: InputDecoration(
-                        hintText: 'Search commands...',
-                        prefixIcon: const Icon(Icons.search),
-                        suffixIcon: _isSearching
+                        hintText: 'ابحث عن أمر، صياغة، أو شرح باللغة العربية...',
+                        hintStyle: TextStyle(
+                          fontSize: 13,
+                          color: isDarkMode ? Colors.grey[500] : Colors.grey[400],
+                        ),
+                        prefixIcon: const Icon(Icons.search, color: Color(0xFF0055FF)),
+                        suffixIcon: _searchController.text.isNotEmpty
                             ? IconButton(
-                                icon: const Icon(Icons.clear),
+                                icon: const Icon(Icons.clear, size: 20),
                                 onPressed: () {
                                   _searchController.clear();
                                 },
                               )
                             : null,
+                        contentPadding: const EdgeInsets.symmetric(
+                          horizontal: 16,
+                          vertical: 12,
+                        ),
                       ),
                     ),
                   ),
+                  const SizedBox(height: 10),
+
+                  // شريط الفلاتر السريعة (Filter Chips Bar)
+                  _buildFilterChipsBar(isDarkMode),
                 ],
               ),
             ),
 
-            // Daily Tip Section
-            if (!_isSearching) const DailyTipCard(),
+            // كارت نصيحة اليوم (يختفي عند البحث أو التصفية لتوفير المساحة)
+            if (!_isSearchingOrFiltering) const DailyTipCard(),
 
-            // Content Section
+            // قسم المحتوى الرئيسي: نتائج البحث أو شبكة الأقسام
             Expanded(
               child: _isLoading
                   ? const Center(child: CircularProgressIndicator())
-                  : _isSearching
+                  : _isSearchingOrFiltering
                   ? _buildSearchResults()
                   : _buildCategoriesGrid(),
             ),
@@ -220,7 +299,275 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  // Widget _buildCategoriesGrid() and _buildSearchResults() remain the same as previous code
+  Widget _buildFilterChipsBar(bool isDarkMode) {
+    return SingleChildScrollView(
+      scrollDirection: Axis.horizontal,
+      padding: const EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        children: [
+          // فلتر القسم
+          _buildFilterChip(
+            label: _selectedCategoryId != null
+                ? _categoryFilterOptions[_selectedCategoryId] ?? 'القسم'
+                : 'القسم',
+            icon: Icons.category_outlined,
+            isSelected: _selectedCategoryId != null,
+            isDarkMode: isDarkMode,
+            onTap: () => _showFilterBottomSheet(
+              title: 'تصفية حسب القسم',
+              options: _categoryFilterOptions,
+              currentValue: _selectedCategoryId,
+              onSelected: (val) {
+                setState(() => _selectedCategoryId = val);
+                _performSearch();
+              },
+            ),
+            onClear: () {
+              setState(() => _selectedCategoryId = null);
+              _performSearch();
+            },
+          ),
+          const SizedBox(width: 8),
+
+          // فلتر التوزيعة
+          _buildFilterChip(
+            label: _selectedDistro != null
+                ? _distroFilterOptions[_selectedDistro] ?? 'التوزيعة'
+                : 'التوزيعة',
+            icon: Icons.devices_outlined,
+            isSelected: _selectedDistro != null,
+            isDarkMode: isDarkMode,
+            onTap: () => _showFilterBottomSheet(
+              title: 'تصفية حسب التوزيعة',
+              options: _distroFilterOptions,
+              currentValue: _selectedDistro,
+              onSelected: (val) {
+                setState(() => _selectedDistro = val);
+                _performSearch();
+              },
+            ),
+            onClear: () {
+              setState(() => _selectedDistro = null);
+              _performSearch();
+            },
+          ),
+          const SizedBox(width: 8),
+
+          // فلتر المستوى
+          _buildFilterChip(
+            label: _selectedLevel != null
+                ? _levelFilterOptions[_selectedLevel] ?? 'المستوى'
+                : 'المستوى',
+            icon: Icons.signal_cellular_alt,
+            isSelected: _selectedLevel != null,
+            isDarkMode: isDarkMode,
+            onTap: () => _showFilterBottomSheet(
+              title: 'تصفية حسب مستوى الصعوبة',
+              options: _levelFilterOptions,
+              currentValue: _selectedLevel,
+              onSelected: (val) {
+                setState(() => _selectedLevel = val);
+                _performSearch();
+              },
+            ),
+            onClear: () {
+              setState(() => _selectedLevel = null);
+              _performSearch();
+            },
+          ),
+
+          // زر إعادة ضبط كل الفلاتر
+          if (_hasActiveFilters) ...[
+            const SizedBox(width: 8),
+            ActionChip(
+              avatar: const Icon(Icons.refresh, size: 16, color: Colors.redAccent),
+              label: const Text(
+                'إعادة ضبط',
+                style: TextStyle(
+                  fontSize: 12,
+                  color: Colors.redAccent,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              backgroundColor: Colors.red.withValues(alpha: 0.1),
+              side: const BorderSide(color: Colors.redAccent, width: 0.8),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+              onPressed: _clearAllFilters,
+            ),
+          ],
+        ],
+      ),
+    );
+  }
+
+  Widget _buildFilterChip({
+    required String label,
+    required IconData icon,
+    required bool isSelected,
+    required bool isDarkMode,
+    required VoidCallback onTap,
+    required VoidCallback onClear,
+  }) {
+    final activeColor = const Color(0xFF0055FF);
+
+    return InkWell(
+      onTap: onTap,
+      borderRadius: BorderRadius.circular(16),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 200),
+        padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+        decoration: BoxDecoration(
+          color: isSelected
+              ? activeColor.withValues(alpha: 0.15)
+              : (isDarkMode ? Colors.grey[850] : Colors.grey[100]),
+          borderRadius: BorderRadius.circular(16),
+          border: Border.all(
+            color: isSelected
+                ? activeColor
+                : (isDarkMode ? Colors.white12 : Colors.black12),
+            width: isSelected ? 1.4 : 1.0,
+          ),
+        ),
+        child: Row(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Icon(
+              icon,
+              size: 15,
+              color: isSelected
+                  ? activeColor
+                  : (isDarkMode ? Colors.grey[400] : Colors.grey[700]),
+            ),
+            const SizedBox(width: 6),
+            ConstrainedBox(
+              constraints: const BoxConstraints(maxWidth: 130),
+              child: Text(
+                label,
+                style: TextStyle(
+                  fontSize: 12,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  color: isSelected
+                      ? activeColor
+                      : (isDarkMode ? Colors.white70 : Colors.black87),
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            const SizedBox(width: 4),
+            if (isSelected)
+              GestureDetector(
+                onTap: onClear,
+                child: const Padding(
+                  padding: EdgeInsets.only(right: 2.0),
+                  child: Icon(Icons.close, size: 15, color: Color(0xFF0055FF)),
+                ),
+              )
+            else
+              Icon(
+                Icons.arrow_drop_down,
+                size: 16,
+                color: isDarkMode ? Colors.grey[500] : Colors.grey[600],
+              ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  void _showFilterBottomSheet({
+    required String title,
+    required Map<String, String> options,
+    required String? currentValue,
+    required ValueChanged<String?> onSelected,
+  }) {
+    final isDarkMode =
+        Provider.of<ThemeProvider>(context, listen: false).isDarkMode;
+
+    showModalBottomSheet(
+      context: context,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
+      ),
+      backgroundColor: isDarkMode ? const Color(0xFF242424) : Colors.white,
+      builder: (context) {
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 10),
+                width: 36,
+                height: 4,
+                decoration: BoxDecoration(
+                  color: isDarkMode ? Colors.grey[700] : Colors.grey[300],
+                  borderRadius: BorderRadius.circular(2),
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      title,
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                    if (currentValue != null)
+                      TextButton(
+                        onPressed: () {
+                          onSelected(null);
+                          Navigator.pop(context);
+                        },
+                        child: const Text('إلغاء التحديد'),
+                      ),
+                  ],
+                ),
+              ),
+              const Divider(height: 1),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  children: options.entries.map((entry) {
+                    final isSelected = entry.key == 'all'
+                        ? currentValue == null
+                        : currentValue == entry.key;
+
+                    return ListTile(
+                      dense: true,
+                      title: Text(
+                        entry.value,
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight:
+                              isSelected ? FontWeight.bold : FontWeight.normal,
+                          color: isSelected
+                              ? const Color(0xFF0055FF)
+                              : (isDarkMode ? Colors.white : Colors.black87),
+                        ),
+                      ),
+                      trailing: isSelected
+                          ? const Icon(Icons.check_circle,
+                              color: Color(0xFF0055FF), size: 18)
+                          : null,
+                      onTap: () {
+                        onSelected(entry.key == 'all' ? null : entry.key);
+                        Navigator.pop(context);
+                      },
+                    );
+                  }).toList(),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildCategoriesGrid() {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
     return Padding(
@@ -257,7 +604,6 @@ class _HomeScreenState extends State<HomeScreen> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    // Use official logos for Debian and Red Hat families
                     if (category.id == 'debian_family')
                       SvgPicture.asset(
                         'assets/images/debian_official_logo.svg',
@@ -267,6 +613,24 @@ class _HomeScreenState extends State<HomeScreen> {
                     else if (category.id == 'redhat_family')
                       SvgPicture.asset(
                         'assets/images/redhat_official_logo.svg',
+                        width: 36,
+                        height: 36,
+                      )
+                    else if (category.id == 'flutter_dart')
+                      SvgPicture.asset(
+                        'assets/images/flutter_official_logo.svg',
+                        width: 36,
+                        height: 36,
+                      )
+                    else if (category.id == 'android_dev')
+                      SvgPicture.asset(
+                        'assets/images/android_official_logo.svg',
+                        width: 36,
+                        height: 36,
+                      )
+                    else if (category.id == 'git_github')
+                      SvgPicture.asset(
+                        'assets/images/git_official_logo.svg',
                         width: 36,
                         height: 36,
                       )
@@ -280,7 +644,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       category.name_ar,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
+                      style: TextStyle(
                         fontSize: 15,
                         fontWeight: FontWeight.bold,
                         color: isDarkMode
@@ -293,7 +657,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     Text(
                       category.name_en,
                       textAlign: TextAlign.center,
-                      style: GoogleFonts.cairo(
+                      style: TextStyle(
                         fontSize: 11,
                         color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
                       ),
@@ -317,90 +681,205 @@ class _HomeScreenState extends State<HomeScreen> {
 
         if (_searchResults.isEmpty) {
           return Center(
-            child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(
-                  Icons.search_off,
-                  size: 64,
-                  color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
-                ),
-                const SizedBox(height: 16),
-                Text(
-                  'No commands found',
-                  style: TextStyle(
-                    fontSize: 18,
-                    color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.search_off,
+                    size: 64,
+                    color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
                   ),
-                ),
-              ],
+                  const SizedBox(height: 16),
+                  Text(
+                    'لم يتم العثور على أوامر تطابق بحثك',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  Text(
+                    'جرب البحث بكلمات أخرى أو تعديل خيارات التصفية النشطة.',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 14,
+                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 20),
+                  ElevatedButton.icon(
+                    onPressed: _clearAllFilters,
+                    icon: const Icon(Icons.refresh),
+                    label: const Text('إعادة ضبط البحث والتصفية'),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: const Color(0xFF0055FF),
+                      foregroundColor: Colors.white,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           );
         }
-        return ListView.builder(
-          padding: const EdgeInsets.all(16.0),
-          itemCount: _searchResults.length,
-          itemBuilder: (context, index) {
-            final command = _searchResults[index];
-            final isFavorite = favoritesProvider.isFavorite(command.id);
 
-            return Card(
-              margin: const EdgeInsets.only(bottom: 12),
-              child: ListTile(
-                leading: Container(
-                  width: 40,
-                  height: 40,
-                  alignment: Alignment.center,
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: const Color(0xFF0055FF),
-                  ),
-                  child: Center(
-                    child: Text(
-                      command.command[0].toUpperCase(),
-                      style: GoogleFonts.cairo(
-                        height: 1.0,
-                        color: Colors.white,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18,
-                      ),
+        return Column(
+          children: [
+            // شريط إحصائي بعدد النتائج
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+              child: Row(
+                children: [
+                  Text(
+                    'النتائج (${_searchResults.length})',
+                    style: TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
                     ),
                   ),
-                ),
-                title: Text(
-                  command.command,
-                  style: const TextStyle(fontWeight: FontWeight.bold),
-                ),
-                subtitle: Text(
-                  command.name_ar,
-                  style: TextStyle(
-                    color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
-                  ),
-                ),
-                trailing: Row(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    IconButton(
-                      icon: Icon(
-                        isFavorite ? Icons.favorite : Icons.favorite_border,
-                        color: isFavorite ? Colors.red : Colors.grey,
+                  const Spacer(),
+                  if (_hasActiveFilters)
+                    TextButton.icon(
+                      onPressed: _clearAllFilters,
+                      icon: const Icon(Icons.clear, size: 14),
+                      label: const Text(
+                        'مسح الفلاتر',
+                        style: TextStyle(fontSize: 12),
                       ),
-                      onPressed: () {
-                        favoritesProvider.toggleFavorite(command.id);
-                      },
+                      style: TextButton.styleFrom(
+                        visualDensity: VisualDensity.compact,
+                        foregroundColor: Colors.redAccent,
+                      ),
                     ),
-                    const Icon(Icons.arrow_forward_ios, size: 16),
-                  ],
-                ),
-                onTap: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) =>
-                        CommandDetailsScreen(command: command),
-                  ),
-                ),
+                ],
               ),
-            );
-          },
+            ),
+            Expanded(
+              child: ListView.builder(
+                padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+                itemCount: _searchResults.length,
+                itemBuilder: (context, index) {
+                  final command = _searchResults[index];
+                  final isFavorite = favoritesProvider.isFavorite(command.id);
+
+                  return Card(
+                    margin: const EdgeInsets.only(bottom: 10),
+                    elevation: 2,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: ListTile(
+                      contentPadding: const EdgeInsets.symmetric(
+                        horizontal: 14,
+                        vertical: 6,
+                      ),
+                      leading: Container(
+                        width: 42,
+                        height: 42,
+                        alignment: Alignment.center,
+                        decoration: const BoxDecoration(
+                          shape: BoxShape.circle,
+                          color: Color(0xFF0055FF),
+                        ),
+                        child: Center(
+                          child: Text(
+                            command.command.isNotEmpty
+                                ? command.command[0].toUpperCase()
+                                : 'C',
+                            style: const TextStyle(
+                              height: 1.0,
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 18,
+                            ),
+                          ),
+                        ),
+                      ),
+                      title: Row(
+                        children: [
+                          Expanded(
+                            child: Text(
+                              command.command,
+                              style: const TextStyle(
+                                fontWeight: FontWeight.bold,
+                                fontSize: 15,
+                              ),
+                              maxLines: 1,
+                              overflow: TextOverflow.ellipsis,
+                            ),
+                          ),
+                          const SizedBox(width: 8),
+                          // شارة المستوى
+                          Container(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 6,
+                              vertical: 2,
+                            ),
+                            decoration: BoxDecoration(
+                              color: _getLevelColor(command.level)
+                                  .withValues(alpha: 0.15),
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Text(
+                              command.level.isNotEmpty ? command.level : 'مبتدئ',
+                              style: TextStyle(
+                                fontSize: 10,
+                                fontWeight: FontWeight.bold,
+                                color: _getLevelColor(command.level),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      subtitle: Padding(
+                        padding: const EdgeInsets.only(top: 4.0),
+                        child: Text(
+                          command.name_ar,
+                          style: TextStyle(
+                            fontSize: 13,
+                            color: isDarkMode
+                                ? Colors.grey[300]
+                                : Colors.grey[700],
+                          ),
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                        ),
+                      ),
+                      trailing: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              isFavorite ? Icons.favorite : Icons.favorite_border,
+                              color: isFavorite ? Colors.red : Colors.grey,
+                              size: 20,
+                            ),
+                            onPressed: () {
+                              favoritesProvider.toggleFavorite(command.id);
+                            },
+                          ),
+                          const Icon(Icons.arrow_forward_ios, size: 14),
+                        ],
+                      ),
+                      onTap: () => Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              CommandDetailsScreen(command: command),
+                        ),
+                      ),
+                    ),
+                  );
+                },
+              ),
+            ),
+          ],
         );
       },
     );

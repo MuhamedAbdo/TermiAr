@@ -5,7 +5,6 @@ import '../models/quiz_model.dart';
 import '../providers/theme_provider.dart';
 import '../services/data_service.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class QuizScreen extends StatefulWidget {
   final VoidCallback? onNavigateToHome;
@@ -95,21 +94,21 @@ class _QuizScreenState extends State<QuizScreen> {
           'lightGradient': [const Color(0xFFD70A53), const Color(0xFFA80030)],
           'darkGradient': [const Color(0xFFE5396B), const Color(0xFFC2185B)],
           'borderColor': const Color(0xFF8B0026),
-          'shadowColor': const Color(0xFFD70A53).withOpacity(0.3),
+          'shadowColor': const Color(0xFFD70A53).withValues(alpha: 0.3),
         };
       case 'redhat_family':
         return {
           'lightGradient': [const Color(0xFFCC0000), const Color(0xFF990000)],
           'darkGradient': [const Color(0xFFE53935), const Color(0xFFD32F2F)],
           'borderColor': const Color(0xFF990000),
-          'shadowColor': const Color(0xFFCC0000).withOpacity(0.3),
+          'shadowColor': const Color(0xFFCC0000).withValues(alpha: 0.3),
         };
       default:
         return {
           'lightGradient': [const Color(0xFF0055FF), const Color(0xFF003DCC)],
           'darkGradient': [const Color(0xFF448AFF), const Color(0xFF2979FF)],
           'borderColor': const Color(0xFF0029CC),
-          'shadowColor': const Color(0xFF0055FF).withOpacity(0.3),
+          'shadowColor': const Color(0xFF0055FF).withValues(alpha: 0.3),
         };
     }
   }
@@ -194,7 +193,7 @@ class _QuizScreenState extends State<QuizScreen> {
           _selectedDistro == 'debian_family'
               ? 'اختبار عائلة دبيان'
               : 'اختبار عائلة ريد هات',
-          style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+          style: const TextStyle(fontWeight: FontWeight.bold),
         ),
         elevation: 0,
         flexibleSpace: Container(
@@ -211,7 +210,7 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
       body: PopScope(
         canPop: false,
-        onPopInvoked: (didPop) async {
+        onPopInvokedWithResult: (didPop, result) async {
           if (didPop) return;
 
           if (!_showCategorySelection) {
@@ -280,17 +279,17 @@ class _QuizScreenState extends State<QuizScreen> {
                           end: Alignment.bottomRight,
                           colors: isDarkMode
                               ? [
-                                  Colors.grey[800]!.withOpacity(0.8),
-                                  Colors.grey[900]!.withOpacity(0.8),
+                                  Colors.grey[800]!.withValues(alpha: 0.8),
+                                  Colors.grey[900]!.withValues(alpha: 0.8),
                                 ]
                               : [
-                                  Colors.white.withOpacity(0.9),
-                                  Colors.grey[100]!.withOpacity(0.9),
+                                  Colors.white.withValues(alpha: 0.9),
+                                  Colors.grey[100]!.withValues(alpha: 0.9),
                                 ],
                         ),
                         boxShadow: [
                           BoxShadow(
-                            color: Colors.black.withOpacity(0.1),
+                            color: Colors.black.withValues(alpha: 0.1),
                             blurRadius: 10,
                             offset: const Offset(0, 5),
                           ),
@@ -300,7 +299,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         padding: const EdgeInsets.all(24.0),
                         child: BiDiHelper.buildMixedText(
                           text: currentQuestion.question_ar,
-                          style: GoogleFonts.cairo(
+                          style: TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                             color: isDarkMode ? Colors.white : Colors.black87,
@@ -332,9 +331,9 @@ class _QuizScreenState extends State<QuizScreen> {
   Widget _buildCategorySelection(bool isDarkMode) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           'اختر نظامك',
-          style: GoogleFonts.cairo(fontWeight: FontWeight.bold),
+          style: TextStyle(fontWeight: FontWeight.bold),
         ),
         elevation: 0,
         backgroundColor: Colors.transparent,
@@ -350,7 +349,7 @@ class _QuizScreenState extends State<QuizScreen> {
       ),
       body: PopScope(
         canPop: false,
-        onPopInvoked: (didPop) async {
+        onPopInvokedWithResult: (didPop, result) async {
           if (didPop) return;
           widget.onNavigateToHome?.call();
         },
@@ -395,7 +394,7 @@ class _QuizScreenState extends State<QuizScreen> {
             children: [
               Text(
                 category.name_ar,
-                style: GoogleFonts.cairo(
+                style: const TextStyle(
                   color: Colors.white,
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
@@ -403,7 +402,7 @@ class _QuizScreenState extends State<QuizScreen> {
               ),
               Text(
                 category.name_en,
-                style: GoogleFonts.cairo(color: Colors.white70, fontSize: 14),
+                style: const TextStyle(color: Colors.white70, fontSize: 14),
               ),
             ],
           ),
@@ -422,21 +421,21 @@ class _QuizScreenState extends State<QuizScreen> {
 
     if (!_isAnswered) {
       backgroundColor = isDarkMode
-          ? Colors.white.withOpacity(0.05)
+          ? Colors.white.withValues(alpha: 0.05)
           : Colors.white;
       borderColor = isSelected
           ? categoryTheme['borderColor']
           : (isDarkMode ? Colors.grey[700]! : Colors.grey[300]!);
     } else {
       if (isCorrect) {
-        backgroundColor = Colors.green.withOpacity(0.1);
+        backgroundColor = Colors.green.withValues(alpha: 0.1);
         borderColor = Colors.green;
       } else if (isSelected) {
-        backgroundColor = Colors.red.withOpacity(0.1);
+        backgroundColor = Colors.red.withValues(alpha: 0.1);
         borderColor = Colors.red;
       } else {
         backgroundColor = isDarkMode
-            ? Colors.white.withOpacity(0.05)
+            ? Colors.white.withValues(alpha: 0.05)
             : Colors.white;
         borderColor = isDarkMode ? Colors.grey[700]! : Colors.grey[300]!;
       }
@@ -465,7 +464,7 @@ class _QuizScreenState extends State<QuizScreen> {
               child: Center(
                 child: Text(
                   String.fromCharCode(65 + index),
-                  style: GoogleFonts.cairo(
+                  style: const TextStyle(
                     height: 1.0,
                     color: Colors.white,
                     fontSize: 12,
@@ -478,7 +477,7 @@ class _QuizScreenState extends State<QuizScreen> {
             Expanded(
               child: BiDiHelper.buildMixedText(
                 text: q.options[index],
-                style: GoogleFonts.cairo(
+                style: TextStyle(
                   color: isDarkMode ? Colors.white : Colors.black87,
                 ),
               ),
@@ -494,9 +493,9 @@ class _QuizScreenState extends State<QuizScreen> {
       margin: const EdgeInsets.only(top: 20),
       padding: const EdgeInsets.all(16),
       decoration: BoxDecoration(
-        color: Colors.blue.withOpacity(0.1),
+        color: Colors.blue.withValues(alpha: 0.1),
         borderRadius: BorderRadius.circular(15),
-        border: Border.all(color: Colors.blue.withOpacity(0.3)),
+        border: Border.all(color: Colors.blue.withValues(alpha: 0.3)),
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -508,7 +507,7 @@ class _QuizScreenState extends State<QuizScreen> {
           const SizedBox(height: 8),
           BiDiHelper.buildMixedText(
             text: q.explanation_ar,
-            style: GoogleFonts.cairo(
+            style: TextStyle(
               fontSize: 14,
               color: isDarkMode ? Colors.white70 : Colors.black87,
             ),
@@ -519,7 +518,6 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   Widget _buildResultScreen() {
-    final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
     return Scaffold(
       body: Center(
         child: Column(

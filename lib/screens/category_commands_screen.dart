@@ -7,7 +7,6 @@ import '../providers/favorites_provider.dart';
 import '../services/data_service.dart';
 import '../screens/command_details_screen.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class CategoryCommandsScreen extends StatefulWidget {
   final String categoryId;
@@ -90,24 +89,17 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
         children: [
           // Watermark background
           if (widget.categoryId == 'debian_family' ||
-              widget.categoryId == 'redhat_family')
+              widget.categoryId == 'redhat_family' ||
+              widget.categoryId == 'flutter_dart' ||
+              widget.categoryId == 'android_dev' ||
+              widget.categoryId == 'git_github')
             Positioned.fill(
               child: Container(
                 decoration: BoxDecoration(
                   color: isDarkMode ? Colors.transparent : Colors.transparent,
                 ),
                 child: Center(
-                  child: widget.categoryId == 'debian_family'
-                      ? SvgPicture.asset(
-                          'assets/images/debian_watermark_official.svg',
-                          width: 250,
-                          height: 250,
-                        )
-                      : SvgPicture.asset(
-                          'assets/images/redhat_watermark_official.svg',
-                          width: 250,
-                          height: 250,
-                        ),
+                  child: _buildCategoryWatermark(widget.categoryId, isDarkMode),
                 ),
               ),
             ),
@@ -227,7 +219,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(12),
                   side: BorderSide(
-                    color: categoryTheme['borderColor']!.withOpacity(0.3),
+                    color: categoryTheme['borderColor']!.withValues(alpha: 0.3),
                     width: 1,
                   ),
                 ),
@@ -249,8 +241,10 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
                     ),
                     child: Center(
                       child: Text(
-                        command.command[0].toUpperCase(),
-                        style: GoogleFonts.cairo(
+                        command.command.isNotEmpty
+                            ? command.command[0].toUpperCase()
+                            : 'C',
+                        style: const TextStyle(
                           height: 1.0,
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -296,7 +290,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
                           vertical: 4,
                         ),
                         decoration: BoxDecoration(
-                          color: _getLevelColor(command.level).withOpacity(0.2),
+                          color: _getLevelColor(command.level).withValues(alpha: 0.2),
                           borderRadius: BorderRadius.circular(12),
                         ),
                         child: BiDiHelper.buildMixedText(
@@ -325,7 +319,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: categoryTheme['borderColor']!.withOpacity(0.1),
+                          color: categoryTheme['borderColor']!.withValues(alpha: 0.1),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Icon(
@@ -379,6 +373,50 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
     }
   }
 
+  Widget _buildCategoryWatermark(String categoryId, bool isDarkMode) {
+    if (categoryId == 'debian_family') {
+      return SvgPicture.asset(
+        'assets/images/debian_watermark_official.svg',
+        width: 250,
+        height: 250,
+      );
+    } else if (categoryId == 'redhat_family') {
+      return SvgPicture.asset(
+        'assets/images/redhat_watermark_official.svg',
+        width: 250,
+        height: 250,
+      );
+    } else if (categoryId == 'flutter_dart') {
+      return Opacity(
+        opacity: isDarkMode ? 0.08 : 0.05,
+        child: SvgPicture.asset(
+          'assets/images/flutter_official_logo.svg',
+          width: 240,
+          height: 240,
+        ),
+      );
+    } else if (categoryId == 'android_dev') {
+      return Opacity(
+        opacity: isDarkMode ? 0.08 : 0.05,
+        child: SvgPicture.asset(
+          'assets/images/android_official_logo.svg',
+          width: 240,
+          height: 240,
+        ),
+      );
+    } else if (categoryId == 'git_github') {
+      return Opacity(
+        opacity: isDarkMode ? 0.08 : 0.05,
+        child: SvgPicture.asset(
+          'assets/images/git_official_logo.svg',
+          width: 240,
+          height: 240,
+        ),
+      );
+    }
+    return const SizedBox.shrink();
+  }
+
   Map<String, dynamic> _getCategoryTheme(String categoryId) {
     switch (categoryId) {
       case 'debian_family':
@@ -386,21 +424,42 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
           'lightGradient': [const Color(0xFFD70A53), const Color(0xFFA80030)],
           'darkGradient': [const Color(0xFFE5396B), const Color(0xFFC2185B)],
           'borderColor': const Color(0xFF8B0026),
-          'shadowColor': const Color(0xFFD70A53).withOpacity(0.3),
+          'shadowColor': const Color(0xFFD70A53).withValues(alpha: 0.3),
         };
       case 'redhat_family':
         return {
           'lightGradient': [const Color(0xFFCC0000), const Color(0xFF990000)],
           'darkGradient': [const Color(0xFFE53935), const Color(0xFFD32F2F)],
           'borderColor': const Color(0xFF990000),
-          'shadowColor': const Color(0xFFCC0000).withOpacity(0.3),
+          'shadowColor': const Color(0xFFCC0000).withValues(alpha: 0.3),
+        };
+      case 'flutter_dart':
+        return {
+          'lightGradient': [const Color(0xFF02569B), const Color(0xFF0175C2)],
+          'darkGradient': [const Color(0xFF027DFD), const Color(0xFF01579B)],
+          'borderColor': const Color(0xFF01579B),
+          'shadowColor': const Color(0xFF02569B).withValues(alpha: 0.3),
+        };
+      case 'android_dev':
+        return {
+          'lightGradient': [const Color(0xFF2E7D32), const Color(0xFF1B5E20)],
+          'darkGradient': [const Color(0xFF4CAF50), const Color(0xFF2E7D32)],
+          'borderColor': const Color(0xFF1B5E20),
+          'shadowColor': const Color(0xFF3DDC84).withValues(alpha: 0.3),
+        };
+      case 'git_github':
+        return {
+          'lightGradient': [const Color(0xFFF05032), const Color(0xFFC0392B)],
+          'darkGradient': [const Color(0xFFFF6E40), const Color(0xFFF05032)],
+          'borderColor': const Color(0xFFBF360C),
+          'shadowColor': const Color(0xFFF05032).withValues(alpha: 0.3),
         };
       default:
         return {
           'lightGradient': [const Color(0xFF0055FF), const Color(0xFF003DCC)],
           'darkGradient': [const Color(0xFF448AFF), const Color(0xFF2979FF)],
           'borderColor': const Color(0xFF0029CC),
-          'shadowColor': const Color(0xFF0055FF).withOpacity(0.3),
+          'shadowColor': const Color(0xFF0055FF).withValues(alpha: 0.3),
         };
     }
   }

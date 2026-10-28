@@ -6,7 +6,6 @@ import '../screens/favorites_screen.dart';
 import '../screens/quiz_screen.dart';
 import '../screens/about_screen.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 
 class MainNavigation extends StatefulWidget {
@@ -35,7 +34,7 @@ class _MainNavigationState extends State<MainNavigation> {
   // Build screens dynamically to access navigateToTab
   List<Widget> get _screens => [
     const HomeScreen(),
-    const FavoritesScreen(),
+    const FavoritesScreen(key: ValueKey('favorites')),
     QuizScreen(
       key: ValueKey('quiz_$_quizKeyCounter'),
       onNavigateToHome: () => navigateToTab(0),
@@ -55,7 +54,7 @@ class _MainNavigationState extends State<MainNavigation> {
                 : Colors.white,
             title: BiDiHelper.buildMixedText(
               text: 'تأكيد الخروج',
-              style: GoogleFonts.cairo(
+              style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.bold,
                 color: isDarkMode ? Colors.white : Colors.black87,
@@ -63,7 +62,7 @@ class _MainNavigationState extends State<MainNavigation> {
             ),
             content: BiDiHelper.buildMixedText(
               text: 'هل تريد حقاً إغلاق التطبيق؟',
-              style: GoogleFonts.cairo(
+              style: TextStyle(
                 fontSize: 16,
                 color: isDarkMode ? Colors.white70 : Colors.black87,
               ),
@@ -73,9 +72,9 @@ class _MainNavigationState extends State<MainNavigation> {
                 onPressed: () => Navigator.of(context).pop(false),
                 child: BiDiHelper.buildMixedText(
                   text: 'لا',
-                  style: GoogleFonts.cairo(
+                  style: const TextStyle(
                     fontSize: 14,
-                    color: const Color(0xFF0055FF),
+                    color: Color(0xFF0055FF),
                   ),
                 ),
               ),
@@ -87,7 +86,7 @@ class _MainNavigationState extends State<MainNavigation> {
                 ),
                 child: BiDiHelper.buildMixedText(
                   text: 'نعم',
-                  style: GoogleFonts.cairo(
+                  style: const TextStyle(
                     fontSize: 14,
                     fontWeight: FontWeight.w500,
                   ),
@@ -106,7 +105,7 @@ class _MainNavigationState extends State<MainNavigation> {
 
     return PopScope(
       canPop: false,
-      onPopInvoked: (didPop) async {
+      onPopInvokedWithResult: (didPop, result) async {
         if (didPop) return;
 
         if (_currentIndex != 0) {
@@ -129,7 +128,7 @@ class _MainNavigationState extends State<MainNavigation> {
             color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withOpacity(0.1),
+                color: Colors.black.withValues(alpha: 0.1),
                 blurRadius: 10,
                 offset: const Offset(0, -2),
               ),
@@ -163,22 +162,22 @@ class _MainNavigationState extends State<MainNavigation> {
               BottomNavigationBarItem(
                 icon: Icon(Icons.home_outlined),
                 activeIcon: Icon(Icons.home),
-                label: 'Home',
+                label: 'الرئيسية',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.favorite_border),
                 activeIcon: Icon(Icons.favorite),
-                label: 'Favorites',
+                label: 'المفضلة',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.quiz_outlined),
                 activeIcon: Icon(Icons.quiz),
-                label: 'Quiz',
+                label: 'الاختبار',
               ),
               BottomNavigationBarItem(
                 icon: Icon(Icons.info_outline),
                 activeIcon: Icon(Icons.info),
-                label: 'About',
+                label: 'حول التطبيق',
               ),
             ],
           ),

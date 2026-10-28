@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../providers/theme_provider.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:flutter/services.dart';
 
 class AppDrawer extends StatelessWidget {
@@ -11,6 +10,7 @@ class AppDrawer extends StatelessWidget {
   void _showPrivacyPolicy(BuildContext context) {
     Navigator.pop(context);
     rootBundle.loadString('assets/data/privacy_policy.md').then((content) {
+      if (!context.mounted) return;
       Navigator.push(
         context,
         MaterialPageRoute(
@@ -19,7 +19,7 @@ class AppDrawer extends StatelessWidget {
               centerTitle: true, // لتوحيد التصميم مع باقي الصفحات
               title: BiDiHelper.buildMixedText(
                 text: 'سياسة الخصوصية',
-                style: GoogleFonts.cairo(
+                style: const TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ),
@@ -30,7 +30,7 @@ class AppDrawer extends StatelessWidget {
               child: Text(
                 content,
                 textAlign: TextAlign.right,
-                style: GoogleFonts.cairo(fontSize: 14, height: 1.6),
+                style: const TextStyle(fontSize: 14, height: 1.6),
               ),
             ),
           ),
@@ -100,15 +100,15 @@ class AppDrawer extends StatelessWidget {
                 const SizedBox(height: 16),
                 Text(
                   'TermiAr',
-                  style: GoogleFonts.cairo(
+                  style: const TextStyle(
                     color: Colors.white,
                     fontSize: 24,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
                 Text(
-                  'Your Linux Command Companion',
-                  style: GoogleFonts.cairo(color: Colors.white70, fontSize: 14),
+                  'دليلك الشامل لأوامر لينكس',
+                  style: const TextStyle(color: Colors.white70, fontSize: 14),
                 ),
               ],
             ),
@@ -161,8 +161,8 @@ class AppDrawer extends StatelessWidget {
                       padding: const EdgeInsets.all(16),
                       decoration: BoxDecoration(
                         color: isDarkMode
-                            ? Colors.white.withOpacity(0.05)
-                            : Colors.black.withOpacity(0.03),
+                            ? Colors.white.withValues(alpha: 0.05)
+                            : Colors.black.withValues(alpha: 0.03),
                         borderRadius: BorderRadius.circular(12),
                         border: Border.all(
                           color: isDarkMode ? Colors.white10 : Colors.black12,
@@ -200,8 +200,8 @@ class AppDrawer extends StatelessWidget {
           Padding(
             padding: const EdgeInsets.all(16.0),
             child: Text(
-              'Version 1.0.0',
-              style: GoogleFonts.cairo(
+              'الإصدار 1.0.0',
+              style: TextStyle(
                 fontSize: 12,
                 color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
               ),
@@ -219,10 +219,10 @@ class AppDrawer extends StatelessWidget {
         alignment: Alignment.centerRight,
         child: Text(
           title,
-          style: GoogleFonts.cairo(
+          style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: const Color(0xFF0055FF), // لون مميز للعناوين الجانبية
+            color: Color(0xFF0055FF), // لون مميز للعناوين الجانبية
           ),
         ),
       ),
@@ -245,7 +245,7 @@ class AppDrawer extends StatelessWidget {
         ),
         title: Text(
           title,
-          style: GoogleFonts.cairo(
+          style: TextStyle(
             color: isDarkMode ? Colors.white : Colors.black87,
             fontSize: 14,
           ),
@@ -254,8 +254,8 @@ class AppDrawer extends StatelessWidget {
         onTap: onTap,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
         tileColor: isDarkMode
-            ? Colors.white.withOpacity(0.03)
-            : Colors.black.withOpacity(0.01),
+            ? Colors.white.withValues(alpha: 0.03)
+            : Colors.black.withValues(alpha: 0.01),
       ),
     );
   }
@@ -268,7 +268,7 @@ class AppDrawer extends StatelessWidget {
         Expanded(
           child: Text(
             text,
-            style: GoogleFonts.cairo(
+            style: TextStyle(
               fontSize: 13,
               color: isDarkMode ? Colors.white : Colors.black87,
             ),

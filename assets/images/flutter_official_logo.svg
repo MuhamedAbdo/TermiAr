@@ -1,0 +1,21 @@
+<svg width="64" height="64" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="flutterGrad1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#47C5FB" />
+      <stop offset="100%" stop-color="#0553B1" />
+    </linearGradient>
+    <linearGradient id="flutterGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#02569B" />
+      <stop offset="100%" stop-color="#012F6C" />
+    </linearGradient>
+  </defs>
+  <!-- Official Flutter Bird Logo Shape -->
+  <g transform="translate(6, 6) scale(0.8125)">
+    <polygon points="37.5,0 0,37.5 11.5,49 49,11.5" fill="#47C5FB" />
+    <polygon points="26,49 37.5,37.5 49,49 37.5,60.5" fill="#02569B" />
+    <polygon points="37.5,37.5 26,49 32,55 49,38" fill="url(#flutterGrad2)" opacity="0.8" />
+    <polygon points="49,38 37.5,49.5 49,61 60.5,49.5" fill="#0175C2" />
+    <polygon points="21,54 26,49 37.5,60.5 32.5,65.5" fill="url(#flutterGrad1)" />
+  </g>
+</svg>
+

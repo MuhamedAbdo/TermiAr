@@ -10,38 +10,48 @@ class FavoritesProvider extends ChangeNotifier {
   bool get isInitialized => _isInitialized;
 
   FavoritesProvider() {
-    _loadFavorites();
+    Future.microtask(() => _loadFavorites());
   }
 
   Future<void> _loadFavorites() async {
     try {
-      final prefs = await SharedPreferences.getInstance();
+      debugPrint('WEB DEBUG: Starting favorites initialization');
+      final prefs = await SharedPreferences.getInstance().timeout(
+        const Duration(seconds: 5),
+        onTimeout: () {
+          debugPrint('WEB DEBUG: SharedPreferences timeout - using empty favorites');
+          throw Exception('SharedPreferences timeout');
+        },
+      );
       final favoritesList = prefs.getStringList(_favoritesKey) ?? [];
-      print('Loading favorites from storage: $favoritesList');
+      debugPrint('Loading favorites from storage: $favoritesList');
       _favoriteCommandIds = favoritesList.map((id) => int.parse(id)).toSet();
-      print('Parsed favorite IDs: $_favoriteCommandIds');
-      _isInitialized = true;
-      notifyListeners();
+      debugPrint('Parsed favorite IDs: $_favoriteCommandIds');
     } catch (e) {
-      print('Error loading favorites: $e');
+      debugPrint('WEB DEBUG: Error loading favorites: $e');
+      _favoriteCommandIds = {};
+    } finally {
       _isInitialized = true;
+      debugPrint(
+        'WEB DEBUG: Initialization complete, favorites count: ${_favoriteCommandIds.length}',
+      );
       notifyListeners();
     }
   }
 
   Future<void> toggleFavorite(int commandId) async {
-    print('Toggling favorite for command ID: $commandId');
-    print('Current favorites before toggle: $_favoriteCommandIds');
+    debugPrint('Toggling favorite for command ID: $commandId');
+    debugPrint('Current favorites before toggle: $_favoriteCommandIds');
 
     if (_favoriteCommandIds.contains(commandId)) {
       _favoriteCommandIds.remove(commandId);
-      print('Removed from favorites');
+      debugPrint('Removed from favorites');
     } else {
       _favoriteCommandIds.add(commandId);
-      print('Added to favorites');
+      debugPrint('Added to favorites');
     }
 
-    print('Updated favorites: $_favoriteCommandIds');
+    debugPrint('Updated favorites: $_favoriteCommandIds');
 
     try {
       final prefs = await SharedPreferences.getInstance();
@@ -49,9 +59,9 @@ class FavoritesProvider extends ChangeNotifier {
         _favoritesKey,
         _favoriteCommandIds.map((id) => id.toString()).toList(),
       );
-      print('Saved to storage successfully');
+      debugPrint('Saved to storage successfully');
     } catch (e) {
-      print('Error saving favorites: $e');
+      debugPrint('Error saving favorites: $e');
     }
 
     notifyListeners();
@@ -62,15 +72,15 @@ class FavoritesProvider extends ChangeNotifier {
   }
 
   Future<void> clearAllFavorites() async {
-    print('Clearing all favorites');
+    debugPrint('Clearing all favorites');
     _favoriteCommandIds.clear();
 
     try {
       final prefs = await SharedPreferences.getInstance();
       await prefs.remove(_favoritesKey);
-      print('Cleared from storage successfully');
+      debugPrint('Cleared from storage successfully');
     } catch (e) {
-      print('Error clearing favorites: $e');
+      debugPrint('Error clearing favorites: $e');
     }
 
     notifyListeners();

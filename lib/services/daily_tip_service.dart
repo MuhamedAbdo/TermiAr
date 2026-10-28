@@ -1,4 +1,5 @@
 import 'dart:math';
+import 'package:flutter/foundation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/quiz_model.dart';
 import '../services/data_service.dart';
@@ -33,7 +34,7 @@ class DailyTipService {
         return await _getCurrentTip(prefs, quizData.daily_tips!);
       }
     } catch (e) {
-      print('Error getting daily tip: $e');
+      debugPrint('Error getting daily tip: $e');
       return null;
     }
   }

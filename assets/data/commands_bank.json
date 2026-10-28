@@ -4,12 +4,63 @@
       "id": 1,
       "category_id": "universal",
       "command": "ls",
-      "syntax": "ls -la",
+      "syntax": "ls [options] [path]",
       "level": "مبتدئ",
       "name_ar": "عرض محتويات المجلد",
-      "description": "يعرض قائمة بالملفات والمجلدات الموجودة في المسار الحالي.",
-      "how_to_use": "اكتب ls لعرض عادي، أو ls -la لعرض الملفات المخفية والتفاصيل.",
-      "can_copy": true
+      "description": "يعرض قائمة بالملفات والمجلدات الموجودة في المسار الحالي أو المحدد.",
+      "how_to_use": "اكتب ls لعرض عادي، أو ls -la لعرض الملفات المخفية والتفاصيل مع الصلاحيات والأحجام.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-l",
+          "description": "عرض مفصل يتضمن الصلاحيات، الحجم، المالك، وتاريخ التعديل."
+        },
+        {
+          "flag": "-a",
+          "description": "إظهار كافة الملفات بما فيها الملفات المخفية التي تبدأ بنقطة (.)"
+        },
+        {
+          "flag": "-h",
+          "description": "عرض أحجام الملفات بصيغة مقروءة للبشر (KB, MB, GB) مع الخيار -l."
+        },
+        {
+          "flag": "-t",
+          "description": "ترتيب الملفات حسب وقت وتاريخ التعديل الأحدث أولاً."
+        }
+      ],
+      "examples": [
+        {
+          "command": "ls -l",
+          "description": "عرض الملفات مع التفاصيل الكاملة كقائمة عمودية."
+        },
+        {
+          "command": "ls -la",
+          "description": "عرض جميع الملفات بما فيها الملفات المخفية بالتفصيل."
+        },
+        {
+          "command": "ls -lh /var/log",
+          "description": "عرض محتويات مجلد السجلات بأحجام مقروءة."
+        }
+      ],
+      "keywords": [
+        "ls",
+        "list",
+        "dir",
+        "عرض",
+        "ملفات",
+        "مجلدات",
+        "محتويات"
+      ]
     },
     {
       "id": 2,
@@ -17,21 +68,94 @@
       "command": "apt update",
       "syntax": "sudo apt update",
       "level": "مبتدئ",
-      "name_ar": "تحديث مستودعات أوبنتو",
-      "description": "تحديث قائمة البرامج المتاحة في نظام أوبنتو وزورين.",
-      "how_to_use": "يجب استخدامه دائماً قبل تثبيت أي برنامج جديد لضمان الحصول على أحدث نسخة.",
-      "can_copy": true
+      "name_ar": "تحديث مستودعات أوبنتو ودبيان",
+      "description": "يقوم بتحديث قائمة الفهارس والحزم المتاحة من المستودعات الرسمية للتحقق من وجود ترقيات جديدة.",
+      "how_to_use": "يجب استخدامه دائماً قبل تثبيت أي برنامج جديد أو تنفيذ ترقية للنظام.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "يحتاج هذا الأمر إلى اتصال بالإنترنت وصلاحيات الجذر (sudo).",
+      "distros": [
+        "Debian",
+        "Ubuntu",
+        "Zorin OS",
+        "Linux Mint",
+        "Kali Linux"
+      ],
+      "options": [
+        {
+          "flag": "-q",
+          "description": "الوضع الصامت: يقلل من حجم المخرجات المعروضة على الشاشة."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sudo apt update",
+          "description": "تحديث مؤشرات الحزم القياسي من المستودعات."
+        },
+        {
+          "command": "sudo apt update && sudo apt upgrade -y",
+          "description": "تحديث المستودعات ثم تطبيق جميع الترقيات المتاحة تلقائياً."
+        }
+      ],
+      "keywords": [
+        "apt",
+        "update",
+        "تحديث",
+        "مستودعات",
+        "ترقية",
+        "ubuntu",
+        "debian"
+      ]
     },
     {
       "id": 3,
       "category_id": "redhat_family",
       "command": "dnf install",
-      "syntax": "sudo dnf install [package]",
+      "syntax": "sudo dnf install [package_name]",
       "level": "مبتدئ",
-      "name_ar": "تثبيت البرامج في فيدورا",
-      "description": "الأمر الأساسي لتثبيت حزم البرامج في توزيعات فيدورا وريد هات.",
+      "name_ar": "تثبيت البرامج في فيدورا وريد هات",
+      "description": "الأمر الأساسي لتنزيل وتثبيت حزم البرامج مع حل تبعياتها التلقائي في توزيعات عائلة ريد هات وفيدورا.",
       "how_to_use": "مثال: sudo dnf install vlc لتثبيت مشغل الوسائط.",
-      "can_copy": true
+      "can_copy": true,
+      "risk_level": "moderate",
+      "warning": "تأكد من اسم الحزمة والمستودع المعتمد قبل التثبيت لتجنب تثبيت برمجيات غير متوافقة.",
+      "distros": [
+        "Fedora",
+        "Red Hat Enterprise Linux (RHEL)",
+        "CentOS",
+        "Rocky Linux",
+        "AlmaLinux"
+      ],
+      "options": [
+        {
+          "flag": "-y",
+          "description": "الموافقة التلقائية على جميع الأسئلة والمطالبات أثناء التثبيت."
+        },
+        {
+          "flag": "--nogpgcheck",
+          "description": "تخطي التحقق من توقيع GPG للحزم (استخدمه بحذر شديد)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "sudo dnf install git",
+          "description": "تثبيت أداة التحكم بالإصدارات Git."
+        },
+        {
+          "command": "sudo dnf install nginx -y",
+          "description": "تثبيت خادم الويب Nginx وتخطي تأكيد التثبيت."
+        }
+      ],
+      "keywords": [
+        "dnf",
+        "install",
+        "تثبيت",
+        "برامج",
+        "حزم",
+        "fedora",
+        "redhat",
+        "rhel"
+      ]
     },
     {
       "id": 4,
@@ -147,12 +271,64 @@
       "id": 14,
       "category_id": "file_management",
       "command": "rm",
-      "syntax": "rm [file_name]",
+      "syntax": "rm [options] [file_or_directory]",
       "level": "مبتدئ",
-      "name_ar": "حذف ملف",
-      "description": "يقوم بحذف الملفات نهائياً من النظام.",
-      "how_to_use": "حذارِ! الملف المحذوف بهذا الأمر لا يذهب لسلة المهملات. استخدم rm -r للمجلدات.",
-      "can_copy": true
+      "name_ar": "حذف الملفات والمجلدات",
+      "description": "يقوم بحذف الملفات أو المجلدات نهائياً من نظام الملفات دون نقلها إلى سلة المهملات.",
+      "how_to_use": "استخدم rm file.txt لحذف ملف واحد، واستخدم الخيار -r لحذف المجلدات بمحتوياتها. كن حذراً للغاية عند استخدام الصلاحيات الجذرية.",
+      "can_copy": true,
+      "risk_level": "high",
+      "warning": "تحذير أمني شديد: الحذف بأمر rm نهائي ولا يمكن التراجع عنه! إياك وتشغيل 'sudo rm -rf /' لأن ذلك يدمر ملفات النظام بالكامل.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-r",
+          "description": "الحذف المتكرر (Recursive): لحذف المجلدات وجميع محتوياتها الداخلية."
+        },
+        {
+          "flag": "-f",
+          "description": "الحذف الإجباري (Force): يتجاهل الملفات غير الموجودة ولا يطلب تأكيد الحذف أبداً."
+        },
+        {
+          "flag": "-i",
+          "description": "الوضع التفاعلي (Interactive): يطلب تأكيد المستخدم قبل حذف كل ملف على حدة (موصى به للأمان)."
+        },
+        {
+          "flag": "-v",
+          "description": "الوضع المفصل (Verbose): يعرض أسماء الملفات التي يتم حذفها تباعاً."
+        }
+      ],
+      "examples": [
+        {
+          "command": "rm old_notes.txt",
+          "description": "حذف ملف نصي محدد."
+        },
+        {
+          "command": "rm -i sensitive_data.pdf",
+          "description": "حذف ملف مع طلب تأكيد قبل التنفيذ للأمان."
+        },
+        {
+          "command": "rm -rf build_cache/",
+          "description": "حذف مجلد كامل بمحتوياته إجبارياً."
+        }
+      ],
+      "keywords": [
+        "rm",
+        "remove",
+        "delete",
+        "حذف",
+        "مسح",
+        "إزالة",
+        "ملف",
+        "مجلد"
+      ]
     },
     {
       "id": 15,
@@ -3837,6 +4013,1106 @@
       "description": "يبحث في سجلات التدقيق (Audit logs) عن أحداث SELinux التي تم منعها مؤخراً.",
       "how_to_use": "الأداة الأولى والأساسية لتشخيص مشاكل رفض الوصول (Access Denied) في فيدورا.",
       "can_copy": true
+    },
+    {
+      "id": 349,
+      "category_id": "flutter_dart",
+      "command": "flutter doctor -v",
+      "syntax": "flutter doctor [-v | --verbose]",
+      "level": "مبتدئ",
+      "name_ar": "فحص بيئة التطوير والتبعيات",
+      "description": "يقوم بفحص شامل لبيئة عمل فلاتر والتأكد من تثبيت جميع الأدوات والتبعيات المطلوبة مثل Android SDK، Chrome، وVS Code.",
+      "how_to_use": "يُستخدم عند تثبيت فلاتر لأول مرة أو عند حدوث مشاكل في البناء لاكتشاف النواقص والتبعيات المفقودة.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-v, --verbose",
+          "description": "عرض تقرير تفصيلي مع المسارات وإصدارات الأدوات."
+        },
+        {
+          "flag": "--android-licenses",
+          "description": "مراجعة وقبول تراخيص Android SDK المطلوبة."
+        }
+      ],
+      "examples": [
+        {
+          "command": "flutter doctor",
+          "description": "فحص سريع ومختصر لحالة بيئة التطوير."
+        },
+        {
+          "command": "flutter doctor -v",
+          "description": "عرض تفاصيل كاملة عن كل أداة ومسارها وحالتها."
+        },
+        {
+          "command": "flutter doctor --android-licenses",
+          "description": "قبول تراخيص أندرويد المطلوبة للبناء والتطوير."
+        }
+      ],
+      "expected_result": "Doctor summary (to see all details, run flutter doctor -v):\n[✓] Flutter (Channel stable, 3.24.0, on Linux)\n[✓] Android toolchain - develop for Android devices (Android SDK version 34.0.0)\n[✓] Chrome - develop for the web\n[✓] Connected device (1 available)\n• No issues found!",
+      "common_errors": "• Android license status unknown: قم بتشغيل flutter doctor --android-licenses واقبل جميع الشروط بالضغط على y.\n• Unable to locate Android SDK: تأكد من تثبيت Android Studio وتحديد مسار SDK عبر متغير البيئة ANDROID_HOME.",
+      "keywords": [
+        "flutter",
+        "doctor",
+        "فحص",
+        "فلاتر",
+        "تشخيص",
+        "بيئة",
+        "sdk",
+        "dependencies",
+        "تراخيص"
+      ]
+    },
+    {
+      "id": 350,
+      "category_id": "flutter_dart",
+      "command": "flutter clean",
+      "syntax": "flutter clean",
+      "level": "مبتدئ",
+      "name_ar": "تنظيف ملفات البناء والتخزين المؤقت",
+      "description": "يحذف مجلدي build و .dart_tool المؤقتين لإعادة بناء المشروع من الصفر وحل مشاكل الملفات التالفة القديمة.",
+      "how_to_use": "شغّله عندما تواجه أخطاء بناء غريبة بعد تعديل ملفات Gradle أو ترقية الحزم أو تغيير إصدار Flutter.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "سيؤدي هذا الأمر إلى إطالة وقت البناء التالي لأنه سيعيد تجميع كافة المكونات من الصفر.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [],
+      "examples": [
+        {
+          "command": "flutter clean",
+          "description": "حذف كافة مخرجات البناء المؤقتة للمشروع."
+        },
+        {
+          "command": "flutter clean && flutter pub get",
+          "description": "تنظيف البناء ثم إعادة جلب حزم المشروع مباشرة."
+        }
+      ],
+      "expected_result": "Deleting build/...\nDeleting .dart_tool/...\nCleaning finished in 1,240ms.",
+      "common_errors": "• Resource temporarily unavailable: تأكد من إغلاق أي تطبيق قيد التشغيل أو نافذة طرفية تشغل flutter run لتجنب قفل الملفات.",
+      "keywords": [
+        "flutter",
+        "clean",
+        "تنظيف",
+        "كاش",
+        "بناء",
+        "build",
+        "حذف",
+        "cache"
+      ]
+    },
+    {
+      "id": 351,
+      "category_id": "flutter_dart",
+      "command": "flutter pub get",
+      "syntax": "flutter pub get [--dry-run] [--offline]",
+      "level": "مبتدئ",
+      "name_ar": "تحميل وتحديث حزم وتبعيّات المشروع",
+      "description": "يقوم بتنزيل وفحص جميع الحزم والمكتبات المعرفة في ملف pubspec.yaml وإنشاء أو تحديث ملف pubspec.lock.",
+      "how_to_use": "يُنفذ فور استنساخ أي مشروع فلاتر أو بعد إضافة حزم ومكتبات جديدة إلى ملف pubspec.yaml.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "--dry-run",
+          "description": "فحص الحزم والتحقق من التوافق دون تنزيل أو تعديل الملفات فعلياً."
+        },
+        {
+          "flag": "--offline",
+          "description": "استخدام الحزم المخزنة مؤقتاً في الجهاز دون الاتصال بالإنترنت."
+        }
+      ],
+      "examples": [
+        {
+          "command": "flutter pub get",
+          "description": "تنزيل حزم المشروع المحددة في pubspec.yaml."
+        },
+        {
+          "command": "flutter pub get --offline",
+          "description": "تحميل الحزم دون اتصال بالإنترنت اعتماداً على الكاش المحلي."
+        },
+        {
+          "command": "flutter pub outdated",
+          "description": "فحص التحديثات المتاحة للمكتبات المستخدمة."
+        }
+      ],
+      "expected_result": "Resolving dependencies...\nGot dependencies!\n3 packages have newer versions incompatible with dependency constraints.",
+      "common_errors": "• Version solving failed: تعارض في إصدارات الحزم في pubspec.yaml. حدّث قيود الإصدارات أو استخدم dependency_overrides بحذر.",
+      "keywords": [
+        "flutter",
+        "pub",
+        "get",
+        "حزم",
+        "مكتبات",
+        "تنزيل",
+        "dependencies",
+        "packages",
+        "pubspec"
+      ]
+    },
+    {
+      "id": 352,
+      "category_id": "flutter_dart",
+      "command": "flutter run",
+      "syntax": "flutter run [-d <device-id>] [--release | --debug | --profile]",
+      "level": "مبتدئ",
+      "name_ar": "تشغيل التطبيق في وضع التطوير",
+      "description": "يبني التطبيق ويشغله على جهاز حقيقي متصل أو محاكي، مع تفعيل ميزة التحديث اللحظي (Hot Reload).",
+      "how_to_use": "يُستخدم أثناء كتابة الكود لاختبار التعديلات لحظياً بالضغط على 'r' في سطر الأوامر.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-d <device>",
+          "description": "تحديد الجهاز أو المحاكي المستهدف للتشغيل."
+        },
+        {
+          "flag": "--release",
+          "description": "تشغيل التطبيق في وضع الإنتاج بأقصى سرعة ممكنة."
+        },
+        {
+          "flag": "--debug",
+          "description": "تشغيل التطبيق في وضع التنقيح والتصحيح (الافتراضي)."
+        },
+        {
+          "flag": "--profile",
+          "description": "وضع قياس الأداء وتحليل استهلاك الذاكرة والمعالج."
+        }
+      ],
+      "examples": [
+        {
+          "command": "flutter run",
+          "description": "تشغيل التطبيق على أول جهاز أو محاكي متاح."
+        },
+        {
+          "command": "flutter run -d chrome",
+          "description": "تشغيل التطبيق داخل متصفح كروم لاختبار بيئة الويب."
+        },
+        {
+          "command": "flutter run --release",
+          "description": "تشغيل التطبيق في وضع الإنتاج دون شريط التصحيح."
+        }
+      ],
+      "expected_result": "Launching lib/main.dart on Linux in debug mode...\nBuilding Linux application...\nSyncing files to device Linux...\nFlutter run key commands:\nr Hot reload.\nR Hot restart.\nh List all available interactive commands.\nq Quit (terminate the application on the device).",
+      "common_errors": "• No connected devices: تأكد من توصيل هاتفك وتفعيل تصحيح USB أو تشغيل المحاكي أولاً عبر أمر adb devices أو flutter devices.",
+      "keywords": [
+        "flutter",
+        "run",
+        "تشغيل",
+        "تطوير",
+        "hot reload",
+        "محاكي",
+        "debug",
+        "تنقيح"
+      ]
+    },
+    {
+      "id": 353,
+      "category_id": "flutter_dart",
+      "command": "flutter build apk",
+      "syntax": "flutter build apk [--split-per-abi] [--release]",
+      "level": "متوسط",
+      "name_ar": "بناء حزمة التثبيت لنظام أندرويد (APK)",
+      "description": "يقوم بتجميع كود دارت ومكونات التطبيق لإنتاج ملف APK جاهز للتثبيت والمشاركة على هواتف أندرويد.",
+      "how_to_use": "يُستخدم لإنشاء نسخة نهائية من التطبيق لتوزيعها على المختبرين أو تثبيتها يدوياً على الأجهزة.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "--split-per-abi",
+          "description": "تقسيم ملف APK إلى حزم منفصلة لكل معمارية معالج لتقليل حجم التحميل بشكل كبير."
+        },
+        {
+          "flag": "--release",
+          "description": "بناء النسخة النهائية المحسنة للإنتاج."
+        },
+        {
+          "flag": "--target-platform",
+          "description": "تحديد المعماريات المستهدفة مثل android-arm, android-arm64."
+        }
+      ],
+      "examples": [
+        {
+          "command": "flutter build apk",
+          "description": "بناء ملف APK شامل (Fat APK) لجميع المعماريات."
+        },
+        {
+          "command": "flutter build apk --split-per-abi",
+          "description": "بناء ملفات APK مقسمة ومنخفضة الحجم لكل معمارية."
+        },
+        {
+          "command": "flutter build appbundle",
+          "description": "بناء حزمة AAB لرفعها إلى متجر Google Play."
+        }
+      ],
+      "expected_result": "✓ Built build/app/outputs/flutter-apk/app-release.apk (18.4MB)",
+      "common_errors": "• Gradle task assembleRelease failed: خطأ أثناء تجميع Gradle، تأكد من صحة إعدادات التوقيع في key.properties وملف build.gradle.",
+      "keywords": [
+        "flutter",
+        "build",
+        "apk",
+        "تصدير",
+        "تجميع",
+        "اندرويد",
+        "إنتاج",
+        "release",
+        "bundle"
+      ]
+    },
+    {
+      "id": 354,
+      "category_id": "flutter_dart",
+      "command": "dart format .",
+      "syntax": "dart format [path] [-l <line-length>] [--set-exit-if-changed]",
+      "level": "مبتدئ",
+      "name_ar": "تنسيق وترتيب شيفرة دارت وفق المعايير",
+      "description": "يقوم بتنسيق ملفات الشيفرة المصدرية المكتوبة بلغة دارت تلقائياً بحسب القواعد والأساليب القياسية المعتمدة.",
+      "how_to_use": "يُشغّل قبل عمل Commit لضمان اتساق شكل الكود وتنظيف المسافات والفواصل الزائدة.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "يقوم هذا الأمر بتعديل الملفات مباشرة على القرص. تأكد من حفظ تغييراتك قبل التشغيل.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-l, --line-length",
+          "description": "تحديد الحد الأقصى لطول السطر (الافتراضي 80 حرفاً)."
+        },
+        {
+          "flag": "-o, --output",
+          "description": "تحديد وجهة المخرجات (write للتعديل في الملفات، show للعرض فقط)."
+        },
+        {
+          "flag": "--set-exit-if-changed",
+          "description": "إعادة رمز خطأ إذا وجدت ملفات تحتاج تنسيق (مفيد في مسارات CI/CD)."
+        }
+      ],
+      "examples": [
+        {
+          "command": "dart format .",
+          "description": "تنسيق كافة ملفات دارت في المجلد الحالي ومجلداته الفرعية."
+        },
+        {
+          "command": "dart format lib/",
+          "description": "تنسيق ملفات مجلد lib فقط."
+        },
+        {
+          "command": "dart format -o show lib/main.dart",
+          "description": "عرض التنسيق المقترح دون تعديل الملف الفعلي."
+        }
+      ],
+      "expected_result": "Formatted 12 files (4 changed) in 0.48 seconds.",
+      "common_errors": "• Could not format because the code contains syntax errors: الكود يحتوي أخطاء لغوية تمنع تنسيقه. أصلح أخطاء الشيفرة أولاً.",
+      "keywords": [
+        "dart",
+        "format",
+        "تنسيق",
+        "ترتيب",
+        "كود",
+        "دارت",
+        "linter",
+        "style"
+      ]
+    },
+    {
+      "id": 355,
+      "category_id": "android_dev",
+      "command": "adb devices",
+      "syntax": "adb devices [-l]",
+      "level": "مبتدئ",
+      "name_ar": "عرض الأجهزة والمحاكيات المتصلة",
+      "description": "يعرض قائمة بجميع أجهزة أندرويد والمحاكيات المتصلة بالحاسوب والمصرح لها بالتواصل عبر جسر تصحيح أندرويد (ADB).",
+      "how_to_use": "يُستخدم كأول خطوة للتحقق من أن الحاسوب يتعرف على جهازك قبل محاولة تشغيل أو تثبيت التطبيقات.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-l",
+          "description": "عرض تفاصيل موسعة لكل جهاز مثل معمارية المعالج وطراز الجهاز ورقم المنفذ."
+        }
+      ],
+      "examples": [
+        {
+          "command": "adb devices",
+          "description": "عرض معرفات الأجهزة المتصلة وحالتها العامة."
+        },
+        {
+          "command": "adb devices -l",
+          "description": "عرض أسماء الأجهزة وطرازاتها بالتفصيل الدقيق."
+        }
+      ],
+      "expected_result": "List of devices attached\nemulator-5554   device product:sdk_gphone64_x86_64 model:sdk_gphone64_x86_64\n1234567890ABC   device product:redfin model:Pixel_5",
+      "common_errors": "• device unauthorized: الهاتف متصل لكن لم تقبل رسالة التحقق. افتح شاشة الهاتف واضغط Allow USB Debugging.\n• no devices/emulators found: تأكد من تفعيل USB Debugging في خيارات المطور وجودة كابل التوصيل.",
+      "keywords": [
+        "adb",
+        "devices",
+        "أجهزة",
+        "اندرويد",
+        "محاكي",
+        "توصيل",
+        "اتصال",
+        "usb",
+        "debugging"
+      ]
+    },
+    {
+      "id": 356,
+      "category_id": "android_dev",
+      "command": "adb logcat",
+      "syntax": "adb logcat [options] [filterspecs]",
+      "level": "متوسط",
+      "name_ar": "مراقبة وعرض سجلات النظام والتطبيق المباشرة",
+      "description": "يعرض تدفقاً حياً لسجلات النظام ورسائل الأخطاء والاستثناءات المطبوعة من نظام أندرويد وتطبيقاته.",
+      "how_to_use": "يُستخدم لتعقب انهيارات التطبيقات (Crashes) ومراقبة ما يطبع في الكود أثناء الفحص والتجربة.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-c",
+          "description": "مسح كافة السجلات المخزنة مسبقاً في الذاكرة المؤقتة."
+        },
+        {
+          "flag": "-d",
+          "description": "طباعة السجلات الحالية ثم الخروج دون البقاء متصلاً للتدفق المستمر."
+        },
+        {
+          "flag": "*:E",
+          "description": "تصفية السجلات لإظهار الأخطاء فقط (Error Level)."
+        },
+        {
+          "flag": "-v time",
+          "description": "إظهار وقت وتاريخ كل رسالة مسجلة بدقة."
+        }
+      ],
+      "examples": [
+        {
+          "command": "adb logcat -c",
+          "description": "تنظيف سجلات أندرويد السابقة قبل بدء الاختبار."
+        },
+        {
+          "command": "adb logcat *:E",
+          "description": "مراقبة الأخطاء والاستثناءات الحرجة فقط في النظام."
+        },
+        {
+          "command": "adb logcat -s flutter",
+          "description": "تصفية الرسائل الصادرة من محرك فلاتر فقط."
+        }
+      ],
+      "expected_result": "04-12 10:15:32.120  2450  2450 E AndroidRuntime: FATAL EXCEPTION: main\nProcess: com.example.app, PID: 2450\njava.lang.NullPointerException: Attempt to invoke virtual method on a null object reference",
+      "common_errors": "• adb: more than one device/emulator: هناك أكثر من جهاز متصل، استخدم خيار -s <serial> لتحديد الجهاز المطلوب.",
+      "keywords": [
+        "adb",
+        "logcat",
+        "سجلات",
+        "أخطاء",
+        "crash",
+        "انهيار",
+        "logs",
+        "مراقبة",
+        "debugging"
+      ]
+    },
+    {
+      "id": 357,
+      "category_id": "android_dev",
+      "command": "adb install",
+      "syntax": "adb install [options] <path_to_apk>",
+      "level": "مبتدئ",
+      "name_ar": "تثبيت تطبيق APK على الجهاز",
+      "description": "يقوم بنقل حزمة تطبيق APK من الحاسوب إلى جهاز أندرويد المتصل وتثبيتها مباشرة في النظام.",
+      "how_to_use": "يُستخدم لتجربة حزم APK المطورة محلياً دون الحاجة لرفعها إلى متجر أو نقلها يدوياً.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-r",
+          "description": "إعادة التثبيت مع الاحتفاظ ببيانات التطبيق السابقة (Reinstall)."
+        },
+        {
+          "flag": "-d",
+          "description": "السماح بتخفيض إصدار التطبيق (Downgrade)."
+        },
+        {
+          "flag": "-g",
+          "description": "منح جميع الأذونات المطلوبة في ملف Manifest تلقائياً عند التثبيت."
+        }
+      ],
+      "examples": [
+        {
+          "command": "adb install app-release.apk",
+          "description": "تثبيت ملف التطبيق لأول مرة على الهاتف."
+        },
+        {
+          "command": "adb install -r app-debug.apk",
+          "description": "تحديث التطبيق الموجود مع الاحتفاظ ببياناته وإعداداته."
+        },
+        {
+          "command": "adb install -r -g app-debug.apk",
+          "description": "تثبيت مع منح الصلاحيات تلقائياً لتسريع الاختبار."
+        }
+      ],
+      "expected_result": "Performing Streamed Install\nSuccess",
+      "common_errors": "• INSTALL_FAILED_ALREADY_EXISTS: التطبيق مثبت مسبقاً، أضف الخيار -r للتحديث.\n• INSTALL_FAILED_UPDATE_INCOMPATIBLE: توقيع APK الجديد يختلف عن القديم؛ احذف التطبيق القديم أولاً عبر adb uninstall.",
+      "keywords": [
+        "adb",
+        "install",
+        "تثبيت",
+        "apk",
+        "تطبيق",
+        "اندرويد",
+        "نقل",
+        "تنصيب"
+      ]
+    },
+    {
+      "id": 358,
+      "category_id": "android_dev",
+      "command": "adb uninstall",
+      "syntax": "adb uninstall [-k] <package_name>",
+      "level": "مبتدئ",
+      "name_ar": "إلغاء تثبيت التطبيق وحذفه من الجهاز",
+      "description": "يحذف تطبيق أندرويد المعين من الهاتف باستخدام اسم الحزمة (Package Name) الخاص به.",
+      "how_to_use": "يُستخدم عند الرغبة في إزالة التطبيق بالكامل لحل تعارضات التوقيع أو إعادة اختباره كأول تثبيت نقي.",
+      "can_copy": true,
+      "risk_level": "moderate",
+      "warning": "سيؤدي هذا الأمر إلى مسح التطبيق وكافة بياناته المحفوظة محلياً وقواعد بياناته ما لم تحدد الخيار -k.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-k",
+          "description": "الاحتفاظ ببيانات التطبيق وملفات الكاش ومسح ملف التطبيق التنفيذي فقط."
+        }
+      ],
+      "examples": [
+        {
+          "command": "adb uninstall com.example.my_app",
+          "description": "إزالة التطبيق بالكامل مع بياناته وقواعده المحلية."
+        },
+        {
+          "command": "adb uninstall -k com.example.my_app",
+          "description": "إزالة التطبيق مع الاحتفاظ ببياناته وإعداداته."
+        }
+      ],
+      "expected_result": "Success",
+      "common_errors": "• Failure [DELETE_FAILED_INTERNAL_ERROR]: تأكد من اسم الحزمة الصحيح وليس اسم ملف الـ APK، يمكنك معرفتها عبر adb shell pm list packages.",
+      "keywords": [
+        "adb",
+        "uninstall",
+        "حذف",
+        "إزالة",
+        "إلغاء تثبيت",
+        "package",
+        "حزمة"
+      ]
+    },
+    {
+      "id": 359,
+      "category_id": "android_dev",
+      "command": "adb push",
+      "syntax": "adb push <local_path> <remote_path>",
+      "level": "متوسط",
+      "name_ar": "إرسال ملفات من الحاسوب إلى جهاز أندرويد",
+      "description": "ينسخ ملفاً أو مجلداً كاملاً من القرص المحلي للحاسوب إلى مسار محدد في الذاكرة الداخلية لجهاز أندرويد.",
+      "how_to_use": "يُستخدم لنقل قواعد بيانات تجريبية أو ملفات وسائط ومستندات إلى مسار /sdcard/ على الهاتف.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [],
+      "examples": [
+        {
+          "command": "adb push database.db /sdcard/Download/",
+          "description": "نسخ قاعدة بيانات إلى مجلد التنزيلات بالهاتف."
+        },
+        {
+          "command": "adb push assets/ /sdcard/Movies/",
+          "description": "نسخ مجلد كامل بالملفات الفرعية إلى هاتف أندرويد."
+        }
+      ],
+      "expected_result": "database.db: 1 file pushed, 0 skipped. 14.2 MB/s (1048576 bytes in 0.070s)",
+      "common_errors": "• Permission denied: لا تملك صلاحية الكتابة في المسار المحدد (مثل مجلدات النظام المحمية). استخدم مسار /sdcard/Download/ المتاح للمستخدم.",
+      "keywords": [
+        "adb",
+        "push",
+        "إرسال",
+        "نسخ",
+        "رفع",
+        "ملفات",
+        "نقل",
+        "ذاكرة"
+      ]
+    },
+    {
+      "id": 360,
+      "category_id": "android_dev",
+      "command": "adb shell",
+      "syntax": "adb shell [command]",
+      "level": "متوسط",
+      "name_ar": "فتح طرفية تفاعلية داخل نظام أندرويد",
+      "description": "يفتح جلسة سطر أوامر داخل نواة أندرويد (Linux Shell) أو ينفذ أمراً فردياً مباشراً داخل نظام الهاتف.",
+      "how_to_use": "يُستخدم لاستكشاف بنية ملفات النظام وفحص العمليات الجارية وإدارة حزم التطبيقات عبر pm و am.",
+      "can_copy": true,
+      "risk_level": "moderate",
+      "warning": "التعديل على ملفات النظام أو صلاحيات التطبيقات من داخل Shell قد يؤثر على استقرار النظام.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "pm list packages",
+          "description": "استعراض قائمة الحزم والتطبيقات المثبتة في الهاتف."
+        },
+        {
+          "flag": "dumpsys battery",
+          "description": "عرض حالة البطارية ونسبة الشحن ومستوى الحرارة."
+        },
+        {
+          "flag": "screencap -p <path>",
+          "description": "التقاط لقطة شاشة من الهاتف وحفظها مباشرة كصورة PNG."
+        }
+      ],
+      "examples": [
+        {
+          "command": "adb shell",
+          "description": "فتح سطر أوامر تفاعلي مباشر داخل الهاتف."
+        },
+        {
+          "command": "adb shell dumpsys battery",
+          "description": "استعراض معلومات تفصيلية عن البطارية."
+        },
+        {
+          "command": "adb shell pm list packages -3",
+          "description": "إظهار حزم تطبيقات الطرف الثالث المثبتة فقط."
+        }
+      ],
+      "expected_result": "Current Battery Service state:\n  AC powered: false\n  USB powered: true\n  status: 2 (Charging)\n  health: 2 (Good)\n  level: 85\n  temperature: 285",
+      "common_errors": "• adb: device offline: الجهاز غير مستجيب؛ أعد تشغيل خادم ADB عبر adb kill-server ثم adb start-server.",
+      "keywords": [
+        "adb",
+        "shell",
+        "طرفية",
+        "اوامر",
+        "نظام",
+        "اندرويد",
+        "لينكس",
+        "مراقبة",
+        "pm",
+        "battery"
+      ]
+    },
+    {
+      "id": 361,
+      "category_id": "git_github",
+      "command": "git status",
+      "syntax": "git status [-s | --short] [-b | --branch]",
+      "level": "مبتدئ",
+      "name_ar": "فحص حالة الملفات والتغييرات الجارية",
+      "description": "يعرض التغييرات التي تمت على الملفات، والملفات المجهزة (Staged)، والملفات غير المتابعة (Untracked) والفرع الحالي.",
+      "how_to_use": "يُفضل استخدامه باستمرار قبل تنفيذ أي أمر commit أو pull لمعرفة حالة مجلد العمل بدقة.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-s, --short",
+          "description": "عرض الحالة بصيغة مقتضبة ورموز بسيطة وسريعة القراءة."
+        },
+        {
+          "flag": "-b, --branch",
+          "description": "إظهار معلومات الفرع الحالي والتفرع مقارنة بالمستودع البعيد."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git status",
+          "description": "عرض تقرير الحالة الشامل والمفصل للمشروع."
+        },
+        {
+          "command": "git status -s",
+          "description": "عرض مختصر وسريع لحالة الملفات المعدلة والمضافة."
+        }
+      ],
+      "expected_result": "On branch main\nYour branch is up to date with 'origin/main'.\n\nChanges not staged for commit:\n  (use \"git add <file>...\" to update what will be committed)\n\tmodified:   lib/main.dart\n\nno changes added to commit (use \"git add\")",
+      "common_errors": "• fatal: not a git repository: المجلد الحالي ليس مستودع جيت. تأكد من الانتقال لمجلد المشروع أو تهيئته عبر git init.",
+      "keywords": [
+        "git",
+        "status",
+        "حالة",
+        "فحص",
+        "تغييرات",
+        "مستودع",
+        "ملفات",
+        "متابعة"
+      ]
+    },
+    {
+      "id": 362,
+      "category_id": "git_github",
+      "command": "git add",
+      "syntax": "git add <file_path | .> [-p] [-A]",
+      "level": "مبتدئ",
+      "name_ar": "إضافة التغييرات إلى منطقة التجهيز (Staging)",
+      "description": "يحدد الملفات والتعديلات المراد شمولها في الالتزام القادم ويضعها في منطقة الإعداد (Staging Area / Index).",
+      "how_to_use": "يُستخدم بعد تعديل أو إنشاء ملفات جديدة لتحديد ما سيتم توثيقه في الحفظ التالي.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": ".",
+          "description": "إضافة جميع التغييرات والملفات الجديدة في المجلد الحالي ومجلداته الفرعية."
+        },
+        {
+          "flag": "-A, --all",
+          "description": "إضافة كافة التغييرات بما فيها الملفات المحذوفة."
+        },
+        {
+          "flag": "-p, --patch",
+          "description": "مراجعة التغييرات واختيار أجزاء منها سطر بسطر بشكل تفاعلي."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git add .",
+          "description": "تجهيز كافة التغييرات والملفات الجديدة في كامل المشروع."
+        },
+        {
+          "command": "git add lib/models/command_model.dart",
+          "description": "تجهيز ملف محدد فقط دون التأثير على بقية الملفات."
+        },
+        {
+          "command": "git add -p",
+          "description": "فحص واختيار التعديلات بدقة قطعة قطعة."
+        }
+      ],
+      "expected_result": "(لا يوجد مخرج عند النجاح، وتظهر الملفات تحت Changes to be committed عند فحص git status)",
+      "common_errors": "• The following untracked working tree files would be overwritten: تعارض عند الإضافة؛ تأكد من عدم وجود ملفات متضاربة.",
+      "keywords": [
+        "git",
+        "add",
+        "إضافة",
+        "تجهيز",
+        "staging",
+        "حفظ",
+        "ملفات"
+      ]
+    },
+    {
+      "id": 363,
+      "category_id": "git_github",
+      "command": "git commit -m",
+      "syntax": "git commit -m \"<message>\" [-a] [--amend]",
+      "level": "مبتدئ",
+      "name_ar": "حفظ وتوثيق التغييرات (Commit)",
+      "description": "يسجل لقطة دائمة (Snapshot) للتغييرات المجهزة في تاريخ المستودع مع كتابة رسالة توضيحية لما تم إنجازه.",
+      "how_to_use": "يُستخدم بعد إنهاء مهمة برمجية محددة أو إصلاح خطأ لتوثيق التطور بخطوات واضحة وقابلة للتراجع.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-m <msg>",
+          "description": "كتابة رسالة الالتزام مباشرة في سطر الأوامر دون فتح محرر النصوص."
+        },
+        {
+          "flag": "-a",
+          "description": "تجهيز كافة الملفات المعدلة مسبقاً وحفظها بخطوة واحدة دون الحاجة لتشغيل git add."
+        },
+        {
+          "flag": "--amend",
+          "description": "تعديل آخر commit تم تنفيذه وإضافة تغييرات جديدة إليه أو تعديل رسالته."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git commit -m \"إصلاح خطأ في شاشة البحث\"",
+          "description": "توثيق الحفظ برسالة وصفية واضحة."
+        },
+        {
+          "command": "git commit -am \"تحديث واجهة المستخدم\"",
+          "description": "تجهيز وحفظ الملفات المعدلة فوراً بخطوة واحدة."
+        },
+        {
+          "command": "git commit --amend --no-edit",
+          "description": "دمج تعديلات جديدة في آخر commit دون تغيير رسالته."
+        }
+      ],
+      "expected_result": "[main 7f3a12b] إصلاح خطأ في شاشة البحث\n 2 files changed, 18 insertions(+), 4 deletions(-)",
+      "common_errors": "• nothing to commit, working tree clean: لا توجد أي تعديلات مجهزة، شغّل git add لإضافة ملفاتك أولاً قبل الالتزام.",
+      "keywords": [
+        "git",
+        "commit",
+        "توثيق",
+        "حفظ",
+        "رسالة",
+        "تسجيل",
+        "تاريخ",
+        "تعديلات"
+      ]
+    },
+    {
+      "id": 364,
+      "category_id": "git_github",
+      "command": "git branch",
+      "syntax": "git branch [-a] [-d <branch_name>] [-m <new_name>]",
+      "level": "متوسط",
+      "name_ar": "إدارة واستعراض فروع المشروع",
+      "description": "يعرض قائمة بالفروع المحلية والبعيدة، ويسمح بإنشاء فروع جديدة أو حذف وتغيير أسماء الفروع القائمة.",
+      "how_to_use": "يُستخدم لعزل الميزات البرمجية الجديدة عن الفرع الرئيسي main وتجنب تخريب النسخة المستقرة.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-a, --all",
+          "description": "عرض جميع الفروع المحلية والبعيدة (Remotes)."
+        },
+        {
+          "flag": "-d <branch>",
+          "description": "حذف فرع محلي تم دمجه بالفعل بأمان."
+        },
+        {
+          "flag": "-D <branch>",
+          "description": "إجبار حذف فرع محلي حتى لو لم يتم دمجه بعد."
+        },
+        {
+          "flag": "-m <new_name>",
+          "description": "إعادة تسمية الفرع الحالي إلى اسم جديد."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git branch",
+          "description": "عرض الفروع المحلية مع تمييز الفرع الحالي بعلامة نجمة (*)."
+        },
+        {
+          "command": "git branch feature-login",
+          "description": "إنشاء فرع جديد باسم feature-login."
+        },
+        {
+          "command": "git branch -d feature-old",
+          "description": "حذف فرع قديم تم الانتهاء من دمجه بنجاح."
+        }
+      ],
+      "expected_result": "* main\n  feature-login\n  bugfix-search",
+      "common_errors": "• error: The branch 'feature-x' is not fully merged: الفرع يحتوي تغييرات لم تدمج في الفرع الرئيسي؛ استخدم -D إذا كنت متأكداً من رغبتك في حذفه نهائياً.",
+      "keywords": [
+        "git",
+        "branch",
+        "فرع",
+        "فروع",
+        "تفرع",
+        "إنشاء فرع",
+        "حذف فرع",
+        "feature"
+      ]
+    },
+    {
+      "id": 365,
+      "category_id": "git_github",
+      "command": "git push",
+      "syntax": "git push [remote] [branch] [-u] [--force]",
+      "level": "متوسط",
+      "name_ar": "رفع التغييرات إلى المستودع البعيد (GitHub)",
+      "description": "يرفع الالتزامات (Commits) والفروع المحلية إلى المستودع السحابي البعيد مثل GitHub أو GitLab لمشاركتها وحفظها.",
+      "how_to_use": "يُستخدم لمزامنة عملك اليومي مع الفريق والنسخ الاحتياطي السحابي بعد إجراء الـ commits.",
+      "can_copy": true,
+      "risk_level": "moderate",
+      "warning": "استخدام خيار --force قد يمحو تعديلات زملائك على المستودع البعيد نهائياً؛ تجنبه تماماً على الفروع المشتركة والرئيسية.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "-u, --set-upstream",
+          "description": "ربط الفرع المحلي بالفرع البعيد ليصبح كافياً كتابة git push لاحقاً."
+        },
+        {
+          "flag": "--force",
+          "description": "إجبار الرفع وإعادة كتابة تاريخ الفرع البعيد (عالي الخطورة)."
+        },
+        {
+          "flag": "--tags",
+          "description": "رفع جميع الوسوم وإصدارات الإصدارات (Tags) إلى المستودع البعيد."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git push origin main",
+          "description": "رفع التغييرات إلى فرع main على المستودع البعيد origin."
+        },
+        {
+          "command": "git push -u origin feature-auth",
+          "description": "رفع فرع جديد لأول مرة وربطه للتتبع التلقائي المستقبلي."
+        }
+      ],
+      "expected_result": "Enumerating objects: 5, done.\nCounting objects: 100% (5/5), done.\nWriting objects: 100% (3/3), 320 bytes | 320.00 KiB/s, done.\nTo github.com:user/project.git\n   7f3a12b..8e4c92a  main -> main",
+      "common_errors": "• Updates were rejected because the remote contains work you do not have: المستودع البعيد يحتوي تعديلات ليست لديك؛ شغّل git pull أولاً لدمجها قبل الرفع.",
+      "keywords": [
+        "git",
+        "push",
+        "رفع",
+        "مستودع بعيد",
+        "github",
+        "gitlab",
+        "مزامنة",
+        "سحابي"
+      ]
+    },
+    {
+      "id": 366,
+      "category_id": "git_github",
+      "command": "git log --oneline",
+      "syntax": "git log [--oneline] [-n <number>] [--graph]",
+      "level": "مبتدئ",
+      "name_ar": "عرض سجل الالتزامات بطريقة مدمجة",
+      "description": "يعرض تاريخ الالتزامات السابقة في سطر واحد مختصر لكل حفظ، موضحاً الرمز التعريفي (Hash) والرسالة.",
+      "how_to_use": "يُستخدم لمراجعة آخر الأعمال والبحث عن رقم commit معين للرجوع إليه أو معرفة من قام بالتعديل.",
+      "can_copy": true,
+      "risk_level": "low",
+      "warning": "",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "--oneline",
+          "description": "ضغط كل commit في سطر واحد مختصر ومباشر."
+        },
+        {
+          "flag": "-n <count>",
+          "description": "تحديد عدد الالتزامات المعروضة (مثلاً -n 5 لآخر 5 عمليات)."
+        },
+        {
+          "flag": "--graph",
+          "description": "إظهار رسم بياني شجري يوضح تفرع واندماج الفروع بالألوان."
+        },
+        {
+          "flag": "--author=<name>",
+          "description": "تصفية الالتزامات حسب اسم المطور أو البريد."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git log --oneline",
+          "description": "عرض التاريخ بشكل موجز ومقروء وسهل المتابعة."
+        },
+        {
+          "command": "git log --oneline -n 5",
+          "description": "عرض آخر خمسة التزامات فقط في الفرع الحالي."
+        },
+        {
+          "command": "git log --graph --oneline --all",
+          "description": "رسم بياني شجري لجميع فروع المستودع وتفرعاتها."
+        }
+      ],
+      "expected_result": "8e4c92a (HEAD -> main, origin/main) إضافة دعم التصنيفات الجديدة\n7f3a12b إصلاح خطأ في شاشة البحث\n3c2d10e تحديث ملف التبعيات pubspec.yaml",
+      "common_errors": "• لا توجد أخطاء شائعة (اضغط على المفتاح 'q' في لوحة المفاتيح للخروج من شاشة السجلات والعودة للطرفية).",
+      "keywords": [
+        "git",
+        "log",
+        "سجل",
+        "تاريخ",
+        "commits",
+        "مراجعة",
+        "oneline",
+        "تتبع"
+      ]
+    },
+    {
+      "id": 367,
+      "category_id": "git_github",
+      "command": "git reset --hard",
+      "syntax": "git reset --hard [<commit_hash> | HEAD]",
+      "level": "متقدم",
+      "name_ar": "إلغاء وتراجع كامل عن التغييرات (شديد الخطورة)",
+      "description": "يعيد شجرة العمل ومنطقة الإعداد تماماً إلى حالة الالتزام المحدد، ويحذف كافة التغييرات غير المحفوظة نهائياً وبلا رجعة.",
+      "how_to_use": "يُستخدم فقط في الحالات القصوى عندما تكون التعديلات الحالية فاسدة كلياً وتريد تصفير المشروع إلى آخر حالة سليمة.",
+      "can_copy": true,
+      "risk_level": "high",
+      "warning": "تحذير أمني شديد: هذا الأمر مدمر للملفات غير المحفوظة! سيتم مسح كافة التعديلات في مجلد العمل ومنطقة الإعداد نهائياً دون إمكانية استرجاعها. لا تقم بتشغيله أبداً إذا كانت لديك أعمال تهمك لم تحفظها في Commit منفصل.",
+      "distros": [
+        "جميع التوزيعات (Universal)",
+        "Ubuntu",
+        "Debian",
+        "Fedora",
+        "Arch",
+        "Zorin OS"
+      ],
+      "options": [
+        {
+          "flag": "HEAD",
+          "description": "إعادة التعيين إلى آخر حفظ في الفرع الحالي وحذف كل التعديلات الجارية."
+        },
+        {
+          "flag": "HEAD~1",
+          "description": "التراجع عن آخر commit وتدمير كافة ملفاته وتعديلاته."
+        },
+        {
+          "flag": "<commit_hash>",
+          "description": "التراجع التام إلى تاريخ نقطة حفظ معينة وإلغاء كل ما بعدها."
+        }
+      ],
+      "examples": [
+        {
+          "command": "git reset --hard HEAD",
+          "description": "حذف كل التغييرات غير المحفوظة وإعادة مجلد العمل لحالة آخر commit تماماً."
+        },
+        {
+          "command": "git reset --hard HEAD~1",
+          "description": "التراجع عن آخر التزام مع محو كافة تعديلاته نهائياً."
+        }
+      ],
+      "expected_result": "HEAD is now at 8e4c92a إضافة دعم التصنيفات الجديدة",
+      "common_errors": "• فقدان التعديلات غير الموثقة: التعديلات التي لم يتم عمل commit لها سابقاً تضيع للأبد ولا تظهر حتى في git reflog.",
+      "keywords": [
+        "git",
+        "reset",
+        "hard",
+        "تراجع",
+        "حذف",
+        "إلغاء",
+        "تدمير",
+        "خطر",
+        "مسح",
+        "إعادة ضبط"
+      ]
     }
   ]
 }

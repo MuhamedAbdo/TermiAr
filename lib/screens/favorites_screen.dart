@@ -6,7 +6,6 @@ import '../providers/theme_provider.dart';
 import '../services/data_service.dart';
 import '../screens/command_details_screen.dart';
 import '../utils/bidi_helper.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class FavoritesScreen extends StatefulWidget {
   const FavoritesScreen({super.key});
@@ -16,119 +15,96 @@ class FavoritesScreen extends StatefulWidget {
 }
 
 class _FavoritesScreenState extends State<FavoritesScreen> {
-  List<CommandModel> _favoriteCommands = [];
   bool _isLoading = true;
+  List<CommandModel> _allCommands = [];
 
   @override
   void initState() {
     super.initState();
-    _loadFavoriteCommands();
+    _loadAllCommands();
   }
 
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    // Reload favorites every time the screen is displayed
-    _loadFavoriteCommands();
-  }
-
-  Future<void> _loadFavoriteCommands() async {
-    final favoritesProvider = Provider.of<FavoritesProvider>(
-      context,
-      listen: false,
-    );
-
-    // Wait for favorites to be initialized
-    while (!favoritesProvider.isInitialized) {
-      await Future.delayed(const Duration(milliseconds: 100));
-    }
-
-    print(
-      'Loading favorite commands. Current favorite IDs: ${favoritesProvider.favoriteCommandIds}',
-    );
-
-    if (favoritesProvider.favoriteCommandIds.isEmpty) {
-      print('No favorites found, showing empty state');
-      setState(() {
-        _favoriteCommands = [];
-        _isLoading = false;
-      });
-      return;
-    }
-
+  Future<void> _loadAllCommands() async {
     try {
-      // Load all commands and filter by favorites
       final allCommandsResponse = await DataService.loadCommands();
-      final favoriteCommands = allCommandsResponse.commands
-          .where((command) => favoritesProvider.isFavorite(command.id))
-          .toList();
-
-      print('Found ${favoriteCommands.length} favorite commands');
-      for (var command in favoriteCommands) {
-        print('Favorite command: ${command.id} - ${command.command}');
+      if (mounted) {
+        setState(() {
+          _allCommands = allCommandsResponse.commands;
+          _isLoading = false;
+        });
       }
-
-      setState(() {
-        _favoriteCommands = favoriteCommands;
-        _isLoading = false;
-      });
     } catch (e) {
-      print('Error loading favorite commands: $e');
-      setState(() {
-        _favoriteCommands = [];
-        _isLoading = false;
-      });
+      if (mounted) {
+        setState(() {
+          _allCommands = [];
+          _isLoading = false;
+        });
+      }
     }
+  }
+
+  List<CommandModel> _getFavoriteCommands(FavoritesProvider favoritesProvider) {
+    if (!favoritesProvider.isInitialized || _isLoading) {
+      return [];
+    }
+    return _allCommands
+        .where((command) => favoritesProvider.isFavorite(command.id))
+        .toList();
   }
 
   String _getCategoryDisplayName(String categoryId) {
     switch (categoryId) {
-      case 'debian_family':
-        return 'Debian Family';
-      case 'redhat_family':
-        return 'Red Hat Family';
+      case 'universal':
       case 'universal_commands':
-        return 'Universal Commands';
+        return 'أوامر مشتركة';
+      case 'debian_family':
+        return 'عائلة دبيان';
+      case 'redhat_family':
+        return 'عائلة ريد هات';
       case 'file_management':
-        return 'File Management';
+        return 'إدارة الملفات';
+      case 'network':
       case 'networking':
-        return 'Networking';
+        return 'الشبكات والاتصال';
+      case 'system_monitor':
       case 'system_administration':
-        return 'System Administration';
+        return 'مراقبة النظام';
       case 'security':
-        return 'Security';
+        return 'الأمان والصلاحيات';
       case 'process_management':
-        return 'Process Management';
+        return 'إدارة العمليات';
+      case 'flutter_dart':
+        return 'فلاتر ودارت';
+      case 'android_dev':
+        return 'تطوير أندرويد';
+      case 'git_github':
+        return 'إدارة الإصدارات';
       default:
-        return categoryId
-            .replaceAll('_', ' ')
-            .split(' ')
-            .map(
-              (word) => word[0].toUpperCase() + word.substring(1).toLowerCase(),
-            )
-            .join(' ');
+        return categoryId;
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return WillPopScope(
-      onWillPop: () async {
-        // Refresh favorites when user navigates back to this screen
-        _loadFavoriteCommands();
-        return true;
-      },
+    return PopScope(
+      canPop: true,
       child: Consumer<FavoritesProvider>(
         builder: (context, favoritesProvider, child) {
-          final themeProvider = Provider.of<ThemeProvider>(context);
-          final isDarkMode = themeProvider.isDarkMode;
+          if (!favoritesProvider.isInitialized || _isLoading) {
+            return Scaffold(
+              appBar: AppBar(title: const Text('المفضلة'), centerTitle: true),
+              body: const Center(child: CircularProgressIndicator()),
+            );
+          }
+
+          final favoriteCommands = _getFavoriteCommands(favoritesProvider);
 
           return Scaffold(
             appBar: AppBar(
-              title: const Text('Favorites'),
+              title: const Text('المفضلة'),
               centerTitle: true,
               actions: [
-                if (_favoriteCommands.isNotEmpty)
+                if (favoriteCommands.isNotEmpty)
                   PopupMenuButton<String>(
                     icon: const Icon(Icons.more_vert),
                     onSelected: (value) {
@@ -139,17 +115,21 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                     itemBuilder: (context) => [
                       const PopupMenuItem(
                         value: 'clear_all',
-                        child: Text('Clear All'),
+                        child: Row(
+                          children: [
+                            Icon(Icons.delete_sweep, color: Colors.red, size: 20),
+                            SizedBox(width: 8),
+                            Text('مسح الكل'),
+                          ],
+                        ),
                       ),
                     ],
                   ),
               ],
             ),
-            body: _isLoading
-                ? const Center(child: CircularProgressIndicator())
-                : _favoriteCommands.isEmpty
+            body: favoriteCommands.isEmpty
                 ? _buildEmptyState()
-                : _buildFavoritesList(favoritesProvider),
+                : _buildFavoritesList(favoriteCommands, favoritesProvider),
           );
         },
       ),
@@ -160,128 +140,140 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
 
     return Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Icon(
-            Icons.favorite_border,
-            size: 80,
-            color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
-          ),
-          const SizedBox(height: 16),
-          Text(
-            'No favorites yet',
-            style: GoogleFonts.cairo(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(
+              Icons.favorite_border,
+              size: 80,
+              color: isDarkMode ? Colors.grey[600] : Colors.grey[400],
             ),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            'Tap the heart icon on commands to add them to favorites',
-            textAlign: TextAlign.center,
-            style: GoogleFonts.cairo(
-              fontSize: 14,
-              color: isDarkMode ? Colors.grey[500] : Colors.grey[600],
+            const SizedBox(height: 16),
+            Text(
+              'لا توجد أوامر مفضلة حتى الآن',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+              ),
             ),
-          ),
-          const SizedBox(height: 16),
-          ElevatedButton.icon(
-            onPressed: () {
-              // Navigate to home screen to discover commands
-              Navigator.of(
-                context,
-              ).pushNamedAndRemoveUntil('/home', (route) => false);
-            },
-            icon: const Icon(Icons.explore),
-            label: Text('Explore Commands'),
-            style: ElevatedButton.styleFrom(
-              backgroundColor: const Color(0xFF0055FF),
-              foregroundColor: Colors.white,
+            const SizedBox(height: 8),
+            Text(
+              'اضغط على أيقونة القلب بجانب أي أمر لإضافته إلى قائمتك المفضلة للرجوع إليه بسرعة.',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 14,
+                color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+              ),
             ),
-          ),
-        ],
+            const SizedBox(height: 24),
+            ElevatedButton.icon(
+              onPressed: () {
+                Navigator.of(
+                  context,
+                ).pushNamedAndRemoveUntil('/home', (route) => false);
+              },
+              icon: const Icon(Icons.explore),
+              label: const Text('استكشف الأوامر'),
+              style: ElevatedButton.styleFrom(
+                backgroundColor: const Color(0xFF0055FF),
+                foregroundColor: Colors.white,
+                padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  Widget _buildFavoritesList(FavoritesProvider favoritesProvider) {
+  Widget _buildFavoritesList(
+    List<CommandModel> favoriteCommands,
+    FavoritesProvider favoritesProvider,
+  ) {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
 
     return ListView.builder(
       padding: const EdgeInsets.all(16.0),
-      itemCount: _favoriteCommands.length,
+      itemCount: favoriteCommands.length,
       itemBuilder: (context, index) {
-        final command = _favoriteCommands[index];
-        final isFavorite = favoritesProvider.isFavorite(command.id);
+        final command = favoriteCommands[index];
 
         return Card(
           margin: const EdgeInsets.only(bottom: 12),
-          elevation: 4,
+          elevation: 3,
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
           child: ListTile(
-            contentPadding: const EdgeInsets.all(16),
+            contentPadding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
             leading: Container(
-              width: 48,
-              height: 48,
+              width: 44,
+              height: 44,
               alignment: Alignment.center,
-              decoration: BoxDecoration(
+              decoration: const BoxDecoration(
                 shape: BoxShape.circle,
-                color: const Color(0xFF0055FF),
+                color: Color(0xFF0055FF),
               ),
               child: Text(
                 command.command.isNotEmpty
                     ? command.command[0].toUpperCase()
                     : 'C',
-                style: GoogleFonts.cairo(
+                style: const TextStyle(
                   height: 1.0,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
-                  fontSize: 20,
+                  fontSize: 18,
                 ),
               ),
             ),
-            title: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+            title: Row(
               children: [
-                Text(
-                  command.command,
-                  style: GoogleFonts.cairo(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                    color: isDarkMode ? Colors.white : Colors.black87,
+                Expanded(
+                  child: Text(
+                    command.command,
+                    style: TextStyle(
+                      fontSize: 16,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black87,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
                   ),
                 ),
-                const SizedBox(height: 4),
+                const SizedBox(width: 8),
                 Container(
                   padding: const EdgeInsets.symmetric(
                     horizontal: 8,
                     vertical: 2,
                   ),
                   decoration: BoxDecoration(
-                    color: const Color(0xFF0055FF).withOpacity(0.1),
-                    borderRadius: BorderRadius.circular(12),
+                    color: const Color(0xFF0055FF).withValues(alpha: 0.1),
+                    borderRadius: BorderRadius.circular(10),
                   ),
                   child: Text(
                     _getCategoryDisplayName(command.category_id),
-                    style: GoogleFonts.cairo(
-                      fontSize: 10,
-                      color: const Color(0xFF0055FF),
-                      fontWeight: FontWeight.w500,
+                    style: const TextStyle(
+                      fontSize: 11,
+                      color: Color(0xFF0055FF),
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
                 ),
               ],
             ),
             subtitle: Padding(
-              padding: const EdgeInsets.only(top: 8.0),
+              padding: const EdgeInsets.only(top: 6.0),
               child: Text(
                 command.name_ar,
-                style: GoogleFonts.cairo(
-                  fontSize: 14,
+                style: TextStyle(
+                  fontSize: 13,
                   color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
                 ),
               ),
@@ -290,13 +282,13 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               mainAxisSize: MainAxisSize.min,
               children: [
                 IconButton(
-                  icon: const Icon(Icons.delete_outline, color: Colors.grey),
+                  icon: const Icon(Icons.delete_outline, color: Colors.redAccent),
                   onPressed: () {
                     _deleteFavorite(command);
                   },
-                  tooltip: 'Remove from favorites',
+                  tooltip: 'إزالة من المفضلة',
                 ),
-                const Icon(Icons.arrow_forward_ios, size: 16),
+                const Icon(Icons.arrow_forward_ios, size: 14),
               ],
             ),
             onTap: () {
@@ -316,7 +308,6 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     final themeProvider = Provider.of<ThemeProvider>(context, listen: false);
     final isDarkMode = themeProvider.isDarkMode;
 
-    // Show confirmation dialog first
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
@@ -332,7 +323,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
         content: BiDiHelper.buildMixedText(
           text: 'هل تريد حقاً حذف "${command.command}" من المفضلة؟',
           style: TextStyle(
-            fontSize: 16,
+            fontSize: 15,
             color: isDarkMode ? Colors.white70 : Colors.black87,
           ),
         ),
@@ -341,38 +332,32 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             onPressed: () => Navigator.of(context).pop(false),
             child: BiDiHelper.buildMixedText(
               text: 'إلغاء',
-              style: TextStyle(color: Colors.red, fontWeight: FontWeight.w500),
+              style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
             ),
           ),
-          TextButton(
+          ElevatedButton(
             onPressed: () => Navigator.of(context).pop(true),
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.red,
+              foregroundColor: Colors.white,
+            ),
             child: BiDiHelper.buildMixedText(
               text: 'حذف',
-              style: TextStyle(
-                color: Color(0xFF0055FF),
-                fontWeight: FontWeight.w500,
-              ),
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],
       ),
     );
 
-    // Only proceed if user confirmed
     if (confirmed == true) {
-      // Remove from favorites with animation
-      setState(() {
-        _favoriteCommands.removeWhere((c) => c.id == command.id);
-      });
-
-      // Also remove from provider
+      if (!mounted) return;
       final favoritesProvider = Provider.of<FavoritesProvider>(
         context,
         listen: false,
       );
       await favoritesProvider.toggleFavorite(command.id);
 
-      // Show confirmation
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
@@ -380,7 +365,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
               text: 'تم الحذف من المفضلة',
               style: const TextStyle(color: Colors.white),
             ),
-            backgroundColor: Colors.red,
+            backgroundColor: const Color(0xFF0055FF),
             duration: const Duration(seconds: 2),
           ),
         );
@@ -399,17 +384,17 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
       builder: (context) => AlertDialog(
         backgroundColor: isDarkMode ? const Color(0xFF2A2A2A) : Colors.white,
         title: BiDiHelper.buildMixedText(
-          text: 'Clear All Favorites',
-          style: GoogleFonts.cairo(
+          text: 'مسح كل المفضلة',
+          style: TextStyle(
             fontSize: 18,
             fontWeight: FontWeight.bold,
             color: isDarkMode ? Colors.white : Colors.black87,
           ),
         ),
         content: BiDiHelper.buildMixedText(
-          text: 'Are you sure you want to remove all favorites?',
-          style: GoogleFonts.cairo(
-            fontSize: 16,
+          text: 'هل أنت متأكد من رغبتك في حذف جميع الأوامر من قائمتك المفضلة؟',
+          style: TextStyle(
+            fontSize: 15,
             color: isDarkMode ? Colors.white70 : Colors.black87,
           ),
         ),
@@ -417,11 +402,8 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           TextButton(
             onPressed: () => Navigator.of(context).pop(),
             child: BiDiHelper.buildMixedText(
-              text: 'Cancel',
-              style: GoogleFonts.cairo(
-                fontSize: 14,
-                color: const Color(0xFF0055FF),
-              ),
+              text: 'إلغاء',
+              style: const TextStyle(color: Colors.grey, fontWeight: FontWeight.bold),
             ),
           ),
           ElevatedButton(
@@ -431,20 +413,20 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
                 context,
                 listen: false,
               ).clearAllFavorites();
-              setState(() {
-                _favoriteCommands.clear();
-              });
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(
+                  content: Text('تم مسح جميع الأوامر من المفضلة'),
+                  backgroundColor: Color(0xFF0055FF),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(
               backgroundColor: Colors.red,
               foregroundColor: Colors.white,
             ),
             child: BiDiHelper.buildMixedText(
-              text: 'Clear All',
-              style: GoogleFonts.cairo(
-                fontSize: 14,
-                fontWeight: FontWeight.w500,
-              ),
+              text: 'مسح الكل',
+              style: const TextStyle(fontWeight: FontWeight.bold),
             ),
           ),
         ],

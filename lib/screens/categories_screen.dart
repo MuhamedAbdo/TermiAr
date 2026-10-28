@@ -72,21 +72,42 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
           'lightGradient': [const Color(0xFFD70A53), const Color(0xFFA80030)],
           'darkGradient': [const Color(0xFFE5396B), const Color(0xFFC2185B)],
           'borderColor': const Color(0xFF8B0026),
-          'shadowColor': const Color(0xFFD70A53).withOpacity(0.3),
+          'shadowColor': const Color(0xFFD70A53).withValues(alpha: 0.3),
         };
       case 'redhat_family':
         return {
           'lightGradient': [const Color(0xFFCC0000), const Color(0xFF990000)],
           'darkGradient': [const Color(0xFFE53935), const Color(0xFFD32F2F)],
           'borderColor': const Color(0xFF990000),
-          'shadowColor': const Color(0xFFCC0000).withOpacity(0.3),
+          'shadowColor': const Color(0xFFCC0000).withValues(alpha: 0.3),
+        };
+      case 'flutter_dart':
+        return {
+          'lightGradient': [const Color(0xFF02569B), const Color(0xFF0175C2)],
+          'darkGradient': [const Color(0xFF027DFD), const Color(0xFF01579B)],
+          'borderColor': const Color(0xFF01579B),
+          'shadowColor': const Color(0xFF02569B).withValues(alpha: 0.3),
+        };
+      case 'android_dev':
+        return {
+          'lightGradient': [const Color(0xFF2E7D32), const Color(0xFF1B5E20)],
+          'darkGradient': [const Color(0xFF4CAF50), const Color(0xFF2E7D32)],
+          'borderColor': const Color(0xFF1B5E20),
+          'shadowColor': const Color(0xFF3DDC84).withValues(alpha: 0.3),
+        };
+      case 'git_github':
+        return {
+          'lightGradient': [const Color(0xFFF05032), const Color(0xFFC0392B)],
+          'darkGradient': [const Color(0xFFFF6E40), const Color(0xFFF05032)],
+          'borderColor': const Color(0xFFBF360C),
+          'shadowColor': const Color(0xFFF05032).withValues(alpha: 0.3),
         };
       default:
         return {
           'lightGradient': [const Color(0xFF0055FF), const Color(0xFF003DCC)],
           'darkGradient': [const Color(0xFF448AFF), const Color(0xFF2979FF)],
           'borderColor': const Color(0xFF0029CC),
-          'shadowColor': const Color(0xFF0055FF).withOpacity(0.3),
+          'shadowColor': const Color(0xFF0055FF).withValues(alpha: 0.3),
         };
     }
   }
@@ -161,7 +182,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                   width: 60,
                   height: 60,
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(12),
                   ),
                   child: category.id == 'debian_family'
@@ -173,6 +194,24 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       : category.id == 'redhat_family'
                       ? SvgPicture.asset(
                           'assets/images/redhat_official_logo.svg',
+                          width: 40,
+                          height: 40,
+                        )
+                      : category.id == 'flutter_dart'
+                      ? SvgPicture.asset(
+                          'assets/images/flutter_official_logo.svg',
+                          width: 40,
+                          height: 40,
+                        )
+                      : category.id == 'android_dev'
+                      ? SvgPicture.asset(
+                          'assets/images/android_official_logo.svg',
+                          width: 40,
+                          height: 40,
+                        )
+                      : category.id == 'git_github'
+                      ? SvgPicture.asset(
+                          'assets/images/git_official_logo.svg',
                           width: 40,
                           height: 40,
                         )
@@ -197,7 +236,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                     BiDiHelper.buildMixedText(
                       text: category.name_en,
                       style: TextStyle(
-                        color: Colors.white.withOpacity(0.9),
+                        color: Colors.white.withValues(alpha: 0.9),
                         fontSize: 14,
                         fontWeight: FontWeight.w500,
                       ),
@@ -207,7 +246,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                       text: category.description,
                       style: TextStyle(
                         fontSize: 12,
-                        color: Colors.white.withOpacity(0.8),
+                        color: Colors.white.withValues(alpha: 0.8),
                       ),
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
@@ -217,7 +256,7 @@ class _CategoriesScreenState extends State<CategoriesScreen> {
                 trailing: Container(
                   padding: const EdgeInsets.all(8),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.2),
+                    color: Colors.white.withValues(alpha: 0.2),
                     borderRadius: BorderRadius.circular(8),
                   ),
                   child: Icon(
