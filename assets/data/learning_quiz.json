@@ -1,771 +1,487 @@
 {
   "quiz_info": {
-    "title": "اختبار معرفة أوامر لينكس",
-    "description": "اختبر معرفتك بناءً على نوع توزيعتك المفضلة مع توزيع عشوائي للإجابات",
+    "title": "أكاديمية أوامر لينكس والطرفية",
+    "description": "اختبارات تفاعلية قائمة على مواقف وتحديات برمجية حقيقية لتعزيز الفهم العملي للطرفية.",
     "categories": [
       {
+        "id": "universal",
+        "name_ar": "أوامر اللينكس المشتركة",
+        "name_en": "Universal Linux",
+        "icon": "laptop_linux"
+      },
+      {
         "id": "debian_family",
-        "name_ar": "عائلة دبيان",
-        "name_en": "Debian Family"
+        "name_ar": "عائلة دبيان وأوبنتو",
+        "name_en": "Debian & Ubuntu",
+        "icon": "debian"
       },
       {
         "id": "redhat_family",
-        "name_ar": "عائلة ريد هات",
-        "name_en": "Red Hat Family"
+        "name_ar": "عائلة ريد هات وفيدورا",
+        "name_en": "Red Hat & Fedora",
+        "icon": "redhat"
+      },
+      {
+        "id": "flutter_dart",
+        "name_ar": "فلاتر ودارت (Flutter)",
+        "name_en": "Flutter & Dart",
+        "icon": "flutter"
+      },
+      {
+        "id": "android_dev",
+        "name_ar": "تطوير أندرويد (ADB)",
+        "name_en": "Android ADB",
+        "icon": "android"
+      },
+      {
+        "id": "git_github",
+        "name_ar": "إدارة الإصدارات (Git)",
+        "name_en": "Git & GitHub",
+        "icon": "git"
       }
     ],
-    "total_questions_per_quiz": 15
+    "totalQuestionsPerQuiz": 10
   },
   "questions": [
     {
       "id": 1,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم للبحث في صفحات الدليل اليدوي عن كلمة مفتاحية؟",
-      "question_en": "What command is used to search manual pages for a keyword?",
+      "distro": "universal",
+      "difficulty": "مبتدئ",
+      "question_ar": "أنت تعمل على خادم لينكس وتريد حذف مجلد فارغ بأمان تام دون المخاطرة بحذف أي ملفات إن وُجدت بداخله بالخطأ، ما هو الأمر الأنسب؟",
+      "question_en": "You are on a Linux server and want to safely remove an empty directory without risking deleting any files inside it by mistake. Which command is best?",
       "options": [
-        "man",
-        "apropos",
-        "help",
-        "info"
+        "rm -rf dirname",
+        "rmdir dirname",
+        "rm -d dirname",
+        "unlink dirname"
       ],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر apropos يبحث في أسماء وأوصاف صفحات الدليل",
-      "explanation_en": "The apropos command searches manual page names and descriptions"
+      "explanation_ar": "أمر rmdir مصمم خصيصاً لحذف المجلدات الفارغة فقط؛ فإذا احتوى المجلد على أي ملف سيقوم النظام برفض الحذف وإظهار تنبيه، بخلاف rm -rf الذي يدمر المحتويات دون تحذير.",
+      "options_explanations_ar": [
+        "rm -rf: خطير جداً ويحذف المجلد وكل ما يحتويه نهائياً دون فحص ما إذا كان فارغاً.",
+        "rmdir: الخيار الصحيح والآمن، يرفض الحذف تماماً إذا كان المجلد يحتوي على ملفات.",
+        "rm -d: يحذف المجلد الفارغ لكنه أقل أماناً وشيوعاً من أمر rmdir القياسي.",
+        "unlink: يُستخدم لحذف الروابط الرمزية (Symlinks) والملفات الفردية وليس المجلدات."
+      ],
+      "explanation_en": "rmdir safely removes directories only if they are empty, preventing accidental loss of files."
     },
     {
       "id": 2,
-      "distro": "debian_family",
-      "question_ar": "أمر 'apt install package' يستخدم لـ؟",
-      "question_en": "The 'apt install package' command is used for?",
+      "distro": "universal",
+      "difficulty": "متوسط",
+      "question_ar": "لاحظت بطئاً مفاجئاً في أداء الخادم وتريد مراقبة العمليات الجارية مع فرزها تفاعلياً حسب استهلاك الذاكرة والمعالج لحظة بلحظة، ما الأمر الأفضل؟",
+      "question_en": "You noticed a sudden server slowdown and want to interactively monitor and sort running processes by memory and CPU in real time. Which command is best?",
       "options": [
-        "تثبيت حزمة",
-        "إزالة حزمة",
-        "تحديث الحزم",
-        "البحث عن حزمة"
+        "ps aux",
+        "top",
+        "killall",
+        "uptime"
       ],
-      "correct_answer_index": 0,
-      "explanation_ar": "أمر apt install يستخدم لتثبيت الحزم في توزيعات دبيان وأوبنتو",
-      "explanation_en": "The apt install command is used to install packages on Debian/Ubuntu"
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر top (أو htop) يوفر واجهة تفاعلية حية تتحدث كل بضع ثوانٍ لعرض استهلاك الموارد وفرز العمليات، بينما ps aux يلتقط صورة ثابتة لتلك اللحظة فقط.",
+      "options_explanations_ar": [
+        "ps aux: يطبع قائمة ثابتة بالعمليات ويخرج مباشرة دون تحديث حي.",
+        "top: الخيار الصحيح، يتيح مراقبة حية وتفاعلية مع إمكانية فرز العمليات بالضغط على M أو P.",
+        "killall: يُستخدم لإنهاء العمليات باسمها وليس لمراقبة أدائها.",
+        "uptime: يعرض فقط مدة تشغيل النظام ومتوسط الحمل (Load Average) بدون تفاصيل العمليات."
+      ],
+      "explanation_en": "top provides a live, interactive view of running processes and system resources."
     },
     {
       "id": 3,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر الأساسي لتثبيت حزمة في توزيعة فيدورا؟",
-      "question_en": "What is the primary command to install a package in Fedora?",
+      "distro": "universal",
+      "difficulty": "متوسط",
+      "question_ar": "تريد ضبط صلاحيات ملف إعدادات سري (config.env) بحيث يستطيع المستخدم المالك فقط القراءة والكتابة فيه، وتمنع تماماً أي مستخدم آخر من الوصول إليه، ما القيمة الرقمية لـ chmod؟",
+      "question_en": "You want to set permissions on a secret config file (config.env) so only the owner can read and write, with no permissions for anyone else. What is the octal chmod value?",
       "options": [
-        "apt install",
-        "pacman -S",
-        "dnf install",
-        "yum-get"
+        "chmod 777 config.env",
+        "chmod 755 config.env",
+        "chmod 600 config.env",
+        "chmod 644 config.env"
       ],
       "correct_answer_index": 2,
-      "explanation_ar": "dnf هو مدير الحزم الحديث والمستخدم في فيدورا",
-      "explanation_en": "dnf is the modern package manager used in Fedora"
+      "explanation_ar": "القيمة 600 تعني: المالك له القراءة (4) والكتابة (2) ومجموعهما 6، والمجموعة (0) والآخرون (0) بلا أي صلاحيات، وهو المعيار الأمني للملفات الحساسة.",
+      "options_explanations_ar": [
+        "777: غير آمن تماماً، يمنح الجميع صلاحيات كاملة للقراءة والكتابة والتنفيذ.",
+        "755: يسمح للجميع بقراءة وتنفيذ الملف، ويستخدم عادة للمجلدات والبرمجيات وليس الملفات السرية.",
+        "600: الخيار الأمني المثالي، يقتصر الوصول قراءة وكتابة على مالك الملف فقط.",
+        "644: يسمح لجميع المستخدمين على النظام بقراءة محتويات الملف السري."
+      ],
+      "explanation_en": "600 grants read/write to the owner and zero permissions to group and others."
     },
     {
       "id": 4,
-      "distro": "redhat_family",
-      "question_ar": "كيف يمكنك تنظيف التخزين المؤقت (Cache) لمدير الحزم DNF؟",
-      "question_en": "How do you clean the DNF package manager cache?",
+      "distro": "universal",
+      "difficulty": "متقدم",
+      "question_ar": "اشتبهت في محاولة اختراق على الخادم وتريد البحث داخل جميع ملفات السجلات في مجلد /var/log/ عن عبارة 'Failed password' مع إظهار أرقام الأسطر، ما الأمر؟",
+      "question_en": "You suspect a breach and want to search recursively inside /var/log/ for 'Failed password' displaying line numbers. Which command?",
       "options": [
-        "dnf remove all",
-        "dnf clear",
-        "dnf delete cache",
-        "dnf clean all"
+        "find /var/log/ -name 'Failed password'",
+        "grep -rn 'Failed password' /var/log/",
+        "cat /var/log/* | grep 'Failed password'",
+        "locate 'Failed password' /var/log/"
       ],
-      "correct_answer_index": 3,
-      "explanation_ar": "أمر dnf clean all يمسح كافة ملفات التخزين المؤقت للمستودعات",
-      "explanation_en": "The dnf clean all command removes all cached data from repositories"
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر grep مع الخيار -r (البحث المتكرر في المجلدات الفرعية) و -n (عرض أرقام الأسطر) هو الأداة الأسرع والأكثر فاعلية للبحث في نصوص السجلات.",
+      "options_explanations_ar": [
+        "find: يبحث عن أسماء الملفات على القرص وليس عن النصوص داخل محتوى الملفات.",
+        "grep -rn: الخيار الصحيح، يبحث تكرارياً في محتويات كافة الملفات ويعرض رقم السطر ومسار الملف.",
+        "cat مع pipe: قد يفشل مع الملفات الكبيرة أو المجلدات الفرعية ولا يظهر أرقام الأسطر أو أسماء الملفات.",
+        "locate: يبحث في قاعدة بيانات الفهرس عن مسارات الملفات فقط."
+      ],
+      "explanation_en": "grep -rn searches recursively through directory contents and prints line numbers."
     },
     {
       "id": 5,
-      "distro": "common",
-      "question_ar": "ما هو الأمر الذي يعرض بنية المعالج؟",
-      "question_en": "What command displays the processor architecture?",
+      "distro": "universal",
+      "difficulty": "مبتدئ",
+      "question_ar": "تريد معرفة المساحة الحرة والمستخدمة لكافة أقراص التخزين ونقاط التوصيل في النظام بوحدات مقروءة وسهلة الفهم (مثل GB و MB)، ما الأمر؟",
+      "question_en": "You want to check free and used storage space for all mounted filesystems in human-readable units (GB, MB). Which command?",
       "options": [
-        "uname -a",
-        "arch",
-        "lscpu",
-        "cpuinfo"
+        "free -h",
+        "df -h",
+        "du -sh /*",
+        "ls -lh"
       ],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر arch يعرض اسم بنية الأجهزة مثل x86_64",
-      "explanation_en": "The arch command displays the hardware architecture name"
+      "explanation_ar": "أمر df (Disk Filesystem) مع الخيار -h (Human-readable) يعرض إحصائيات الأقراص ونقاط التوصيل والمساحة المتاحة، بينما free مخصص للذاكرة العشوائية RAM.",
+      "options_explanations_ar": [
+        "free -h: يعرض استهلاك الذاكرة العشوائية (RAM) ومساحة التبديل (Swap) وليس الأقراص التخزينية.",
+        "df -h: الخيار الصحيح، يلخص حالة كافة الأقراص التخزينية ونقاط التركيب بأحجام واضحة.",
+        "du -sh: يقيس حجم استهلاك مجلد معين ومحتوياته وليس الأقراص كاملة.",
+        "ls -lh: يعرض تفاصيل وأحجام الملفات داخل مجلد معين فقط."
+      ],
+      "explanation_en": "df -h reports file system disk space usage in human-readable units."
     },
     {
       "id": 6,
       "distro": "debian_family",
-      "question_ar": "أي أمر يستخدم لتحديث قائمة المستودعات في أوبنتو؟",
-      "question_en": "Which command is used to update the repository list in Ubuntu?",
+      "difficulty": "متوسط",
+      "question_ar": "أثناء محاولة تثبيت حزمة على أوبنتو ظهر الخطأ: 'Could not get lock /var/lib/dpkg/lock-frontend'. ما السبب الأساسي والأكثر شيوعاً لهذه المشكلة؟",
+      "question_en": "While installing a package on Ubuntu you get: 'Could not get lock /var/lib/dpkg/lock-frontend'. What is the most common root cause?",
       "options": [
-        "apt update",
-        "apt upgrade",
-        "apt search",
-        "apt-get config"
+        "القرص الصلب ممتلئ تماماً",
+        "هناك عملية apt أو تحديث تلقائي تعمل بالفعل في الخلفية وتستحوذ على القفل",
+        "الحزمة المطلوبة غير متوافقة مع معمارية المعالج",
+        "تم حذف مستودعات النظام بالخطأ"
       ],
-      "correct_answer_index": 0,
-      "explanation_ar": "apt update يقوم بجلب أحدث المعلومات عن الحزم المتاحة",
-      "explanation_en": "apt update fetches the latest information about available packages"
+      "correct_answer_index": 1,
+      "explanation_ar": "نظام dpkg يمنع تشغيل أكثر من عملية تثبيت في نفس الوقت لتجنب تلف قاعدة البيانات؛ لذا فإن وجود تحديث تلقائي (Unattended Upgrades) أو نافذة apt أخرى يسبب قفل الملف.",
+      "options_explanations_ar": [
+        "القرص ممتلئ: يعطي خطأ 'No space left on device' وليس قفل الحزم.",
+        "الخيار الصحيح: عملية أخرى (مثل unattended-upgrades أو apt آخر) قيد التشغيل وتمنع التضارب.",
+        "تعارض المعمارية: ينتج عنه خطأ 'wrong architecture'.",
+        "فقدان المستودعات: يظهر خطأ 'Unable to locate package'."
+      ],
+      "explanation_en": "Another package management process (like apt or automatic updates) holds the dpkg frontend lock."
     },
     {
       "id": 7,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر المستخدم لرؤية تاريخ عمليات DNF في فيدورا؟",
-      "question_en": "What command is used to see the DNF transaction history in Fedora?",
+      "distro": "debian_family",
+      "difficulty": "مبتدئ",
+      "question_ar": "تريد حذف برنامج معين بالكامل من نظام دبيان مع إزالة كافة ملفات الإعدادات والتهيئات التابعة له لضمان عدم بقاء أي أثر، ما الأمر الأنسب؟",
+      "question_en": "You want to completely remove a package along with all its configuration files from a Debian system. Which command is best?",
       "options": [
-        "dnf log",
-        "dnf history",
-        "dnf record",
-        "dnf transactions"
+        "sudo apt remove package_name",
+        "sudo apt purge package_name",
+        "sudo apt autoremove",
+        "sudo apt clean"
       ],
       "correct_answer_index": 1,
-      "explanation_ar": "dnf history يسمح لك برؤية قائمة بكافة عمليات التثبيت والحذف السابقة",
-      "explanation_en": "dnf history allows you to view a list of all past installations and removals"
+      "explanation_ar": "أمر apt purge يحذف الحزمة مع كافة ملفات إعداداتها، بينما remove العادي يحذف البرنامج فقط ويبقي ملفات التهيئات في مسار /etc لاسترجاعها إن أعدت التثبيت.",
+      "options_explanations_ar": [
+        "apt remove: يحذف الحزمة فقط ويحتفظ بملفات الإعدادات والتكوين.",
+        "apt purge: الخيار الصحيح، يقتلع الحزمة ويمحو كافة ملفات الإعدادات التابعة لها.",
+        "apt autoremove: يحذف فقط الحزم والتبعيات اليتيمة التي لم يعد أي برنامج يحتاجها.",
+        "apt clean: يمسح ملفات .deb المخزنة مؤقتاً في كاش النظام لتوفير المساحة."
+      ],
+      "explanation_en": "apt purge removes both the package binaries and its configuration files."
     },
     {
       "id": 8,
-      "distro": "common",
-      "question_ar": "ما هو الأمر الذي يعرض معلومات تفصيلية عن المعالج (CPU)؟",
-      "question_en": "What command displays detailed CPU information?",
+      "distro": "debian_family",
+      "difficulty": "متوسط",
+      "question_ar": "قمت بتنزيل ملف حزمة محلية بصيغة (package.deb) وتريد تثبيتها يدوياً عبر الطرفية في أوبنتو، ما الأمر المباشر للقيام بذلك؟",
+      "question_en": "You downloaded a local Debian package file (package.deb) and want to install it via terminal. Which direct command to use?",
       "options": [
-        "uname",
-        "arch",
-        "lscpu",
-        "cpuinfo"
+        "sudo dpkg -i package.deb",
+        "sudo apt get package.deb",
+        "sudo dpkg -r package.deb",
+        "sudo apt source package.deb"
       ],
-      "correct_answer_index": 2,
-      "explanation_ar": "أمر lscpu يعرض معلومات مفصلة عن بنية المعالج",
-      "explanation_en": "The lscpu command gathers CPU architecture information from sysfs"
+      "correct_answer_index": 0,
+      "explanation_ar": "أمر dpkg مع الخيار -i (Install) هو الأداة المباشرة لتثبيت حزم .deb المحلية في عائلة دبيان (ويمكن استخدام sudo apt install ./package.deb لحل التبعيات تلقائياً).",
+      "options_explanations_ar": [
+        "sudo dpkg -i: الخيار الصحيح لتثبيت ملفات deb المحلية مباشرة.",
+        "apt get package.deb: صيغة خاطئة، أمر apt يبحث في المستودعات السحابية ما لم يسبق المسار بـ ./",
+        "dpkg -r: يقوم بإزالة (Remove) الحزمة المثبتة مسبقاً وليس تثبيتها.",
+        "apt source: يقوم بتنزيل الكود المصدري للحزمة ولا يثبتها."
+      ],
+      "explanation_en": "dpkg -i installs local .deb package archives directly into the system."
     },
     {
       "id": 9,
-      "distro": "debian_family",
-      "question_ar": "ما هو الأمر المستخدم لعرض معلومات حزمة مثبتة في أوبنتو؟",
-      "question_en": "What command shows information about an installed package in Ubuntu?",
+      "distro": "redhat_family",
+      "difficulty": "مبتدئ",
+      "question_ar": "أنت تعمل على خادم بنظام Fedora / RHEL وتريد استعراض سجل كافة عمليات التثبيت والتحديث السابقة مع إمكانية التراجع عن آخر عملية تمت، ما الأمر؟",
+      "question_en": "You are on a Fedora/RHEL server and want to view the transaction history of installations/updates with the ability to undo the last action. Which command?",
       "options": [
-        "apt info package",
-        "apt show package",
-        "apt details package",
-        "apt describe package"
+        "dnf history",
+        "rpm -qa",
+        "systemctl status",
+        "dnf check-update"
       ],
-      "correct_answer_index": 1,
-      "explanation_ar": "apt show يعرض معلومات مفصلة عن الحزمة",
-      "explanation_en": "apt show displays detailed information about the package"
+      "correct_answer_index": 0,
+      "explanation_ar": "مدير الحزم dnf يتميز بميزة المعاملات (Transactions) حيث يتيح أمر dnf history استعراض أرقام العمليات السابقة والتراجع عن أي عملية غير مرغوبة عبر dnf history undo.",
+      "options_explanations_ar": [
+        "dnf history: الخيار الصحيح، يسجل كل عملية برقم زمني ويتيح التراجع عنها بسهولة.",
+        "rpm -qa: يسرد فقط قائمة بكافة الحزم المثبتة حالياً دون تاريخ المعاملات.",
+        "systemctl status: يعرض حالة خدمات النظام وليس سجلات مدير الحزم.",
+        "dnf check-update: يفحص توفر تحديثات جديدة للحزم دون تسجيل أو تراجع."
+      ],
+      "explanation_en": "dnf history lists all package manager operations and supports undoing transactions."
     },
     {
       "id": 10,
-      "distro": "debian_family",
-      "question_ar": "كيف تزيل حزمة بشكل كامل مع جميع ملفات الإعدادات في دبيان؟",
-      "question_en": "How do you remove a package completely with all config files in Debian?",
+      "distro": "redhat_family",
+      "difficulty": "متوسط",
+      "question_ar": "قمت بتعديل إعدادات خادم الويب Nginx على نظام CentOS وتريد تفعيل الخدمة لتبدأ تلقائياً عند إقلاع النظام مع تشغيلها فوراً الآن، ما الأمر المدمج الأنسب؟",
+      "question_en": "You configured Nginx on CentOS and want to enable it to start on boot while immediately starting it right now. What is the combined command?",
       "options": [
-        "apt remove package",
-        "apt delete package",
-        "apt clean package",
-        "apt purge package"
+        "sudo systemctl enable --now nginx",
+        "sudo service nginx restart",
+        "sudo chkconfig nginx on",
+        "sudo systemctl start nginx --boot"
       ],
-      "correct_answer_index": 3,
-      "explanation_ar": "apt purge يزيل الحزمة مع جميع ملفات الإعدادات والتبعيات",
-      "explanation_en": "apt purge removes package with all config files and dependencies"
+      "correct_answer_index": 0,
+      "explanation_ar": "الخيار --now مع أمر systemctl enable يقوم بالوظيفتين معاً في خطوة واحدة: تمكين الخدمة عند بدء تشغيل الجهاز وتشغيلها في اللحظة الحالية.",
+      "options_explanations_ar": [
+        "systemctl enable --now: الخيار الصحيح والحديث، يجمع بين التمكين والتشغيل الفوري.",
+        "service nginx restart: يعيد تشغيل الخدمة الحالية فقط ولا يضمن إقلاعها مع النظام.",
+        "chkconfig: أداة قديمة جداً في SysVinit تم استبدالها بـ systemctl في التوزيعات الحديثة.",
+        "--boot: خيار غير صالح في بنية أوامر systemctl."
+      ],
+      "explanation_en": "systemctl enable --now simultaneously enables the service on boot and starts it immediately."
     },
     {
       "id": 11,
-      "distro": "debian_family",
-      "question_ar": "ما هو الأمر المستخدم لإضافة مستودع PPA جديد؟",
-      "question_en": "What command is used to add a new PPA repository?",
+      "distro": "flutter_dart",
+      "difficulty": "مبتدئ",
+      "question_ar": "قمت بتعديل حزم مشروع فلاتر في ملف pubspec.yaml ولكن عند البناء ظهرت أخطاء غريبة وتعارضات في كاش Gradle و .dart_tool، ما الخطوة الأولى لتنظيف بيئة البناء؟",
+      "question_en": "You updated packages in pubspec.yaml but encountered build conflicts in Gradle and .dart_tool cache. What is the first cleanup command?",
       "options": [
-        "add-apt-repository",
-        "apt-add-repo",
-        "apt-repo add",
-        "apt repository add"
+        "flutter doctor -v",
+        "flutter clean",
+        "flutter build apk",
+        "dart analyze"
       ],
-      "correct_answer_index": 0,
-      "explanation_ar": "add-apt-repository يضيف مستودع جديد لقائمة مصادر أوبنتو",
-      "explanation_en": "add-apt-repository adds new repository to Ubuntu sources list"
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر flutter clean يحذف كافة الملفات المؤقتة في مجلد build ومجلد .dart_tool، وبعدها يتم تشغيل flutter pub get لإعادة تجميع المشروع بنظافة تامة.",
+      "options_explanations_ar": [
+        "flutter doctor: يفحص بيئة تثبيت أدوات Flutter و SDK ولا يحذف كاش المشروع.",
+        "flutter clean: الخيار الصحيح والأنسب لمسح كافة مخرجات البناء المعطوبة وتصفير الكاش.",
+        "flutter build apk: سيفشل مجدداً إذا كانت ملفات البناء القديمة تالفة ومتعارضة.",
+        "dart analyze: يفحص الأخطاء البرمجية في الكود فقط ولا ينظف ملفات البناء."
+      ],
+      "explanation_en": "flutter clean deletes the build/ and .dart_tool/ directories, fixing stale build cache issues."
     },
     {
       "id": 12,
-      "distro": "debian_family",
-      "question_ar": "كيف تبحث عن حزمة في مستودعات دبيان؟",
-      "question_en": "How do you search for a package in Debian repositories?",
+      "distro": "flutter_dart",
+      "difficulty": "متوسط",
+      "question_ar": "تريد بناء ملف تثبيت أندرويد APK لتطبيقه المكتوب بفلاتر، ولكنك تريد تقليل حجم الملف إلى أدنى حد ممكن عن طريق تجزئته لمعماريات المعالج المنفصلة، ما الخيار؟",
+      "question_en": "You want to build an Android APK for your Flutter app, minimizing file size by splitting into separate CPU architectures. Which flag to use?",
       "options": [
-        "apt find package",
-        "apt look package",
-        "apt search package",
-        "apt locate package"
+        "flutter build apk --split-per-abi",
+        "flutter build apk --obfuscate",
+        "flutter build apk --no-sound-null-safety",
+        "flutter build apk --shrink"
       ],
-      "correct_answer_index": 2,
-      "explanation_ar": "apt search يبحث عن الحزم المتاحة في المستودعات المفعلة",
-      "explanation_en": "apt search searches for available packages in all enabled repositories"
+      "correct_answer_index": 0,
+      "explanation_ar": "الخيار --split-per-abi ينتج ملفات APK مخصصة لكل معمارية (arm64, armeabi-v7a, x86_64) بدلاً من حزمة واحدة ضخمة (Fat APK)، مما يقلل الحجم بأكثر من 50%.",
+      "options_explanations_ar": [
+        "flutter build apk --split-per-abi: الخيار الصحيح، يولد حزم APK منفصلة لكل معمارية.",
+        "--obfuscate: خيار لتمويه الكود وإخفاء أسماء الكلاسات لحماية التطبيق من الهندسة العكسية.",
+        "--no-sound-null-safety: خاص بتعطيل فحص أمان القيمة الخالية ولا علاقة له بالحجم.",
+        "--shrink: خيار غير موجود بصيغة مباشرة في أمر بناء فلاتر."
+      ],
+      "explanation_en": "--split-per-abi splits the APK per targeted ABI (arm64, armeabi-v7a, x86_64), drastically cutting app size."
     },
     {
       "id": 13,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر المستخدم لعرض معلومات حزمة في فيدورا؟",
-      "question_en": "What command shows package information in Fedora?",
+      "distro": "flutter_dart",
+      "difficulty": "مبتدئ",
+      "question_ar": "قبل رفع كود لغة دارت إلى مستودع الفريق، تريد تنسيق وترتيب كافة ملفات المشروع في مجلد lib تلقائياً لتوافق معايير الأسلوب المعتمدة، ما الأمر؟",
+      "question_en": "Before pushing Dart code to the repo, you want to automatically format all files in lib to match official style guides. Which command?",
       "options": [
-        "dnf info package",
-        "dnf show package",
-        "dnf details package",
-        "dnf describe package"
+        "dart test",
+        "dart format lib/",
+        "flutter pub get",
+        "flutter create ."
       ],
-      "correct_answer_index": 0,
-      "explanation_ar": "dnf info يعرض معلومات مفصلة عن الحزمة في مستودعات فيدورا",
-      "explanation_en": "dnf info displays detailed information about package in Fedora repositories"
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر dart format يعيد صياغة وتنسيق المسافات والأسطر والفواصل في كود دارت وفقاً لدليل الأسلوب الرسمي لـ Dart.",
+      "options_explanations_ar": [
+        "dart test: يقوم بتشغيل اختبارات الوحدة للمشروع ولا يعدل التنسيق.",
+        "dart format lib/: الخيار الصحيح، ينسق كافة ملفات دارت داخل مجلد lib تلقائياً.",
+        "flutter pub get: يقوم بجلب وتحديث الحزم من pub.dev.",
+        "flutter create .: يُستخدم لإنشاء أو إعادة تهيئة قوالب منصات المشروع."
+      ],
+      "explanation_en": "dart format applies the official Dart style rules to all specified Dart files."
     },
     {
       "id": 14,
-      "distro": "redhat_family",
-      "question_ar": "كيف تقوم بتحديث جميع الحزم في فيدورا؟",
-      "question_en": "How do you upgrade all packages in Fedora?",
+      "distro": "android_dev",
+      "difficulty": "مبتدئ",
+      "question_ar": "قمت بتوصيل هاتف أندرويد بالحاسوب عبر كابل USB وشغلت أمر adb devices، فظهرت الحالة بجانب الهاتف كلمة 'unauthorized'. ما الإجراء المطلوب لحلها؟",
+      "question_en": "You connected an Android phone via USB and ran adb devices; the status showed 'unauthorized'. How do you resolve this?",
       "options": [
-        "dnf refresh",
-        "dnf update",
-        "dnf upgrade",
-        "dnf sync"
+        "إعادة تشغيل الحاسوب بالكامل",
+        "فتح شاشة الهاتف وقبول رسالة المصادقة بالسماح بتصحيح USB (Allow USB Debugging)",
+        "حذف تطبيق adb وتثبيته مجدداً",
+        "تغيير منفذ الشحن في الهاتف"
       ],
-      "correct_answer_index": 2,
-      "explanation_ar": "dnf upgrade يقوم بتحديث جميع الحزم المثبتة إلى أحدث الإصدارات",
-      "explanation_en": "dnf upgrade upgrades all installed packages to latest versions"
+      "correct_answer_index": 1,
+      "explanation_ar": "حالة unauthorized تعني أن الهاتف متصل بنجاح لكنه ينتظر موافقة المستخدم الأمنية على مفتاح RSA للحاسوب عبر نافذة تنبثق على شاشة الهاتف.",
+      "options_explanations_ar": [
+        "إعادة تشغيل الحاسوب: لا تحل المشكلة لأن المصادقة الأمنية مطلوبة من شاشة الهاتف.",
+        "الخيار الصحيح: فتح قفل الهاتف والضغط على 'Always allow from this computer' ثم 'OK'.",
+        "إعادة تثبيت adb: لن يغير شيئاً لأن المشكلة أمنية على مستوى صلاحيات الهاتف.",
+        "تغيير المنفذ: الهاتف متصل بالفعل بالحاسوب ويقرأ الاتصال، لكنه محجوب أمنياً."
+      ],
+      "explanation_en": "The device is awaiting RSA fingerprint confirmation on the phone screen for USB debugging authorization."
     },
     {
       "id": 15,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر المستخدم لتثبيت حزمة من ملف RPM محلي؟",
-      "question_en": "What command installs a package from local RPM file?",
+      "distro": "android_dev",
+      "difficulty": "متوسط",
+      "question_ar": "تريد تثبيت تحديث جديد لملف تطبيق (app.apk) على جهاز أندرويد متصل، مع الاحتفاظ ببيانات وقواعد بيانات التطبيق السابقة دون تصفيرها، ما الخيار؟",
+      "question_en": "You want to install an updated APK on a connected Android device while keeping the existing app user data and cache intact. Which flag?",
       "options": [
-        "dnf install file.rpm",
-        "dnf localinstall file.rpm",
-        "rpm -i file.rpm",
-        "rpm install file.rpm"
+        "adb install -r app.apk",
+        "adb install -s app.apk",
+        "adb push app.apk /system/",
+        "adb install -d app.apk"
       ],
-      "correct_answer_index": 1,
-      "explanation_ar": "dnf localinstall يثبت حزمة محلياً من ملف RPM ويتعامل مع التبعيات",
-      "explanation_en": "dnf localinstall installs package locally from RPM file"
+      "correct_answer_index": 0,
+      "explanation_ar": "الخيار -r في أمر adb install يعني (Reinstall) ويسمح باستبدال التطبيق وتحديثه مع الاحتفاظ الكامل ببيانات المستخدم المحلية.",
+      "options_explanations_ar": [
+        "adb install -r: الخيار الصحيح (Reinstall)، يثبت التحديث ويحتفظ بالبيانات السابقة.",
+        "adb install -s: كان يُستخدم لتثبيت التطبيق على بطاقة الذاكرة الخارجية SD القديمة.",
+        "adb push: ينسخ الملف فقط ولا يثبته في مدير حزم أندرويد (PackageManager).",
+        "adb install -d: يسمح بتخفيض إصدار التطبيق (Downgrade) لكن لا يضمن التحديث العادي وحده."
+      ],
+      "explanation_en": "adb install -r reinstalls the application, preserving user data and application state."
     },
     {
       "id": 16,
-      "distro": "redhat_family",
-      "question_ar": "كيف تعرض قائمة بالمجموعات البرمجية المتاحة في فيدورا؟",
-      "question_en": "How do you list available software groups in Fedora?",
+      "distro": "android_dev",
+      "difficulty": "متوسط",
+      "question_ar": "أثناء اختبار تطبيق حدث انهيار مفاجئ (Crash) وتريد تتبع سجل الأخطاء والرسائل المباشرة الصادرة من نظام أندرويد وتصفيتها للأخطاء فقط، ما الأمر؟",
+      "question_en": "An app crashed during testing and you want to view real-time logcat output filtered to errors only. Which command to run?",
       "options": [
-        "dnf group-list",
-        "dnf groups list",
-        "dnf list groups",
-        "dnf show-groups"
+        "adb shell dmesg",
+        "adb logcat *:E",
+        "adb bugreport",
+        "adb shell top"
       ],
-      "correct_answer_index": 0,
-      "explanation_ar": "dnf group-list يعرض جميع مجموعات البرمجيات المتاحة للتثبيت",
-      "explanation_en": "dnf group-list displays all available software groups for installation"
+      "correct_answer_index": 1,
+      "explanation_ar": "أمر adb logcat مع مرشح *:E يقوم بفرز وتدفق رسائل الخطأ الحرجة (Error level) واستثناءات Java/Kotlin فور وقوعها مما يسهل تشخيص الانهيار.",
+      "options_explanations_ar": [
+        "adb shell dmesg: يعرض سجلات نواة اللينكس (Kernel) الخاصة بالعتاد والتعريفات وليس التطبيقات.",
+        "adb logcat *:E: الخيار الصحيح والمباشر لعرض وتصفية استثناءات وأخطاء التطبيقات فوراً.",
+        "adb bugreport: يولد ملف تقرير ضخم وشامل للنظام بالكامل ويستغرق دقائق.",
+        "adb shell top: يعرض استهلاك المعالج للعمليات ولا يظهر سجلات الأخطاء والـ Stacktrace."
+      ],
+      "explanation_en": "adb logcat *:E filters Android logcat stream to show only Error priority level logs."
     },
     {
       "id": 17,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر المستخدم لتنشيط مستودع معطل في فيدورا؟",
-      "question_en": "What command enables a disabled repository in Fedora?",
+      "distro": "git_github",
+      "difficulty": "مبتدئ",
+      "question_ar": "قمت بتعديل عدة ملفات برمجية وتريد فحص حالة المستودع ومعرفة الملفات الجاهزة للحفظ والملفات غير المتابعة في سطر واحد مختصر وسريع، ما الأمر؟",
+      "question_en": "You modified multiple files and want to check repo status showing staged and untracked files in a short, concise format. Which command?",
       "options": [
-        "dnf enable-repo",
-        "dnf repo-enable",
-        "dnf config-manager --enable",
-        "dnf activate-repo"
+        "git status -s",
+        "git diff --stat",
+        "git log -1",
+        "git branch -v"
       ],
-      "correct_answer_index": 2,
-      "explanation_ar": "dnf config-manager --enable ينشط مستودع معطل",
-      "explanation_en": "dnf config-manager --enable enables a disabled repository"
+      "correct_answer_index": 0,
+      "explanation_ar": "الخيار -s (Short) في أمر git status يضغط المخرجات في أسطر موجزة بأحرف دلالية (مثل M للمعدل، ?? لغير المتابع، A للمجهز)، مما يسهل المتابعة السريعة.",
+      "options_explanations_ar": [
+        "git status -s: الخيار الصحيح، يظهر ملخصاً مقتضباً وواضحاً لحالة الملفات.",
+        "git diff --stat: يعرض عدد الأسطر المضافة والمحذوفة في الملفات المعدلة وليس حالة التجهيز.",
+        "git log -1: يعرض تفاصيل آخر commit تم حفظه مسبقاً ولا يظهر التعديلات الجارية.",
+        "git branch -v: يعرض الفروع وأرقام التجزئة لآخر التزام في كل فرع."
+      ],
+      "explanation_en": "git status -s (or --short) displays working directory status in a streamlined two-letter format."
     },
     {
       "id": 18,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لعرض العمليات الجارية حالياً؟",
-      "question_en": "What command displays currently running processes?",
+      "distro": "git_github",
+      "difficulty": "متوسط",
+      "question_ar": "قمت بعمل commit لملفات بالخطأ في فرعك المحلي، وتريد إلغاء آخر commit والتراجع عنه مع الحفاظ الكامل على كافة التعديلات في ملفاتك دون أن تفقد أي سطر كود، ما الأمر؟",
+      "question_en": "You accidentally made a commit on your local branch and want to undo it while keeping all your code changes unstaged and intact. Which command?",
       "options": [
-        "top",
-        "ps",
-        "jobs",
-        "processes"
+        "git reset --hard HEAD~1",
+        "git reset --soft HEAD~1",
+        "git checkout HEAD~1",
+        "git clean -fd"
       ],
       "correct_answer_index": 1,
-      "explanation_ar": "أمر ps يعرض لقطة بالعمليات الجارية حالياً",
-      "explanation_en": "ps command displays a snapshot of currently running processes"
+      "explanation_ar": "أمر git reset --soft HEAD~1 يرجع مؤشر الفرع إلى ما قبل الالتزام السابق مباشرة، مع الاحتفاظ بجميع التعديلات التي قمت بها في منطقة التجهيز دون أن تفقد أي شيء.",
+      "options_explanations_ar": [
+        "git reset --hard: مدمر وخطير جداً! سيمحو الالتزام والتعديلات بالكامل نهائياً.",
+        "git reset --soft HEAD~1: الخيار الصحيح والآمن، يلغي الـ commit مع بقاء كافة ملفاتك وتعديلاتك كما هي.",
+        "git checkout HEAD~1: ينقلك لحالة 'Detached HEAD' ولا يلغي الالتزام في فرعك.",
+        "git clean -fd: يحذف الملفات غير المتابعة في مجلد العمل ولا يلغي الـ commits."
+      ],
+      "explanation_en": "git reset --soft HEAD~1 moves HEAD back one commit while keeping changes staged and safe."
     },
     {
       "id": 19,
-      "distro": "common",
-      "question_ar": "كيف تقتل عملية بشكل قسري باستخدام معرفها (PID)؟",
-      "question_en": "How do you kill a process forcefully using its PID?",
+      "distro": "git_github",
+      "difficulty": "متقدم",
+      "question_ar": "تريد دمج فرع ميزات (feature-auth) في الفرع الرئيسي (main)، ولكن ترغب في ضغط كافة التزامات الفرع المتفرقة في التزام واحد أنيق ونظيف، ما الخيار؟",
+      "question_en": "You want to merge a feature branch into main, squashing all intermediate commits into one clean, single commit. Which option?",
       "options": [
-        "kill -TERM PID",
-        "kill -STOP PID",
-        "kill -9 PID",
-        "kill -INT PID"
+        "git merge --squash feature-auth",
+        "git merge --no-ff feature-auth",
+        "git rebase -i HEAD~1",
+        "git cherry-pick feature-auth"
       ],
-      "correct_answer_index": 2,
-      "explanation_ar": "kill -9 يرسل إشارة SIGKILL لقتل العملية فوراً",
-      "explanation_en": "kill -9 sends SIGKILL signal to terminate process immediately"
+      "correct_answer_index": 0,
+      "explanation_ar": "الخيار --squash في أمر git merge يأخذ جميع التغييرات من الفرع ويدمجها في مجلد العمل كـ commit واحد مجمع، مما يحافظ على نظافة تاريخ الفرع الرئيسي.",
+      "options_explanations_ar": [
+        "git merge --squash: الخيار الصحيح، يجمع كل التزامات الفرع في التزام واحد مجهز للتوثيق.",
+        "git merge --no-ff: ينشئ التزام دمج صريح ويحتفظ بكافة الالتزامات الفرعية دون ضغطها.",
+        "git rebase -i: يُستخدم لإعادة ترتيب وتعديل الالتزامات تفاعلياً وليس لدمج فرع كامل بخطوة واحدة.",
+        "git cherry-pick: ينسخ التزاماً محدداً بعينه من فرع لآخر ولا يدمج فرعاً كاملاً مجمعاً."
+      ],
+      "explanation_en": "git merge --squash combines all commits from the source branch into a single uncommitted change."
     },
     {
       "id": 20,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لعرض مساحة القرص المستخدمة والمتاحة؟",
-      "question_en": "What command displays used and available disk space?",
+      "distro": "git_github",
+      "difficulty": "متوسط",
+      "question_ar": "قمت بتعديل ملفات وتفاجأت أنك بحاجة عاجلة للانتقال إلى فرع آخر لإصلاح خطأ، ولكنك لست جاهزاً بعد لعمل Commit لتعديلاتك غير المكتملة، ما الحل الأمثل؟",
+      "question_en": "You have unfinished edits and need to urgently switch branches to fix a bug without committing yet. What is the best command?",
       "options": [
-        "df",
-        "du",
-        "disk",
-        "usage"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "أمر df يعرض مساحة القرص المستخدمة والمتاحة للملفات",
-      "explanation_en": "df command displays used and available disk space"
-    },
-    {
-      "id": 21,
-      "distro": "common",
-      "question_ar": "كيف تعرض حجم المجلدات والملفات بصيغة سهلة القراءة؟",
-      "question_en": "How do you display file/directory sizes in human readable format?",
-      "options": [
-        "ls -lh",
-        "du -sh",
-        "size -a",
-        "disk-usage"
+        "git reset --hard",
+        "git stash",
+        "git checkout -f",
+        "git branch -D"
       ],
       "correct_answer_index": 1,
-      "explanation_ar": "du -sh يعرض إجمالي حجم كل ملف ومجلد بصيغة مقروءة (G, M, K)",
-      "explanation_en": "du -sh displays total size in human readable format"
-    },
-    {
-      "id": 22,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لنسخ ملف من مسار لآخر؟",
-      "question_en": "What command is used to copy a file?",
-      "options": [
-        "duplicate",
-        "clone",
-        "copy",
-        "cp"
+      "explanation_ar": "أمر git stash يقوم بحفظ مؤقت وآمن لكافة التعديلات غير المكتملة وتنظيف مجلد العمل للانتقال لأي فرع آخر، وعند العودة يمكن استرجاعها عبر git stash pop.",
+      "options_explanations_ar": [
+        "git reset --hard: سيمحو تعديلاتك التي عملت عليها نهائياً.",
+        "git stash: الخيار الصحيح، يخفي ويحفظ تعديلاتك بأمان في رف التخزين المؤقت لاسترجاعها لاحقاً.",
+        "git checkout -f: يجبر الانتقال للفرع الآخر مع تجاهل وربما تدمير التعديلات غير المحفوظة.",
+        "git branch -D: يحذف فرعاً بالكامل ولا علاقة له بحفظ التعديلات الجارية."
       ],
-      "correct_answer_index": 3,
-      "explanation_ar": "أمر cp ينسخ الملفات والمجلدات",
-      "explanation_en": "cp command copies files and directories"
-    },
-    {
-      "id": 23,
-      "distro": "common",
-      "question_ar": "كيف تنقل ملفاً أو تعيد تسميته؟",
-      "question_en": "How do you move or rename a file?",
-      "options": [
-        "mv",
-        "move",
-        "transfer",
-        "relocate"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "أمر mv ينقل الملفات ويعيد تسميتها",
-      "explanation_en": "mv command moves files and can rename them"
-    },
-    {
-      "id": 24,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لحذف ملف نهائياً؟",
-      "question_en": "What command is used to delete a file permanently?",
-      "options": [
-        "delete",
-        "rm",
-        "remove",
-        "del"
-      ],
-      "correct_answer_index": 1,
-      "explanation_ar": "أمر rm يحذف الملفات والمجلدات (كن حذراً!)",
-      "explanation_en": "rm command deletes files and directories"
-    },
-    {
-      "id": 25,
-      "distro": "common",
-      "question_ar": "كيف تنشئ ملفاً نصياً فارغاً جديداً؟",
-      "question_en": "How do you create a new empty text file?",
-      "options": [
-        "create filename",
-        "new filename",
-        "touch filename",
-        "make filename"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "touch ينشئ ملفاً فارغاً إذا لم يكن موجوداً",
-      "explanation_en": "touch creates an empty file"
-    },
-    {
-      "id": 26,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لإنشاء مجلد جديد؟",
-      "question_en": "What command creates a new directory?",
-      "options": [
-        "mkdir dirname",
-        "create dirname",
-        "newdir dirname",
-        "md dirname"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "mkdir ينشئ مجلد جديد بالاسم المحدد",
-      "explanation_en": "mkdir creates new directory"
-    },
-    {
-      "id": 27,
-      "distro": "common",
-      "question_ar": "كيف تعرض محتويات ملف نصي على الطرفية مباشرة؟",
-      "question_en": "How do you display text file contents in terminal?",
-      "options": [
-        "show filename",
-        "display filename",
-        "cat filename",
-        "view filename"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "cat يعرض محتويات الملف بالكامل",
-      "explanation_en": "cat displays entire file contents"
-    },
-    {
-      "id": 28,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لعرض ملف كبير صفحة بصفحة؟",
-      "question_en": "What command displays a large file page by page?",
-      "options": [
-        "more filename",
-        "less filename",
-        "page filename",
-        "view-page filename"
-      ],
-      "correct_answer_index": 1,
-      "explanation_ar": "less يعرض الملف صفحة بصفحة مع إمكانية التمرير للأعلى والأسفل",
-      "explanation_en": "less displays file page by page with scrolling"
-    },
-    {
-      "id": 29,
-      "distro": "common",
-      "question_ar": "كيف تبحث عن كلمة أو نمط معين داخل ملف؟",
-      "question_en": "How do you search for a pattern inside a file?",
-      "options": [
-        "search pattern file",
-        "find pattern file",
-        "grep pattern file",
-        "locate pattern file"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "grep يبحث عن نمط نصي داخل الملفات",
-      "explanation_en": "grep searches for text patterns inside files"
-    },
-    {
-      "id": 30,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لتغيير صلاحيات ملف (مثل جعله قابلاً للتنفيذ)؟",
-      "question_en": "What command changes file permissions?",
-      "options": [
-        "chmod",
-        "perm",
-        "modify",
-        "access"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "chmod يغير صلاحيات الوصول للملف (قراءة، كتابة، تنفيذ)",
-      "explanation_en": "chmod changes file access permissions"
-    },
-    {
-      "id": 31,
-      "distro": "debian_family",
-      "question_ar": "كيف تصلح الحزم المعطوبة في أوبنتو عبر الطرفية؟",
-      "question_en": "How do you fix broken packages in Ubuntu terminal?",
-      "options": [
-        "apt --fix-broken install",
-        "apt-get -f install",
-        "dpkg --configure -a",
-        "جميع ما سبق"
-      ],
-      "correct_answer_index": 3,
-      "explanation_ar": "هذه الأوامر تساعد في إصلاح وإعادة إعداد الحزم المعطوبة",
-      "explanation_en": "These commands help fix and reconfigure broken packages"
-    },
-    {
-      "id": 32,
-      "distro": "debian_family",
-      "question_ar": "ما هو الأمر المستخدم لعرض الحزم التي تم حذفها ولكن بقت ملفات إعداداتها؟",
-      "question_en": "What command shows packages removed but config remain?",
-      "options": [
-        "dpkg -l | grep ^rc",
-        "apt list --removed",
-        "apt-show-removed",
-        "dpkg --removed"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "dpkg -l | grep ^rc يعرض الحزم التي تم حذفها وبقت ملفات الإعدادات",
-      "explanation_en": "dpkg -l | grep ^rc shows packages removed but config files remain"
-    },
-    {
-      "id": 33,
-      "distro": "redhat_family",
-      "question_ar": "كيف تعرض تفاصيل عملية DNF معينة باستخدام معرفها؟",
-      "question_en": "How do you show specific DNF transaction history details?",
-      "options": [
-        "dnf history detail ID",
-        "dnf history info ID",
-        "dnf log show ID",
-        "dnf transaction-info ID"
-      ],
-      "correct_answer_index": 1,
-      "explanation_ar": "dnf history info يعرض تفاصيل عملية معينة بالمعرف",
-      "explanation_en": "dnf history info shows details of specific transaction by ID"
-    },
-    {
-      "id": 34,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر المستخدم لتنزيل حزمة إلى إصدار أقدم في فيدورا؟",
-      "question_en": "What command downgrades a package in Fedora?",
-      "options": [
-        "dnf downgrade package",
-        "dnf rollback package",
-        "dnf undo package",
-        "dnf revert package"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "dnf downgrade يعود إلى إصدار أقدم من الحزمة",
-      "explanation_en": "dnf downgrade reverts to older version of package"
-    },
-    {
-      "id": 35,
-      "distro": "redhat_family",
-      "question_ar": "كيف تثبت مجموعة برمجيات كاملة (مثل واجهة سطح مكتب) في فيدورا؟",
-      "question_en": "How do you install a software group in Fedora?",
-      "options": [
-        "dnf group install",
-        "dnf install-group",
-        "dnf groupinstall",
-        "dnf install --group"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "dnf group install يثبت مجموعة كاملة من البرامج المرتبطة",
-      "explanation_en": "dnf group install installs complete group of software"
-    },
-    {
-      "id": 36,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لعرض اتصالات الشبكة النشطة؟",
-      "question_en": "What command shows active network connections?",
-      "options": [
-        "netstat",
-        "ifconfig",
-        "ip addr",
-        "networkctl"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "netstat يعرض جميع الاتصالات الشبكية النشطة والمنافذ",
-      "explanation_en": "netstat displays all active network connections"
-    },
-    {
-      "id": 37,
-      "distro": "common",
-      "question_ar": "كيف تختبر جودة الاتصال بخادم معين أو موقع؟",
-      "question_en": "How do you test connectivity to a server?",
-      "options": [
-        "test-net",
-        "ping",
-        "check-host",
-        "connect-test"
-      ],
-      "correct_answer_index": 1,
-      "explanation_ar": "ping يرسل حزم ICMP لاختبار سرعة واستقرار الاتصال",
-      "explanation_en": "ping sends ICMP packets to test connectivity"
-    },
-    {
-      "id": 38,
-      "distro": "common",
-      "question_ar": "ما هو الأمر الحديث المستخدم لعرض عناوين IP للواجهات؟",
-      "question_en": "What modern command shows interface IP addresses?",
-      "options": [
-        "ifconfig",
-        "ipconfig",
-        "ip addr",
-        "net-addr"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "ip addr هو البديل الحديث لأمر ifconfig القديم",
-      "explanation_en": "ip addr is the modern replacement for ifconfig"
-    },
-    {
-      "id": 39,
-      "distro": "common",
-      "question_ar": "كيف تعرض المنافذ (Ports) التي تستمع للاتصالات حالياً؟",
-      "question_en": "How do you show listening ports on the system?",
-      "options": [
-        "ss -tulpn",
-        "netstat -l",
-        "lsof -i",
-        "جميع ما سبق"
-      ],
-      "correct_answer_index": 3,
-      "explanation_ar": "يمكن استخدام هذه الأوامر لعرض المنافذ المفتوحة والعمليات المرتبطة بها",
-      "explanation_en": "These commands can be used to show listening ports"
-    },
-    {
-      "id": 40,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لضغط ملف مفرد؟",
-      "question_en": "What command compresses a single file?",
-      "options": [
-        "gzip",
-        "compress",
-        "zip",
-        "pack"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "gzip يضغط الملف ويضيف له امتداد .gz",
-      "explanation_en": "gzip compresses file using gzip algorithm"
-    },
-    {
-      "id": 41,
-      "distro": "common",
-      "question_ar": "كيف تفك ضغط ملف ينتهي بـ .gz؟",
-      "question_en": "How do you decompress a .gz file?",
-      "options": [
-        "gunzip",
-        "gzip -d",
-        "unzip",
-        "الخياران الأول والثاني"
-      ],
-      "correct_answer_index": 3,
-      "explanation_ar": "gunzip أو gzip -d كلاهما يفك ضغط ملفات gzip",
-      "explanation_en": "Both gunzip and gzip -d decompress gzip files"
-    },
-    {
-      "id": 42,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لإنشاء ملف أرشيف (تجميع ملفات)؟",
-      "question_en": "What command creates an archive file?",
-      "options": [
-        "archive",
-        "zip",
-        "tar -cvf",
-        "pack"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "أمر tar يجمع عدة ملفات في ملف واحد يسمى أرشيف",
-      "explanation_en": "tar command archives multiple files into one"
-    },
-    {
-      "id": 43,
-      "distro": "common",
-      "question_ar": "كيف تستخرج ملفات من أرشيف مضغوط .tar.gz؟",
-      "question_en": "How do you extract .tar.gz archive?",
-      "options": [
-        "tar -xzvf",
-        "extract",
-        "untar",
-        "unpack"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "tar -xzvf يستخرج محتويات الأرشيف المضغوط",
-      "explanation_en": "tar -xzvf extracts compressed archive contents"
-    },
-    {
-      "id": 44,
-      "distro": "common",
-      "question_ar": "ما هو محرر النصوص الافتراضي البسيط في معظم التوزيعات؟",
-      "question_en": "What is the simple default text editor in most distros?",
-      "options": [
-        "vim",
-        "nano",
-        "emacs",
-        "gedit"
-      ],
-      "correct_answer_index": 1,
-      "explanation_ar": "nano محرر نصوص طرفي سهل الاستخدام للمبتدئين",
-      "explanation_en": "nano is an easy-to-use terminal text editor"
-    },
-    {
-      "id": 45,
-      "distro": "common",
-      "question_ar": "كيف تبحث عن ملف بناءً على اسمه في القرص؟",
-      "question_en": "How do you find a file by name on disk?",
-      "options": [
-        "find",
-        "locate",
-        "search",
-        "whereis"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "أمر find يبحث بعمق في المجلدات بناءً على معايير محددة",
-      "explanation_en": "find command searches for files based on criteria"
-    },
-    {
-      "id": 46,
-      "distro": "common",
-      "question_ar": "ما هو الأمر المستخدم لمعرفة مكانك الحالي في المجلدات؟",
-      "question_en": "What command shows your current directory?",
-      "options": [
-        "cwd",
-        "whereami",
-        "pwd",
-        "path"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "pwd (Print Working Directory) يعرض المسار الكامل",
-      "explanation_en": "pwd prints the full path of current directory"
-    },
-    {
-      "id": 47,
-      "distro": "common",
-      "question_ar": "كيف تعود خطوة واحدة للخلف في شجرة المجلدات؟",
-      "question_en": "How do you move up one directory level?",
-      "options": [
-        "cd ..",
-        "cd -",
-        "back",
-        "up"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "cd .. ينقلك للمجلد الأب مباشرة",
-      "explanation_en": "cd .. navigates to parent directory"
-    },
-    {
-      "id": 48,
-      "distro": "common",
-      "question_ar": "ما هو الأمر الذي يطبع قائمة بكل ما كتبت من أوامر سابقاً؟",
-      "question_en": "What command lists all previous commands?",
-      "options": [
-        "history",
-        "hist",
-        "log",
-        "prev"
-      ],
-      "correct_answer_index": 0,
-      "explanation_ar": "history يعرض سجل الأوامر التي تم تنفيذها في الجلسة",
-      "explanation_en": "history displays command history list"
-    },
-    {
-      "id": 49,
-      "distro": "debian_family",
-      "question_ar": "كيف تضيف مفتاح GPG لمستودع خارجي في أوبنتو؟",
-      "question_en": "How do you add a GPG key in Ubuntu?",
-      "options": [
-        "apt-key add",
-        "gpg --import",
-        "الخيار الأول والثاني",
-        "لا يمكن إضافة مفاتيح"
-      ],
-      "correct_answer_index": 2,
-      "explanation_ar": "يستخدم apt-key أو استيراد gpg لإدارة مفاتيح الموثوقية للمستودعات",
-      "explanation_en": "apt-key or gpg import is used to manage repository trust keys"
-    },
-    {
-      "id": 50,
-      "distro": "redhat_family",
-      "question_ar": "ما هو الأمر المستخدم لاستيراد مفتاح توقيع RPM في فيدورا؟",
-      "question_en": "What command imports RPM signing key in Fedora?",
-      "options": [
-        "dnf import-key",
-        "rpm --import",
-        "gpg --import",
-        "rpm-add-key"
-      ],
-      "correct_answer_index": 1,
-      "explanation_ar": "rpm --import يضمن صحة وموثوقية حزم RPM المثبتة",
-      "explanation_en": "rpm --import imports GPG key to RPM database"
+      "explanation_en": "git stash temporarily shelves modified tracked files so you can switch branches cleanly."
     }
   ],
   "daily_tips": [

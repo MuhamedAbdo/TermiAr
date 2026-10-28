@@ -17,6 +17,12 @@ QuizQuestion _$QuizQuestionFromJson(Map<String, dynamic> json) => QuizQuestion(
   explanation_ar: json['explanation_ar'] as String? ?? '',
   explanation_en: json['explanation_en'] as String? ?? '',
   distro: json['distro'] as String? ?? '',
+  options_explanations_ar:
+      (json['options_explanations_ar'] as List<dynamic>?)
+          ?.map((e) => e as String)
+          .toList() ??
+      [],
+  difficulty: json['difficulty'] as String? ?? 'متوسط',
 );
 
 Map<String, dynamic> _$QuizQuestionToJson(QuizQuestion instance) =>
@@ -29,6 +35,8 @@ Map<String, dynamic> _$QuizQuestionToJson(QuizQuestion instance) =>
       'explanation_ar': instance.explanation_ar,
       'explanation_en': instance.explanation_en,
       'distro': instance.distro,
+      'options_explanations_ar': instance.options_explanations_ar,
+      'difficulty': instance.difficulty,
     };
 
 DailyTip _$DailyTipFromJson(Map<String, dynamic> json) => DailyTip(
@@ -67,6 +75,7 @@ QuizCategory _$QuizCategoryFromJson(Map<String, dynamic> json) => QuizCategory(
   id: json['id'] as String? ?? '',
   name_ar: json['name_ar'] as String? ?? '',
   name_en: json['name_en'] as String? ?? '',
+  icon: json['icon'] as String? ?? '',
 );
 
 Map<String, dynamic> _$QuizCategoryToJson(QuizCategory instance) =>
@@ -74,6 +83,7 @@ Map<String, dynamic> _$QuizCategoryToJson(QuizCategory instance) =>
       'id': instance.id,
       'name_ar': instance.name_ar,
       'name_en': instance.name_en,
+      'icon': instance.icon,
     };
 
 LearningQuizResponse _$LearningQuizResponseFromJson(

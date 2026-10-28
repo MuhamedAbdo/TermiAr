@@ -30,6 +30,12 @@ class QuizQuestion {
   @JsonKey(defaultValue: "")
   final String distro;
 
+  @JsonKey(defaultValue: [])
+  final List<String> options_explanations_ar;
+
+  @JsonKey(defaultValue: "متوسط")
+  final String difficulty;
+
   QuizQuestion({
     required this.id,
     required this.question_ar,
@@ -39,6 +45,8 @@ class QuizQuestion {
     required this.explanation_ar,
     required this.explanation_en,
     required this.distro,
+    this.options_explanations_ar = const [],
+    this.difficulty = "متوسط",
   });
 
   factory QuizQuestion.fromJson(Map<String, dynamic> json) =>
@@ -112,10 +120,14 @@ class QuizCategory {
   @JsonKey(defaultValue: "")
   final String name_en;
 
+  @JsonKey(defaultValue: "")
+  final String icon;
+
   QuizCategory({
     required this.id,
     required this.name_ar,
     required this.name_en,
+    this.icon = "",
   });
 
   factory QuizCategory.fromJson(Map<String, dynamic> json) =>

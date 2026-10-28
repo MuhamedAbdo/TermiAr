@@ -1,9 +1,13 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:termi_ar/models/command_model.dart';
+import 'package:termi_ar/providers/favorites_provider.dart';
 import 'package:termi_ar/services/data_service.dart';
+import 'package:termi_ar/services/quiz_progress_service.dart';
 
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
+  SharedPreferences.setMockInitialValues({});
 
   group('CommandModel & DataService Tests', () {
     test('CommandModel deserializes new attributes with defaults', () {
@@ -234,6 +238,90 @@ void main() {
       // Search Git by option
       final gitSearch = await DataService.searchCommands('--oneline');
       expect(gitSearch.any((c) => c.command == 'git log --oneline'), isTrue);
+    });
+
+    test('FavoritesProvider manages custom tags and backward-compatible metadata', () async {
+      final provider = FavoritesProvider();
+      await Future.delayed(const Duration(milliseconds: 100));
+
+      // Toggle favorite with a custom tag
+      await provider.toggleFavorite(349, tag: 'فلاتر');
+      expect(provider.isFavorite(349), isTrue);
+      expect(provider.getCommandTag(349), 'فلاتر');
+      expect(provider.getAvailableTags().contains('فلاتر'), isTrue);
+      expect(provider.getCommandAddedDate(349), greaterThan(0));
+
+      // Update tag
+      await provider.setCommandTag(349, 'أدوات');
+      expect(provider.getCommandTag(349), 'أدوات');
+      expect(provider.getAvailableTags().contains('أدوات'), isTrue);
+
+      // Remove tag
+      await provider.setCommandTag(349, null);
+      expect(provider.getCommandTag(349), isNull);
+
+      // Remove favorite
+      await provider.toggleFavorite(349);
+      expect(provider.isFavorite(349), isFalse);
+    });
+
+    test('QuizProgressService tracks high scores and calculates accuracy offline', () async {
+      await QuizProgressService.clearHistory();
+
+      // Save first result
+      final isNewHigh1 = await QuizProgressService.saveQuizResult(
+        categoryId: 'flutter_dart',
+        categoryNameAr: 'فلاتر ودارت',
+        score: 8,
+        totalQuestions: 10,
+      );
+      expect(isNewHigh1, isTrue);
+
+      final highScore1 = await QuizProgressService.getHighScore('flutter_dart');
+      expect(highScore1, 8);
+
+      // Save lower result (not high score)
+      final isNewHigh2 = await QuizProgressService.saveQuizResult(
+        categoryId: 'flutter_dart',
+        categoryNameAr: 'فلاتر ودارت',
+        score: 6,
+        totalQuestions: 10,
+      );
+      expect(isNewHigh2, isFalse);
+
+      final stats = await QuizProgressService.getOverallStats();
+      expect(stats['total_attempts'], 2);
+      expect(stats['total_questions'], 20);
+      expect(stats['total_correct'], 14);
+      expect(stats['accuracy'], 70); // (14 / 20) * 100 = 70%
+
+      final history = await QuizProgressService.getRecentHistory();
+      expect(history.length, 2);
+      expect(history.first['score'], 6);
+    });
+
+    test('LearningQuiz loads situational questions and multi-option explanations', () async {
+      DataService.clearCache();
+      final quizData = await DataService.loadQuizData();
+
+      expect(quizData.questions, isNotNull);
+      expect(quizData.questions!.isNotEmpty, isTrue);
+
+      // Validate all categories have questions
+      final distros = quizData.questions!.map((q) => q.distro).toSet();
+      expect(distros.contains('universal'), isTrue);
+      expect(distros.contains('debian_family'), isTrue);
+      expect(distros.contains('redhat_family'), isTrue);
+      expect(distros.contains('flutter_dart'), isTrue);
+      expect(distros.contains('android_dev'), isTrue);
+      expect(distros.contains('git_github'), isTrue);
+
+      // Verify situational nature and options explanations
+      final sampleQ = quizData.questions!.firstWhere((q) => q.id == 1);
+      expect(sampleQ.question_ar.contains('أنت تعمل على خادم لينكس'), isTrue);
+      expect(sampleQ.options.length, 4);
+      expect(sampleQ.options_explanations_ar.length, 4);
+      expect(sampleQ.explanation_ar.isNotEmpty, isTrue);
     });
   });
 }
