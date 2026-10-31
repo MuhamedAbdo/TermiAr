@@ -49,11 +49,14 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
           ),
         ],
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(16.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
             // الكارت العلوي: اسم الأمر، المستوى، ومستوى الخطورة
             _buildHeaderCard(context, isDarkMode),
 
@@ -166,7 +169,9 @@ class _CommandDetailsScreenState extends State<CommandDetailsScreen> {
           ],
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 
   Widget _buildHeaderCard(BuildContext context, bool isDarkMode) {

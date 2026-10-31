@@ -68,14 +68,64 @@ class ThemeProvider extends ChangeNotifier {
       ),
       cardTheme: CardThemeData(
         elevation: 2,
+        clipBehavior: Clip.antiAlias,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF0055FF),
           foregroundColor: Colors.white,
+          enabledMouseCursor: SystemMouseCursors.click,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          enabledMouseCursor: SystemMouseCursors.click,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          enabledMouseCursor: SystemMouseCursors.click,
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          enabledMouseCursor: SystemMouseCursors.click,
+        ),
+      ),
+      listTileTheme: const ListTileThemeData(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
+      scrollbarTheme: ScrollbarThemeData(
+        interactive: true,
+        thickness: const WidgetStatePropertyAll(8.0),
+        radius: const Radius.circular(4),
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.hovered) ||
+              states.contains(WidgetState.dragged)) {
+            return const Color(0xFF0055FF);
+          }
+          return Colors.black.withValues(alpha: 0.25);
+        }),
+      ),
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: Colors.white,
+        selectedIconTheme: const IconThemeData(color: Color(0xFF0055FF)),
+        unselectedIconTheme: IconThemeData(color: Colors.grey[600]),
+        selectedLabelTextStyle: const TextStyle(
+          color: Color(0xFF0055FF),
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+          fontFamily: 'Cairo',
+        ),
+        unselectedLabelTextStyle: TextStyle(
+          color: Colors.grey[600],
+          fontSize: 12,
+          fontFamily: 'Cairo',
+        ),
+        useIndicator: true,
+        indicatorColor: const Color(0xFF0055FF).withValues(alpha: 0.15),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
@@ -102,6 +152,7 @@ class ThemeProvider extends ChangeNotifier {
       ),
       cardTheme: CardThemeData(
         elevation: 4,
+        clipBehavior: Clip.antiAlias,
         color: const Color(0xFF2A2A2A),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
       ),
@@ -109,8 +160,57 @@ class ThemeProvider extends ChangeNotifier {
         style: ElevatedButton.styleFrom(
           backgroundColor: const Color(0xFF0055FF),
           foregroundColor: Colors.white,
+          enabledMouseCursor: SystemMouseCursors.click,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         ),
+      ),
+      textButtonTheme: TextButtonThemeData(
+        style: TextButton.styleFrom(
+          enabledMouseCursor: SystemMouseCursors.click,
+        ),
+      ),
+      outlinedButtonTheme: OutlinedButtonThemeData(
+        style: OutlinedButton.styleFrom(
+          enabledMouseCursor: SystemMouseCursors.click,
+        ),
+      ),
+      iconButtonTheme: IconButtonThemeData(
+        style: IconButton.styleFrom(
+          enabledMouseCursor: SystemMouseCursors.click,
+        ),
+      ),
+      listTileTheme: const ListTileThemeData(
+        mouseCursor: WidgetStatePropertyAll(SystemMouseCursors.click),
+      ),
+      scrollbarTheme: ScrollbarThemeData(
+        interactive: true,
+        thickness: const WidgetStatePropertyAll(8.0),
+        radius: const Radius.circular(4),
+        thumbColor: WidgetStateProperty.resolveWith((states) {
+          if (states.contains(WidgetState.hovered) ||
+              states.contains(WidgetState.dragged)) {
+            return const Color(0xFF0055FF);
+          }
+          return Colors.white.withValues(alpha: 0.3);
+        }),
+      ),
+      navigationRailTheme: NavigationRailThemeData(
+        backgroundColor: const Color(0xFF1E1E1E),
+        selectedIconTheme: const IconThemeData(color: Color(0xFF0055FF)),
+        unselectedIconTheme: IconThemeData(color: Colors.grey[400]),
+        selectedLabelTextStyle: const TextStyle(
+          color: Color(0xFF0055FF),
+          fontWeight: FontWeight.bold,
+          fontSize: 12,
+          fontFamily: 'Cairo',
+        ),
+        unselectedLabelTextStyle: TextStyle(
+          color: Colors.grey[400],
+          fontSize: 12,
+          fontFamily: 'Cairo',
+        ),
+        useIndicator: true,
+        indicatorColor: const Color(0xFF0055FF).withValues(alpha: 0.15),
       ),
       inputDecorationTheme: InputDecorationTheme(
         border: OutlineInputBorder(

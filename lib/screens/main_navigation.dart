@@ -121,67 +121,220 @@ class _MainNavigationState extends State<MainNavigation> {
           }
         }
       },
-      child: Scaffold(
-        body: IndexedStack(index: _currentIndex, children: _screens),
-        bottomNavigationBar: Container(
-          decoration: BoxDecoration(
-            color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
-            boxShadow: [
-              BoxShadow(
-                color: Colors.black.withValues(alpha: 0.1),
-                blurRadius: 10,
-                offset: const Offset(0, -2),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isDesktop = constraints.maxWidth >= 800;
+
+          if (isDesktop) {
+            return Scaffold(
+              body: Row(
+                children: [
+                  NavigationRail(
+                    selectedIndex: _currentIndex,
+                    onDestinationSelected: navigateToTab,
+                    labelType: NavigationRailLabelType.all,
+                    groupAlignment: -1.0,
+                    minWidth: 92,
+                    backgroundColor: isDarkMode
+                        ? const Color(0xFF1E1E1E)
+                        : Colors.white,
+                    indicatorColor:
+                        const Color(0xFF0055FF).withValues(alpha: 0.15),
+                    selectedIconTheme: const IconThemeData(
+                      color: Color(0xFF0055FF),
+                      size: 26,
+                    ),
+                    unselectedIconTheme: IconThemeData(
+                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                      size: 24,
+                    ),
+                    selectedLabelTextStyle: const TextStyle(
+                      color: Color(0xFF0055FF),
+                      fontWeight: FontWeight.bold,
+                      fontSize: 12,
+                      fontFamily: 'Cairo',
+                    ),
+                    unselectedLabelTextStyle: TextStyle(
+                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                      fontSize: 12,
+                      fontFamily: 'Cairo',
+                    ),
+                    leading: Padding(
+                      padding: const EdgeInsets.only(top: 16.0, bottom: 20.0),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Container(
+                            width: 44,
+                            height: 44,
+                            decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              gradient: const LinearGradient(
+                                colors: [Color(0xFF0055FF), Color(0xFF003DCC)],
+                                begin: Alignment.topLeft,
+                                end: Alignment.bottomRight,
+                              ),
+                              boxShadow: [
+                                BoxShadow(
+                                  color: const Color(0xFF0055FF)
+                                      .withValues(alpha: 0.3),
+                                  blurRadius: 8,
+                                  offset: const Offset(0, 3),
+                                ),
+                              ],
+                            ),
+                            child: const Center(
+                              child: Icon(
+                                Icons.terminal,
+                                color: Colors.white,
+                                size: 24,
+                              ),
+                            ),
+                          ),
+                          const SizedBox(height: 6),
+                          BiDiHelper.buildMixedText(
+                            text: 'TermiAr',
+                            style: TextStyle(
+                              fontSize: 13,
+                              fontWeight: FontWeight.bold,
+                              color: isDarkMode
+                                  ? Colors.white
+                                  : const Color(0xFF1A1A1A),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                    trailing: Padding(
+                      padding: const EdgeInsets.only(top: 16.0),
+                      child: IconButton(
+                        icon: Icon(
+                          isDarkMode ? Icons.light_mode : Icons.dark_mode,
+                          color: isDarkMode ? Colors.amber : Colors.grey[700],
+                        ),
+                        tooltip: isDarkMode ? 'الوضع النهاري' : 'الوضع الليلي',
+                        mouseCursor: SystemMouseCursors.click,
+                        onPressed: () => themeProvider.toggleTheme(),
+                      ),
+                    ),
+                    destinations: const [
+                      NavigationRailDestination(
+                        icon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.home_outlined),
+                        ),
+                        selectedIcon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.home),
+                        ),
+                        label: Text('الرئيسية'),
+                      ),
+                      NavigationRailDestination(
+                        icon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.favorite_border),
+                        ),
+                        selectedIcon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.favorite),
+                        ),
+                        label: Text('المفضلة'),
+                      ),
+                      NavigationRailDestination(
+                        icon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.quiz_outlined),
+                        ),
+                        selectedIcon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.quiz),
+                        ),
+                        label: Text('الاختبار'),
+                      ),
+                      NavigationRailDestination(
+                        icon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.info_outline),
+                        ),
+                        selectedIcon: MouseRegion(
+                          cursor: SystemMouseCursors.click,
+                          child: Icon(Icons.info),
+                        ),
+                        label: Text('حول التطبيق'),
+                      ),
+                    ],
+                  ),
+                  VerticalDivider(
+                    thickness: 1,
+                    width: 1,
+                    color: isDarkMode ? Colors.white12 : Colors.black12,
+                  ),
+                  Expanded(
+                    child: IndexedStack(
+                      index: _currentIndex,
+                      children: _screens,
+                    ),
+                  ),
+                ],
               ),
-            ],
-          ),
-          child: BottomNavigationBar(
-            currentIndex: _currentIndex,
-            onTap: (index) {
-              setState(() {
-                _currentIndex = index;
-                // Increment counter when navigating to quiz to reset state
-                if (index == 2) {
-                  // Quiz tab index
-                  _quizKeyCounter++;
-                }
-              });
-            },
-            type: BottomNavigationBarType.fixed,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            selectedItemColor: const Color(0xFF0055FF),
-            unselectedItemColor: isDarkMode
-                ? Colors.grey[600]
-                : Colors.grey[500],
-            selectedLabelStyle: const TextStyle(
-              fontWeight: FontWeight.bold,
-              fontSize: 12,
+            );
+          }
+
+          // Mobile Layout (< 800)
+          return Scaffold(
+            body: IndexedStack(index: _currentIndex, children: _screens),
+            bottomNavigationBar: Container(
+              decoration: BoxDecoration(
+                color: isDarkMode ? const Color(0xFF1A1A1A) : Colors.white,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, -2),
+                  ),
+                ],
+              ),
+              child: BottomNavigationBar(
+                currentIndex: _currentIndex,
+                onTap: navigateToTab,
+                type: BottomNavigationBarType.fixed,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                selectedItemColor: const Color(0xFF0055FF),
+                unselectedItemColor: isDarkMode
+                    ? Colors.grey[600]
+                    : Colors.grey[500],
+                selectedLabelStyle: const TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                ),
+                unselectedLabelStyle: const TextStyle(fontSize: 12),
+                items: const [
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.home_outlined),
+                    activeIcon: Icon(Icons.home),
+                    label: 'الرئيسية',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite_border),
+                    activeIcon: Icon(Icons.favorite),
+                    label: 'المفضلة',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.quiz_outlined),
+                    activeIcon: Icon(Icons.quiz),
+                    label: 'الاختبار',
+                  ),
+                  BottomNavigationBarItem(
+                    icon: Icon(Icons.info_outline),
+                    activeIcon: Icon(Icons.info),
+                    label: 'حول التطبيق',
+                  ),
+                ],
+              ),
             ),
-            unselectedLabelStyle: const TextStyle(fontSize: 12),
-            items: const [
-              BottomNavigationBarItem(
-                icon: Icon(Icons.home_outlined),
-                activeIcon: Icon(Icons.home),
-                label: 'الرئيسية',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.favorite_border),
-                activeIcon: Icon(Icons.favorite),
-                label: 'المفضلة',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.quiz_outlined),
-                activeIcon: Icon(Icons.quiz),
-                label: 'الاختبار',
-              ),
-              BottomNavigationBarItem(
-                icon: Icon(Icons.info_outline),
-                activeIcon: Icon(Icons.info),
-                label: 'حول التطبيق',
-              ),
-            ],
-          ),
-        ),
+          );
+        },
       ),
     );
   }

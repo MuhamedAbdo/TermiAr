@@ -363,127 +363,132 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
             // Main content
             SafeArea(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.all(16.0),
-                child: Column(
-                  children: [
-                    // Progress Indicator Bar
-                    Row(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 1000),
+                  child: SingleChildScrollView(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
                       children: [
-                        Text(
-                          'السؤال ${_currentQuestionIndex + 1} من ${_currentQuizQuestions.length}',
-                          style: TextStyle(
-                            fontSize: 13,
-                            fontWeight: FontWeight.bold,
-                            color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
-                          ),
+                        // Progress Indicator Bar
+                        Row(
+                          children: [
+                            Text(
+                              'السؤال ${_currentQuestionIndex + 1} من ${_currentQuizQuestions.length}',
+                              style: TextStyle(
+                                fontSize: 13,
+                                fontWeight: FontWeight.bold,
+                                color: isDarkMode ? Colors.grey[300] : Colors.grey[700],
+                              ),
+                            ),
+                            const Spacer(),
+                            Container(
+                              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
+                              decoration: BoxDecoration(
+                                color: Colors.blue.withValues(alpha: 0.15),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: Text(
+                                currentQuestion.difficulty.isNotEmpty ? currentQuestion.difficulty : 'متوسط',
+                                style: const TextStyle(fontSize: 11, color: Colors.blue, fontWeight: FontWeight.bold),
+                              ),
+                            ),
+                          ],
                         ),
-                        const Spacer(),
+                        const SizedBox(height: 8),
                         Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                          decoration: BoxDecoration(
-                            color: Colors.blue.withValues(alpha: 0.15),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Text(
-                            currentQuestion.difficulty.isNotEmpty ? currentQuestion.difficulty : 'متوسط',
-                            style: const TextStyle(fontSize: 11, color: Colors.blue, fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 8),
-                    Container(
-                      height: 8,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(4),
-                        color: isDarkMode ? Colors.grey[800] : Colors.grey[300],
-                      ),
-                      child: FractionallySizedBox(
-                        alignment: Alignment.centerLeft,
-                        widthFactor: (_currentQuestionIndex + 1) / _currentQuizQuestions.length,
-                        child: Container(
+                          height: 8,
                           decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(4),
-                            gradient: LinearGradient(
-                              colors: isDarkMode ? categoryTheme['darkGradient'] : categoryTheme['lightGradient'],
+                            color: isDarkMode ? Colors.grey[800] : Colors.grey[300],
+                          ),
+                          child: FractionallySizedBox(
+                            alignment: Alignment.centerLeft,
+                            widthFactor: (_currentQuestionIndex + 1) / _currentQuizQuestions.length,
+                            child: Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(4),
+                                gradient: LinearGradient(
+                                  colors: isDarkMode ? categoryTheme['darkGradient'] : categoryTheme['lightGradient'],
+                                ),
+                              ),
                             ),
                           ),
                         ),
-                      ),
-                    ),
-                    const SizedBox(height: 20),
+                        const SizedBox(height: 20),
 
-                    // Situational Question Card
-                    Container(
-                      width: double.infinity,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(16),
-                        color: isDarkMode ? const Color(0xFF242424) : Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.black.withValues(alpha: isDarkMode ? 0.3 : 0.08),
-                            blurRadius: 10,
-                            offset: const Offset(0, 4),
-                          ),
-                        ],
-                        border: Border.all(
-                          color: isDarkMode ? Colors.white12 : Colors.black12,
-                        ),
-                      ),
-                      padding: const EdgeInsets.all(20.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Row(
-                            children: [
-                              Container(
-                                padding: const EdgeInsets.all(6),
-                                decoration: BoxDecoration(
-                                  color: const Color(0xFF0055FF).withValues(alpha: 0.15),
-                                  borderRadius: BorderRadius.circular(8),
-                                ),
-                                child: const Icon(Icons.help_outline, color: Color(0xFF0055FF), size: 18),
+                        // Situational Question Card
+                        Container(
+                          width: double.infinity,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(16),
+                            color: isDarkMode ? const Color(0xFF242424) : Colors.white,
+                            boxShadow: [
+                              BoxShadow(
+                                color: Colors.black.withValues(alpha: isDarkMode ? 0.3 : 0.08),
+                                blurRadius: 10,
+                                offset: const Offset(0, 4),
                               ),
-                              const SizedBox(width: 8),
-                              const Text(
-                                'تحدي عملي (Situational Problem)',
+                            ],
+                            border: Border.all(
+                              color: isDarkMode ? Colors.white12 : Colors.black12,
+                            ),
+                          ),
+                          padding: const EdgeInsets.all(20.0),
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Row(
+                                children: [
+                                  Container(
+                                    padding: const EdgeInsets.all(6),
+                                    decoration: BoxDecoration(
+                                      color: const Color(0xFF0055FF).withValues(alpha: 0.15),
+                                      borderRadius: BorderRadius.circular(8),
+                                    ),
+                                    child: const Icon(Icons.help_outline, color: Color(0xFF0055FF), size: 18),
+                                  ),
+                                  const SizedBox(width: 8),
+                                  const Text(
+                                    'تحدي عملي (Situational Problem)',
+                                    style: TextStyle(
+                                      fontSize: 12,
+                                      fontWeight: FontWeight.bold,
+                                      color: Color(0xFF0055FF),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              const SizedBox(height: 12),
+                              BiDiHelper.buildMixedText(
+                                text: currentQuestion.question_ar,
                                 style: TextStyle(
-                                  fontSize: 12,
+                                  fontSize: 17,
                                   fontWeight: FontWeight.bold,
-                                  color: Color(0xFF0055FF),
+                                  height: 1.5,
+                                  color: isDarkMode ? Colors.white : Colors.black87,
                                 ),
                               ),
                             ],
                           ),
-                          const SizedBox(height: 12),
-                          BiDiHelper.buildMixedText(
-                            text: currentQuestion.question_ar,
-                            style: TextStyle(
-                              fontSize: 17,
-                              fontWeight: FontWeight.bold,
-                              height: 1.5,
-                              color: isDarkMode ? Colors.white : Colors.black87,
-                            ),
-                          ),
-                        ],
-                      ),
+                        ),
+                        const SizedBox(height: 18),
+
+                        // Options
+                        ...List.generate(currentQuestion.options.length, (index) {
+                          return _buildOptionCard(
+                            index,
+                            currentQuestion,
+                            isDarkMode,
+                          );
+                        }),
+
+                        // In-depth Educational Feedback
+                        if (_isAnswered)
+                          _buildEducationalFeedback(currentQuestion, isDarkMode),
+                      ],
                     ),
-                    const SizedBox(height: 18),
-
-                    // Options
-                    ...List.generate(currentQuestion.options.length, (index) {
-                      return _buildOptionCard(
-                        index,
-                        currentQuestion,
-                        isDarkMode,
-                      );
-                    }),
-
-                    // In-depth Educational Feedback
-                    if (_isAnswered)
-                      _buildEducationalFeedback(currentQuestion, isDarkMode),
-                  ],
+                  ),
                 ),
               ),
             ),
@@ -518,36 +523,41 @@ class _QuizScreenState extends State<QuizScreen> {
           if (didPop) return;
           widget.onNavigateToHome?.call();
         },
-        child: SingleChildScrollView(
-          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Overall User Stats Dashboard Card
-              _buildStatsDashboard(isDarkMode),
-              const SizedBox(height: 24),
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1000),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  // Overall User Stats Dashboard Card
+                  _buildStatsDashboard(isDarkMode),
+                  const SizedBox(height: 24),
 
-              Text(
-                'اختر مجال التحدي والاختبار:',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                  color: isDarkMode ? Colors.white : Colors.black87,
-                ),
-              ),
-              const SizedBox(height: 6),
-              Text(
-                'تم تصميم الأسئلة على شكل مواقف وتحديات برمجية حقيقية لترسيخ الفهم مع شروحات تعليمية لكل خيار.',
-                style: TextStyle(
-                  fontSize: 13,
-                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                ),
-              ),
-              const SizedBox(height: 16),
+                  Text(
+                    'اختر مجال التحدي والاختبار:',
+                    style: TextStyle(
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode ? Colors.white : Colors.black87,
+                    ),
+                  ),
+                  const SizedBox(height: 6),
+                  Text(
+                    'تم تصميم الأسئلة على شكل مواقف وتحديات برمجية حقيقية لترسيخ الفهم مع شروحات تعليمية لكل خيار.',
+                    style: TextStyle(
+                      fontSize: 13,
+                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                    ),
+                  ),
+                  const SizedBox(height: 16),
 
-              // Categories List
-              ..._categories.map((cat) => _buildCategoryCard(cat, isDarkMode)),
-            ],
+                  // Categories List
+                  ..._categories.map((cat) => _buildCategoryCard(cat, isDarkMode)),
+                ],
+              ),
+            ),
           ),
         ),
       ),
@@ -651,6 +661,8 @@ class _QuizScreenState extends State<QuizScreen> {
         color: Colors.transparent,
         child: InkWell(
           onTap: () => _selectDistro(category.id),
+          mouseCursor: SystemMouseCursors.click,
+          hoverColor: Colors.white.withValues(alpha: 0.15),
           borderRadius: BorderRadius.circular(16),
           child: Padding(
             padding: const EdgeInsets.all(18),
@@ -757,6 +769,10 @@ class _QuizScreenState extends State<QuizScreen> {
         color: Colors.transparent,
         child: InkWell(
           onTap: _isAnswered ? null : () => _answerQuestion(index),
+          mouseCursor: _isAnswered
+              ? SystemMouseCursors.basic
+              : SystemMouseCursors.click,
+          hoverColor: const Color(0xFF0055FF).withValues(alpha: 0.08),
           borderRadius: BorderRadius.circular(14),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 14),
@@ -952,10 +968,13 @@ class _QuizScreenState extends State<QuizScreen> {
         title: const Text('نتيجة الاختبار'),
         centerTitle: true,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          children: [
+      body: Center(
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 1000),
+          child: SingleChildScrollView(
+            padding: const EdgeInsets.all(20),
+            child: Column(
+              children: [
             if (_isNewHighScore)
               Container(
                 margin: const EdgeInsets.only(bottom: 16),
@@ -1132,6 +1151,8 @@ class _QuizScreenState extends State<QuizScreen> {
           ],
         ),
       ),
-    );
+    ),
+  ),
+);
   }
 }

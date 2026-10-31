@@ -27,6 +27,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
   List<CommandModel> _filteredCommands = [];
   bool _isLoading = true;
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
 
   @override
   void initState() {
@@ -38,6 +39,7 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _scrollController.dispose();
     super.dispose();
   }
 
@@ -134,19 +136,24 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
   }
 
   Widget _buildBody(bool isDarkMode, Map<String, dynamic> categoryTheme) {
-    return Column(
-      children: [
-        _buildSearchBar(isDarkMode, categoryTheme),
-        const SizedBox(height: 8),
-        Expanded(
-          child: _filteredCommands.isEmpty
-              ? _buildEmptyState(
-                  isDarkMode,
-                  isSearchResult: _searchController.text.isNotEmpty,
-                )
-              : _buildCommandsList(isDarkMode, categoryTheme),
+    return Center(
+      child: ConstrainedBox(
+        constraints: const BoxConstraints(maxWidth: 1200),
+        child: Column(
+          children: [
+            _buildSearchBar(isDarkMode, categoryTheme),
+            const SizedBox(height: 8),
+            Expanded(
+              child: _filteredCommands.isEmpty
+                  ? _buildEmptyState(
+                      isDarkMode,
+                      isSearchResult: _searchController.text.isNotEmpty,
+                    )
+                  : _buildCommandsList(isDarkMode, categoryTheme),
+            ),
+          ],
         ),
-      ],
+      ),
     );
   }
 
@@ -202,29 +209,34 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
   ) {
     return Consumer<FavoritesProvider>(
       builder: (context, favoritesProvider, child) {
-        return ListView.builder(
-          padding: const EdgeInsets.symmetric(horizontal: 16.0),
-          itemCount: _filteredCommands.length,
-          itemBuilder: (context, index) {
-            final command = _filteredCommands[index];
-            final isFavorite = favoritesProvider.isFavorite(command.id);
+        return Scrollbar(
+          controller: _scrollController,
+          interactive: true,
+          child: ListView.builder(
+            controller: _scrollController,
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            itemCount: _filteredCommands.length,
+            itemBuilder: (context, index) {
+              final command = _filteredCommands[index];
+              final isFavorite = favoritesProvider.isFavorite(command.id);
 
-            return AnimatedContainer(
-              duration: const Duration(milliseconds: 300),
-              curve: Curves.easeInOut,
-              margin: const EdgeInsets.only(bottom: 12),
-              child: Card(
-                elevation: 4,
-                shadowColor: categoryTheme['shadowColor'],
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                  side: BorderSide(
-                    color: categoryTheme['borderColor']!.withValues(alpha: 0.3),
-                    width: 1,
+              return AnimatedContainer(
+                duration: const Duration(milliseconds: 300),
+                curve: Curves.easeInOut,
+                margin: const EdgeInsets.only(bottom: 12),
+                child: Card(
+                  elevation: 4,
+                  shadowColor: categoryTheme['shadowColor'],
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(12),
+                    side: BorderSide(
+                      color: categoryTheme['borderColor']!.withValues(alpha: 0.3),
+                      width: 1,
+                    ),
                   ),
-                ),
-                child: ListTile(
-                  contentPadding: const EdgeInsets.all(16),
+                  child: ListTile(
+                    mouseCursor: SystemMouseCursors.click,
+                    contentPadding: const EdgeInsets.all(16),
                   leading: Container(
                     width: 50,
                     height: 50,
@@ -355,10 +367,11 @@ class _CategoryCommandsScreenState extends State<CategoryCommandsScreen> {
               ),
             );
           },
-        );
-      },
-    );
-  }
+        ),
+      );
+    },
+  );
+}
 
   Color _getLevelColor(String level) {
     switch (level) {

@@ -18,6 +18,7 @@ class _TroubleshootingScreenState extends State<TroubleshootingScreen> {
   List<TroubleshootingGuide> _allGuides = [];
   String _selectedCategory = 'all';
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _guidesScrollController = ScrollController();
   String _searchQuery = '';
 
   @override
@@ -34,6 +35,7 @@ class _TroubleshootingScreenState extends State<TroubleshootingScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _guidesScrollController.dispose();
     super.dispose();
   }
 
@@ -155,24 +157,34 @@ class _TroubleshootingScreenState extends State<TroubleshootingScreen> {
       ),
       body: _isLoading
           ? const Center(child: CircularProgressIndicator())
-          : Column(
-              children: [
-                _buildSearchAndFilters(isDarkMode),
-                Expanded(
-                  child: _filteredGuides.isEmpty
-                      ? _buildEmptyState(isDarkMode)
-                      : ListView.builder(
-                          padding: const EdgeInsets.all(16),
-                          itemCount: _filteredGuides.length,
-                          itemBuilder: (context, index) {
-                            return _buildGuideCard(
-                              _filteredGuides[index],
-                              isDarkMode,
-                            );
-                          },
-                        ),
+          : Center(
+              child: ConstrainedBox(
+                constraints: const BoxConstraints(maxWidth: 1100),
+                child: Column(
+                  children: [
+                    _buildSearchAndFilters(isDarkMode),
+                    Expanded(
+                      child: _filteredGuides.isEmpty
+                          ? _buildEmptyState(isDarkMode)
+                          : Scrollbar(
+                              controller: _guidesScrollController,
+                              interactive: true,
+                              child: ListView.builder(
+                                controller: _guidesScrollController,
+                                padding: const EdgeInsets.all(16),
+                                itemCount: _filteredGuides.length,
+                                itemBuilder: (context, index) {
+                                  return _buildGuideCard(
+                                    _filteredGuides[index],
+                                    isDarkMode,
+                                  );
+                                },
+                              ),
+                            ),
+                    ),
+                  ],
                 ),
-              ],
+              ),
             ),
     );
   }

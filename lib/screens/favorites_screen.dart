@@ -27,6 +27,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   bool _isLoading = true;
   List<CommandModel> _allCommands = [];
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _favoritesScrollController = ScrollController();
   String _searchQuery = '';
   String? _selectedCategoryFilter;
   String? _selectedTagFilter;
@@ -46,6 +47,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   @override
   void dispose() {
     _searchController.dispose();
+    _favoritesScrollController.dispose();
     super.dispose();
   }
 
@@ -275,15 +277,22 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
             ),
             body: allFavoriteCommands.isEmpty
                 ? _buildEmptyState()
-                : Column(
-                    children: [
-                      _buildSearchAndFilters(allFavoriteCommands, favoritesProvider),
-                      Expanded(
-                        child: filteredFavorites.isEmpty
-                            ? _buildFilteredEmptyState()
-                            : _buildFavoritesList(filteredFavorites, favoritesProvider),
+                : Center(
+                    child: ConstrainedBox(
+                      constraints: const BoxConstraints(maxWidth: 1200),
+                      child: Column(
+                        children: [
+                          _buildSearchAndFilters(
+                              allFavoriteCommands, favoritesProvider),
+                          Expanded(
+                            child: filteredFavorites.isEmpty
+                                ? _buildFilteredEmptyState()
+                                : _buildFavoritesList(
+                                    filteredFavorites, favoritesProvider),
+                          ),
+                        ],
                       ),
-                    ],
+                    ),
                   ),
           );
         },
@@ -517,33 +526,39 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   ) {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
 
-    return ListView.builder(
-      padding: const EdgeInsets.all(16.0),
-      itemCount: favoriteCommands.length,
-      itemBuilder: (context, index) {
-        final command = favoriteCommands[index];
-        final tag = favoritesProvider.getCommandTag(command.id);
+    return Scrollbar(
+      controller: _favoritesScrollController,
+      interactive: true,
+      child: ListView.builder(
+        controller: _favoritesScrollController,
+        padding: const EdgeInsets.all(16.0),
+        itemCount: favoriteCommands.length,
+        itemBuilder: (context, index) {
+          final command = favoriteCommands[index];
+          final tag = favoritesProvider.getCommandTag(command.id);
 
-        return Card(
-          margin: const EdgeInsets.only(bottom: 12),
-          elevation: 3,
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(14),
-            side: BorderSide(
-              color: isDarkMode ? Colors.white12 : Colors.black12,
+          return Card(
+            margin: const EdgeInsets.only(bottom: 12),
+            elevation: 3,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(14),
+              side: BorderSide(
+                color: isDarkMode ? Colors.white12 : Colors.black12,
+              ),
             ),
-          ),
-          child: InkWell(
-            borderRadius: BorderRadius.circular(14),
-            onTap: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(
-                  builder: (context) => CommandDetailsScreen(command: command),
-                ),
-              );
-            },
-            child: Padding(
-              padding: const EdgeInsets.all(14.0),
+            child: InkWell(
+              mouseCursor: SystemMouseCursors.click,
+              hoverColor: const Color(0xFF0055FF).withValues(alpha: 0.08),
+              borderRadius: BorderRadius.circular(14),
+              onTap: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(
+                    builder: (context) => CommandDetailsScreen(command: command),
+                  ),
+                );
+              },
+              child: Padding(
+                padding: const EdgeInsets.all(14.0),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -727,8 +742,9 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
           ),
         );
       },
-    );
-  }
+    ),
+  );
+}
 
   void _showSortModal(BuildContext context) {
     final isDarkMode = Provider.of<ThemeProvider>(context, listen: false).isDarkMode;

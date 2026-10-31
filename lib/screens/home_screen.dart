@@ -22,6 +22,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _categoryScrollController = ScrollController();
+  final ScrollController _searchScrollController = ScrollController();
   List<CommandModel> _searchResults = [];
   List<CategoryModel> _categories = [];
   bool _isLoading = true;
@@ -81,6 +83,8 @@ class _HomeScreenState extends State<HomeScreen> {
   void dispose() {
     _searchController.removeListener(_onSearchChanged);
     _searchController.dispose();
+    _categoryScrollController.dispose();
+    _searchScrollController.dispose();
     super.dispose();
   }
 
@@ -192,174 +196,200 @@ class _HomeScreenState extends State<HomeScreen> {
       key: _scaffoldKey,
       drawer: const AppDrawer(),
       body: SafeArea(
-        child: Column(
-          children: [
-            // Header Section: Title, Search, and Filters
-            Padding(
-              padding: const EdgeInsets.symmetric(
-                horizontal: 8.0,
-                vertical: 12.0,
-              ),
-              child: Column(
-                children: [
-                  Row(
+        child: Center(
+          child: ConstrainedBox(
+            constraints: const BoxConstraints(maxWidth: 1200),
+            child: Column(
+              children: [
+                // Header Section: Title, Search, and Filters
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 8.0,
+                    vertical: 12.0,
+                  ),
+                  child: Column(
                     children: [
-                      // زر القائمة الجانبية
-                      IconButton(
-                        onPressed: () {
-                          _scaffoldKey.currentState?.openDrawer();
-                        },
-                        icon: Icon(
-                          Icons.menu,
-                          color: isDarkMode
-                              ? Colors.white
-                              : const Color(0xFF1A1A1A),
-                        ),
+                      Row(
+                        children: [
+                          // زر القائمة الجانبية
+                          IconButton(
+                            onPressed: () {
+                              _scaffoldKey.currentState?.openDrawer();
+                            },
+                            tooltip: 'القائمة الجانبية',
+                            mouseCursor: SystemMouseCursors.click,
+                            icon: Icon(
+                              Icons.menu,
+                              color: isDarkMode
+                                  ? Colors.white
+                                  : const Color(0xFF1A1A1A),
+                            ),
+                          ),
+                          // عنوان التطبيق في المنتصف
+                          Expanded(
+                            child: Column(
+                              children: [
+                                BiDiHelper.buildMixedText(
+                                  text: 'TermiAr',
+                                  style: TextStyle(
+                                    fontSize: 26,
+                                    fontWeight: FontWeight.bold,
+                                    color: isDarkMode
+                                        ? Colors.white
+                                        : const Color(0xFF1A1A1A),
+                                  ),
+                                ),
+                                const SizedBox(height: 2),
+                                BiDiHelper.buildMixedText(
+                                  text: 'دليلك الشامل لأوامر لينكس',
+                                  style: TextStyle(
+                                    fontSize: 13,
+                                    color: isDarkMode
+                                        ? Colors.grey[400]
+                                        : Colors.grey[600],
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          // عنصر موازن لأيقونة القائمة لتوسيط العنوان تماماً
+                          const SizedBox(width: 48),
+                        ],
                       ),
-                      // عنوان التطبيق في المنتصف
-                      Expanded(
-                        child: Center(
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 48.0),
-                            child: BiDiHelper.buildMixedText(
-                              text: 'TermiAr',
-                              style: TextStyle(
-                                fontSize: 26,
-                                fontWeight: FontWeight.bold,
-                                color: isDarkMode
-                                    ? Colors.white
-                                    : const Color(0xFF1A1A1A),
-                              ),
+                      const SizedBox(height: 12),
+
+                      // شريط البحث الذكي
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+                        child: TextField(
+                          controller: _searchController,
+                          decoration: InputDecoration(
+                            hintText:
+                                'ابحث عن أمر، صياغة، أو شرح باللغة العربية...',
+                            hintStyle: TextStyle(
+                              fontSize: 13,
+                              color: isDarkMode
+                                  ? Colors.grey[500]
+                                  : Colors.grey[400],
+                            ),
+                            prefixIcon: const Icon(Icons.search,
+                                color: Color(0xFF0055FF)),
+                            suffixIcon: _searchController.text.isNotEmpty
+                                ? IconButton(
+                                    icon: const Icon(Icons.clear, size: 20),
+                                    mouseCursor: SystemMouseCursors.click,
+                                    onPressed: () {
+                                      _searchController.clear();
+                                    },
+                                  )
+                                : null,
+                            contentPadding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                              vertical: 12,
                             ),
                           ),
                         ),
                       ),
+                      const SizedBox(height: 10),
+
+                      // شريط الفلاتر السريعة (Filter Chips Bar)
+                      _buildFilterChipsBar(isDarkMode),
                     ],
                   ),
-                  const SizedBox(height: 2),
-                  Center(
-                    child: BiDiHelper.buildMixedText(
-                      text: 'دليلك الشامل لأوامر لينكس',
-                      style: TextStyle(
-                        fontSize: 13,
-                        color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 12),
-
-                  // شريط البحث الذكي
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                    child: TextField(
-                      controller: _searchController,
-                      decoration: InputDecoration(
-                        hintText: 'ابحث عن أمر، صياغة، أو شرح باللغة العربية...',
-                        hintStyle: TextStyle(
-                          fontSize: 13,
-                          color: isDarkMode ? Colors.grey[500] : Colors.grey[400],
-                        ),
-                        prefixIcon: const Icon(Icons.search, color: Color(0xFF0055FF)),
-                        suffixIcon: _searchController.text.isNotEmpty
-                            ? IconButton(
-                                icon: const Icon(Icons.clear, size: 20),
-                                onPressed: () {
-                                  _searchController.clear();
-                                },
-                              )
-                            : null,
-                        contentPadding: const EdgeInsets.symmetric(
-                          horizontal: 16,
-                          vertical: 12,
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(height: 10),
-
-                  // شريط الفلاتر السريعة (Filter Chips Bar)
-                  _buildFilterChipsBar(isDarkMode),
-                ],
-              ),
-            ),
-
-            // كارت نصيحة اليوم (يختفي عند البحث أو التصفية لتوفير المساحة)
-            if (!_isSearchingOrFiltering) const DailyTipCard(),
-
-            // شريط دليل حل المشكلات والتشخيص
-            if (!_isSearchingOrFiltering)
-              Padding(
-                padding: const EdgeInsets.fromLTRB(16, 2, 16, 8),
-                child: InkWell(
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => const TroubleshootingScreen(),
-                      ),
-                    );
-                  },
-                  borderRadius: BorderRadius.circular(12),
-                  child: Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
-                    decoration: BoxDecoration(
-                      color: isDarkMode
-                          ? const Color(0xFF0055FF).withValues(alpha: 0.12)
-                          : const Color(0xFF0055FF).withValues(alpha: 0.08),
-                      borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: const Color(0xFF0055FF).withValues(alpha: 0.3),
-                      ),
-                    ),
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(6),
-                          decoration: BoxDecoration(
-                            color: const Color(0xFF0055FF).withValues(alpha: 0.2),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: const Icon(Icons.build_circle_outlined, color: Color(0xFF0055FF), size: 20),
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'دليل حل المشكلات (Troubleshooting)',
-                                style: TextStyle(
-                                  fontSize: 13,
-                                  fontWeight: FontWeight.bold,
-                                  color: isDarkMode ? Colors.white : const Color(0xFF003DCC),
-                                ),
-                              ),
-                              Text(
-                                'إرشادات تشخيصية وأوامر حلول خطوة بخطوة',
-                                style: TextStyle(
-                                  fontSize: 11,
-                                  color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                        const Icon(Icons.arrow_forward_ios, size: 14, color: Color(0xFF0055FF)),
-                      ],
-                    ),
-                  ),
                 ),
-              ),
 
-            // قسم المحتوى الرئيسي: نتائج البحث أو شبكة الأقسام
-            Expanded(
-              child: _isLoading
-                  ? const Center(child: CircularProgressIndicator())
-                  : _isSearchingOrFiltering
-                  ? _buildSearchResults()
-                  : _buildCategoriesGrid(),
+                // كارت نصيحة اليوم (يختفي عند البحث أو التصفية لتوفير المساحة)
+                if (!_isSearchingOrFiltering) const DailyTipCard(),
+
+                // شريط دليل حل المشكلات والتشخيص
+                if (!_isSearchingOrFiltering)
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(16, 2, 16, 8),
+                    child: InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) =>
+                                const TroubleshootingScreen(),
+                          ),
+                        );
+                      },
+                      mouseCursor: SystemMouseCursors.click,
+                      hoverColor:
+                          const Color(0xFF0055FF).withValues(alpha: 0.12),
+                      borderRadius: BorderRadius.circular(12),
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 14, vertical: 10),
+                        decoration: BoxDecoration(
+                          color: isDarkMode
+                              ? const Color(0xFF0055FF).withValues(alpha: 0.12)
+                              : const Color(0xFF0055FF).withValues(alpha: 0.08),
+                          borderRadius: BorderRadius.circular(12),
+                          border: Border.all(
+                            color: const Color(0xFF0055FF)
+                                .withValues(alpha: 0.3),
+                          ),
+                        ),
+                        child: Row(
+                          children: [
+                            Container(
+                              padding: const EdgeInsets.all(6),
+                              decoration: BoxDecoration(
+                                color: const Color(0xFF0055FF)
+                                    .withValues(alpha: 0.2),
+                                borderRadius: BorderRadius.circular(8),
+                              ),
+                              child: const Icon(Icons.build_circle_outlined,
+                                  color: Color(0xFF0055FF), size: 20),
+                            ),
+                            const SizedBox(width: 12),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'دليل حل المشكلات (Troubleshooting)',
+                                    style: TextStyle(
+                                      fontSize: 13,
+                                      fontWeight: FontWeight.bold,
+                                      color: isDarkMode
+                                          ? Colors.white
+                                          : const Color(0xFF003DCC),
+                                    ),
+                                  ),
+                                  Text(
+                                    'إرشادات تشخيصية وأوامر حلول خطوة بخطوة',
+                                    style: TextStyle(
+                                      fontSize: 11,
+                                      color: isDarkMode
+                                          ? Colors.grey[400]
+                                          : Colors.grey[600],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const Icon(Icons.arrow_forward_ios,
+                                size: 14, color: Color(0xFF0055FF)),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ),
+
+                // قسم المحتوى الرئيسي: نتائج البحث أو شبكة الأقسام
+                Expanded(
+                  child: _isLoading
+                      ? const Center(child: CircularProgressIndicator())
+                      : _isSearchingOrFiltering
+                          ? _buildSearchResults()
+                          : _buildCategoriesGrid(),
+                ),
+              ],
             ),
-          ],
+          ),
         ),
       ),
     );
@@ -445,20 +475,25 @@ class _HomeScreenState extends State<HomeScreen> {
           // زر إعادة ضبط كل الفلاتر
           if (_hasActiveFilters) ...[
             const SizedBox(width: 8),
-            ActionChip(
-              avatar: const Icon(Icons.refresh, size: 16, color: Colors.redAccent),
-              label: const Text(
-                'إعادة ضبط',
-                style: TextStyle(
-                  fontSize: 12,
-                  color: Colors.redAccent,
-                  fontWeight: FontWeight.bold,
+            MouseRegion(
+              cursor: SystemMouseCursors.click,
+              child: ActionChip(
+                avatar: const Icon(Icons.refresh,
+                    size: 16, color: Colors.redAccent),
+                label: const Text(
+                  'إعادة ضبط',
+                  style: TextStyle(
+                    fontSize: 12,
+                    color: Colors.redAccent,
+                    fontWeight: FontWeight.bold,
+                  ),
                 ),
+                backgroundColor: Colors.red.withValues(alpha: 0.1),
+                side: const BorderSide(color: Colors.redAccent, width: 0.8),
+                shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(16)),
+                onPressed: _clearAllFilters,
               ),
-              backgroundColor: Colors.red.withValues(alpha: 0.1),
-              side: const BorderSide(color: Colors.redAccent, width: 0.8),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
-              onPressed: _clearAllFilters,
             ),
           ],
         ],
@@ -478,6 +513,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
     return InkWell(
       onTap: onTap,
+      mouseCursor: SystemMouseCursors.click,
+      hoverColor: activeColor.withValues(alpha: 0.08),
       borderRadius: BorderRadius.circular(16),
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 200),
@@ -524,9 +561,12 @@ class _HomeScreenState extends State<HomeScreen> {
             if (isSelected)
               GestureDetector(
                 onTap: onClear,
-                child: const Padding(
-                  padding: EdgeInsets.only(right: 2.0),
-                  child: Icon(Icons.close, size: 15, color: Color(0xFF0055FF)),
+                child: MouseRegion(
+                  cursor: SystemMouseCursors.click,
+                  child: const Padding(
+                    padding: EdgeInsets.only(right: 2.0),
+                    child: Icon(Icons.close, size: 15, color: Color(0xFF0055FF)),
+                  ),
                 ),
               )
             else
@@ -588,6 +628,9 @@ class _HomeScreenState extends State<HomeScreen> {
                           onSelected(null);
                           Navigator.pop(context);
                         },
+                        style: TextButton.styleFrom(
+                          enabledMouseCursor: SystemMouseCursors.click,
+                        ),
                         child: const Text('إلغاء التحديد'),
                       ),
                   ],
@@ -603,6 +646,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         : currentValue == entry.key;
 
                     return ListTile(
+                      mouseCursor: SystemMouseCursors.click,
                       dense: true,
                       title: Text(
                         entry.value,
@@ -638,101 +682,50 @@ class _HomeScreenState extends State<HomeScreen> {
     final isDarkMode = Provider.of<ThemeProvider>(context).isDarkMode;
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: GridView.builder(
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
-          childAspectRatio: 1.1,
-        ),
-        itemCount: _categories.length,
-        itemBuilder: (context, index) {
-          final category = _categories[index];
-          return Card(
-            elevation: 4,
-            shape: RoundedRectangleBorder(
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: InkWell(
-              onTap: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (context) => CategoryCommandsScreen(
-                      categoryId: category.id,
-                      categoryName: category.name_ar,
-                    ),
-                  ),
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final width = constraints.maxWidth;
+          final int crossAxisCount;
+          final double childAspectRatio;
+
+          if (width < 600) {
+            // Mobile: 2 columns
+            crossAxisCount = 2;
+            childAspectRatio = 1.1;
+          } else if (width < 850) {
+            // Tablet: 3 columns
+            crossAxisCount = 3;
+            childAspectRatio = 1.15;
+          } else if (width < 1100) {
+            // Desktop: 4 columns
+            crossAxisCount = 4;
+            childAspectRatio = 1.2;
+          } else {
+            // Desktop (Wide): 5 columns
+            crossAxisCount = 5;
+            childAspectRatio = 1.25;
+          }
+
+          return Scrollbar(
+            controller: _categoryScrollController,
+            interactive: true,
+            child: GridView.builder(
+              controller: _categoryScrollController,
+              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                crossAxisCount: crossAxisCount,
+                crossAxisSpacing: 16,
+                mainAxisSpacing: 16,
+                childAspectRatio: childAspectRatio,
+              ),
+              itemCount: _categories.length,
+              itemBuilder: (context, index) {
+                final category = _categories[index];
+                return _CategoryCardItem(
+                  category: category,
+                  isDarkMode: isDarkMode,
+                  getIconData: _getIconData,
                 );
               },
-              borderRadius: BorderRadius.circular(20),
-              child: Padding(
-                padding: const EdgeInsets.all(12.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    if (category.id == 'debian_family')
-                      SvgPicture.asset(
-                        'assets/images/debian_official_logo.svg',
-                        width: 36,
-                        height: 36,
-                      )
-                    else if (category.id == 'redhat_family')
-                      SvgPicture.asset(
-                        'assets/images/redhat_official_logo.svg',
-                        width: 36,
-                        height: 36,
-                      )
-                    else if (category.id == 'flutter_dart')
-                      SvgPicture.asset(
-                        'assets/images/flutter_official_logo.svg',
-                        width: 36,
-                        height: 36,
-                      )
-                    else if (category.id == 'android_dev')
-                      SvgPicture.asset(
-                        'assets/images/android_official_logo.svg',
-                        width: 36,
-                        height: 36,
-                      )
-                    else if (category.id == 'git_github')
-                      SvgPicture.asset(
-                        'assets/images/git_official_logo.svg',
-                        width: 36,
-                        height: 36,
-                      )
-                    else
-                      Icon(
-                        _getIconData(category.icon),
-                        size: 36,
-                        color: const Color(0xFF0055FF),
-                      ),
-                    const SizedBox(height: 10),
-                    Text(
-                      category.name_ar,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.bold,
-                        color: isDarkMode
-                            ? Colors.white
-                            : const Color(0xFF1A1A1A),
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    Text(
-                      category.name_en,
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 11,
-                        color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
-                      ),
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ],
-                ),
-              ),
             ),
           );
         },
@@ -784,6 +777,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     style: ElevatedButton.styleFrom(
                       backgroundColor: const Color(0xFF0055FF),
                       foregroundColor: Colors.white,
+                      enabledMouseCursor: SystemMouseCursors.click,
                       shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10),
                       ),
@@ -799,7 +793,8 @@ class _HomeScreenState extends State<HomeScreen> {
           children: [
             // شريط إحصائي بعدد النتائج
             Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 16.0, vertical: 6.0),
+              padding: const EdgeInsets.symmetric(
+                  horizontal: 16.0, vertical: 6.0),
               child: Row(
                 children: [
                   Text(
@@ -822,132 +817,347 @@ class _HomeScreenState extends State<HomeScreen> {
                       style: TextButton.styleFrom(
                         visualDensity: VisualDensity.compact,
                         foregroundColor: Colors.redAccent,
+                        enabledMouseCursor: SystemMouseCursors.click,
                       ),
                     ),
                 ],
               ),
             ),
             Expanded(
-              child: ListView.builder(
-                padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
-                itemCount: _searchResults.length,
-                itemBuilder: (context, index) {
-                  final command = _searchResults[index];
-                  final isFavorite = favoritesProvider.isFavorite(command.id);
+              child: Scrollbar(
+                controller: _searchScrollController,
+                interactive: true,
+                child: ListView.builder(
+                  controller: _searchScrollController,
+                  padding: const EdgeInsets.fromLTRB(16.0, 0, 16.0, 16.0),
+                  itemCount: _searchResults.length,
+                  itemBuilder: (context, index) {
+                    final command = _searchResults[index];
+                    final isFavorite =
+                        favoritesProvider.isFavorite(command.id);
 
-                  return Card(
-                    margin: const EdgeInsets.only(bottom: 10),
-                    elevation: 2,
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    child: ListTile(
-                      contentPadding: const EdgeInsets.symmetric(
-                        horizontal: 14,
-                        vertical: 6,
-                      ),
-                      leading: Container(
-                        width: 42,
-                        height: 42,
-                        alignment: Alignment.center,
-                        decoration: const BoxDecoration(
-                          shape: BoxShape.circle,
-                          color: Color(0xFF0055FF),
-                        ),
-                        child: Center(
-                          child: Text(
-                            command.command.isNotEmpty
-                                ? command.command[0].toUpperCase()
-                                : 'C',
-                            style: const TextStyle(
-                              height: 1.0,
-                              color: Colors.white,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
-                            ),
-                          ),
-                        ),
-                      ),
-                      title: Row(
-                        children: [
-                          Expanded(
-                            child: Text(
-                              command.command,
-                              style: const TextStyle(
-                                fontWeight: FontWeight.bold,
-                                fontSize: 15,
-                              ),
-                              maxLines: 1,
-                              overflow: TextOverflow.ellipsis,
-                            ),
-                          ),
-                          const SizedBox(width: 8),
-                          // شارة المستوى
-                          Container(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 6,
-                              vertical: 2,
-                            ),
-                            decoration: BoxDecoration(
-                              color: _getLevelColor(command.level)
-                                  .withValues(alpha: 0.15),
-                              borderRadius: BorderRadius.circular(8),
-                            ),
-                            child: Text(
-                              command.level.isNotEmpty ? command.level : 'مبتدئ',
-                              style: TextStyle(
-                                fontSize: 10,
-                                fontWeight: FontWeight.bold,
-                                color: _getLevelColor(command.level),
-                              ),
-                            ),
-                          ),
-                        ],
-                      ),
-                      subtitle: Padding(
-                        padding: const EdgeInsets.only(top: 4.0),
-                        child: Text(
-                          command.name_ar,
-                          style: TextStyle(
-                            fontSize: 13,
-                            color: isDarkMode
-                                ? Colors.grey[300]
-                                : Colors.grey[700],
-                          ),
-                          maxLines: 1,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                      ),
-                      trailing: Row(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          IconButton(
-                            icon: Icon(
-                              isFavorite ? Icons.favorite : Icons.favorite_border,
-                              color: isFavorite ? Colors.red : Colors.grey,
-                              size: 20,
-                            ),
-                            onPressed: () {
-                              favoritesProvider.toggleFavorite(command.id);
-                            },
-                          ),
-                          const Icon(Icons.arrow_forward_ios, size: 14),
-                        ],
-                      ),
+                    return _SearchResultTile(
+                      command: command,
+                      isFavorite: isFavorite,
+                      isDarkMode: isDarkMode,
+                      levelColor: _getLevelColor(command.level),
+                      onFavoriteToggle: () {
+                        favoritesProvider.toggleFavorite(command.id);
+                      },
                       onTap: () => Navigator.of(context).push(
                         MaterialPageRoute(
                           builder: (context) =>
                               CommandDetailsScreen(command: command),
                         ),
                       ),
-                    ),
-                  );
-                },
+                    );
+                  },
+                ),
               ),
             ),
           ],
         );
       },
+    );
+  }
+}
+
+class _CategoryCardItem extends StatefulWidget {
+  final CategoryModel category;
+  final bool isDarkMode;
+  final IconData Function(String) getIconData;
+
+  const _CategoryCardItem({
+    required this.category,
+    required this.isDarkMode,
+    required this.getIconData,
+  });
+
+  @override
+  State<_CategoryCardItem> createState() => _CategoryCardItemState();
+}
+
+class _CategoryCardItemState extends State<_CategoryCardItem> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    final isDarkMode = widget.isDarkMode;
+    final category = widget.category;
+
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 180),
+        curve: Curves.easeOutCubic,
+        transform:
+            Matrix4.translationValues(0.0, _isHovered ? -3.0 : 0.0, 0.0),
+        child: Card(
+          elevation: _isHovered ? 6 : 2,
+          shadowColor: const Color(0xFF0055FF)
+              .withValues(alpha: _isHovered ? 0.25 : 0.08),
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(20),
+            side: BorderSide(
+              color: _isHovered
+                  ? const Color(0xFF0055FF).withValues(alpha: 0.6)
+                  : (isDarkMode ? Colors.white12 : Colors.black12),
+              width: _isHovered ? 1.5 : 1.0,
+            ),
+          ),
+          color: _isHovered
+              ? (isDarkMode
+                  ? const Color(0xFF303030)
+                  : const Color(0xFFF3F7FF))
+              : (isDarkMode ? const Color(0xFF242424) : Colors.white),
+          child: InkWell(
+            mouseCursor: SystemMouseCursors.click,
+            borderRadius: BorderRadius.circular(20),
+            onTap: () {
+              Navigator.of(context).push(
+                MaterialPageRoute(
+                  builder: (context) => CategoryCommandsScreen(
+                    categoryId: category.id,
+                    categoryName: category.name_ar,
+                  ),
+                ),
+              );
+            },
+            child: Padding(
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  if (category.id == 'debian_family')
+                    SvgPicture.asset(
+                      'assets/images/debian_official_logo.svg',
+                      width: 36,
+                      height: 36,
+                    )
+                  else if (category.id == 'redhat_family')
+                    SvgPicture.asset(
+                      'assets/images/redhat_official_logo.svg',
+                      width: 36,
+                      height: 36,
+                    )
+                  else if (category.id == 'flutter_dart')
+                    SvgPicture.asset(
+                      'assets/images/flutter_official_logo.svg',
+                      width: 36,
+                      height: 36,
+                    )
+                  else if (category.id == 'android_dev')
+                    SvgPicture.asset(
+                      'assets/images/android_official_logo.svg',
+                      width: 36,
+                      height: 36,
+                    )
+                  else if (category.id == 'git_github')
+                    SvgPicture.asset(
+                      'assets/images/git_official_logo.svg',
+                      width: 36,
+                      height: 36,
+                    )
+                  else
+                    Icon(
+                      widget.getIconData(category.icon),
+                      size: 36,
+                      color: const Color(0xFF0055FF),
+                    ),
+                  const SizedBox(height: 10),
+                  Text(
+                    category.name_ar,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 15,
+                      fontWeight: FontWeight.bold,
+                      color: isDarkMode
+                          ? Colors.white
+                          : const Color(0xFF1A1A1A),
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  Text(
+                    category.name_en,
+                    textAlign: TextAlign.center,
+                    style: TextStyle(
+                      fontSize: 11,
+                      color: isDarkMode ? Colors.grey[400] : Colors.grey[600],
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ],
+              ),
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _SearchResultTile extends StatefulWidget {
+  final CommandModel command;
+  final bool isFavorite;
+  final bool isDarkMode;
+  final Color levelColor;
+  final VoidCallback onFavoriteToggle;
+  final VoidCallback onTap;
+
+  const _SearchResultTile({
+    required this.command,
+    required this.isFavorite,
+    required this.isDarkMode,
+    required this.levelColor,
+    required this.onFavoriteToggle,
+    required this.onTap,
+  });
+
+  @override
+  State<_SearchResultTile> createState() => _SearchResultTileState();
+}
+
+class _SearchResultTileState extends State<_SearchResultTile> {
+  bool _isHovered = false;
+
+  @override
+  Widget build(BuildContext context) {
+    return MouseRegion(
+      cursor: SystemMouseCursors.click,
+      onEnter: (_) => setState(() => _isHovered = true),
+      onExit: (_) => setState(() => _isHovered = false),
+      child: AnimatedContainer(
+        duration: const Duration(milliseconds: 150),
+        margin: const EdgeInsets.only(bottom: 10),
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(
+            color: _isHovered
+                ? const Color(0xFF0055FF).withValues(alpha: 0.5)
+                : (widget.isDarkMode ? Colors.white12 : Colors.black12),
+            width: _isHovered ? 1.4 : 1.0,
+          ),
+          boxShadow: [
+            BoxShadow(
+              color: Colors.black.withValues(alpha: _isHovered ? 0.08 : 0.03),
+              blurRadius: _isHovered ? 8 : 4,
+              offset: const Offset(0, 2),
+            ),
+          ],
+        ),
+        child: Card(
+          margin: EdgeInsets.zero,
+          elevation: 0,
+          color: _isHovered
+              ? (widget.isDarkMode
+                  ? const Color(0xFF2E2E2E)
+                  : const Color(0xFFF7FAFF))
+              : (widget.isDarkMode ? const Color(0xFF242424) : Colors.white),
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+          child: ListTile(
+            mouseCursor: SystemMouseCursors.click,
+            contentPadding: const EdgeInsets.symmetric(
+              horizontal: 14,
+              vertical: 6,
+            ),
+            leading: Container(
+              width: 42,
+              height: 42,
+              alignment: Alignment.center,
+              decoration: const BoxDecoration(
+                shape: BoxShape.circle,
+                color: Color(0xFF0055FF),
+              ),
+              child: Center(
+                child: Text(
+                  widget.command.command.isNotEmpty
+                      ? widget.command.command[0].toUpperCase()
+                      : 'C',
+                  style: const TextStyle(
+                    height: 1.0,
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18,
+                  ),
+                ),
+              ),
+            ),
+            title: Row(
+              children: [
+                Expanded(
+                  child: Text(
+                    widget.command.command,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 15,
+                    ),
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+                const SizedBox(width: 8),
+                Container(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 6,
+                    vertical: 2,
+                  ),
+                  decoration: BoxDecoration(
+                    color: widget.levelColor.withValues(alpha: 0.15),
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                  child: Text(
+                    widget.command.level.isNotEmpty
+                        ? widget.command.level
+                        : 'مبتدئ',
+                    style: TextStyle(
+                      fontSize: 10,
+                      fontWeight: FontWeight.bold,
+                      color: widget.levelColor,
+                    ),
+                  ),
+                ),
+              ],
+            ),
+            subtitle: Padding(
+              padding: const EdgeInsets.only(top: 4.0),
+              child: Text(
+                widget.command.name_ar,
+                style: TextStyle(
+                  fontSize: 13,
+                  color: widget.isDarkMode
+                      ? Colors.grey[300]
+                      : Colors.grey[700],
+                ),
+                maxLines: 1,
+                overflow: TextOverflow.ellipsis,
+              ),
+            ),
+            trailing: Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                IconButton(
+                  mouseCursor: SystemMouseCursors.click,
+                  icon: Icon(
+                    widget.isFavorite
+                        ? Icons.favorite
+                        : Icons.favorite_border,
+                    color: widget.isFavorite ? Colors.red : Colors.grey,
+                    size: 20,
+                  ),
+                  onPressed: widget.onFavoriteToggle,
+                ),
+                const Icon(Icons.arrow_forward_ios, size: 14),
+              ],
+            ),
+            onTap: widget.onTap,
+          ),
+        ),
+      ),
     );
   }
 }
